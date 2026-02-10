@@ -1241,7 +1241,7 @@ message ChannelDescription {
   // last seen message id
   ChannelMessageHeader last_seen_message = 13;
   // DM status
-  repeated bool onlines = 14;
+  repeated bool onlines = 14 [packed=true];
   // meeting code
   string meeting_code = 15;
   // count message unread
@@ -1321,6 +1321,8 @@ message ListChannelDescsRequest {
   int32 channel_type = 5;
   // is mobile
   bool is_mobile = 6;
+  // page
+  int32 page = 7;
 }
 
 // List channel description detail
@@ -2075,7 +2077,7 @@ message AllUsersAddChannelResponse {
   repeated string usernames = 4;
   repeated string display_names = 5;
   repeated string avatars = 6;
-  repeated bool onlines = 7;
+  repeated bool onlines = 7 [packed=true];
 }
 
 message ClanEmojiCreateRequest {
@@ -3394,7 +3396,7 @@ message DirectFcmProto {
   repeated int32 position_e = 15;
   string attachment_type = 16;
   bool has_more_attachment = 17;
-  repeated bool is_mention_role = 18;
+  repeated bool is_mention_role = 18 [packed=true];
   int64  message_id = 19;
 }
 
@@ -3504,3 +3506,53 @@ message ParticipantInfo {
   State state = 3;
 }
 
+// Channel Event Attachment
+message ChannelEventAttachment {
+  int64 id = 1;
+  string file_name = 2;
+  string file_url = 3;
+  string file_type = 4;
+  int64 file_size = 5;
+  int32 width = 6;
+  int32 height = 7;
+  string thumbnail = 8;
+  int32 duration = 9;
+  int64 message_id = 10;
+}
+
+// Channel Event Attachment List
+message ListChannelEventAttachment {
+  repeated ChannelEventAttachment attachments = 1;
+}
+
+// Channel Event
+message ChannelEvent {
+  int64 id = 1;
+  int64 clan_id = 2;
+  int64 channel_id = 3;
+  uint32 start_time_seconds = 4;
+  string title = 5;
+  string description = 6;
+  uint32 end_time_seconds = 7;
+  string location = 8;
+  int32 status = 9;
+  int64 creator_id = 10;
+  uint32 create_time_seconds = 11;
+  uint32 update_time_seconds = 12;
+  bytes attachments = 13;
+}
+
+// List Channel Events Request
+message ListChannelEventsRequest {
+  int64 clan_id = 1;
+  int64 channel_id = 2;
+  int32 year = 3;
+  uint32 start_time = 4;
+  uint32 end_time = 5;
+  int32 limit = 6;
+}
+
+// List Channel Events Response
+message ListChannelEventsResponse {
+  repeated ChannelEvent events = 1;
+}
