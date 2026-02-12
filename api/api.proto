@@ -3543,6 +3543,7 @@ message ChannelTimeline {
   uint32 update_time_seconds = 12;
   int32 type = 13;
   bytes attachments = 14;
+  bytes preview_imgs = 15;
 }
 
 // List Channel Timeline Request
@@ -3591,6 +3592,17 @@ message UpdateChannelTimelineRequest {
 }
 
 message UpdateChannelTimelineResponse {
+  ChannelTimeline event = 1;
+}
+
+message ChannelTimelineDetailRequest {
+  int64 clan_id = 1;
+  int64 channel_id = 2;
+  int64 id = 3;
+  uint32 start_time_seconds = 4;
+}
+
+message ChannelTimelineDetailResponse {
   ChannelTimeline event = 1;
 }
 
