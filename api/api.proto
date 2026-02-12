@@ -3541,7 +3541,8 @@ message ChannelTimeline {
   int64 creator_id = 10;
   uint32 create_time_seconds = 11;
   uint32 update_time_seconds = 12;
-  bytes attachments = 13;
+  int32 type = 13;
+  bytes attachments = 14;
 }
 
 // List Channel Timeline Request
@@ -3568,7 +3569,8 @@ message CreateChannelTimelineRequest {
   string description = 5;
   uint32 end_time_seconds = 6;
   string location = 7;
-  repeated ChannelTimelineAttachment attachments = 8;
+  int32 type = 8;
+  repeated ChannelTimelineAttachment attachments = 9;
 }
 
 message CreateChannelTimelineResponse {
@@ -3584,7 +3586,8 @@ message UpdateChannelTimelineRequest {
   string title = 5;
   string description = 6;
   string location = 7;
-  repeated ChannelTimelineAttachment attachments = 8;
+  int32 type = 8;
+  repeated ChannelTimelineAttachment attachments = 9;
 }
 
 message UpdateChannelTimelineResponse {

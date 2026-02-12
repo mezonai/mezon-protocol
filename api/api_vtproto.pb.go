@@ -20600,7 +20600,12 @@ func (m *ChannelTimeline) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		copy(dAtA[i:], m.Attachments)
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Attachments)))
 		i--
-		dAtA[i] = 0x6a
+		dAtA[i] = 0x72
+	}
+	if m.Type != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Type))
+		i--
+		dAtA[i] = 0x68
 	}
 	if m.UpdateTimeSeconds != 0 {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.UpdateTimeSeconds))
@@ -20818,8 +20823,13 @@ func (m *CreateChannelTimelineRequest) MarshalToSizedBufferVT(dAtA []byte) (int,
 			i -= size
 			i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
 			i--
-			dAtA[i] = 0x42
+			dAtA[i] = 0x4a
 		}
+	}
+	if m.Type != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Type))
+		i--
+		dAtA[i] = 0x40
 	}
 	if len(m.Location) > 0 {
 		i -= len(m.Location)
@@ -20947,8 +20957,13 @@ func (m *UpdateChannelTimelineRequest) MarshalToSizedBufferVT(dAtA []byte) (int,
 			i -= size
 			i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
 			i--
-			dAtA[i] = 0x42
+			dAtA[i] = 0x4a
 		}
+	}
+	if m.Type != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Type))
+		i--
+		dAtA[i] = 0x40
 	}
 	if len(m.Location) > 0 {
 		i -= len(m.Location)
@@ -29477,6 +29492,9 @@ func (m *ChannelTimeline) SizeVT() (n int) {
 	if m.UpdateTimeSeconds != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.UpdateTimeSeconds))
 	}
+	if m.Type != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.Type))
+	}
 	l = len(m.Attachments)
 	if l > 0 {
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
@@ -29559,6 +29577,9 @@ func (m *CreateChannelTimelineRequest) SizeVT() (n int) {
 	if l > 0 {
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
+	if m.Type != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.Type))
+	}
 	if len(m.Attachments) > 0 {
 		for _, e := range m.Attachments {
 			l = e.SizeVT()
@@ -29612,6 +29633,9 @@ func (m *UpdateChannelTimelineRequest) SizeVT() (n int) {
 	l = len(m.Location)
 	if l > 0 {
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
+	if m.Type != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.Type))
 	}
 	if len(m.Attachments) > 0 {
 		for _, e := range m.Attachments {
@@ -83988,6 +84012,25 @@ func (m *ChannelTimeline) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 		case 13:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Type", wireType)
+			}
+			m.Type = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Type |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 14:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Attachments", wireType)
 			}
@@ -84495,6 +84538,25 @@ func (m *CreateChannelTimelineRequest) UnmarshalVT(dAtA []byte) error {
 			m.Location = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Type", wireType)
+			}
+			m.Type = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Type |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 9:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Attachments", wireType)
 			}
@@ -84839,6 +84901,25 @@ func (m *UpdateChannelTimelineRequest) UnmarshalVT(dAtA []byte) error {
 			m.Location = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Type", wireType)
+			}
+			m.Type = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Type |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 9:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Attachments", wireType)
 			}
