@@ -3504,9 +3504,11 @@ message ParticipantInfo {
   string sid = 1;
   string identity = 2;
   State state = 3;
+  bool is_publisher = 13;
+  Kind kind = 14;
 }
 
-// Channel Event Attachment
+// Channel Timeline Attachment
 message ChannelTimelineAttachment {
   int64 id = 1;
   string file_name = 2;
@@ -3520,12 +3522,12 @@ message ChannelTimelineAttachment {
   int64 message_id = 10;
 }
 
-// Channel Event Attachment List
+// Channel Timeline Attachment List
 message ListChannelTimelineAttachment {
   repeated ChannelTimelineAttachment attachments = 1;
 }
 
-// Channel Event
+// Channel Timeline
 message ChannelTimeline {
   int64 id = 1;
   int64 clan_id = 2;
@@ -3542,7 +3544,7 @@ message ChannelTimeline {
   bytes attachments = 13;
 }
 
-// List Channel Events Request
+// List Channel Timeline Request
 message ListChannelTimelineRequest {
   int64 clan_id = 1;
   int64 channel_id = 2;
@@ -3552,7 +3554,39 @@ message ListChannelTimelineRequest {
   int32 limit = 6;
 }
 
-// List Channel Events Response
+// List Channel Timeline Response
 message ListChannelTimelineResponse {
   repeated ChannelTimeline events = 1;
+}
+
+// Create Channel Timeline Request
+message CreateChannelTimelineRequest {
+  int64 clan_id = 1;
+  int64 channel_id = 2;
+  uint32 start_time_seconds = 3;
+  string title = 4;
+  string description = 5;
+  uint32 end_time_seconds = 6;
+  string location = 7;
+  repeated ChannelTimelineAttachment attachments = 8;
+}
+
+message CreateChannelTimelineResponse {
+  ChannelTimeline event = 1;
+}
+
+// Update Channel Timeline Request
+message UpdateChannelTimelineRequest {
+  int64 clan_id = 1;
+  int64 channel_id = 2;
+  int64 id = 3;
+  uint32 start_time_seconds = 4;
+  string title = 5;
+  string description = 6;
+  string location = 7;
+  repeated ChannelTimelineAttachment attachments = 8;
+}
+
+message UpdateChannelTimelineResponse {
+  ChannelTimeline event = 1;
 }
