@@ -3590,3 +3590,7 @@ message UpdateChannelTimelineRequest {
 message UpdateChannelTimelineResponse {
   ChannelTimeline event = 1;
 }
+
+message ListMutedChannelResponse {
+  int64 channel_id = 1;
+}
