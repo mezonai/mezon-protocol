@@ -1417,13 +1417,14 @@ message AIAgentEnabledEvent {
 }
 
 message GotifyMessage {
-	int64 channel_id = 1;
-	string message = 2;
-	string title = 3;
-	string image = 4;
-	int32 priority = 5;
-	repeated string users = 6;
-	map<string, string> extras = 7;
-	uint32 app_id = 8;
-	int64 sender_id = 9;
+  uint32 id = 1;
+	int64 channel_id = 2;
+	string message = 3;
+	string title = 4;
+	string image = 5;
+	int32 priority = 6;
+	repeated string users = 7;
+	map<string, string> extras = 8;
+	uint32 app_id = 9;
+	int64 sender_id = 10;
 }
