@@ -9116,8 +9116,8 @@ func (m *GotifyMessage) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x48
 	}
-	if m.ApplicationId != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ApplicationId))
+	if m.AppId != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.AppId))
 		i--
 		dAtA[i] = 0x40
 	}
@@ -13297,8 +13297,8 @@ func (m *GotifyMessage) SizeVT() (n int) {
 			n += mapEntrySize + 1 + protohelpers.SizeOfVarint(uint64(mapEntrySize))
 		}
 	}
-	if m.ApplicationId != 0 {
-		n += 1 + protohelpers.SizeOfVarint(uint64(m.ApplicationId))
+	if m.AppId != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.AppId))
 	}
 	if m.SenderId != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.SenderId))
@@ -35836,9 +35836,9 @@ func (m *GotifyMessage) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 8:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ApplicationId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field AppId", wireType)
 			}
-			m.ApplicationId = 0
+			m.AppId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protohelpers.ErrIntOverflow
@@ -35848,7 +35848,7 @@ func (m *GotifyMessage) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ApplicationId |= uint32(b&0x7F) << shift
+				m.AppId |= uint32(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}

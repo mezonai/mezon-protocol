@@ -1424,6 +1424,6 @@ message GotifyMessage {
 	int32 priority = 5;
 	repeated string users = 6;
 	map<string, string> extras = 7;
-	uint32 application_id = 8;
+	uint32 app_id = 8;
 	int64 sender_id = 9;
 }
