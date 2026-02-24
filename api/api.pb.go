@@ -24,12 +24,11 @@
 package api
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -1529,7 +1528,7 @@ type NotificationInfo struct {
 	// clan name
 	ClanName string `protobuf:"bytes,9,opt,name=clan_name,json=clanName,proto3" json:"clan_name,omitempty"`
 	// clan logo
-	ClanLogo      string              `protobuf:"bytes,10,opt,name=clan_logo,json=clanLogo,proto3" json:"clan_logo,omitempty"`
+	ClanLogo string `protobuf:"bytes,10,opt,name=clan_logo,json=clanLogo,proto3" json:"clan_logo,omitempty"`
 	Channel       *ChannelDescription `protobuf:"bytes,11,opt,name=channel,proto3" json:"channel,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3095,7 +3094,7 @@ func (x *ClanUserList) GetClanId() int64 {
 type RegistFcmDeviceTokenRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The token
-	Token    string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	Token string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	DeviceId string `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	Platform string `protobuf:"bytes,3,opt,name=platform,proto3" json:"platform,omitempty"`
 	// voip token for IOS
@@ -3165,8 +3164,8 @@ func (x *RegistFcmDeviceTokenRequest) GetVoipToken() string {
 type RegistFcmDeviceTokenResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The token
-	Token         string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
-	DeviceId      int64  `protobuf:"varint,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	Token string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	DeviceId int64 `protobuf:"varint,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	Platform      string `protobuf:"bytes,3,opt,name=platform,proto3" json:"platform,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3235,7 +3234,7 @@ type ListChannelMessagesRequest struct {
 	// Max number of records to return. Between 1 and 100.
 	Limit int32 `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`
 	// True if listing should be older messages to newer, false if reverse.
-	Direction     int32 `protobuf:"varint,5,opt,name=direction,proto3" json:"direction,omitempty"`
+	Direction int32 `protobuf:"varint,5,opt,name=direction,proto3" json:"direction,omitempty"`
 	TopicId       int64 `protobuf:"varint,6,opt,name=topic_id,json=topicId,proto3" json:"topic_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3964,10 +3963,10 @@ type Notification struct {
 	// ID of channel
 	ChannelId int64 `protobuf:"varint,9,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// mode of
-	ChannelType int32               `protobuf:"varint,10,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"`
-	AvatarUrl   string              `protobuf:"bytes,11,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
-	Channel     *ChannelDescription `protobuf:"bytes,12,opt,name=channel,proto3" json:"channel,omitempty"`
-	TopicId     int64               `protobuf:"varint,13,opt,name=topic_id,json=topicId,proto3" json:"topic_id,omitempty"`
+	ChannelType int32 `protobuf:"varint,10,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"`
+	AvatarUrl string `protobuf:"bytes,11,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
+	Channel *ChannelDescription `protobuf:"bytes,12,opt,name=channel,proto3" json:"channel,omitempty"`
+	TopicId int64 `protobuf:"varint,13,opt,name=topic_id,json=topicId,proto3" json:"topic_id,omitempty"`
 	// category.
 	Category      int32 `protobuf:"varint,14,opt,name=category,proto3" json:"category,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -4106,7 +4105,7 @@ type EmojiRecent struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the emoji.
 	EmojiRecentsId int64 `protobuf:"varint,1,opt,name=emoji_recents_id,json=emojiRecentsId,proto3" json:"emoji_recents_id,omitempty"`
-	EmojiId        int64 `protobuf:"varint,2,opt,name=emoji_id,json=emojiId,proto3" json:"emoji_id,omitempty"`
+	EmojiId int64 `protobuf:"varint,2,opt,name=emoji_id,json=emojiId,proto3" json:"emoji_id,omitempty"`
 	// The UNIX time (for gRPC clients) or ISO string (for REST clients) when the emoji was created.
 	UpdateTimeSeconds uint32 `protobuf:"varint,3,opt,name=update_time_seconds,json=updateTimeSeconds,proto3" json:"update_time_seconds,omitempty"`
 	unknownFields     protoimpl.UnknownFields
@@ -8149,9 +8148,9 @@ type UpdateChannelDescRequest struct {
 	// app url for channel type app
 	AppId int64 `protobuf:"varint,5,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
 	// topic
-	Topic         string `protobuf:"bytes,6,opt,name=topic,proto3" json:"topic,omitempty"`
-	AgeRestricted int32  `protobuf:"varint,7,opt,name=age_restricted,json=ageRestricted,proto3" json:"age_restricted,omitempty"`
-	E2Ee          int32  `protobuf:"varint,8,opt,name=e2ee,proto3" json:"e2ee,omitempty"`
+	Topic string `protobuf:"bytes,6,opt,name=topic,proto3" json:"topic,omitempty"`
+	AgeRestricted int32 `protobuf:"varint,7,opt,name=age_restricted,json=ageRestricted,proto3" json:"age_restricted,omitempty"`
+	E2Ee int32 `protobuf:"varint,8,opt,name=e2ee,proto3" json:"e2ee,omitempty"`
 	// channel avatar
 	ChannelAvatar *wrapperspb.StringValue `protobuf:"bytes,9,opt,name=channel_avatar,json=channelAvatar,proto3" json:"channel_avatar,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -9333,11 +9332,11 @@ func (x *NotificationSetting) GetNotificationSettingType() int32 {
 }
 
 type DeletePinMessage struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	MessageId     int64                  `protobuf:"varint,2,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
-	ChannelId     int64                  `protobuf:"varint,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	ClanId        int64                  `protobuf:"varint,4,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	MessageId int64 `protobuf:"varint,2,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	ChannelId int64 `protobuf:"varint,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	ClanId        int64 `protobuf:"varint,4,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -9401,14 +9400,14 @@ func (x *DeletePinMessage) GetClanId() int64 {
 }
 
 type PinMessage struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	Id        int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	MessageId int64                  `protobuf:"varint,2,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
-	ChannelId int64                  `protobuf:"varint,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	SenderId  int64                  `protobuf:"varint,4,opt,name=sender_id,json=senderId,proto3" json:"sender_id,omitempty"`
-	Content   string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
-	Username  string                 `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
-	Avatar    string                 `protobuf:"bytes,7,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	MessageId int64 `protobuf:"varint,2,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	ChannelId int64 `protobuf:"varint,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	SenderId int64 `protobuf:"varint,4,opt,name=sender_id,json=senderId,proto3" json:"sender_id,omitempty"`
+	Content string `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
+	Username string `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
+	Avatar string `protobuf:"bytes,7,opt,name=avatar,proto3" json:"avatar,omitempty"`
 	// The UNIX time (for gRPC clients) or ISO string (for REST clients) when the message was created.
 	CreateTimeSeconds uint32 `protobuf:"varint,8,opt,name=create_time_seconds,json=createTimeSeconds,proto3" json:"create_time_seconds,omitempty"`
 	// attachment
@@ -9558,13 +9557,13 @@ func (x *PinMessagesList) GetPinMessagesList() []*PinMessage {
 type NotificationUserChannel struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Notification id
-	Id                      int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	NotificationSettingType int32  `protobuf:"varint,2,opt,name=notification_setting_type,json=notificationSettingType,proto3" json:"notification_setting_type,omitempty"`
-	TimeMuteSeconds         uint32 `protobuf:"varint,3,opt,name=time_mute_seconds,json=timeMuteSeconds,proto3" json:"time_mute_seconds,omitempty"`
-	Active                  int32  `protobuf:"varint,4,opt,name=active,proto3" json:"active,omitempty"`
-	ChannelId               int64  `protobuf:"varint,5,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	NotificationSettingType int32 `protobuf:"varint,2,opt,name=notification_setting_type,json=notificationSettingType,proto3" json:"notification_setting_type,omitempty"`
+	TimeMuteSeconds uint32 `protobuf:"varint,3,opt,name=time_mute_seconds,json=timeMuteSeconds,proto3" json:"time_mute_seconds,omitempty"`
+	Active int32 `protobuf:"varint,4,opt,name=active,proto3" json:"active,omitempty"`
+	ChannelId     int64 `protobuf:"varint,5,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *NotificationUserChannel) Reset() {
@@ -9636,8 +9635,8 @@ func (x *NotificationUserChannel) GetChannelId() int64 {
 type NotifiReactMessage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Notification id
-	Id            int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	UserId        int64 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId int64 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	ChannelId     int64 `protobuf:"varint,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -9695,8 +9694,8 @@ func (x *NotifiReactMessage) GetChannelId() int64 {
 }
 
 type DefaultNotificationClan struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClanId        int64                  `protobuf:"varint,1,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	ClanId        int64 `protobuf:"varint,1,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -9739,8 +9738,8 @@ func (x *DefaultNotificationClan) GetClanId() int64 {
 }
 
 type DefaultNotificationCategory struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	CategoryId    int64                  `protobuf:"varint,1,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	CategoryId    int64 `protobuf:"varint,1,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -9783,8 +9782,8 @@ func (x *DefaultNotificationCategory) GetCategoryId() int64 {
 }
 
 type NotificationChannel struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ChannelId     int64                  `protobuf:"varint,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	ChannelId     int64 `protobuf:"varint,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -9827,8 +9826,8 @@ func (x *NotificationChannel) GetChannelId() int64 {
 }
 
 type NotificationClan struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClanId        int64                  `protobuf:"varint,1,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	ClanId        int64 `protobuf:"varint,1,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -9922,9 +9921,9 @@ type SetNotificationRequest struct {
 	ChannelCategoryId int64 `protobuf:"varint,1,opt,name=channel_category_id,json=channelCategoryId,proto3" json:"channel_category_id,omitempty"`
 	// notification_type
 	NotificationType int32 `protobuf:"varint,2,opt,name=notification_type,json=notificationType,proto3" json:"notification_type,omitempty"`
-	ClanId           int64 `protobuf:"varint,3,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	ClanId        int64 `protobuf:"varint,3,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SetNotificationRequest) Reset() {
@@ -10155,14 +10154,14 @@ func (x *NotificationChannelCategorySettingList) GetNotificationChannelCategoryS
 type NotificationChannelCategorySetting struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Notification id
-	Id                   int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	ChannelCategoryLabel string `protobuf:"bytes,2,opt,name=channel_category_label,json=channelCategoryLabel,proto3" json:"channel_category_label,omitempty"`
 	// Notification title
-	NotificationSettingType int32  `protobuf:"varint,3,opt,name=notification_setting_type,json=notificationSettingType,proto3" json:"notification_setting_type,omitempty"`
-	ChannelCategoryTitle    string `protobuf:"bytes,4,opt,name=channel_category_title,json=channelCategoryTitle,proto3" json:"channel_category_title,omitempty"`
-	Action                  int32  `protobuf:"varint,5,opt,name=action,proto3" json:"action,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	NotificationSettingType int32 `protobuf:"varint,3,opt,name=notification_setting_type,json=notificationSettingType,proto3" json:"notification_setting_type,omitempty"`
+	ChannelCategoryTitle string `protobuf:"bytes,4,opt,name=channel_category_title,json=channelCategoryTitle,proto3" json:"channel_category_title,omitempty"`
+	Action        int32 `protobuf:"varint,5,opt,name=action,proto3" json:"action,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *NotificationChannelCategorySetting) Reset() {
@@ -17011,7 +17010,7 @@ type ChannelCanvasListRequest struct {
 	// limit
 	Limit int32 `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
 	// page
-	Page          int32  `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
+	Page int32 `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
 	Cursor        string `protobuf:"bytes,5,opt,name=cursor,proto3" json:"cursor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -17093,7 +17092,7 @@ type ChannelCanvasItem struct {
 	// content
 	Content string `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
 	// creator
-	CreatorId         int64  `protobuf:"varint,5,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
+	CreatorId int64 `protobuf:"varint,5,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
 	UpdateTimeSeconds uint32 `protobuf:"varint,6,opt,name=update_time_seconds,json=updateTimeSeconds,proto3" json:"update_time_seconds,omitempty"`
 	CreateTimeSeconds uint32 `protobuf:"varint,7,opt,name=create_time_seconds,json=createTimeSeconds,proto3" json:"create_time_seconds,omitempty"`
 	unknownFields     protoimpl.UnknownFields
@@ -17187,9 +17186,9 @@ type ChannelCanvasListResponse struct {
 	ChannelId int64 `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// channel doc item
 	ChannelCanvases []*ChannelCanvasItem `protobuf:"bytes,3,rep,name=channel_canvases,json=channelCanvases,proto3" json:"channel_canvases,omitempty"`
-	Count           int32                `protobuf:"varint,4,opt,name=count,proto3" json:"count,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	Count         int32 `protobuf:"varint,4,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ChannelCanvasListResponse) Reset() {
@@ -24752,8 +24751,8 @@ type ClanUserList_ClanUser struct {
 	// from the `nick_name` field in the `clan_desc_profile` table.
 	ClanNick string `protobuf:"bytes,3,opt,name=clan_nick,json=clanNick,proto3" json:"clan_nick,omitempty"`
 	// from the `avatar_url` field in the `clan_desc_profile` table.
-	ClanAvatar    string `protobuf:"bytes,4,opt,name=clan_avatar,json=clanAvatar,proto3" json:"clan_avatar,omitempty"`
-	ClanId        int64  `protobuf:"varint,5,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
+	ClanAvatar string `protobuf:"bytes,4,opt,name=clan_avatar,json=clanAvatar,proto3" json:"clan_avatar,omitempty"`
+	ClanId        int64 `protobuf:"varint,5,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

@@ -1415,3 +1415,15 @@ message AIAgentEnabledEvent {
 	string room_name = 3;
   bool enabled = 4;
 }
+
+message GotifyMessage {
+	int64 channel_id = 1;
+	string message = 2;
+	string title = 3;
+	string image = 4;
+	int32 priority = 5;
+	repeated string users = 6;
+	map<string, string> extras = 7;
+	uint32 application_id = 8;
+	int64 sender_id = 9;
+}
