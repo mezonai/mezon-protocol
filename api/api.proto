@@ -3613,3 +3613,7 @@ message ListMutedChannelRequest {
 message MutedChannelList {
   repeated int64 muted_list = 1;
 }
+
+message NotificationBatchRequest {
+  map<int64, NotificationList> notifications = 1;
+}
