@@ -3618,9 +3618,6 @@ message NotificationBatchRequest {
   map<int64, NotificationList> notifications = 1;
 }
 
-// ----- Poll feature -----
-
-// Stream mode: 2 = channel, 4 = DM, 6 = thread (where the poll is created).
 // Poll type: SINGLE = one choice, MULTIPLE = multiple choices.
 enum PollType {
   SINGLE = 0;
