@@ -3617,3 +3617,42 @@ message MutedChannelList {
 message NotificationBatchRequest {
   map<int64, NotificationList> notifications = 1;
 }
+
+// ----- Poll feature -----
+
+// Stream mode: 2 = channel, 4 = DM, 6 = thread (where the poll is created).
+// Poll type: SINGLE = one choice, MULTIPLE = multiple choices.
+enum PollType {
+  SINGLE = 0;
+  MULTIPLE = 1;
+}
+
+message CreatePollRequest {
+  int64 channel_id = 1;
+  int64 clan_id = 2;
+  string question = 3;
+  repeated string answers = 4;
+  int32 mode = 5;       // Stream mode: 2 = channel, 4 = DM, 6 = thread
+  bool is_public = 6;
+  double expire_hours = 7;
+  PollType type = 8;    // Poll type: SINGLE or MULTIPLE
+}
+
+message CreatePollResponse {
+  int64 poll_id = 1;
+  int64 message_id = 2;
+}
+
+message VotePollRequest {
+  int64 poll_id = 1;
+  int64 message_id = 2;
+  int64 channel_id = 3;
+  string value = 4;
+  repeated string values = 5;
+}
+
+message ClosePollRequest {
+  int64 poll_id = 1;
+  int64 message_id = 2;
+  int64 channel_id = 3;
+}
