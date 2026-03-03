@@ -1242,8 +1242,6 @@ message ChannelDescription {
   ChannelMessageHeader last_seen_message = 13;
   // DM status
   repeated bool onlines = 14 [packed=true];
-  // meeting code
-  string meeting_code = 15;
   // count message unread
   int32 count_mess_unread = 16;
   // active channel
