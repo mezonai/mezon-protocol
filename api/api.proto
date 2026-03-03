@@ -3638,6 +3638,14 @@ message CreatePollRequest {
 message CreatePollResponse {
   int64 poll_id = 1;
   int64 message_id = 2;
+  string question = 3;
+  repeated PollAnswer answers = 4;
+  repeated int32 answer_counts = 5;
+  int64 expire_at = 6;
+  bool is_closed = 7;
+  int64 creator_id = 8;
+  PollType type = 9;
+  int32 total_votes = 10;
 }
 
 message VotePollRequest {
@@ -3652,4 +3660,34 @@ message ClosePollRequest {
   int64 poll_id = 1;
   int64 message_id = 2;
   int64 channel_id = 3;
+}
+
+message GetPollRequest {
+  int64 poll_id = 1;
+  int64 message_id = 2;
+  int64 channel_id = 3;
+}
+
+message PollAnswer {
+  int32 index = 1;
+  string label = 2;
+}
+
+message PollVoterDetail {
+  int32 answer_index = 1;
+  repeated int64 user_ids = 2;
+}
+
+message GetPollResponse {
+  int64 poll_id = 1;
+  int64 message_id = 2;
+  string question = 3;
+  repeated PollAnswer answers = 4;
+  repeated int32 answer_counts = 5;
+  int64 expire_at = 6;
+  bool is_closed = 7;
+  int64 creator_id = 8;
+  PollType type = 9;
+  repeated PollVoterDetail voter_details = 11;
+  int32 total_votes = 12;
 }
