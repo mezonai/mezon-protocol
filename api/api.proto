@@ -3641,7 +3641,7 @@ message CreatePollResponse {
   string question = 3;
   repeated PollAnswer answers = 4;
   repeated int32 answer_counts = 5;
-  int64 expire_at = 6;
+  int64 exp = 6;
   bool is_closed = 7;
   int64 creator_id = 8;
   PollType type = 9;
@@ -3684,10 +3684,10 @@ message GetPollResponse {
   string question = 3;
   repeated PollAnswer answers = 4;
   repeated int32 answer_counts = 5;
-  int64 expire_at = 6;
+  int64 exp = 6;
   bool is_closed = 7;
   int64 creator_id = 8;
   PollType type = 9;
+  int32 total_votes = 10;
   repeated PollVoterDetail voter_details = 11;
-  int32 total_votes = 12;
 }

@@ -24813,7 +24813,7 @@ type CreatePollResponse struct {
 	Question      string                 `protobuf:"bytes,3,opt,name=question,proto3" json:"question,omitempty"`
 	Answers       []*PollAnswer          `protobuf:"bytes,4,rep,name=answers,proto3" json:"answers,omitempty"`
 	AnswerCounts  []int32                `protobuf:"varint,5,rep,packed,name=answer_counts,json=answerCounts,proto3" json:"answer_counts,omitempty"`
-	ExpireAt      int64                  `protobuf:"varint,6,opt,name=expire_at,json=expireAt,proto3" json:"expire_at,omitempty"`
+	Exp           int64                  `protobuf:"varint,6,opt,name=exp,proto3" json:"exp,omitempty"`
 	IsClosed      bool                   `protobuf:"varint,7,opt,name=is_closed,json=isClosed,proto3" json:"is_closed,omitempty"`
 	CreatorId     int64                  `protobuf:"varint,8,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
 	Type          PollType               `protobuf:"varint,9,opt,name=type,proto3,enum=mezon.api.PollType" json:"type,omitempty"`
@@ -24887,9 +24887,9 @@ func (x *CreatePollResponse) GetAnswerCounts() []int32 {
 	return nil
 }
 
-func (x *CreatePollResponse) GetExpireAt() int64 {
+func (x *CreatePollResponse) GetExp() int64 {
 	if x != nil {
-		return x.ExpireAt
+		return x.Exp
 	}
 	return 0
 }
@@ -25229,12 +25229,12 @@ type GetPollResponse struct {
 	Question      string                 `protobuf:"bytes,3,opt,name=question,proto3" json:"question,omitempty"`
 	Answers       []*PollAnswer          `protobuf:"bytes,4,rep,name=answers,proto3" json:"answers,omitempty"`
 	AnswerCounts  []int32                `protobuf:"varint,5,rep,packed,name=answer_counts,json=answerCounts,proto3" json:"answer_counts,omitempty"`
-	ExpireAt      int64                  `protobuf:"varint,6,opt,name=expire_at,json=expireAt,proto3" json:"expire_at,omitempty"`
+	Exp           int64                  `protobuf:"varint,6,opt,name=exp,proto3" json:"exp,omitempty"`
 	IsClosed      bool                   `protobuf:"varint,7,opt,name=is_closed,json=isClosed,proto3" json:"is_closed,omitempty"`
 	CreatorId     int64                  `protobuf:"varint,8,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
 	Type          PollType               `protobuf:"varint,9,opt,name=type,proto3,enum=mezon.api.PollType" json:"type,omitempty"`
+	TotalVotes    int32                  `protobuf:"varint,10,opt,name=total_votes,json=totalVotes,proto3" json:"total_votes,omitempty"`
 	VoterDetails  []*PollVoterDetail     `protobuf:"bytes,11,rep,name=voter_details,json=voterDetails,proto3" json:"voter_details,omitempty"`
-	TotalVotes    int32                  `protobuf:"varint,12,opt,name=total_votes,json=totalVotes,proto3" json:"total_votes,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -25304,9 +25304,9 @@ func (x *GetPollResponse) GetAnswerCounts() []int32 {
 	return nil
 }
 
-func (x *GetPollResponse) GetExpireAt() int64 {
+func (x *GetPollResponse) GetExp() int64 {
 	if x != nil {
-		return x.ExpireAt
+		return x.Exp
 	}
 	return 0
 }
@@ -25332,18 +25332,18 @@ func (x *GetPollResponse) GetType() PollType {
 	return PollType_SINGLE
 }
 
-func (x *GetPollResponse) GetVoterDetails() []*PollVoterDetail {
-	if x != nil {
-		return x.VoterDetails
-	}
-	return nil
-}
-
 func (x *GetPollResponse) GetTotalVotes() int32 {
 	if x != nil {
 		return x.TotalVotes
 	}
 	return 0
+}
+
+func (x *GetPollResponse) GetVoterDetails() []*PollVoterDetail {
+	if x != nil {
+		return x.VoterDetails
+	}
+	return nil
 }
 
 // A single user-role pair.
@@ -27907,15 +27907,15 @@ const file_api_proto_rawDesc = "" +
 	"\x04mode\x18\x05 \x01(\x05R\x04mode\x12\x1b\n" +
 	"\tis_public\x18\x06 \x01(\bR\bisPublic\x12!\n" +
 	"\fexpire_hours\x18\a \x01(\x01R\vexpireHours\x12'\n" +
-	"\x04type\x18\b \x01(\x0e2\x13.mezon.api.PollTypeR\x04type\"\xe1\x02\n" +
+	"\x04type\x18\b \x01(\x0e2\x13.mezon.api.PollTypeR\x04type\"\xd6\x02\n" +
 	"\x12CreatePollResponse\x12\x17\n" +
 	"\apoll_id\x18\x01 \x01(\x03R\x06pollId\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x02 \x01(\x03R\tmessageId\x12\x1a\n" +
 	"\bquestion\x18\x03 \x01(\tR\bquestion\x12/\n" +
 	"\aanswers\x18\x04 \x03(\v2\x15.mezon.api.PollAnswerR\aanswers\x12#\n" +
-	"\ranswer_counts\x18\x05 \x03(\x05R\fanswerCounts\x12\x1b\n" +
-	"\texpire_at\x18\x06 \x01(\x03R\bexpireAt\x12\x1b\n" +
+	"\ranswer_counts\x18\x05 \x03(\x05R\fanswerCounts\x12\x10\n" +
+	"\x03exp\x18\x06 \x01(\x03R\x03exp\x12\x1b\n" +
 	"\tis_closed\x18\a \x01(\bR\bisClosed\x12\x1d\n" +
 	"\n" +
 	"creator_id\x18\b \x01(\x03R\tcreatorId\x12'\n" +
@@ -27949,22 +27949,23 @@ const file_api_proto_rawDesc = "" +
 	"\x05label\x18\x02 \x01(\tR\x05label\"O\n" +
 	"\x0fPollVoterDetail\x12!\n" +
 	"\fanswer_index\x18\x01 \x01(\x05R\vanswerIndex\x12\x19\n" +
-	"\buser_ids\x18\x02 \x03(\x03R\auserIds\"\x9f\x03\n" +
+	"\buser_ids\x18\x02 \x03(\x03R\auserIds\"\x94\x03\n" +
 	"\x0fGetPollResponse\x12\x17\n" +
 	"\apoll_id\x18\x01 \x01(\x03R\x06pollId\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x02 \x01(\x03R\tmessageId\x12\x1a\n" +
 	"\bquestion\x18\x03 \x01(\tR\bquestion\x12/\n" +
 	"\aanswers\x18\x04 \x03(\v2\x15.mezon.api.PollAnswerR\aanswers\x12#\n" +
-	"\ranswer_counts\x18\x05 \x03(\x05R\fanswerCounts\x12\x1b\n" +
-	"\texpire_at\x18\x06 \x01(\x03R\bexpireAt\x12\x1b\n" +
+	"\ranswer_counts\x18\x05 \x03(\x05R\fanswerCounts\x12\x10\n" +
+	"\x03exp\x18\x06 \x01(\x03R\x03exp\x12\x1b\n" +
 	"\tis_closed\x18\a \x01(\bR\bisClosed\x12\x1d\n" +
 	"\n" +
 	"creator_id\x18\b \x01(\x03R\tcreatorId\x12'\n" +
-	"\x04type\x18\t \x01(\x0e2\x13.mezon.api.PollTypeR\x04type\x12?\n" +
-	"\rvoter_details\x18\v \x03(\v2\x1a.mezon.api.PollVoterDetailR\fvoterDetails\x12\x1f\n" +
-	"\vtotal_votes\x18\f \x01(\x05R\n" +
-	"totalVotes*o\n" +
+	"\x04type\x18\t \x01(\x0e2\x13.mezon.api.PollTypeR\x04type\x12\x1f\n" +
+	"\vtotal_votes\x18\n" +
+	" \x01(\x05R\n" +
+	"totalVotes\x12?\n" +
+	"\rvoter_details\x18\v \x03(\v2\x1a.mezon.api.PollVoterDetailR\fvoterDetails*o\n" +
 	"\rStoreProvider\x12\x13\n" +
 	"\x0fAPPLE_APP_STORE\x10\x00\x12\x15\n" +
 	"\x11GOOGLE_PLAY_STORE\x10\x01\x12\x16\n" +

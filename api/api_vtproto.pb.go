@@ -21442,8 +21442,8 @@ func (m *CreatePollResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x38
 	}
-	if m.ExpireAt != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ExpireAt))
+	if m.Exp != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Exp))
 		i--
 		dAtA[i] = 0x30
 	}
@@ -21794,11 +21794,6 @@ func (m *GetPollResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if m.TotalVotes != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.TotalVotes))
-		i--
-		dAtA[i] = 0x60
-	}
 	if len(m.VoterDetails) > 0 {
 		for iNdEx := len(m.VoterDetails) - 1; iNdEx >= 0; iNdEx-- {
 			size, err := m.VoterDetails[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
@@ -21810,6 +21805,11 @@ func (m *GetPollResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 			i--
 			dAtA[i] = 0x5a
 		}
+	}
+	if m.TotalVotes != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.TotalVotes))
+		i--
+		dAtA[i] = 0x50
 	}
 	if m.Type != 0 {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Type))
@@ -21831,8 +21831,8 @@ func (m *GetPollResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x38
 	}
-	if m.ExpireAt != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ExpireAt))
+	if m.Exp != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Exp))
 		i--
 		dAtA[i] = 0x30
 	}
@@ -30620,8 +30620,8 @@ func (m *CreatePollResponse) SizeVT() (n int) {
 		}
 		n += 1 + protohelpers.SizeOfVarint(uint64(l)) + l
 	}
-	if m.ExpireAt != 0 {
-		n += 1 + protohelpers.SizeOfVarint(uint64(m.ExpireAt))
+	if m.Exp != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.Exp))
 	}
 	if m.IsClosed {
 		n += 2
@@ -30772,8 +30772,8 @@ func (m *GetPollResponse) SizeVT() (n int) {
 		}
 		n += 1 + protohelpers.SizeOfVarint(uint64(l)) + l
 	}
-	if m.ExpireAt != 0 {
-		n += 1 + protohelpers.SizeOfVarint(uint64(m.ExpireAt))
+	if m.Exp != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.Exp))
 	}
 	if m.IsClosed {
 		n += 2
@@ -30784,14 +30784,14 @@ func (m *GetPollResponse) SizeVT() (n int) {
 	if m.Type != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.Type))
 	}
+	if m.TotalVotes != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.TotalVotes))
+	}
 	if len(m.VoterDetails) > 0 {
 		for _, e := range m.VoterDetails {
 			l = e.SizeVT()
 			n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 		}
-	}
-	if m.TotalVotes != 0 {
-		n += 1 + protohelpers.SizeOfVarint(uint64(m.TotalVotes))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -87229,9 +87229,9 @@ func (m *CreatePollResponse) UnmarshalVT(dAtA []byte) error {
 			}
 		case 6:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ExpireAt", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Exp", wireType)
 			}
-			m.ExpireAt = 0
+			m.Exp = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protohelpers.ErrIntOverflow
@@ -87241,7 +87241,7 @@ func (m *CreatePollResponse) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ExpireAt |= int64(b&0x7F) << shift
+				m.Exp |= int64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -88192,9 +88192,9 @@ func (m *GetPollResponse) UnmarshalVT(dAtA []byte) error {
 			}
 		case 6:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ExpireAt", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Exp", wireType)
 			}
-			m.ExpireAt = 0
+			m.Exp = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protohelpers.ErrIntOverflow
@@ -88204,7 +88204,7 @@ func (m *GetPollResponse) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ExpireAt |= int64(b&0x7F) << shift
+				m.Exp |= int64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -88267,6 +88267,25 @@ func (m *GetPollResponse) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
+		case 10:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TotalVotes", wireType)
+			}
+			m.TotalVotes = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.TotalVotes |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		case 11:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field VoterDetails", wireType)
@@ -88301,25 +88320,6 @@ func (m *GetPollResponse) UnmarshalVT(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 12:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TotalVotes", wireType)
-			}
-			m.TotalVotes = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.TotalVotes |= int32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
