@@ -24712,10 +24712,8 @@ type CreatePollRequest struct {
 	ClanId        int64                  `protobuf:"varint,2,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
 	Question      string                 `protobuf:"bytes,3,opt,name=question,proto3" json:"question,omitempty"`
 	Answers       []string               `protobuf:"bytes,4,rep,name=answers,proto3" json:"answers,omitempty"`
-	Mode          int32                  `protobuf:"varint,5,opt,name=mode,proto3" json:"mode,omitempty"` // Stream mode: 2 = channel, 4 = DM, 6 = thread
-	IsPublic      bool                   `protobuf:"varint,6,opt,name=is_public,json=isPublic,proto3" json:"is_public,omitempty"`
-	ExpireHours   float64                `protobuf:"fixed64,7,opt,name=expire_hours,json=expireHours,proto3" json:"expire_hours,omitempty"`
-	Type          PollType               `protobuf:"varint,8,opt,name=type,proto3,enum=mezon.api.PollType" json:"type,omitempty"` // Poll type: SINGLE or MULTIPLE
+	ExpireHours   float64                `protobuf:"fixed64,5,opt,name=expire_hours,json=expireHours,proto3" json:"expire_hours,omitempty"`
+	Type          PollType               `protobuf:"varint,6,opt,name=type,proto3,enum=mezon.api.PollType" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -24776,20 +24774,6 @@ func (x *CreatePollRequest) GetAnswers() []string {
 		return x.Answers
 	}
 	return nil
-}
-
-func (x *CreatePollRequest) GetMode() int32 {
-	if x != nil {
-		return x.Mode
-	}
-	return 0
-}
-
-func (x *CreatePollRequest) GetIsPublic() bool {
-	if x != nil {
-		return x.IsPublic
-	}
-	return false
 }
 
 func (x *CreatePollRequest) GetExpireHours() float64 {
@@ -24927,8 +24911,7 @@ type VotePollRequest struct {
 	PollId        int64                  `protobuf:"varint,1,opt,name=poll_id,json=pollId,proto3" json:"poll_id,omitempty"`
 	MessageId     int64                  `protobuf:"varint,2,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
 	ChannelId     int64                  `protobuf:"varint,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	Value         string                 `protobuf:"bytes,4,opt,name=value,proto3" json:"value,omitempty"`
-	Values        []string               `protobuf:"bytes,5,rep,name=values,proto3" json:"values,omitempty"`
+	AnswerIndices []int32                `protobuf:"varint,4,rep,packed,name=answer_indices,json=answerIndices,proto3" json:"answer_indices,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -24984,16 +24967,9 @@ func (x *VotePollRequest) GetChannelId() int64 {
 	return 0
 }
 
-func (x *VotePollRequest) GetValue() string {
+func (x *VotePollRequest) GetAnswerIndices() []int32 {
 	if x != nil {
-		return x.Value
-	}
-	return ""
-}
-
-func (x *VotePollRequest) GetValues() []string {
-	if x != nil {
-		return x.Values
+		return x.AnswerIndices
 	}
 	return nil
 }
@@ -27897,17 +27873,15 @@ const file_api_proto_rawDesc = "" +
 	"\rnotifications\x18\x01 \x03(\v26.mezon.api.NotificationBatchRequest.NotificationsEntryR\rnotifications\x1a]\n" +
 	"\x12NotificationsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x03R\x03key\x121\n" +
-	"\x05value\x18\x02 \x01(\v2\x1b.mezon.api.NotificationListR\x05value:\x028\x01\"\xfe\x01\n" +
+	"\x05value\x18\x02 \x01(\v2\x1b.mezon.api.NotificationListR\x05value:\x028\x01\"\xcd\x01\n" +
 	"\x11CreatePollRequest\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\x03R\tchannelId\x12\x17\n" +
 	"\aclan_id\x18\x02 \x01(\x03R\x06clanId\x12\x1a\n" +
 	"\bquestion\x18\x03 \x01(\tR\bquestion\x12\x18\n" +
-	"\aanswers\x18\x04 \x03(\tR\aanswers\x12\x12\n" +
-	"\x04mode\x18\x05 \x01(\x05R\x04mode\x12\x1b\n" +
-	"\tis_public\x18\x06 \x01(\bR\bisPublic\x12!\n" +
-	"\fexpire_hours\x18\a \x01(\x01R\vexpireHours\x12'\n" +
-	"\x04type\x18\b \x01(\x0e2\x13.mezon.api.PollTypeR\x04type\"\xd6\x02\n" +
+	"\aanswers\x18\x04 \x03(\tR\aanswers\x12!\n" +
+	"\fexpire_hours\x18\x05 \x01(\x01R\vexpireHours\x12'\n" +
+	"\x04type\x18\x06 \x01(\x0e2\x13.mezon.api.PollTypeR\x04type\"\xd6\x02\n" +
 	"\x12CreatePollResponse\x12\x17\n" +
 	"\apoll_id\x18\x01 \x01(\x03R\x06pollId\x12\x1d\n" +
 	"\n" +
@@ -27922,15 +27896,14 @@ const file_api_proto_rawDesc = "" +
 	"\x04type\x18\t \x01(\x0e2\x13.mezon.api.PollTypeR\x04type\x12\x1f\n" +
 	"\vtotal_votes\x18\n" +
 	" \x01(\x05R\n" +
-	"totalVotes\"\x96\x01\n" +
+	"totalVotes\"\x8f\x01\n" +
 	"\x0fVotePollRequest\x12\x17\n" +
 	"\apoll_id\x18\x01 \x01(\x03R\x06pollId\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x02 \x01(\x03R\tmessageId\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x03 \x01(\x03R\tchannelId\x12\x14\n" +
-	"\x05value\x18\x04 \x01(\tR\x05value\x12\x16\n" +
-	"\x06values\x18\x05 \x03(\tR\x06values\"i\n" +
+	"channel_id\x18\x03 \x01(\x03R\tchannelId\x12%\n" +
+	"\x0eanswer_indices\x18\x04 \x03(\x05R\ranswerIndices\"i\n" +
 	"\x10ClosePollRequest\x12\x17\n" +
 	"\apoll_id\x18\x01 \x01(\x03R\x06pollId\x12\x1d\n" +
 	"\n" +
