@@ -24703,7 +24703,7 @@ type CreatePollRequest struct {
 	ClanId        int64                  `protobuf:"varint,2,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
 	Question      string                 `protobuf:"bytes,3,opt,name=question,proto3" json:"question,omitempty"`
 	Answers       []string               `protobuf:"bytes,4,rep,name=answers,proto3" json:"answers,omitempty"`
-	ExpireHours   float64                `protobuf:"fixed64,5,opt,name=expire_hours,json=expireHours,proto3" json:"expire_hours,omitempty"`
+	ExpireHours   int32                  `protobuf:"varint,5,opt,name=expire_hours,json=expireHours,proto3" json:"expire_hours,omitempty"`
 	Type          PollType               `protobuf:"varint,6,opt,name=type,proto3,enum=mezon.api.PollType" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -24767,7 +24767,7 @@ func (x *CreatePollRequest) GetAnswers() []string {
 	return nil
 }
 
-func (x *CreatePollRequest) GetExpireHours() float64 {
+func (x *CreatePollRequest) GetExpireHours() int32 {
 	if x != nil {
 		return x.ExpireHours
 	}
@@ -27870,7 +27870,7 @@ const file_api_proto_rawDesc = "" +
 	"\aclan_id\x18\x02 \x01(\x03R\x06clanId\x12\x1a\n" +
 	"\bquestion\x18\x03 \x01(\tR\bquestion\x12\x18\n" +
 	"\aanswers\x18\x04 \x03(\tR\aanswers\x12!\n" +
-	"\fexpire_hours\x18\x05 \x01(\x01R\vexpireHours\x12'\n" +
+	"\fexpire_hours\x18\x05 \x01(\x05R\vexpireHours\x12'\n" +
 	"\x04type\x18\x06 \x01(\x0e2\x13.mezon.api.PollTypeR\x04type\"\xd6\x02\n" +
 	"\x12CreatePollResponse\x12\x17\n" +
 	"\apoll_id\x18\x01 \x01(\x03R\x06pollId\x12\x1d\n" +

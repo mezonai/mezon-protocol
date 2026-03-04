@@ -5,14 +5,12 @@
 package api
 
 import (
-	binary "encoding/binary"
 	fmt "fmt"
 	protohelpers "github.com/planetscale/vtprotobuf/protohelpers"
 	wrapperspb "github.com/planetscale/vtprotobuf/types/known/wrapperspb"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb1 "google.golang.org/protobuf/types/known/wrapperspb"
 	io "io"
-	math "math"
 )
 
 const (
@@ -21331,10 +21329,9 @@ func (m *CreatePollRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		dAtA[i] = 0x30
 	}
 	if m.ExpireHours != 0 {
-		i -= 8
-		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.ExpireHours))))
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ExpireHours))
 		i--
-		dAtA[i] = 0x29
+		dAtA[i] = 0x28
 	}
 	if len(m.Answers) > 0 {
 		for iNdEx := len(m.Answers) - 1; iNdEx >= 0; iNdEx-- {
@@ -30555,7 +30552,7 @@ func (m *CreatePollRequest) SizeVT() (n int) {
 		}
 	}
 	if m.ExpireHours != 0 {
-		n += 9
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.ExpireHours))
 	}
 	if m.Type != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.Type))
@@ -86866,16 +86863,24 @@ func (m *CreatePollRequest) UnmarshalVT(dAtA []byte) error {
 			m.Answers = append(m.Answers, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		case 5:
-			if wireType != 1 {
+			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ExpireHours", wireType)
 			}
-			var v uint64
-			if (iNdEx + 8) > l {
-				return io.ErrUnexpectedEOF
+			m.ExpireHours = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ExpireHours |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
 			}
-			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
-			iNdEx += 8
-			m.ExpireHours = float64(math.Float64frombits(v))
 		case 6:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Type", wireType)

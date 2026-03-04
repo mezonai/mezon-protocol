@@ -3627,7 +3627,7 @@ message CreatePollRequest {
   int64 clan_id = 2;
   string question = 3;
   repeated string answers = 4;
-  double expire_hours = 5;
+  int32 expire_hours = 5;
   PollType type = 6;
 }
 
