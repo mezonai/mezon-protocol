@@ -1921,6 +1921,25 @@ message UploadAttachment {
   string url = 2;
 }
 
+message MultipartUploadAttachment {
+  // The name of file that need to upload
+  string filename = 1;
+  // The url
+  repeated string urls = 2;
+  // the upload id
+  string upload_id = 3;
+}
+
+message MultipartUploadAttachmentPart {
+	int32 part_number = 1;
+	string e_tag = 2;       
+}
+
+message MultipartUploadAttachmentFinishRequest {
+	string upload_id = 1;
+	repeated MultipartUploadAttachmentPart parts = 2;
+}
+
 // Operator that can be used to override the one set in the leaderboard.
 enum Operator {
   // Do not override the leaderboard operator.
