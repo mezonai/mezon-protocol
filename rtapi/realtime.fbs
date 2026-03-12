@@ -167,7 +167,7 @@ table SFUSignalingFwd {
 
 table AddClanUserEvent {
   clan_id:long;
-  user:UserProfileRedis;
+  user:UserProfile;
   invitor:string;
 }
 
@@ -625,10 +625,10 @@ table CustomStatusEvent {
 
 table UserChannelAdded {
   channel_desc:mezon.api.ChannelDescription;
-  users:[UserProfileRedis];
+  users:[UserProfile];
   status:string;
   clan_id:long;
-  caller:UserProfileRedis;
+  caller:UserProfile;
   create_time_seconds:uint;
   active:int;
 }
@@ -692,7 +692,7 @@ table ConfirmLinkMezonOTPData {
   value:string;
 }
 
-table UserProfileRedis {
+table UserProfile {
   user_id:long;
   username:string;
   avatar:string;
