@@ -703,7 +703,7 @@ table UserProfile {
   fcm_tokens:[FCMTokens];
   joined_clans:[long];
   app_token:string;
-  create_time_second:uint;
+  create_time_seconds:uint;
   app_url:string;
   is_bot:bool;
   voip_token:string;

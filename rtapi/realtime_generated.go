@@ -4,8 +4,9 @@ package rtapi
 
 import (
 	"bytes"
-	flatbuffers "github.com/google/flatbuffers/go"
 	"strconv"
+
+	flatbuffers "github.com/google/flatbuffers/go"
 
 	mezon__api "github.com/mezonai/mezon-protocol/v2/api"
 )
@@ -431,6 +432,7 @@ func EnvelopeAddMessage(builder *flatbuffers.Builder, message flatbuffers.UOffse
 func EnvelopeEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UpdateLocalCacheEvent struct {
 	_tab flatbuffers.Table
 }
@@ -536,6 +538,7 @@ func UpdateLocalCacheEventStartParams2Vector(builder *flatbuffers.Builder, numEl
 func UpdateLocalCacheEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type FollowEvent struct {
 	_tab flatbuffers.Table
 }
@@ -577,6 +580,7 @@ func FollowEventStart(builder *flatbuffers.Builder) {
 func FollowEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type BannedUserEvent struct {
 	_tab flatbuffers.Table
 }
@@ -725,6 +729,7 @@ func BannedUserEventAddBanTime(builder *flatbuffers.Builder, banTime int32) {
 func BannedUserEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelCanvas struct {
 	_tab flatbuffers.Table
 }
@@ -878,6 +883,7 @@ func ChannelCanvasAddStatus(builder *flatbuffers.Builder, status int32) {
 func ChannelCanvasEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type IncomingCallPush struct {
 	_tab flatbuffers.Table
 }
@@ -975,6 +981,7 @@ func IncomingCallPushAddCallerId(builder *flatbuffers.Builder, callerId int64) {
 func IncomingCallPushEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type WebrtcSignalingFwd struct {
 	_tab flatbuffers.Table
 }
@@ -1087,6 +1094,7 @@ func WebrtcSignalingFwdAddCallerId(builder *flatbuffers.Builder, callerId int64)
 func WebrtcSignalingFwdEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type SFUSignalingFwd struct {
 	_tab flatbuffers.Table
 }
@@ -1199,6 +1207,7 @@ func SFUSignalingFwdAddUserId(builder *flatbuffers.Builder, userId int64) {
 func SFUSignalingFwdEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type AddClanUserEvent struct {
 	_tab flatbuffers.Table
 }
@@ -1282,6 +1291,7 @@ func AddClanUserEventAddInvitor(builder *flatbuffers.Builder, invitor flatbuffer
 func AddClanUserEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type RoleAssignedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -1413,6 +1423,7 @@ func RoleAssignedEventStartUserIdsRemovedVector(builder *flatbuffers.Builder, nu
 func RoleAssignedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type PermissionRoleChannel struct {
 	_tab flatbuffers.Table
 }
@@ -1484,6 +1495,7 @@ func PermissionRoleChannelAddActive(builder *flatbuffers.Builder, active bool) {
 func PermissionRoleChannelEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type HashtagDm struct {
 	_tab flatbuffers.Table
 }
@@ -1633,6 +1645,7 @@ func HashtagDmAddParentId(builder *flatbuffers.Builder, parentId int64) {
 func HashtagDmEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelDescription struct {
 	_tab flatbuffers.Table
 }
@@ -1798,6 +1811,7 @@ func ChannelDescriptionAddLastSentMessage(builder *flatbuffers.Builder, lastSent
 func ChannelDescriptionEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ClanEmoji struct {
 	_tab flatbuffers.Table
 }
@@ -1939,6 +1953,7 @@ func ClanEmojiAddClanName(builder *flatbuffers.Builder, clanName flatbuffers.UOf
 func ClanEmojiEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type Channel struct {
 	_tab flatbuffers.Table
 }
@@ -2070,6 +2085,7 @@ func ChannelAddCategoryName(builder *flatbuffers.Builder, categoryName flatbuffe
 func ChannelEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ClanJoin struct {
 	_tab flatbuffers.Table
 }
@@ -2126,6 +2142,7 @@ func ClanJoinAddClanId(builder *flatbuffers.Builder, clanId int64) {
 func ClanJoinEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelJoin struct {
 	_tab flatbuffers.Table
 }
@@ -2227,6 +2244,7 @@ func ChannelJoinAddIsPublic(builder *flatbuffers.Builder, isPublic bool) {
 func ChannelJoinEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelLeave struct {
 	_tab flatbuffers.Table
 }
@@ -2328,6 +2346,7 @@ func ChannelLeaveAddIsPublic(builder *flatbuffers.Builder, isPublic bool) {
 func ChannelLeaveEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelMessageAck struct {
 	_tab flatbuffers.Table
 }
@@ -2492,6 +2511,7 @@ func ChannelMessageAckAddCategoryName(builder *flatbuffers.Builder, categoryName
 func ChannelMessageAckEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type EphemeralMessageSend struct {
 	_tab flatbuffers.Table
 }
@@ -2581,6 +2601,7 @@ func EphemeralMessageSendStartReceiverIdsVector(builder *flatbuffers.Builder, nu
 func EphemeralMessageSendEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type QuickMenuDataEvent struct {
 	_tab flatbuffers.Table
 }
@@ -2649,6 +2670,7 @@ func QuickMenuDataEventAddMessage(builder *flatbuffers.Builder, message flatbuff
 func QuickMenuDataEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type VoiceReactionSend struct {
 	_tab flatbuffers.Table
 }
@@ -2758,6 +2780,7 @@ func VoiceReactionSendAddMediaType(builder *flatbuffers.Builder, mediaType int32
 func VoiceReactionSendEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type MarkAsRead struct {
 	_tab flatbuffers.Table
 }
@@ -2844,6 +2867,7 @@ func MarkAsReadAddClanId(builder *flatbuffers.Builder, clanId int64) {
 func MarkAsReadEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelMessageSend struct {
 	_tab flatbuffers.Table
 }
@@ -3120,6 +3144,7 @@ func ChannelMessageSendAddId(builder *flatbuffers.Builder, id int64) {
 func ChannelMessageSendEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelMessageUpdate struct {
 	_tab flatbuffers.Table
 }
@@ -3344,6 +3369,7 @@ func ChannelMessageUpdateAddIsUpdateMsgTopic(builder *flatbuffers.Builder, isUpd
 func ChannelMessageUpdateEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelMessageRemove struct {
 	_tab flatbuffers.Table
 }
@@ -3570,6 +3596,7 @@ func ChannelMessageRemoveStartReferencesVector(builder *flatbuffers.Builder, num
 func ChannelMessageRemoveEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelPresenceEvent struct {
 	_tab flatbuffers.Table
 }
@@ -3715,6 +3742,7 @@ func ChannelPresenceEventAddMode(builder *flatbuffers.Builder, mode int32) {
 func ChannelPresenceEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type Error struct {
 	_tab flatbuffers.Table
 }
@@ -3817,6 +3845,7 @@ func ErrorStartContextVector(builder *flatbuffers.Builder, numElems int) flatbuf
 func ErrorEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ContextEntry struct {
 	_tab flatbuffers.Table
 }
@@ -3912,6 +3941,7 @@ func ContextEntryAddValue(builder *flatbuffers.Builder, value flatbuffers.UOffse
 func ContextEntryEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type Notifications struct {
 	_tab flatbuffers.Table
 }
@@ -3979,6 +4009,7 @@ func NotificationsStartNotificationsVector(builder *flatbuffers.Builder, numElem
 func NotificationsEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type AddFriend struct {
 	_tab flatbuffers.Table
 }
@@ -4068,6 +4099,7 @@ func AddFriendAddAvatar(builder *flatbuffers.Builder, avatar flatbuffers.UOffset
 func AddFriendEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type RemoveFriend struct {
 	_tab flatbuffers.Table
 }
@@ -4124,6 +4156,7 @@ func RemoveFriendAddUserId(builder *flatbuffers.Builder, userId int64) {
 func RemoveFriendEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type BlockFriend struct {
 	_tab flatbuffers.Table
 }
@@ -4180,6 +4213,7 @@ func BlockFriendAddUserId(builder *flatbuffers.Builder, userId int64) {
 func BlockFriendEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UnblockFriend struct {
 	_tab flatbuffers.Table
 }
@@ -4291,6 +4325,7 @@ func UnblockFriendAddUserStatus(builder *flatbuffers.Builder, userStatus flatbuf
 func UnblockFriendEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type Ping struct {
 	_tab flatbuffers.Table
 }
@@ -4332,6 +4367,7 @@ func PingStart(builder *flatbuffers.Builder) {
 func PingEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type Pong struct {
 	_tab flatbuffers.Table
 }
@@ -4373,6 +4409,7 @@ func PongStart(builder *flatbuffers.Builder) {
 func PongEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type Status struct {
 	_tab flatbuffers.Table
 }
@@ -4440,6 +4477,7 @@ func StatusStartPresencesVector(builder *flatbuffers.Builder, numElems int) flat
 func StatusEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StatusFollow struct {
 	_tab flatbuffers.Table
 }
@@ -4536,6 +4574,7 @@ func StatusFollowStartUsernamesVector(builder *flatbuffers.Builder, numElems int
 func StatusFollowEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StatusPresenceEvent struct {
 	_tab flatbuffers.Table
 }
@@ -4629,6 +4668,7 @@ func StatusPresenceEventStartLeavesVector(builder *flatbuffers.Builder, numElems
 func StatusPresenceEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type LastPinMessageEvent struct {
 	_tab flatbuffers.Table
 }
@@ -4856,6 +4896,7 @@ func LastPinMessageEventAddMessageCreatedTime(builder *flatbuffers.Builder, mess
 func LastPinMessageEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type LastSeenMessageEvent struct {
 	_tab flatbuffers.Table
 }
@@ -4987,6 +5028,7 @@ func LastSeenMessageEventAddBadgeCount(builder *flatbuffers.Builder, badgeCount 
 func LastSeenMessageEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type MessageTypingEvent struct {
 	_tab flatbuffers.Table
 }
@@ -5140,6 +5182,7 @@ func MessageTypingEventAddTopicId(builder *flatbuffers.Builder, topicId int64) {
 func MessageTypingEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type VoiceLeavedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -5237,6 +5280,7 @@ func VoiceLeavedEventAddVoiceUserId(builder *flatbuffers.Builder, voiceUserId in
 func VoiceLeavedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type VoiceJoinedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -5378,6 +5422,7 @@ func VoiceJoinedEventAddLastScreenshot(builder *flatbuffers.Builder, lastScreens
 func VoiceJoinedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type VoiceStartedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -5460,6 +5505,7 @@ func VoiceStartedEventAddVoiceChannelId(builder *flatbuffers.Builder, voiceChann
 func VoiceStartedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type VoiceEndedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -5542,6 +5588,7 @@ func VoiceEndedEventAddVoiceChannelId(builder *flatbuffers.Builder, voiceChannel
 func VoiceEndedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StreamingLeavedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -5635,6 +5682,7 @@ func StreamingLeavedEventAddStreamingUserId(builder *flatbuffers.Builder, stream
 func StreamingLeavedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StreamingJoinedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -5769,6 +5817,7 @@ func StreamingJoinedEventAddStreamingChannelId(builder *flatbuffers.Builder, str
 func StreamingJoinedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StreamingStartedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -5866,6 +5915,7 @@ func StreamingStartedEventAddIsStreaming(builder *flatbuffers.Builder, isStreami
 func StreamingStartedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StreamingEndedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -5937,6 +5987,7 @@ func StreamingEndedEventAddChannelId(builder *flatbuffers.Builder, channelId int
 func StreamingEndedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelCreatedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6146,6 +6197,7 @@ func ChannelCreatedEventAddChannelAvatar(builder *flatbuffers.Builder, channelAv
 func ChannelCreatedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type CategoryEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6258,6 +6310,7 @@ func CategoryEventAddStatus(builder *flatbuffers.Builder, status int32) {
 func CategoryEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type RoleEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6473,6 +6526,7 @@ func RoleEventStartRemovePermissionIdsVector(builder *flatbuffers.Builder, numEl
 func RoleEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelDeletedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6585,6 +6639,7 @@ func ChannelDeletedEventAddDeletor(builder *flatbuffers.Builder, deletor flatbuf
 func ChannelDeletedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ClanDeletedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6656,6 +6711,7 @@ func ClanDeletedEventAddDeletor(builder *flatbuffers.Builder, deletor int64) {
 func ClanDeletedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StickerCreateEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6797,6 +6853,7 @@ func StickerCreateEventAddClanName(builder *flatbuffers.Builder, clanName flatbu
 func StickerCreateEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StickerUpdateEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6879,6 +6936,7 @@ func StickerUpdateEventAddUserId(builder *flatbuffers.Builder, userId int64) {
 func StickerUpdateEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StickerDeleteEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6950,6 +7008,7 @@ func StickerDeleteEventAddUserId(builder *flatbuffers.Builder, userId int64) {
 func StickerDeleteEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelUpdatedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -7309,6 +7368,7 @@ func ChannelUpdatedEventAddChannelAvatar(builder *flatbuffers.Builder, channelAv
 func ChannelUpdatedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StatusUnfollow struct {
 	_tab flatbuffers.Table
 }
@@ -7382,6 +7442,7 @@ func StatusUnfollowStartUserIdsVector(builder *flatbuffers.Builder, numElems int
 func StatusUnfollowEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StatusUpdate struct {
 	_tab flatbuffers.Table
 }
@@ -7434,6 +7495,7 @@ func StatusUpdateAddStatus(builder *flatbuffers.Builder, status flatbuffers.UOff
 func StatusUpdateEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type Stream struct {
 	_tab flatbuffers.Table
 }
@@ -7531,6 +7593,7 @@ func StreamAddLabel(builder *flatbuffers.Builder, label flatbuffers.UOffsetT) {
 func StreamEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StreamData struct {
 	_tab flatbuffers.Table
 }
@@ -7630,6 +7693,7 @@ func StreamDataAddReliable(builder *flatbuffers.Builder, reliable bool) {
 func StreamDataEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StreamPresenceEvent struct {
 	_tab flatbuffers.Table
 }
@@ -7739,6 +7803,7 @@ func StreamPresenceEventStartLeavesVector(builder *flatbuffers.Builder, numElems
 func StreamPresenceEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UserPresence struct {
 	_tab flatbuffers.Table
 }
@@ -7854,6 +7919,7 @@ func UserPresenceAddUserStatus(builder *flatbuffers.Builder, userStatus flatbuff
 func UserPresenceEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type CustomStatusEvent struct {
 	_tab flatbuffers.Table
 }
@@ -7977,6 +8043,7 @@ func CustomStatusEventAddNoClear(builder *flatbuffers.Builder, noClear bool) {
 func CustomStatusEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UserChannelAdded struct {
 	_tab flatbuffers.Table
 }
@@ -8132,6 +8199,7 @@ func UserChannelAddedAddActive(builder *flatbuffers.Builder, active int32) {
 func UserChannelAddedEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UserChannelRemoved struct {
 	_tab flatbuffers.Table
 }
@@ -8282,6 +8350,7 @@ func UserChannelRemovedStartBadgeCountsVector(builder *flatbuffers.Builder, numE
 func UserChannelRemovedEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UserClanRemoved struct {
 	_tab flatbuffers.Table
 }
@@ -8370,6 +8439,7 @@ func UserClanRemovedStartUserIdsVector(builder *flatbuffers.Builder, numElems in
 func UserClanRemovedEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ClanCreatedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -8478,6 +8548,7 @@ func ClanCreatedEventAddWelcomeChannelId(builder *flatbuffers.Builder, welcomeCh
 func ClanCreatedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ClanUpdatedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -8686,6 +8757,7 @@ func ClanUpdatedEventAddPreventAnonymous(builder *flatbuffers.Builder, preventAn
 func ClanUpdatedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ClanProfileUpdatedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -8779,6 +8851,7 @@ func ClanProfileUpdatedEventAddClanId(builder *flatbuffers.Builder, clanId int64
 func ClanProfileUpdatedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UserProfileUpdatedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -8909,6 +8982,7 @@ func UserProfileUpdatedEventAddEncryptPrivateKey(builder *flatbuffers.Builder, e
 func UserProfileUpdatedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ConfirmLinkMezonOTPData struct {
 	_tab flatbuffers.Table
 }
@@ -8976,6 +9050,7 @@ func ConfirmLinkMezonOTPDataAddValue(builder *flatbuffers.Builder, value flatbuf
 func ConfirmLinkMezonOTPDataEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UserProfile struct {
 	_tab flatbuffers.Table
 }
@@ -9129,7 +9204,7 @@ func (rcv *UserProfile) AppToken() []byte {
 	return nil
 }
 
-func (rcv *UserProfile) CreateTimeSecond() uint32 {
+func (rcv *UserProfile) CreateTimeSeconds() uint32 {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(24))
 	if o != 0 {
 		return rcv._tab.GetUint32(o + rcv._tab.Pos)
@@ -9137,7 +9212,7 @@ func (rcv *UserProfile) CreateTimeSecond() uint32 {
 	return 0
 }
 
-func (rcv *UserProfile) MutateCreateTimeSecond(n uint32) bool {
+func (rcv *UserProfile) MutateCreateTimeSeconds(n uint32) bool {
 	return rcv._tab.MutateUint32Slot(24, n)
 }
 
@@ -9208,8 +9283,8 @@ func UserProfileStartJoinedClansVector(builder *flatbuffers.Builder, numElems in
 func UserProfileAddAppToken(builder *flatbuffers.Builder, appToken flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(9, flatbuffers.UOffsetT(appToken), 0)
 }
-func UserProfileAddCreateTimeSecond(builder *flatbuffers.Builder, createTimeSecond uint32) {
-	builder.PrependUint32Slot(10, createTimeSecond, 0)
+func UserProfileAddCreateTimeSeconds(builder *flatbuffers.Builder, createTimeSeconds uint32) {
+	builder.PrependUint32Slot(10, createTimeSeconds, 0)
 }
 func UserProfileAddAppUrl(builder *flatbuffers.Builder, appUrl flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(11, flatbuffers.UOffsetT(appUrl), 0)
@@ -9223,6 +9298,7 @@ func UserProfileAddVoipToken(builder *flatbuffers.Builder, voipToken flatbuffers
 func UserProfileEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type FCMTokens struct {
 	_tab flatbuffers.Table
 }
@@ -9297,6 +9373,7 @@ func FCMTokensAddPlatform(builder *flatbuffers.Builder, platform flatbuffers.UOf
 func FCMTokensEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type CheckNameExistedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -9409,6 +9486,7 @@ func CheckNameExistedEventAddClanId(builder *flatbuffers.Builder, clanId int64) 
 func CheckNameExistedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type NotificationChannelCategorySetting struct {
 	_tab flatbuffers.Table
 }
@@ -9517,6 +9595,7 @@ func NotificationChannelCategorySettingAddAction(builder *flatbuffers.Builder, a
 func NotificationChannelCategorySettingEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type EventEmoji struct {
 	_tab flatbuffers.Table
 }
@@ -9688,6 +9767,7 @@ func EventEmojiAddIsForSale(builder *flatbuffers.Builder, isForSale bool) {
 func EventEmojiEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type PermissionSetEvent struct {
 	_tab flatbuffers.Table
 }
@@ -9811,6 +9891,7 @@ func PermissionSetEventStartPermissionUpdatesVector(builder *flatbuffers.Builder
 func PermissionSetEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type PermissionChangedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -9960,6 +10041,7 @@ func PermissionChangedEventStartDefaultPermissionsVector(builder *flatbuffers.Bu
 func PermissionChangedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type MessageButtonClicked struct {
 	_tab flatbuffers.Table
 }
@@ -10083,6 +10165,7 @@ func MessageButtonClickedAddExtraData(builder *flatbuffers.Builder, extraData fl
 func MessageButtonClickedEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UnmuteEvent struct {
 	_tab flatbuffers.Table
 }
@@ -10169,6 +10252,7 @@ func UnmuteEventAddClanId(builder *flatbuffers.Builder, clanId int64) {
 func UnmuteEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ListActivity struct {
 	_tab flatbuffers.Table
 }
@@ -10236,6 +10320,7 @@ func ListActivityStartActsVector(builder *flatbuffers.Builder, numElems int) fla
 func ListActivityEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type DropdownBoxSelected struct {
 	_tab flatbuffers.Table
 }
@@ -10371,6 +10456,7 @@ func DropdownBoxSelectedStartValuesVector(builder *flatbuffers.Builder, numElems
 func DropdownBoxSelectedEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type SdTopicEvent struct {
 	_tab flatbuffers.Table
 }
@@ -10519,6 +10605,7 @@ func SdTopicEventAddMessage(builder *flatbuffers.Builder, message flatbuffers.UO
 func SdTopicEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelAppEvent struct {
 	_tab flatbuffers.Table
 }
@@ -10631,6 +10718,7 @@ func ChannelAppEventAddAction(builder *flatbuffers.Builder, action int32) {
 func ChannelAppEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UserStatusEvent struct {
 	_tab flatbuffers.Table
 }
@@ -10698,6 +10786,7 @@ func UserStatusEventAddCustomStatus(builder *flatbuffers.Builder, customStatus f
 func UserStatusEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type JoinChannelAppData struct {
 	_tab flatbuffers.Table
 }
@@ -10776,6 +10865,7 @@ func JoinChannelAppDataAddHash(builder *flatbuffers.Builder, hash flatbuffers.UO
 func JoinChannelAppDataEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UnpinMessageEvent struct {
 	_tab flatbuffers.Table
 }
@@ -10877,6 +10967,7 @@ func UnpinMessageEventAddClanId(builder *flatbuffers.Builder, clanId int64) {
 func UnpinMessageEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type HandleParticipantMeetStateEvent struct {
 	_tab flatbuffers.Table
 }
@@ -10985,6 +11076,7 @@ func HandleParticipantMeetStateEventAddRoomName(builder *flatbuffers.Builder, ro
 func HandleParticipantMeetStateEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type DeleteAccountEvent struct {
 	_tab flatbuffers.Table
 }
@@ -11041,6 +11133,7 @@ func DeleteAccountEventAddUserId(builder *flatbuffers.Builder, userId int64) {
 func DeleteAccountEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ListDataSocket struct {
 	_tab flatbuffers.Table
 }
@@ -11173,6 +11266,7 @@ func ListDataSocketAddListLogedDevice(builder *flatbuffers.Builder, listLogedDev
 func ListDataSocketEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type MeetParticipantEvent struct {
 	_tab flatbuffers.Table
 }
@@ -11281,6 +11375,7 @@ func MeetParticipantEventAddAction(builder *flatbuffers.Builder, action int32) {
 func MeetParticipantEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type TransferOwnershipEvent struct {
 	_tab flatbuffers.Table
 }
@@ -11367,6 +11462,7 @@ func TransferOwnershipEventAddCurrOwner(builder *flatbuffers.Builder, currOwner 
 func TransferOwnershipEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ActiveArchivedThread struct {
 	_tab flatbuffers.Table
 }
@@ -11438,6 +11534,7 @@ func ActiveArchivedThreadAddChannelId(builder *flatbuffers.Builder, channelId in
 func ActiveArchivedThreadEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type AllowAnonymousEvent struct {
 	_tab flatbuffers.Table
 }
@@ -11509,6 +11606,7 @@ func AllowAnonymousEventAddAllow(builder *flatbuffers.Builder, allow bool) {
 func AllowAnonymousEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type FcmDataPayload struct {
 	_tab flatbuffers.Table
 }
@@ -11849,6 +11947,7 @@ func FcmDataPayloadStartAttachmentsVector(builder *flatbuffers.Builder, numElems
 func FcmDataPayloadEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type AIAgentEnabledEvent struct {
 	_tab flatbuffers.Table
 }
@@ -11946,6 +12045,7 @@ func AIAgentEnabledEventAddEnabled(builder *flatbuffers.Builder, enabled bool) {
 func AIAgentEnabledEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type GotifyMessage struct {
 	_tab flatbuffers.Table
 }
@@ -12153,6 +12253,7 @@ func GotifyMessageAddSenderId(builder *flatbuffers.Builder, senderId int64) {
 func GotifyMessageEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ExtrasEntry struct {
 	_tab flatbuffers.Table
 }
