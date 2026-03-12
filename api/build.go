@@ -14,4 +14,4 @@
 
 package api
 
-//go:generate protoc -I. --go_out=. --go_opt=paths=source_relative --go-vtproto_out=. --go-vtproto_opt=paths=source_relative --go-vtproto_opt=features=marshal+unmarshal+size+pool api.proto
+//go:generate flatc --go --gen-onefile api.fbs

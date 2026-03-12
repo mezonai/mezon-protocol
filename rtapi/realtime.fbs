@@ -1,0 +1,913 @@
+include "api.fbs";
+
+namespace rtapi;
+
+enum Code : int {
+  RUNTIME_EXCEPTION = 0,
+  UNRECOGNIZED_PAYLOAD = 1,
+  MISSING_PAYLOAD = 2,
+  BAD_INPUT = 3,
+  MATCH_NOT_FOUND = 4,
+  MATCH_JOIN_REJECTED = 5,
+  RUNTIME_FUNCTION_NOT_FOUND = 6,
+  RUNTIME_FUNCTION_EXCEPTION = 7,
+}
+
+table Envelope {
+  cid:string;
+  message:Anonymous0;
+}
+
+table Anonymous0 {
+  channel:Channel;
+  clan_join:ClanJoin;
+  channel_join:ChannelJoin;
+  channel_leave:ChannelLeave;
+  channel_message:mezon.api.ChannelMessage;
+  channel_message_ack:ChannelMessageAck;
+  channel_message_send:ChannelMessageSend;
+  channel_message_update:ChannelMessageUpdate;
+  channel_message_remove:ChannelMessageRemove;
+  channel_presence_event:ChannelPresenceEvent;
+  error:Error;
+  notifications:Notifications;
+  rpc:mezon.api.Rpc;
+  status:Status;
+  status_follow:StatusFollow;
+  status_presence_event:StatusPresenceEvent;
+  status_unfollow:StatusUnfollow;
+  status_update:StatusUpdate;
+  stream_data:StreamData;
+  stream_presence_event:StreamPresenceEvent;
+  ping:Ping;
+  pong:Pong;
+  message_typing_event:MessageTypingEvent;
+  last_seen_message_event:LastSeenMessageEvent;
+  message_reaction_event:mezon.api.MessageReaction;
+  voice_joined_event:VoiceJoinedEvent;
+  voice_leaved_event:VoiceLeavedEvent;
+  voice_started_event:VoiceStartedEvent;
+  voice_ended_event:VoiceEndedEvent;
+  channel_created_event:ChannelCreatedEvent;
+  channel_deleted_event:ChannelDeletedEvent;
+  channel_updated_event:ChannelUpdatedEvent;
+  last_pin_message_event:LastPinMessageEvent;
+  custom_status_event:CustomStatusEvent;
+  user_channel_added_event:UserChannelAdded;
+  user_channel_removed_event:UserChannelRemoved;
+  user_clan_removed_event:UserClanRemoved;
+  clan_updated_event:ClanUpdatedEvent;
+  clan_profile_updated_event:ClanProfileUpdatedEvent;
+  check_name_existed_event:CheckNameExistedEvent;
+  user_profile_updated_event:UserProfileUpdatedEvent;
+  add_clan_user_event:AddClanUserEvent;
+  clan_event_created:mezon.api.CreateEventRequest;
+  role_assign_event:RoleAssignedEvent;
+  clan_deleted_event:ClanDeletedEvent;
+  give_coffee_event:mezon.api.GiveCoffeeEvent;
+  sticker_create_event:StickerCreateEvent;
+  sticker_update_event:StickerUpdateEvent;
+  sticker_delete_event:StickerDeleteEvent;
+  role_event:RoleEvent;
+  event_emoji:EventEmoji;
+  streaming_joined_event:StreamingJoinedEvent;
+  streaming_leaved_event:StreamingLeavedEvent;
+  streaming_started_event:StreamingStartedEvent;
+  streaming_ended_event:StreamingEndedEvent;
+  permission_set_event:PermissionSetEvent;
+  permission_changed_event:PermissionChangedEvent;
+  token_sent_event:mezon.api.TokenSentEvent;
+  message_button_clicked:MessageButtonClicked;
+  unmute_event:UnmuteEvent;
+  webrtc_signaling_fwd:WebrtcSignalingFwd;
+  list_activity:ListActivity;
+  dropdown_box_selected:DropdownBoxSelected;
+  incoming_call_push:IncomingCallPush;
+  sd_topic_event:SdTopicEvent;
+  follow_event:FollowEvent;
+  channel_app_event:ChannelAppEvent;
+  user_status_event:UserStatusEvent;
+  remove_friend:RemoveFriend;
+  webhook_event:mezon.api.Webhook;
+  noti_user_channel:mezon.api.NotificationUserChannel;
+  join_channel_app_data:JoinChannelAppData;
+  canvas_event:ChannelCanvas;
+  unpin_message_event:UnpinMessageEvent;
+  category_event:CategoryEvent;
+  handle_participant_meet_state_event:HandleParticipantMeetStateEvent;
+  delete_account_event:DeleteAccountEvent;
+  ephemeral_message_send:EphemeralMessageSend;
+  block_friend:BlockFriend;
+  voice_reaction_send:VoiceReactionSend;
+  mark_as_read:MarkAsRead;
+  list_data_socket:ListDataSocket;
+  quick_menu_event:QuickMenuDataEvent;
+  un_block_friend:UnblockFriend;
+  meet_participant_event:MeetParticipantEvent;
+  transfer_ownership_event:TransferOwnershipEvent;
+  add_friend:AddFriend;
+  ban_user_event:BannedUserEvent;
+  active_archived_thread:ActiveArchivedThread;
+  allow_anonymous_event:AllowAnonymousEvent;
+  update_localcache_event:UpdateLocalCacheEvent;
+  clan_created_event:ClanCreatedEvent;
+  aiagent_enabled_event:AIAgentEnabledEvent;
+}
+
+table UpdateLocalCacheEvent {
+  params1:[long];
+  params2:[long];
+}
+
+table FollowEvent {
+}
+
+table BannedUserEvent {
+  user_ids:[long];
+  action:int;
+  banner_id:long;
+  channel_id:long;
+  clan_id:long;
+  ban_time:int;
+}
+
+table ChannelCanvas {
+  id:long;
+  title:string;
+  content:string;
+  creator_id:long;
+  editor_id:long;
+  is_default:bool;
+  channel_id:long;
+  status:int;
+}
+
+table IncomingCallPush {
+  receiver_id:long;
+  json_data:string;
+  channel_id:long;
+  caller_id:long;
+}
+
+table WebrtcSignalingFwd {
+  receiver_id:long;
+  data_type:int;
+  json_data:string;
+  channel_id:long;
+  caller_id:long;
+}
+
+table SFUSignalingFwd {
+  clan_id:long;
+  channel_id:long;
+  data_type:int;
+  json_data:string;
+  user_id:long;
+}
+
+table AddClanUserEvent {
+  clan_id:long;
+  user:UserProfileRedis;
+  invitor:string;
+}
+
+table RoleAssignedEvent {
+  clan_id:string;
+  role_id:long;
+  user_ids_assigned:[long];
+  user_ids_removed:[long];
+}
+
+table PermissionRoleChannel {
+  permission_id:long;
+  active:bool;
+}
+
+table HashtagDm {
+  channel_id:long;
+  channel_label:string;
+  clan_id:long;
+  clan_name:string;
+  meeting_code:string;
+  type:int;
+  channel_private:int;
+  parent_id:long;
+}
+
+table ChannelDescription {
+  clan_id:long;
+  channel_id:long;
+  type:int;
+  channel_label:string;
+  channel_private:int;
+  meeting_code:string;
+  clan_name:string;
+  parent_id:long;
+  last_sent_message:mezon.api.ChannelMessageHeader;
+}
+
+table ClanEmoji {
+  id:long;
+  src:string;
+  shortname:string;
+  category:string;
+  creator_id:long;
+  clan_id:long;
+  logo:string;
+  clan_name:string;
+}
+
+table Channel {
+  id:long;
+  presences:[UserPresence];
+  self:UserPresence;
+  chanel_label:string;
+  clan_logo:string;
+  category_name:string;
+}
+
+table ClanJoin {
+  clan_id:long;
+}
+
+table ChannelJoin {
+  clan_id:long;
+  channel_id:long;
+  channel_type:int;
+  is_public:bool;
+}
+
+table ChannelLeave {
+  clan_id:long;
+  channel_id:long;
+  channel_type:int;
+  is_public:bool;
+}
+
+table ChannelMessageAck {
+  channel_id:long;
+  message_id:long;
+  code:int;
+  username:string;
+  create_time_seconds:uint;
+  update_time_seconds:uint;
+  persistent:bool;
+  clan_logo:string;
+  category_name:string;
+}
+
+table EphemeralMessageSend {
+  message:ChannelMessageSend;
+  receiver_ids:[long];
+}
+
+table QuickMenuDataEvent {
+  menu_name:string;
+  message:ChannelMessageSend;
+}
+
+table VoiceReactionSend {
+  emojis:[string];
+  channel_id:long;
+  sender_id:long;
+  media_type:int;
+}
+
+table MarkAsRead {
+  channel_id:long;
+  category_id:long;
+  clan_id:long;
+}
+
+table ChannelMessageSend {
+  clan_id:long;
+  channel_id:long;
+  content:string;
+  mentions:[mezon.api.MessageMention];
+  attachments:[mezon.api.MessageAttachment];
+  references:[mezon.api.MessageRef];
+  mode:int;
+  anonymous_message:bool;
+  mention_everyone:bool;
+  avatar:string;
+  is_public:bool;
+  code:int;
+  topic_id:long;
+  id:long;
+}
+
+table ChannelMessageUpdate {
+  clan_id:long;
+  channel_id:long;
+  message_id:long;
+  content:string;
+  mentions:[mezon.api.MessageMention];
+  attachments:[mezon.api.MessageAttachment];
+  mode:int;
+  is_public:bool;
+  hide_editted:bool;
+  topic_id:long;
+  is_update_msg_topic:bool;
+}
+
+table ChannelMessageRemove {
+  clan_id:long;
+  channel_id:long;
+  message_id:long;
+  mode:int;
+  is_public:bool;
+  has_attachment:bool;
+  topic_id:long;
+  mentions:[ubyte];
+  references:[ubyte];
+}
+
+table ChannelPresenceEvent {
+  channel_id:long;
+  joins:[UserPresence];
+  leaves:[UserPresence];
+  clan_logo:string;
+  category_name:string;
+  mode:int;
+}
+
+table Error {
+  code:int;
+  message:string;
+  context:[ContextEntry];
+}
+
+table ContextEntry {
+  key:string (key);
+  value:string;
+}
+
+table Notifications {
+  notifications:[mezon.api.Notification];
+}
+
+table AddFriend {
+  user_id:long;
+  username:string;
+  display_name:string;
+  avatar:string;
+}
+
+table RemoveFriend {
+  user_id:long;
+}
+
+table BlockFriend {
+  user_id:long;
+}
+
+table UnblockFriend {
+  user_id:long;
+  username:string;
+  avatar:string;
+  display_name:string;
+  status:string;
+  user_status:string;
+}
+
+table Ping {
+}
+
+table Pong {
+}
+
+table Status {
+  presences:[UserPresence];
+}
+
+table StatusFollow {
+  user_ids:[long];
+  usernames:[string];
+}
+
+table StatusPresenceEvent {
+  joins:[UserPresence];
+  leaves:[UserPresence];
+}
+
+table LastPinMessageEvent {
+  clan_id:long;
+  channel_id:long;
+  message_id:long;
+  mode:int;
+  user_id:long;
+  timestamp_seconds:uint;
+  operation:int;
+  is_public:bool;
+  message_sender_avatar:string;
+  message_sender_id:string;
+  message_sender_username:string;
+  message_content:string;
+  message_attachment:string;
+  message_created_time:string;
+}
+
+table LastSeenMessageEvent {
+  clan_id:long;
+  channel_id:long;
+  message_id:long;
+  mode:int;
+  timestamp_seconds:uint;
+  badge_count:int;
+}
+
+table MessageTypingEvent {
+  clan_id:long;
+  channel_id:long;
+  sender_id:long;
+  mode:int;
+  is_public:bool;
+  sender_username:string;
+  sender_display_name:string;
+  topic_id:long;
+}
+
+table VoiceLeavedEvent {
+  id:string;
+  clan_id:long;
+  voice_channel_id:long;
+  voice_user_id:long;
+}
+
+table VoiceJoinedEvent {
+  clan_id:long;
+  clan_name:string;
+  id:string;
+  participant:string;
+  user_id:long;
+  voice_channel_label:string;
+  voice_channel_id:long;
+  last_screenshot:string;
+}
+
+table VoiceStartedEvent {
+  id:string;
+  clan_id:long;
+  voice_channel_id:long;
+}
+
+table VoiceEndedEvent {
+  id:long;
+  clan_id:long;
+  voice_channel_id:string;
+}
+
+table StreamingLeavedEvent {
+  id:long;
+  clan_id:long;
+  streaming_channel_id:string;
+  streaming_user_id:string;
+}
+
+table StreamingJoinedEvent {
+  clan_id:long;
+  clan_name:string;
+  id:long;
+  participant:string;
+  user_id:long;
+  streaming_channel_label:string;
+  streaming_channel_id:long;
+}
+
+table StreamingStartedEvent {
+  clan_id:long;
+  channel_id:long;
+  streaming_url:string;
+  is_streaming:bool;
+}
+
+table StreamingEndedEvent {
+  clan_id:long;
+  channel_id:long;
+}
+
+table ChannelCreatedEvent {
+  clan_id:long;
+  category_id:long;
+  creator_id:long;
+  parent_id:long;
+  channel_id:long;
+  channel_label:string;
+  channel_private:int;
+  channel_type:int;
+  status:int;
+  app_id:long;
+  clan_name:string;
+  channel_avatar:string;
+}
+
+table CategoryEvent {
+  creator_id:long;
+  clan_id:long;
+  category_name:string;
+  id:long;
+  status:int;
+}
+
+table RoleEvent {
+  role:mezon.api.Role;
+  status:int;
+  user_id:long;
+  user_add_ids:[long];
+  user_remove_ids:[long];
+  active_permission_ids:[long];
+  remove_permission_ids:[long];
+}
+
+table ChannelDeletedEvent {
+  clan_id:long;
+  category_id:long;
+  parent_id:long;
+  channel_id:long;
+  deletor:string;
+}
+
+table ClanDeletedEvent {
+  clan_id:long;
+  deletor:long;
+}
+
+table StickerCreateEvent {
+  clan_id:long;
+  source:string;
+  shortname:string;
+  category:string;
+  creator_id:long;
+  sticker_id:long;
+  logo:string;
+  clan_name:string;
+}
+
+table StickerUpdateEvent {
+  shortname:string;
+  sticker_id:long;
+  user_id:long;
+}
+
+table StickerDeleteEvent {
+  sticker_id:long;
+  user_id:long;
+}
+
+table ChannelUpdatedEvent {
+  clan_id:long;
+  category_id:long;
+  creator_id:long;
+  parent_id:long;
+  channel_id:long;
+  channel_label:string;
+  channel_type:int;
+  status:int;
+  meeting_code:string;
+  is_error:bool;
+  channel_private:bool;
+  app_id:long;
+  e2ee:int;
+  topic:string;
+  age_restricted:int;
+  active:int;
+  count_mess_unread:int;
+  user_ids:[long];
+  role_ids:[long];
+  channel_avatar:string;
+}
+
+table StatusUnfollow {
+  user_ids:[long];
+}
+
+table StatusUpdate {
+  status:string;
+}
+
+table Stream {
+  mode:int;
+  channel_id:long;
+  clan_id:long;
+  label:string;
+}
+
+table StreamData {
+  stream:Stream;
+  sender:UserPresence;
+  data:string;
+  reliable:bool;
+}
+
+table StreamPresenceEvent {
+  stream:Stream;
+  joins:[UserPresence];
+  leaves:[UserPresence];
+}
+
+table UserPresence {
+  user_id:long;
+  session_id:string;
+  username:string;
+  status:string;
+  is_mobile:bool;
+  user_status:string;
+}
+
+table CustomStatusEvent {
+  clan_id:long;
+  user_id:long;
+  username:string;
+  status:string;
+  time_reset:int;
+  no_clear:bool;
+}
+
+table UserChannelAdded {
+  channel_desc:mezon.api.ChannelDescription;
+  users:[UserProfileRedis];
+  status:string;
+  clan_id:long;
+  caller:UserProfileRedis;
+  create_time_seconds:uint;
+  active:int;
+}
+
+table UserChannelRemoved {
+  channel_id:long;
+  user_ids:[long];
+  channel_type:int;
+  clan_id:long;
+  badge_counts:[int];
+}
+
+table UserClanRemoved {
+  clan_id:long;
+  user_ids:[long];
+}
+
+table ClanCreatedEvent {
+  clan_id:long;
+  clan_name:string;
+  logo:string;
+  creator_id:long;
+  welcome_channel_id:long;
+}
+
+table ClanUpdatedEvent {
+  clan_id:long;
+  clan_name:string;
+  logo:string;
+  banner:string;
+  status:int;
+  is_onboarding:bool;
+  welcome_channel_id:long;
+  onboarding_banner:string;
+  community_banner:string;
+  is_community:bool;
+  about:string;
+  description:string;
+  prevent_anonymous:bool;
+}
+
+table ClanProfileUpdatedEvent {
+  user_id:long;
+  clan_nick:string;
+  clan_avatar:string;
+  clan_id:long;
+}
+
+table UserProfileUpdatedEvent {
+  user_id:long;
+  display_name:string;
+  avatar:string;
+  about_me:string;
+  channel_id:long;
+  clan_id:long;
+  encrypt_private_key:string;
+}
+
+table ConfirmLinkMezonOTPData {
+  type:int;
+  value:string;
+}
+
+table UserProfileRedis {
+  user_id:long;
+  username:string;
+  avatar:string;
+  display_name:string;
+  user_status:string;
+  status:string;
+  online:bool;
+  fcm_tokens:[FCMTokens];
+  joined_clans:[long];
+  app_token:string;
+  create_time_second:uint;
+  app_url:string;
+  is_bot:bool;
+  voip_token:string;
+}
+
+table FCMTokens {
+  device_id:string;
+  token_id:string;
+  platform:string;
+}
+
+table CheckNameExistedEvent {
+  name:string;
+  condition_id:long;
+  exist:bool;
+  type:int;
+  clan_id:long;
+}
+
+table NotificationChannelCategorySetting {
+  id:long;
+  channel_category_label:string;
+  notification_setting_type:int;
+  channel_category_title:string;
+  action:int;
+}
+
+table EventEmoji {
+  id:long;
+  clan_id:long;
+  short_name:string;
+  source:string;
+  category:string;
+  action:int;
+  user_id:long;
+  logo:string;
+  clan_name:string;
+  is_for_sale:bool;
+}
+
+table PermissionSetEvent {
+  caller:string;
+  role_id:long;
+  user_id:long;
+  channel_id:long;
+  permission_updates:[mezon.api.PermissionUpdate];
+}
+
+table PermissionChangedEvent {
+  user_id:long;
+  channel_id:long;
+  add_permissions:[mezon.api.PermissionUpdate];
+  remove_permissions:[mezon.api.PermissionUpdate];
+  default_permissions:[mezon.api.PermissionUpdate];
+}
+
+table MessageButtonClicked {
+  message_id:long;
+  channel_id:long;
+  button_id:string;
+  sender_id:long;
+  user_id:long;
+  extra_data:string;
+}
+
+table UnmuteEvent {
+  channel_id:long;
+  category_id:long;
+  clan_id:long;
+}
+
+table ListActivity {
+  acts:[mezon.api.UserActivity];
+}
+
+table DropdownBoxSelected {
+  message_id:long;
+  channel_id:long;
+  selectbox_id:string;
+  sender_id:long;
+  user_id:long;
+  values:[string];
+}
+
+table SdTopicEvent {
+  id:long;
+  clan_id:long;
+  channel_id:long;
+  message_id:long;
+  user_id:long;
+  last_sent_message:mezon.api.ChannelMessageHeader;
+  message:mezon.api.ChannelMessage;
+}
+
+table ChannelAppEvent {
+  user_id:long;
+  username:string;
+  clan_id:long;
+  channel_id:long;
+  action:int;
+}
+
+table UserStatusEvent {
+  user_id:long;
+  custom_status:string;
+}
+
+table JoinChannelAppData {
+  user_id:long;
+  username:string;
+  hash:string;
+}
+
+table UnpinMessageEvent {
+  id:long;
+  message_id:long;
+  channel_id:long;
+  clan_id:long;
+}
+
+table HandleParticipantMeetStateEvent {
+  clan_id:long;
+  channel_id:long;
+  display_name:string;
+  state:int;
+  room_name:string;
+}
+
+table DeleteAccountEvent {
+  user_id:long;
+}
+
+table ListDataSocket {
+  api_name:string;
+  list_unread_msg_indicator_req:mezon.api.ListClanUnreadMsgIndicatorRequest;
+  unread_msg_indicator:mezon.api.ListClanUnreadMsgIndicatorResponse;
+  list_clan_badge_count_req:mezon.api.ListClanBadgeCountRequest;
+  clan_badge_count:mezon.api.ListClanBadgeCountResponse;
+  list_loged_device:mezon.api.LogedDeviceList;
+}
+
+table MeetParticipantEvent {
+  username:string;
+  room_name:string;
+  channel_id:long;
+  clan_id:long;
+  action:int;
+}
+
+table TransferOwnershipEvent {
+  clan_id:long;
+  prev_owner:long;
+  curr_owner:long;
+}
+
+table ActiveArchivedThread {
+  clan_id:long;
+  channel_id:long;
+}
+
+table AllowAnonymousEvent {
+  clan_id:long;
+  allow:bool;
+}
+
+table FcmDataPayload {
+  command_type:int;
+  receiver_id:long;
+  title:string;
+  body:[ubyte];
+  user_role_ids:[long];
+  user_sent_ids:[long];
+  priority:int;
+  message:mezon.api.ChannelMessage;
+  is_e2ee:bool;
+  is_dm:bool;
+  mention_here:bool;
+  mentions:[mezon.api.MessageMention];
+  references:[mezon.api.MessageRef];
+  attachments:[mezon.api.MessageAttachment];
+}
+
+table AIAgentEnabledEvent {
+  clan_id:long;
+  channel_id:long;
+  room_name:string;
+  enabled:bool;
+}
+
+table GotifyMessage {
+  id:uint;
+  channel_id:long;
+  message:string;
+  title:string;
+  image:string;
+  priority:int;
+  users:[string];
+  extras:[ExtrasEntry];
+  app_id:uint;
+  sender_id:long;
+}
+
+table ExtrasEntry {
+  key:string (key);
+  value:string;
+}
+
