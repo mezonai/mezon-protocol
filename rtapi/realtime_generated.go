@@ -4,8 +4,9 @@ package rtapi
 
 import (
 	"bytes"
-	flatbuffers "github.com/google/flatbuffers/go"
 	"strconv"
+
+	flatbuffers "github.com/google/flatbuffers/go"
 
 	mezon__api "github.com/mezonai/mezon-protocol/v2/api"
 )
@@ -52,6 +53,306 @@ func (v Code) String() string {
 	return "Code(" + strconv.FormatInt(int64(v), 10) + ")"
 }
 
+type Message byte
+
+const (
+	MessageNONE                                Message = 0
+	Messagechannel                             Message = 1
+	Messageclan_join                           Message = 2
+	Messagechannel_join                        Message = 3
+	Messagechannel_leave                       Message = 4
+	Messagechannel_message                     Message = 5
+	Messagechannel_message_ack                 Message = 6
+	Messagechannel_message_send                Message = 7
+	Messagechannel_message_update              Message = 8
+	Messagechannel_message_remove              Message = 9
+	Messagechannel_presence_event              Message = 10
+	Messageerror                               Message = 11
+	Messagenotifications                       Message = 12
+	Messagerpc                                 Message = 13
+	Messagestatus                              Message = 14
+	Messagestatus_follow                       Message = 15
+	Messagestatus_presence_event               Message = 16
+	Messagestatus_unfollow                     Message = 17
+	Messagestatus_update                       Message = 18
+	Messagestream_data                         Message = 19
+	Messagestream_presence_event               Message = 20
+	Messageping                                Message = 21
+	Messagepong                                Message = 22
+	Messagemessage_typing_event                Message = 23
+	Messagelast_seen_message_event             Message = 24
+	Messagemessage_reaction_event              Message = 25
+	Messagevoice_joined_event                  Message = 26
+	Messagevoice_leaved_event                  Message = 27
+	Messagevoice_started_event                 Message = 28
+	Messagevoice_ended_event                   Message = 29
+	Messagechannel_created_event               Message = 30
+	Messagechannel_deleted_event               Message = 31
+	Messagechannel_updated_event               Message = 32
+	Messagelast_pin_message_event              Message = 33
+	Messagecustom_status_event                 Message = 34
+	Messageuser_channel_added_event            Message = 35
+	Messageuser_channel_removed_event          Message = 36
+	Messageuser_clan_removed_event             Message = 37
+	Messageclan_updated_event                  Message = 38
+	Messageclan_profile_updated_event          Message = 39
+	Messagecheck_name_existed_event            Message = 40
+	Messageuser_profile_updated_event          Message = 41
+	Messageadd_clan_user_event                 Message = 42
+	Messageclan_event_created                  Message = 43
+	Messagerole_assign_event                   Message = 44
+	Messageclan_deleted_event                  Message = 45
+	Messagegive_coffee_event                   Message = 46
+	Messagesticker_create_event                Message = 47
+	Messagesticker_update_event                Message = 48
+	Messagesticker_delete_event                Message = 49
+	Messagerole_event                          Message = 50
+	Messageevent_emoji                         Message = 51
+	Messagestreaming_joined_event              Message = 52
+	Messagestreaming_leaved_event              Message = 53
+	Messagestreaming_started_event             Message = 54
+	Messagestreaming_ended_event               Message = 55
+	Messagepermission_set_event                Message = 56
+	Messagepermission_changed_event            Message = 57
+	Messagetoken_sent_event                    Message = 58
+	Messagemessage_button_clicked              Message = 59
+	Messageunmute_event                        Message = 60
+	Messagewebrtc_signaling_fwd                Message = 61
+	Messagelist_activity                       Message = 62
+	Messagedropdown_box_selected               Message = 63
+	Messageincoming_call_push                  Message = 64
+	Messagesd_topic_event                      Message = 65
+	Messagefollow_event                        Message = 66
+	Messagechannel_app_event                   Message = 67
+	Messageuser_status_event                   Message = 68
+	Messageremove_friend                       Message = 69
+	Messagewebhook_event                       Message = 70
+	Messagenoti_user_channel                   Message = 71
+	Messagejoin_channel_app_data               Message = 72
+	Messagecanvas_event                        Message = 73
+	Messageunpin_message_event                 Message = 74
+	Messagecategory_event                      Message = 75
+	Messagehandle_participant_meet_state_event Message = 76
+	Messagedelete_account_event                Message = 77
+	Messageephemeral_message_send              Message = 78
+	Messageblock_friend                        Message = 79
+	Messagevoice_reaction_send                 Message = 80
+	Messagemark_as_read                        Message = 81
+	Messagelist_data_socket                    Message = 82
+	Messagequick_menu_event                    Message = 83
+	Messageun_block_friend                     Message = 84
+	Messagemeet_participant_event              Message = 85
+	Messagetransfer_ownership_event            Message = 86
+	Messageadd_friend                          Message = 87
+	Messageban_user_event                      Message = 88
+	Messageactive_archived_thread              Message = 89
+	Messageallow_anonymous_event               Message = 90
+	Messageupdate_localcache_event             Message = 91
+	Messageclan_created_event                  Message = 92
+	Messageaiagent_enabled_event               Message = 93
+)
+
+var EnumNamesMessage = map[Message]string{
+	MessageNONE:                                "NONE",
+	Messagechannel:                             "channel",
+	Messageclan_join:                           "clan_join",
+	Messagechannel_join:                        "channel_join",
+	Messagechannel_leave:                       "channel_leave",
+	Messagechannel_message:                     "channel_message",
+	Messagechannel_message_ack:                 "channel_message_ack",
+	Messagechannel_message_send:                "channel_message_send",
+	Messagechannel_message_update:              "channel_message_update",
+	Messagechannel_message_remove:              "channel_message_remove",
+	Messagechannel_presence_event:              "channel_presence_event",
+	Messageerror:                               "error",
+	Messagenotifications:                       "notifications",
+	Messagerpc:                                 "rpc",
+	Messagestatus:                              "status",
+	Messagestatus_follow:                       "status_follow",
+	Messagestatus_presence_event:               "status_presence_event",
+	Messagestatus_unfollow:                     "status_unfollow",
+	Messagestatus_update:                       "status_update",
+	Messagestream_data:                         "stream_data",
+	Messagestream_presence_event:               "stream_presence_event",
+	Messageping:                                "ping",
+	Messagepong:                                "pong",
+	Messagemessage_typing_event:                "message_typing_event",
+	Messagelast_seen_message_event:             "last_seen_message_event",
+	Messagemessage_reaction_event:              "message_reaction_event",
+	Messagevoice_joined_event:                  "voice_joined_event",
+	Messagevoice_leaved_event:                  "voice_leaved_event",
+	Messagevoice_started_event:                 "voice_started_event",
+	Messagevoice_ended_event:                   "voice_ended_event",
+	Messagechannel_created_event:               "channel_created_event",
+	Messagechannel_deleted_event:               "channel_deleted_event",
+	Messagechannel_updated_event:               "channel_updated_event",
+	Messagelast_pin_message_event:              "last_pin_message_event",
+	Messagecustom_status_event:                 "custom_status_event",
+	Messageuser_channel_added_event:            "user_channel_added_event",
+	Messageuser_channel_removed_event:          "user_channel_removed_event",
+	Messageuser_clan_removed_event:             "user_clan_removed_event",
+	Messageclan_updated_event:                  "clan_updated_event",
+	Messageclan_profile_updated_event:          "clan_profile_updated_event",
+	Messagecheck_name_existed_event:            "check_name_existed_event",
+	Messageuser_profile_updated_event:          "user_profile_updated_event",
+	Messageadd_clan_user_event:                 "add_clan_user_event",
+	Messageclan_event_created:                  "clan_event_created",
+	Messagerole_assign_event:                   "role_assign_event",
+	Messageclan_deleted_event:                  "clan_deleted_event",
+	Messagegive_coffee_event:                   "give_coffee_event",
+	Messagesticker_create_event:                "sticker_create_event",
+	Messagesticker_update_event:                "sticker_update_event",
+	Messagesticker_delete_event:                "sticker_delete_event",
+	Messagerole_event:                          "role_event",
+	Messageevent_emoji:                         "event_emoji",
+	Messagestreaming_joined_event:              "streaming_joined_event",
+	Messagestreaming_leaved_event:              "streaming_leaved_event",
+	Messagestreaming_started_event:             "streaming_started_event",
+	Messagestreaming_ended_event:               "streaming_ended_event",
+	Messagepermission_set_event:                "permission_set_event",
+	Messagepermission_changed_event:            "permission_changed_event",
+	Messagetoken_sent_event:                    "token_sent_event",
+	Messagemessage_button_clicked:              "message_button_clicked",
+	Messageunmute_event:                        "unmute_event",
+	Messagewebrtc_signaling_fwd:                "webrtc_signaling_fwd",
+	Messagelist_activity:                       "list_activity",
+	Messagedropdown_box_selected:               "dropdown_box_selected",
+	Messageincoming_call_push:                  "incoming_call_push",
+	Messagesd_topic_event:                      "sd_topic_event",
+	Messagefollow_event:                        "follow_event",
+	Messagechannel_app_event:                   "channel_app_event",
+	Messageuser_status_event:                   "user_status_event",
+	Messageremove_friend:                       "remove_friend",
+	Messagewebhook_event:                       "webhook_event",
+	Messagenoti_user_channel:                   "noti_user_channel",
+	Messagejoin_channel_app_data:               "join_channel_app_data",
+	Messagecanvas_event:                        "canvas_event",
+	Messageunpin_message_event:                 "unpin_message_event",
+	Messagecategory_event:                      "category_event",
+	Messagehandle_participant_meet_state_event: "handle_participant_meet_state_event",
+	Messagedelete_account_event:                "delete_account_event",
+	Messageephemeral_message_send:              "ephemeral_message_send",
+	Messageblock_friend:                        "block_friend",
+	Messagevoice_reaction_send:                 "voice_reaction_send",
+	Messagemark_as_read:                        "mark_as_read",
+	Messagelist_data_socket:                    "list_data_socket",
+	Messagequick_menu_event:                    "quick_menu_event",
+	Messageun_block_friend:                     "un_block_friend",
+	Messagemeet_participant_event:              "meet_participant_event",
+	Messagetransfer_ownership_event:            "transfer_ownership_event",
+	Messageadd_friend:                          "add_friend",
+	Messageban_user_event:                      "ban_user_event",
+	Messageactive_archived_thread:              "active_archived_thread",
+	Messageallow_anonymous_event:               "allow_anonymous_event",
+	Messageupdate_localcache_event:             "update_localcache_event",
+	Messageclan_created_event:                  "clan_created_event",
+	Messageaiagent_enabled_event:               "aiagent_enabled_event",
+}
+
+var EnumValuesMessage = map[string]Message{
+	"NONE":                                MessageNONE,
+	"channel":                             Messagechannel,
+	"clan_join":                           Messageclan_join,
+	"channel_join":                        Messagechannel_join,
+	"channel_leave":                       Messagechannel_leave,
+	"channel_message":                     Messagechannel_message,
+	"channel_message_ack":                 Messagechannel_message_ack,
+	"channel_message_send":                Messagechannel_message_send,
+	"channel_message_update":              Messagechannel_message_update,
+	"channel_message_remove":              Messagechannel_message_remove,
+	"channel_presence_event":              Messagechannel_presence_event,
+	"error":                               Messageerror,
+	"notifications":                       Messagenotifications,
+	"rpc":                                 Messagerpc,
+	"status":                              Messagestatus,
+	"status_follow":                       Messagestatus_follow,
+	"status_presence_event":               Messagestatus_presence_event,
+	"status_unfollow":                     Messagestatus_unfollow,
+	"status_update":                       Messagestatus_update,
+	"stream_data":                         Messagestream_data,
+	"stream_presence_event":               Messagestream_presence_event,
+	"ping":                                Messageping,
+	"pong":                                Messagepong,
+	"message_typing_event":                Messagemessage_typing_event,
+	"last_seen_message_event":             Messagelast_seen_message_event,
+	"message_reaction_event":              Messagemessage_reaction_event,
+	"voice_joined_event":                  Messagevoice_joined_event,
+	"voice_leaved_event":                  Messagevoice_leaved_event,
+	"voice_started_event":                 Messagevoice_started_event,
+	"voice_ended_event":                   Messagevoice_ended_event,
+	"channel_created_event":               Messagechannel_created_event,
+	"channel_deleted_event":               Messagechannel_deleted_event,
+	"channel_updated_event":               Messagechannel_updated_event,
+	"last_pin_message_event":              Messagelast_pin_message_event,
+	"custom_status_event":                 Messagecustom_status_event,
+	"user_channel_added_event":            Messageuser_channel_added_event,
+	"user_channel_removed_event":          Messageuser_channel_removed_event,
+	"user_clan_removed_event":             Messageuser_clan_removed_event,
+	"clan_updated_event":                  Messageclan_updated_event,
+	"clan_profile_updated_event":          Messageclan_profile_updated_event,
+	"check_name_existed_event":            Messagecheck_name_existed_event,
+	"user_profile_updated_event":          Messageuser_profile_updated_event,
+	"add_clan_user_event":                 Messageadd_clan_user_event,
+	"clan_event_created":                  Messageclan_event_created,
+	"role_assign_event":                   Messagerole_assign_event,
+	"clan_deleted_event":                  Messageclan_deleted_event,
+	"give_coffee_event":                   Messagegive_coffee_event,
+	"sticker_create_event":                Messagesticker_create_event,
+	"sticker_update_event":                Messagesticker_update_event,
+	"sticker_delete_event":                Messagesticker_delete_event,
+	"role_event":                          Messagerole_event,
+	"event_emoji":                         Messageevent_emoji,
+	"streaming_joined_event":              Messagestreaming_joined_event,
+	"streaming_leaved_event":              Messagestreaming_leaved_event,
+	"streaming_started_event":             Messagestreaming_started_event,
+	"streaming_ended_event":               Messagestreaming_ended_event,
+	"permission_set_event":                Messagepermission_set_event,
+	"permission_changed_event":            Messagepermission_changed_event,
+	"token_sent_event":                    Messagetoken_sent_event,
+	"message_button_clicked":              Messagemessage_button_clicked,
+	"unmute_event":                        Messageunmute_event,
+	"webrtc_signaling_fwd":                Messagewebrtc_signaling_fwd,
+	"list_activity":                       Messagelist_activity,
+	"dropdown_box_selected":               Messagedropdown_box_selected,
+	"incoming_call_push":                  Messageincoming_call_push,
+	"sd_topic_event":                      Messagesd_topic_event,
+	"follow_event":                        Messagefollow_event,
+	"channel_app_event":                   Messagechannel_app_event,
+	"user_status_event":                   Messageuser_status_event,
+	"remove_friend":                       Messageremove_friend,
+	"webhook_event":                       Messagewebhook_event,
+	"noti_user_channel":                   Messagenoti_user_channel,
+	"join_channel_app_data":               Messagejoin_channel_app_data,
+	"canvas_event":                        Messagecanvas_event,
+	"unpin_message_event":                 Messageunpin_message_event,
+	"category_event":                      Messagecategory_event,
+	"handle_participant_meet_state_event": Messagehandle_participant_meet_state_event,
+	"delete_account_event":                Messagedelete_account_event,
+	"ephemeral_message_send":              Messageephemeral_message_send,
+	"block_friend":                        Messageblock_friend,
+	"voice_reaction_send":                 Messagevoice_reaction_send,
+	"mark_as_read":                        Messagemark_as_read,
+	"list_data_socket":                    Messagelist_data_socket,
+	"quick_menu_event":                    Messagequick_menu_event,
+	"un_block_friend":                     Messageun_block_friend,
+	"meet_participant_event":              Messagemeet_participant_event,
+	"transfer_ownership_event":            Messagetransfer_ownership_event,
+	"add_friend":                          Messageadd_friend,
+	"ban_user_event":                      Messageban_user_event,
+	"active_archived_thread":              Messageactive_archived_thread,
+	"allow_anonymous_event":               Messageallow_anonymous_event,
+	"update_localcache_event":             Messageupdate_localcache_event,
+	"clan_created_event":                  Messageclan_created_event,
+	"aiagent_enabled_event":               Messageaiagent_enabled_event,
+}
+
+func (v Message) String() string {
+	if s, ok := EnumNamesMessage[v]; ok {
+		return s
+	}
+	return "Message(" + strconv.FormatInt(int64(v), 10) + ")"
+}
+
 type Envelope struct {
 	_tab flatbuffers.Table
 }
@@ -95,1560 +396,43 @@ func (rcv *Envelope) Cid() []byte {
 	return nil
 }
 
-func (rcv *Envelope) Message(obj *Anonymous0) *Anonymous0 {
+func (rcv *Envelope) MessageType() Message {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
 	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(Anonymous0)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
+		return Message(rcv._tab.GetByte(o + rcv._tab.Pos))
 	}
-	return nil
+	return 0
+}
+
+func (rcv *Envelope) MutateMessageType(n Message) bool {
+	return rcv._tab.MutateByteSlot(6, byte(n))
+}
+
+func (rcv *Envelope) Message(obj *flatbuffers.Table) bool {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(8))
+	if o != 0 {
+		rcv._tab.Union(obj, o)
+		return true
+	}
+	return false
 }
 
 func EnvelopeStart(builder *flatbuffers.Builder) {
-	builder.StartObject(2)
+	builder.StartObject(3)
 }
 func EnvelopeAddCid(builder *flatbuffers.Builder, cid flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(0, flatbuffers.UOffsetT(cid), 0)
 }
+func EnvelopeAddMessageType(builder *flatbuffers.Builder, messageType Message) {
+	builder.PrependByteSlot(1, byte(messageType), 0)
+}
 func EnvelopeAddMessage(builder *flatbuffers.Builder, message flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(1, flatbuffers.UOffsetT(message), 0)
+	builder.PrependUOffsetTSlot(2, flatbuffers.UOffsetT(message), 0)
 }
 func EnvelopeEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
-type Anonymous0 struct {
-	_tab flatbuffers.Table
-}
 
-func GetRootAsAnonymous0(buf []byte, offset flatbuffers.UOffsetT) *Anonymous0 {
-	n := flatbuffers.GetUOffsetT(buf[offset:])
-	x := &Anonymous0{}
-	x.Init(buf, n+offset)
-	return x
-}
-
-func FinishAnonymous0Buffer(builder *flatbuffers.Builder, offset flatbuffers.UOffsetT) {
-	builder.Finish(offset)
-}
-
-func GetSizePrefixedRootAsAnonymous0(buf []byte, offset flatbuffers.UOffsetT) *Anonymous0 {
-	n := flatbuffers.GetUOffsetT(buf[offset+flatbuffers.SizeUint32:])
-	x := &Anonymous0{}
-	x.Init(buf, n+offset+flatbuffers.SizeUint32)
-	return x
-}
-
-func FinishSizePrefixedAnonymous0Buffer(builder *flatbuffers.Builder, offset flatbuffers.UOffsetT) {
-	builder.FinishSizePrefixed(offset)
-}
-
-func (rcv *Anonymous0) Init(buf []byte, i flatbuffers.UOffsetT) {
-	rcv._tab.Bytes = buf
-	rcv._tab.Pos = i
-}
-
-func (rcv *Anonymous0) Table() flatbuffers.Table {
-	return rcv._tab
-}
-
-func (rcv *Anonymous0) Channel(obj *Channel) *Channel {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(4))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(Channel)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ClanJoin(obj *ClanJoin) *ClanJoin {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ClanJoin)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ChannelJoin(obj *ChannelJoin) *ChannelJoin {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(8))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ChannelJoin)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ChannelLeave(obj *ChannelLeave) *ChannelLeave {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(10))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ChannelLeave)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ChannelMessage(obj *mezon__api.ChannelMessage) *mezon__api.ChannelMessage {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(12))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(mezon__api.ChannelMessage)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ChannelMessageAck(obj *ChannelMessageAck) *ChannelMessageAck {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(14))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ChannelMessageAck)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ChannelMessageSend(obj *ChannelMessageSend) *ChannelMessageSend {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(16))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ChannelMessageSend)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ChannelMessageUpdate(obj *ChannelMessageUpdate) *ChannelMessageUpdate {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(18))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ChannelMessageUpdate)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ChannelMessageRemove(obj *ChannelMessageRemove) *ChannelMessageRemove {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(20))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ChannelMessageRemove)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ChannelPresenceEvent(obj *ChannelPresenceEvent) *ChannelPresenceEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(22))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ChannelPresenceEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) Error(obj *Error) *Error {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(24))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(Error)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) Notifications(obj *Notifications) *Notifications {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(26))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(Notifications)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) Rpc(obj *mezon__api.Rpc) *mezon__api.Rpc {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(28))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(mezon__api.Rpc)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) Status(obj *Status) *Status {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(30))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(Status)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) StatusFollow(obj *StatusFollow) *StatusFollow {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(32))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(StatusFollow)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) StatusPresenceEvent(obj *StatusPresenceEvent) *StatusPresenceEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(34))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(StatusPresenceEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) StatusUnfollow(obj *StatusUnfollow) *StatusUnfollow {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(36))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(StatusUnfollow)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) StatusUpdate(obj *StatusUpdate) *StatusUpdate {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(38))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(StatusUpdate)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) StreamData(obj *StreamData) *StreamData {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(40))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(StreamData)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) StreamPresenceEvent(obj *StreamPresenceEvent) *StreamPresenceEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(42))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(StreamPresenceEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) Ping(obj *Ping) *Ping {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(44))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(Ping)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) Pong(obj *Pong) *Pong {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(46))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(Pong)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) MessageTypingEvent(obj *MessageTypingEvent) *MessageTypingEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(48))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(MessageTypingEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) LastSeenMessageEvent(obj *LastSeenMessageEvent) *LastSeenMessageEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(50))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(LastSeenMessageEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) MessageReactionEvent(obj *mezon__api.MessageReaction) *mezon__api.MessageReaction {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(52))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(mezon__api.MessageReaction)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) VoiceJoinedEvent(obj *VoiceJoinedEvent) *VoiceJoinedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(54))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(VoiceJoinedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) VoiceLeavedEvent(obj *VoiceLeavedEvent) *VoiceLeavedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(56))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(VoiceLeavedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) VoiceStartedEvent(obj *VoiceStartedEvent) *VoiceStartedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(58))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(VoiceStartedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) VoiceEndedEvent(obj *VoiceEndedEvent) *VoiceEndedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(60))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(VoiceEndedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ChannelCreatedEvent(obj *ChannelCreatedEvent) *ChannelCreatedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(62))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ChannelCreatedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ChannelDeletedEvent(obj *ChannelDeletedEvent) *ChannelDeletedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(64))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ChannelDeletedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ChannelUpdatedEvent(obj *ChannelUpdatedEvent) *ChannelUpdatedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(66))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ChannelUpdatedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) LastPinMessageEvent(obj *LastPinMessageEvent) *LastPinMessageEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(68))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(LastPinMessageEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) CustomStatusEvent(obj *CustomStatusEvent) *CustomStatusEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(70))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(CustomStatusEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) UserChannelAddedEvent(obj *UserChannelAdded) *UserChannelAdded {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(72))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(UserChannelAdded)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) UserChannelRemovedEvent(obj *UserChannelRemoved) *UserChannelRemoved {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(74))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(UserChannelRemoved)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) UserClanRemovedEvent(obj *UserClanRemoved) *UserClanRemoved {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(76))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(UserClanRemoved)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ClanUpdatedEvent(obj *ClanUpdatedEvent) *ClanUpdatedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(78))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ClanUpdatedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ClanProfileUpdatedEvent(obj *ClanProfileUpdatedEvent) *ClanProfileUpdatedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(80))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ClanProfileUpdatedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) CheckNameExistedEvent(obj *CheckNameExistedEvent) *CheckNameExistedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(82))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(CheckNameExistedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) UserProfileUpdatedEvent(obj *UserProfileUpdatedEvent) *UserProfileUpdatedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(84))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(UserProfileUpdatedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) AddClanUserEvent(obj *AddClanUserEvent) *AddClanUserEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(86))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(AddClanUserEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ClanEventCreated(obj *mezon__api.CreateEventRequest) *mezon__api.CreateEventRequest {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(88))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(mezon__api.CreateEventRequest)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) RoleAssignEvent(obj *RoleAssignedEvent) *RoleAssignedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(90))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(RoleAssignedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ClanDeletedEvent(obj *ClanDeletedEvent) *ClanDeletedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(92))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ClanDeletedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) GiveCoffeeEvent(obj *mezon__api.GiveCoffeeEvent) *mezon__api.GiveCoffeeEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(94))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(mezon__api.GiveCoffeeEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) StickerCreateEvent(obj *StickerCreateEvent) *StickerCreateEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(96))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(StickerCreateEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) StickerUpdateEvent(obj *StickerUpdateEvent) *StickerUpdateEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(98))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(StickerUpdateEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) StickerDeleteEvent(obj *StickerDeleteEvent) *StickerDeleteEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(100))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(StickerDeleteEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) RoleEvent(obj *RoleEvent) *RoleEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(102))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(RoleEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) EventEmoji(obj *EventEmoji) *EventEmoji {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(104))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(EventEmoji)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) StreamingJoinedEvent(obj *StreamingJoinedEvent) *StreamingJoinedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(106))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(StreamingJoinedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) StreamingLeavedEvent(obj *StreamingLeavedEvent) *StreamingLeavedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(108))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(StreamingLeavedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) StreamingStartedEvent(obj *StreamingStartedEvent) *StreamingStartedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(110))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(StreamingStartedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) StreamingEndedEvent(obj *StreamingEndedEvent) *StreamingEndedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(112))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(StreamingEndedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) PermissionSetEvent(obj *PermissionSetEvent) *PermissionSetEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(114))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(PermissionSetEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) PermissionChangedEvent(obj *PermissionChangedEvent) *PermissionChangedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(116))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(PermissionChangedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) TokenSentEvent(obj *mezon__api.TokenSentEvent) *mezon__api.TokenSentEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(118))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(mezon__api.TokenSentEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) MessageButtonClicked(obj *MessageButtonClicked) *MessageButtonClicked {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(120))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(MessageButtonClicked)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) UnmuteEvent(obj *UnmuteEvent) *UnmuteEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(122))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(UnmuteEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) WebrtcSignalingFwd(obj *WebrtcSignalingFwd) *WebrtcSignalingFwd {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(124))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(WebrtcSignalingFwd)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ListActivity(obj *ListActivity) *ListActivity {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(126))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ListActivity)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) DropdownBoxSelected(obj *DropdownBoxSelected) *DropdownBoxSelected {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(128))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(DropdownBoxSelected)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) IncomingCallPush(obj *IncomingCallPush) *IncomingCallPush {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(130))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(IncomingCallPush)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) SdTopicEvent(obj *SdTopicEvent) *SdTopicEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(132))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(SdTopicEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) FollowEvent(obj *FollowEvent) *FollowEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(134))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(FollowEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ChannelAppEvent(obj *ChannelAppEvent) *ChannelAppEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(136))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ChannelAppEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) UserStatusEvent(obj *UserStatusEvent) *UserStatusEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(138))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(UserStatusEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) RemoveFriend(obj *RemoveFriend) *RemoveFriend {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(140))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(RemoveFriend)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) WebhookEvent(obj *mezon__api.Webhook) *mezon__api.Webhook {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(142))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(mezon__api.Webhook)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) NotiUserChannel(obj *mezon__api.NotificationUserChannel) *mezon__api.NotificationUserChannel {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(144))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(mezon__api.NotificationUserChannel)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) JoinChannelAppData(obj *JoinChannelAppData) *JoinChannelAppData {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(146))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(JoinChannelAppData)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) CanvasEvent(obj *ChannelCanvas) *ChannelCanvas {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(148))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ChannelCanvas)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) UnpinMessageEvent(obj *UnpinMessageEvent) *UnpinMessageEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(150))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(UnpinMessageEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) CategoryEvent(obj *CategoryEvent) *CategoryEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(152))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(CategoryEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) HandleParticipantMeetStateEvent(obj *HandleParticipantMeetStateEvent) *HandleParticipantMeetStateEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(154))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(HandleParticipantMeetStateEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) DeleteAccountEvent(obj *DeleteAccountEvent) *DeleteAccountEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(156))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(DeleteAccountEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) EphemeralMessageSend(obj *EphemeralMessageSend) *EphemeralMessageSend {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(158))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(EphemeralMessageSend)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) BlockFriend(obj *BlockFriend) *BlockFriend {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(160))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(BlockFriend)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) VoiceReactionSend(obj *VoiceReactionSend) *VoiceReactionSend {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(162))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(VoiceReactionSend)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) MarkAsRead(obj *MarkAsRead) *MarkAsRead {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(164))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(MarkAsRead)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ListDataSocket(obj *ListDataSocket) *ListDataSocket {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(166))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ListDataSocket)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) QuickMenuEvent(obj *QuickMenuDataEvent) *QuickMenuDataEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(168))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(QuickMenuDataEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) UnBlockFriend(obj *UnblockFriend) *UnblockFriend {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(170))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(UnblockFriend)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) MeetParticipantEvent(obj *MeetParticipantEvent) *MeetParticipantEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(172))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(MeetParticipantEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) TransferOwnershipEvent(obj *TransferOwnershipEvent) *TransferOwnershipEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(174))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(TransferOwnershipEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) AddFriend(obj *AddFriend) *AddFriend {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(176))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(AddFriend)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) BanUserEvent(obj *BannedUserEvent) *BannedUserEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(178))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(BannedUserEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ActiveArchivedThread(obj *ActiveArchivedThread) *ActiveArchivedThread {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(180))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ActiveArchivedThread)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) AllowAnonymousEvent(obj *AllowAnonymousEvent) *AllowAnonymousEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(182))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(AllowAnonymousEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) UpdateLocalcacheEvent(obj *UpdateLocalCacheEvent) *UpdateLocalCacheEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(184))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(UpdateLocalCacheEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) ClanCreatedEvent(obj *ClanCreatedEvent) *ClanCreatedEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(186))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(ClanCreatedEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func (rcv *Anonymous0) AiagentEnabledEvent(obj *AIAgentEnabledEvent) *AIAgentEnabledEvent {
-	o := flatbuffers.UOffsetT(rcv._tab.Offset(188))
-	if o != 0 {
-		x := rcv._tab.Indirect(o + rcv._tab.Pos)
-		if obj == nil {
-			obj = new(AIAgentEnabledEvent)
-		}
-		obj.Init(rcv._tab.Bytes, x)
-		return obj
-	}
-	return nil
-}
-
-func Anonymous0Start(builder *flatbuffers.Builder) {
-	builder.StartObject(93)
-}
-func Anonymous0AddChannel(builder *flatbuffers.Builder, channel flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(0, flatbuffers.UOffsetT(channel), 0)
-}
-func Anonymous0AddClanJoin(builder *flatbuffers.Builder, clanJoin flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(1, flatbuffers.UOffsetT(clanJoin), 0)
-}
-func Anonymous0AddChannelJoin(builder *flatbuffers.Builder, channelJoin flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(2, flatbuffers.UOffsetT(channelJoin), 0)
-}
-func Anonymous0AddChannelLeave(builder *flatbuffers.Builder, channelLeave flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(3, flatbuffers.UOffsetT(channelLeave), 0)
-}
-func Anonymous0AddChannelMessage(builder *flatbuffers.Builder, channelMessage flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(4, flatbuffers.UOffsetT(channelMessage), 0)
-}
-func Anonymous0AddChannelMessageAck(builder *flatbuffers.Builder, channelMessageAck flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(5, flatbuffers.UOffsetT(channelMessageAck), 0)
-}
-func Anonymous0AddChannelMessageSend(builder *flatbuffers.Builder, channelMessageSend flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(6, flatbuffers.UOffsetT(channelMessageSend), 0)
-}
-func Anonymous0AddChannelMessageUpdate(builder *flatbuffers.Builder, channelMessageUpdate flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(7, flatbuffers.UOffsetT(channelMessageUpdate), 0)
-}
-func Anonymous0AddChannelMessageRemove(builder *flatbuffers.Builder, channelMessageRemove flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(8, flatbuffers.UOffsetT(channelMessageRemove), 0)
-}
-func Anonymous0AddChannelPresenceEvent(builder *flatbuffers.Builder, channelPresenceEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(9, flatbuffers.UOffsetT(channelPresenceEvent), 0)
-}
-func Anonymous0AddError(builder *flatbuffers.Builder, error flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(10, flatbuffers.UOffsetT(error), 0)
-}
-func Anonymous0AddNotifications(builder *flatbuffers.Builder, notifications flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(11, flatbuffers.UOffsetT(notifications), 0)
-}
-func Anonymous0AddRpc(builder *flatbuffers.Builder, rpc flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(12, flatbuffers.UOffsetT(rpc), 0)
-}
-func Anonymous0AddStatus(builder *flatbuffers.Builder, status flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(13, flatbuffers.UOffsetT(status), 0)
-}
-func Anonymous0AddStatusFollow(builder *flatbuffers.Builder, statusFollow flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(14, flatbuffers.UOffsetT(statusFollow), 0)
-}
-func Anonymous0AddStatusPresenceEvent(builder *flatbuffers.Builder, statusPresenceEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(15, flatbuffers.UOffsetT(statusPresenceEvent), 0)
-}
-func Anonymous0AddStatusUnfollow(builder *flatbuffers.Builder, statusUnfollow flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(16, flatbuffers.UOffsetT(statusUnfollow), 0)
-}
-func Anonymous0AddStatusUpdate(builder *flatbuffers.Builder, statusUpdate flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(17, flatbuffers.UOffsetT(statusUpdate), 0)
-}
-func Anonymous0AddStreamData(builder *flatbuffers.Builder, streamData flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(18, flatbuffers.UOffsetT(streamData), 0)
-}
-func Anonymous0AddStreamPresenceEvent(builder *flatbuffers.Builder, streamPresenceEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(19, flatbuffers.UOffsetT(streamPresenceEvent), 0)
-}
-func Anonymous0AddPing(builder *flatbuffers.Builder, ping flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(20, flatbuffers.UOffsetT(ping), 0)
-}
-func Anonymous0AddPong(builder *flatbuffers.Builder, pong flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(21, flatbuffers.UOffsetT(pong), 0)
-}
-func Anonymous0AddMessageTypingEvent(builder *flatbuffers.Builder, messageTypingEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(22, flatbuffers.UOffsetT(messageTypingEvent), 0)
-}
-func Anonymous0AddLastSeenMessageEvent(builder *flatbuffers.Builder, lastSeenMessageEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(23, flatbuffers.UOffsetT(lastSeenMessageEvent), 0)
-}
-func Anonymous0AddMessageReactionEvent(builder *flatbuffers.Builder, messageReactionEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(24, flatbuffers.UOffsetT(messageReactionEvent), 0)
-}
-func Anonymous0AddVoiceJoinedEvent(builder *flatbuffers.Builder, voiceJoinedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(25, flatbuffers.UOffsetT(voiceJoinedEvent), 0)
-}
-func Anonymous0AddVoiceLeavedEvent(builder *flatbuffers.Builder, voiceLeavedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(26, flatbuffers.UOffsetT(voiceLeavedEvent), 0)
-}
-func Anonymous0AddVoiceStartedEvent(builder *flatbuffers.Builder, voiceStartedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(27, flatbuffers.UOffsetT(voiceStartedEvent), 0)
-}
-func Anonymous0AddVoiceEndedEvent(builder *flatbuffers.Builder, voiceEndedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(28, flatbuffers.UOffsetT(voiceEndedEvent), 0)
-}
-func Anonymous0AddChannelCreatedEvent(builder *flatbuffers.Builder, channelCreatedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(29, flatbuffers.UOffsetT(channelCreatedEvent), 0)
-}
-func Anonymous0AddChannelDeletedEvent(builder *flatbuffers.Builder, channelDeletedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(30, flatbuffers.UOffsetT(channelDeletedEvent), 0)
-}
-func Anonymous0AddChannelUpdatedEvent(builder *flatbuffers.Builder, channelUpdatedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(31, flatbuffers.UOffsetT(channelUpdatedEvent), 0)
-}
-func Anonymous0AddLastPinMessageEvent(builder *flatbuffers.Builder, lastPinMessageEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(32, flatbuffers.UOffsetT(lastPinMessageEvent), 0)
-}
-func Anonymous0AddCustomStatusEvent(builder *flatbuffers.Builder, customStatusEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(33, flatbuffers.UOffsetT(customStatusEvent), 0)
-}
-func Anonymous0AddUserChannelAddedEvent(builder *flatbuffers.Builder, userChannelAddedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(34, flatbuffers.UOffsetT(userChannelAddedEvent), 0)
-}
-func Anonymous0AddUserChannelRemovedEvent(builder *flatbuffers.Builder, userChannelRemovedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(35, flatbuffers.UOffsetT(userChannelRemovedEvent), 0)
-}
-func Anonymous0AddUserClanRemovedEvent(builder *flatbuffers.Builder, userClanRemovedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(36, flatbuffers.UOffsetT(userClanRemovedEvent), 0)
-}
-func Anonymous0AddClanUpdatedEvent(builder *flatbuffers.Builder, clanUpdatedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(37, flatbuffers.UOffsetT(clanUpdatedEvent), 0)
-}
-func Anonymous0AddClanProfileUpdatedEvent(builder *flatbuffers.Builder, clanProfileUpdatedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(38, flatbuffers.UOffsetT(clanProfileUpdatedEvent), 0)
-}
-func Anonymous0AddCheckNameExistedEvent(builder *flatbuffers.Builder, checkNameExistedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(39, flatbuffers.UOffsetT(checkNameExistedEvent), 0)
-}
-func Anonymous0AddUserProfileUpdatedEvent(builder *flatbuffers.Builder, userProfileUpdatedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(40, flatbuffers.UOffsetT(userProfileUpdatedEvent), 0)
-}
-func Anonymous0AddAddClanUserEvent(builder *flatbuffers.Builder, addClanUserEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(41, flatbuffers.UOffsetT(addClanUserEvent), 0)
-}
-func Anonymous0AddClanEventCreated(builder *flatbuffers.Builder, clanEventCreated flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(42, flatbuffers.UOffsetT(clanEventCreated), 0)
-}
-func Anonymous0AddRoleAssignEvent(builder *flatbuffers.Builder, roleAssignEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(43, flatbuffers.UOffsetT(roleAssignEvent), 0)
-}
-func Anonymous0AddClanDeletedEvent(builder *flatbuffers.Builder, clanDeletedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(44, flatbuffers.UOffsetT(clanDeletedEvent), 0)
-}
-func Anonymous0AddGiveCoffeeEvent(builder *flatbuffers.Builder, giveCoffeeEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(45, flatbuffers.UOffsetT(giveCoffeeEvent), 0)
-}
-func Anonymous0AddStickerCreateEvent(builder *flatbuffers.Builder, stickerCreateEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(46, flatbuffers.UOffsetT(stickerCreateEvent), 0)
-}
-func Anonymous0AddStickerUpdateEvent(builder *flatbuffers.Builder, stickerUpdateEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(47, flatbuffers.UOffsetT(stickerUpdateEvent), 0)
-}
-func Anonymous0AddStickerDeleteEvent(builder *flatbuffers.Builder, stickerDeleteEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(48, flatbuffers.UOffsetT(stickerDeleteEvent), 0)
-}
-func Anonymous0AddRoleEvent(builder *flatbuffers.Builder, roleEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(49, flatbuffers.UOffsetT(roleEvent), 0)
-}
-func Anonymous0AddEventEmoji(builder *flatbuffers.Builder, eventEmoji flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(50, flatbuffers.UOffsetT(eventEmoji), 0)
-}
-func Anonymous0AddStreamingJoinedEvent(builder *flatbuffers.Builder, streamingJoinedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(51, flatbuffers.UOffsetT(streamingJoinedEvent), 0)
-}
-func Anonymous0AddStreamingLeavedEvent(builder *flatbuffers.Builder, streamingLeavedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(52, flatbuffers.UOffsetT(streamingLeavedEvent), 0)
-}
-func Anonymous0AddStreamingStartedEvent(builder *flatbuffers.Builder, streamingStartedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(53, flatbuffers.UOffsetT(streamingStartedEvent), 0)
-}
-func Anonymous0AddStreamingEndedEvent(builder *flatbuffers.Builder, streamingEndedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(54, flatbuffers.UOffsetT(streamingEndedEvent), 0)
-}
-func Anonymous0AddPermissionSetEvent(builder *flatbuffers.Builder, permissionSetEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(55, flatbuffers.UOffsetT(permissionSetEvent), 0)
-}
-func Anonymous0AddPermissionChangedEvent(builder *flatbuffers.Builder, permissionChangedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(56, flatbuffers.UOffsetT(permissionChangedEvent), 0)
-}
-func Anonymous0AddTokenSentEvent(builder *flatbuffers.Builder, tokenSentEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(57, flatbuffers.UOffsetT(tokenSentEvent), 0)
-}
-func Anonymous0AddMessageButtonClicked(builder *flatbuffers.Builder, messageButtonClicked flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(58, flatbuffers.UOffsetT(messageButtonClicked), 0)
-}
-func Anonymous0AddUnmuteEvent(builder *flatbuffers.Builder, unmuteEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(59, flatbuffers.UOffsetT(unmuteEvent), 0)
-}
-func Anonymous0AddWebrtcSignalingFwd(builder *flatbuffers.Builder, webrtcSignalingFwd flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(60, flatbuffers.UOffsetT(webrtcSignalingFwd), 0)
-}
-func Anonymous0AddListActivity(builder *flatbuffers.Builder, listActivity flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(61, flatbuffers.UOffsetT(listActivity), 0)
-}
-func Anonymous0AddDropdownBoxSelected(builder *flatbuffers.Builder, dropdownBoxSelected flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(62, flatbuffers.UOffsetT(dropdownBoxSelected), 0)
-}
-func Anonymous0AddIncomingCallPush(builder *flatbuffers.Builder, incomingCallPush flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(63, flatbuffers.UOffsetT(incomingCallPush), 0)
-}
-func Anonymous0AddSdTopicEvent(builder *flatbuffers.Builder, sdTopicEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(64, flatbuffers.UOffsetT(sdTopicEvent), 0)
-}
-func Anonymous0AddFollowEvent(builder *flatbuffers.Builder, followEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(65, flatbuffers.UOffsetT(followEvent), 0)
-}
-func Anonymous0AddChannelAppEvent(builder *flatbuffers.Builder, channelAppEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(66, flatbuffers.UOffsetT(channelAppEvent), 0)
-}
-func Anonymous0AddUserStatusEvent(builder *flatbuffers.Builder, userStatusEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(67, flatbuffers.UOffsetT(userStatusEvent), 0)
-}
-func Anonymous0AddRemoveFriend(builder *flatbuffers.Builder, removeFriend flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(68, flatbuffers.UOffsetT(removeFriend), 0)
-}
-func Anonymous0AddWebhookEvent(builder *flatbuffers.Builder, webhookEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(69, flatbuffers.UOffsetT(webhookEvent), 0)
-}
-func Anonymous0AddNotiUserChannel(builder *flatbuffers.Builder, notiUserChannel flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(70, flatbuffers.UOffsetT(notiUserChannel), 0)
-}
-func Anonymous0AddJoinChannelAppData(builder *flatbuffers.Builder, joinChannelAppData flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(71, flatbuffers.UOffsetT(joinChannelAppData), 0)
-}
-func Anonymous0AddCanvasEvent(builder *flatbuffers.Builder, canvasEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(72, flatbuffers.UOffsetT(canvasEvent), 0)
-}
-func Anonymous0AddUnpinMessageEvent(builder *flatbuffers.Builder, unpinMessageEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(73, flatbuffers.UOffsetT(unpinMessageEvent), 0)
-}
-func Anonymous0AddCategoryEvent(builder *flatbuffers.Builder, categoryEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(74, flatbuffers.UOffsetT(categoryEvent), 0)
-}
-func Anonymous0AddHandleParticipantMeetStateEvent(builder *flatbuffers.Builder, handleParticipantMeetStateEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(75, flatbuffers.UOffsetT(handleParticipantMeetStateEvent), 0)
-}
-func Anonymous0AddDeleteAccountEvent(builder *flatbuffers.Builder, deleteAccountEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(76, flatbuffers.UOffsetT(deleteAccountEvent), 0)
-}
-func Anonymous0AddEphemeralMessageSend(builder *flatbuffers.Builder, ephemeralMessageSend flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(77, flatbuffers.UOffsetT(ephemeralMessageSend), 0)
-}
-func Anonymous0AddBlockFriend(builder *flatbuffers.Builder, blockFriend flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(78, flatbuffers.UOffsetT(blockFriend), 0)
-}
-func Anonymous0AddVoiceReactionSend(builder *flatbuffers.Builder, voiceReactionSend flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(79, flatbuffers.UOffsetT(voiceReactionSend), 0)
-}
-func Anonymous0AddMarkAsRead(builder *flatbuffers.Builder, markAsRead flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(80, flatbuffers.UOffsetT(markAsRead), 0)
-}
-func Anonymous0AddListDataSocket(builder *flatbuffers.Builder, listDataSocket flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(81, flatbuffers.UOffsetT(listDataSocket), 0)
-}
-func Anonymous0AddQuickMenuEvent(builder *flatbuffers.Builder, quickMenuEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(82, flatbuffers.UOffsetT(quickMenuEvent), 0)
-}
-func Anonymous0AddUnBlockFriend(builder *flatbuffers.Builder, unBlockFriend flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(83, flatbuffers.UOffsetT(unBlockFriend), 0)
-}
-func Anonymous0AddMeetParticipantEvent(builder *flatbuffers.Builder, meetParticipantEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(84, flatbuffers.UOffsetT(meetParticipantEvent), 0)
-}
-func Anonymous0AddTransferOwnershipEvent(builder *flatbuffers.Builder, transferOwnershipEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(85, flatbuffers.UOffsetT(transferOwnershipEvent), 0)
-}
-func Anonymous0AddAddFriend(builder *flatbuffers.Builder, addFriend flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(86, flatbuffers.UOffsetT(addFriend), 0)
-}
-func Anonymous0AddBanUserEvent(builder *flatbuffers.Builder, banUserEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(87, flatbuffers.UOffsetT(banUserEvent), 0)
-}
-func Anonymous0AddActiveArchivedThread(builder *flatbuffers.Builder, activeArchivedThread flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(88, flatbuffers.UOffsetT(activeArchivedThread), 0)
-}
-func Anonymous0AddAllowAnonymousEvent(builder *flatbuffers.Builder, allowAnonymousEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(89, flatbuffers.UOffsetT(allowAnonymousEvent), 0)
-}
-func Anonymous0AddUpdateLocalcacheEvent(builder *flatbuffers.Builder, updateLocalcacheEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(90, flatbuffers.UOffsetT(updateLocalcacheEvent), 0)
-}
-func Anonymous0AddClanCreatedEvent(builder *flatbuffers.Builder, clanCreatedEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(91, flatbuffers.UOffsetT(clanCreatedEvent), 0)
-}
-func Anonymous0AddAiagentEnabledEvent(builder *flatbuffers.Builder, aiagentEnabledEvent flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(92, flatbuffers.UOffsetT(aiagentEnabledEvent), 0)
-}
-func Anonymous0End(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
-	return builder.EndObject()
-}
 type UpdateLocalCacheEvent struct {
 	_tab flatbuffers.Table
 }
@@ -1754,6 +538,7 @@ func UpdateLocalCacheEventStartParams2Vector(builder *flatbuffers.Builder, numEl
 func UpdateLocalCacheEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type FollowEvent struct {
 	_tab flatbuffers.Table
 }
@@ -1795,6 +580,7 @@ func FollowEventStart(builder *flatbuffers.Builder) {
 func FollowEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type BannedUserEvent struct {
 	_tab flatbuffers.Table
 }
@@ -1943,6 +729,7 @@ func BannedUserEventAddBanTime(builder *flatbuffers.Builder, banTime int32) {
 func BannedUserEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelCanvas struct {
 	_tab flatbuffers.Table
 }
@@ -2096,6 +883,7 @@ func ChannelCanvasAddStatus(builder *flatbuffers.Builder, status int32) {
 func ChannelCanvasEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type IncomingCallPush struct {
 	_tab flatbuffers.Table
 }
@@ -2193,6 +981,7 @@ func IncomingCallPushAddCallerId(builder *flatbuffers.Builder, callerId int64) {
 func IncomingCallPushEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type WebrtcSignalingFwd struct {
 	_tab flatbuffers.Table
 }
@@ -2305,6 +1094,7 @@ func WebrtcSignalingFwdAddCallerId(builder *flatbuffers.Builder, callerId int64)
 func WebrtcSignalingFwdEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type SFUSignalingFwd struct {
 	_tab flatbuffers.Table
 }
@@ -2417,6 +1207,7 @@ func SFUSignalingFwdAddUserId(builder *flatbuffers.Builder, userId int64) {
 func SFUSignalingFwdEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type AddClanUserEvent struct {
 	_tab flatbuffers.Table
 }
@@ -2500,6 +1291,7 @@ func AddClanUserEventAddInvitor(builder *flatbuffers.Builder, invitor flatbuffer
 func AddClanUserEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type RoleAssignedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -2631,6 +1423,7 @@ func RoleAssignedEventStartUserIdsRemovedVector(builder *flatbuffers.Builder, nu
 func RoleAssignedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type PermissionRoleChannel struct {
 	_tab flatbuffers.Table
 }
@@ -2702,6 +1495,7 @@ func PermissionRoleChannelAddActive(builder *flatbuffers.Builder, active bool) {
 func PermissionRoleChannelEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type HashtagDm struct {
 	_tab flatbuffers.Table
 }
@@ -2851,6 +1645,7 @@ func HashtagDmAddParentId(builder *flatbuffers.Builder, parentId int64) {
 func HashtagDmEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelDescription struct {
 	_tab flatbuffers.Table
 }
@@ -3016,6 +1811,7 @@ func ChannelDescriptionAddLastSentMessage(builder *flatbuffers.Builder, lastSent
 func ChannelDescriptionEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ClanEmoji struct {
 	_tab flatbuffers.Table
 }
@@ -3157,6 +1953,7 @@ func ClanEmojiAddClanName(builder *flatbuffers.Builder, clanName flatbuffers.UOf
 func ClanEmojiEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type Channel struct {
 	_tab flatbuffers.Table
 }
@@ -3288,6 +2085,7 @@ func ChannelAddCategoryName(builder *flatbuffers.Builder, categoryName flatbuffe
 func ChannelEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ClanJoin struct {
 	_tab flatbuffers.Table
 }
@@ -3344,6 +2142,7 @@ func ClanJoinAddClanId(builder *flatbuffers.Builder, clanId int64) {
 func ClanJoinEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelJoin struct {
 	_tab flatbuffers.Table
 }
@@ -3445,6 +2244,7 @@ func ChannelJoinAddIsPublic(builder *flatbuffers.Builder, isPublic bool) {
 func ChannelJoinEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelLeave struct {
 	_tab flatbuffers.Table
 }
@@ -3546,6 +2346,7 @@ func ChannelLeaveAddIsPublic(builder *flatbuffers.Builder, isPublic bool) {
 func ChannelLeaveEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelMessageAck struct {
 	_tab flatbuffers.Table
 }
@@ -3710,6 +2511,7 @@ func ChannelMessageAckAddCategoryName(builder *flatbuffers.Builder, categoryName
 func ChannelMessageAckEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type EphemeralMessageSend struct {
 	_tab flatbuffers.Table
 }
@@ -3799,6 +2601,7 @@ func EphemeralMessageSendStartReceiverIdsVector(builder *flatbuffers.Builder, nu
 func EphemeralMessageSendEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type QuickMenuDataEvent struct {
 	_tab flatbuffers.Table
 }
@@ -3867,6 +2670,7 @@ func QuickMenuDataEventAddMessage(builder *flatbuffers.Builder, message flatbuff
 func QuickMenuDataEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type VoiceReactionSend struct {
 	_tab flatbuffers.Table
 }
@@ -3976,6 +2780,7 @@ func VoiceReactionSendAddMediaType(builder *flatbuffers.Builder, mediaType int32
 func VoiceReactionSendEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type MarkAsRead struct {
 	_tab flatbuffers.Table
 }
@@ -4062,6 +2867,7 @@ func MarkAsReadAddClanId(builder *flatbuffers.Builder, clanId int64) {
 func MarkAsReadEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelMessageSend struct {
 	_tab flatbuffers.Table
 }
@@ -4338,6 +3144,7 @@ func ChannelMessageSendAddId(builder *flatbuffers.Builder, id int64) {
 func ChannelMessageSendEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelMessageUpdate struct {
 	_tab flatbuffers.Table
 }
@@ -4562,6 +3369,7 @@ func ChannelMessageUpdateAddIsUpdateMsgTopic(builder *flatbuffers.Builder, isUpd
 func ChannelMessageUpdateEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelMessageRemove struct {
 	_tab flatbuffers.Table
 }
@@ -4788,6 +3596,7 @@ func ChannelMessageRemoveStartReferencesVector(builder *flatbuffers.Builder, num
 func ChannelMessageRemoveEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelPresenceEvent struct {
 	_tab flatbuffers.Table
 }
@@ -4933,6 +3742,7 @@ func ChannelPresenceEventAddMode(builder *flatbuffers.Builder, mode int32) {
 func ChannelPresenceEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type Error struct {
 	_tab flatbuffers.Table
 }
@@ -5035,6 +3845,7 @@ func ErrorStartContextVector(builder *flatbuffers.Builder, numElems int) flatbuf
 func ErrorEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ContextEntry struct {
 	_tab flatbuffers.Table
 }
@@ -5130,6 +3941,7 @@ func ContextEntryAddValue(builder *flatbuffers.Builder, value flatbuffers.UOffse
 func ContextEntryEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type Notifications struct {
 	_tab flatbuffers.Table
 }
@@ -5197,6 +4009,7 @@ func NotificationsStartNotificationsVector(builder *flatbuffers.Builder, numElem
 func NotificationsEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type AddFriend struct {
 	_tab flatbuffers.Table
 }
@@ -5286,6 +4099,7 @@ func AddFriendAddAvatar(builder *flatbuffers.Builder, avatar flatbuffers.UOffset
 func AddFriendEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type RemoveFriend struct {
 	_tab flatbuffers.Table
 }
@@ -5342,6 +4156,7 @@ func RemoveFriendAddUserId(builder *flatbuffers.Builder, userId int64) {
 func RemoveFriendEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type BlockFriend struct {
 	_tab flatbuffers.Table
 }
@@ -5398,6 +4213,7 @@ func BlockFriendAddUserId(builder *flatbuffers.Builder, userId int64) {
 func BlockFriendEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UnblockFriend struct {
 	_tab flatbuffers.Table
 }
@@ -5509,6 +4325,7 @@ func UnblockFriendAddUserStatus(builder *flatbuffers.Builder, userStatus flatbuf
 func UnblockFriendEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type Ping struct {
 	_tab flatbuffers.Table
 }
@@ -5550,6 +4367,7 @@ func PingStart(builder *flatbuffers.Builder) {
 func PingEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type Pong struct {
 	_tab flatbuffers.Table
 }
@@ -5591,6 +4409,7 @@ func PongStart(builder *flatbuffers.Builder) {
 func PongEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type Status struct {
 	_tab flatbuffers.Table
 }
@@ -5658,6 +4477,7 @@ func StatusStartPresencesVector(builder *flatbuffers.Builder, numElems int) flat
 func StatusEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StatusFollow struct {
 	_tab flatbuffers.Table
 }
@@ -5754,6 +4574,7 @@ func StatusFollowStartUsernamesVector(builder *flatbuffers.Builder, numElems int
 func StatusFollowEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StatusPresenceEvent struct {
 	_tab flatbuffers.Table
 }
@@ -5847,6 +4668,7 @@ func StatusPresenceEventStartLeavesVector(builder *flatbuffers.Builder, numElems
 func StatusPresenceEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type LastPinMessageEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6074,6 +4896,7 @@ func LastPinMessageEventAddMessageCreatedTime(builder *flatbuffers.Builder, mess
 func LastPinMessageEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type LastSeenMessageEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6205,6 +5028,7 @@ func LastSeenMessageEventAddBadgeCount(builder *flatbuffers.Builder, badgeCount 
 func LastSeenMessageEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type MessageTypingEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6358,6 +5182,7 @@ func MessageTypingEventAddTopicId(builder *flatbuffers.Builder, topicId int64) {
 func MessageTypingEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type VoiceLeavedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6455,6 +5280,7 @@ func VoiceLeavedEventAddVoiceUserId(builder *flatbuffers.Builder, voiceUserId in
 func VoiceLeavedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type VoiceJoinedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6596,6 +5422,7 @@ func VoiceJoinedEventAddLastScreenshot(builder *flatbuffers.Builder, lastScreens
 func VoiceJoinedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type VoiceStartedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6678,6 +5505,7 @@ func VoiceStartedEventAddVoiceChannelId(builder *flatbuffers.Builder, voiceChann
 func VoiceStartedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type VoiceEndedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6760,6 +5588,7 @@ func VoiceEndedEventAddVoiceChannelId(builder *flatbuffers.Builder, voiceChannel
 func VoiceEndedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StreamingLeavedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6853,6 +5682,7 @@ func StreamingLeavedEventAddStreamingUserId(builder *flatbuffers.Builder, stream
 func StreamingLeavedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StreamingJoinedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -6987,6 +5817,7 @@ func StreamingJoinedEventAddStreamingChannelId(builder *flatbuffers.Builder, str
 func StreamingJoinedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StreamingStartedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -7084,6 +5915,7 @@ func StreamingStartedEventAddIsStreaming(builder *flatbuffers.Builder, isStreami
 func StreamingStartedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StreamingEndedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -7155,6 +5987,7 @@ func StreamingEndedEventAddChannelId(builder *flatbuffers.Builder, channelId int
 func StreamingEndedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelCreatedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -7364,6 +6197,7 @@ func ChannelCreatedEventAddChannelAvatar(builder *flatbuffers.Builder, channelAv
 func ChannelCreatedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type CategoryEvent struct {
 	_tab flatbuffers.Table
 }
@@ -7476,6 +6310,7 @@ func CategoryEventAddStatus(builder *flatbuffers.Builder, status int32) {
 func CategoryEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type RoleEvent struct {
 	_tab flatbuffers.Table
 }
@@ -7691,6 +6526,7 @@ func RoleEventStartRemovePermissionIdsVector(builder *flatbuffers.Builder, numEl
 func RoleEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelDeletedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -7803,6 +6639,7 @@ func ChannelDeletedEventAddDeletor(builder *flatbuffers.Builder, deletor flatbuf
 func ChannelDeletedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ClanDeletedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -7874,6 +6711,7 @@ func ClanDeletedEventAddDeletor(builder *flatbuffers.Builder, deletor int64) {
 func ClanDeletedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StickerCreateEvent struct {
 	_tab flatbuffers.Table
 }
@@ -8015,6 +6853,7 @@ func StickerCreateEventAddClanName(builder *flatbuffers.Builder, clanName flatbu
 func StickerCreateEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StickerUpdateEvent struct {
 	_tab flatbuffers.Table
 }
@@ -8097,6 +6936,7 @@ func StickerUpdateEventAddUserId(builder *flatbuffers.Builder, userId int64) {
 func StickerUpdateEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StickerDeleteEvent struct {
 	_tab flatbuffers.Table
 }
@@ -8168,6 +7008,7 @@ func StickerDeleteEventAddUserId(builder *flatbuffers.Builder, userId int64) {
 func StickerDeleteEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelUpdatedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -8527,6 +7368,7 @@ func ChannelUpdatedEventAddChannelAvatar(builder *flatbuffers.Builder, channelAv
 func ChannelUpdatedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StatusUnfollow struct {
 	_tab flatbuffers.Table
 }
@@ -8600,6 +7442,7 @@ func StatusUnfollowStartUserIdsVector(builder *flatbuffers.Builder, numElems int
 func StatusUnfollowEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StatusUpdate struct {
 	_tab flatbuffers.Table
 }
@@ -8652,6 +7495,7 @@ func StatusUpdateAddStatus(builder *flatbuffers.Builder, status flatbuffers.UOff
 func StatusUpdateEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type Stream struct {
 	_tab flatbuffers.Table
 }
@@ -8749,6 +7593,7 @@ func StreamAddLabel(builder *flatbuffers.Builder, label flatbuffers.UOffsetT) {
 func StreamEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StreamData struct {
 	_tab flatbuffers.Table
 }
@@ -8848,6 +7693,7 @@ func StreamDataAddReliable(builder *flatbuffers.Builder, reliable bool) {
 func StreamDataEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type StreamPresenceEvent struct {
 	_tab flatbuffers.Table
 }
@@ -8957,6 +7803,7 @@ func StreamPresenceEventStartLeavesVector(builder *flatbuffers.Builder, numElems
 func StreamPresenceEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UserPresence struct {
 	_tab flatbuffers.Table
 }
@@ -9072,6 +7919,7 @@ func UserPresenceAddUserStatus(builder *flatbuffers.Builder, userStatus flatbuff
 func UserPresenceEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type CustomStatusEvent struct {
 	_tab flatbuffers.Table
 }
@@ -9195,6 +8043,7 @@ func CustomStatusEventAddNoClear(builder *flatbuffers.Builder, noClear bool) {
 func CustomStatusEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UserChannelAdded struct {
 	_tab flatbuffers.Table
 }
@@ -9350,6 +8199,7 @@ func UserChannelAddedAddActive(builder *flatbuffers.Builder, active int32) {
 func UserChannelAddedEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UserChannelRemoved struct {
 	_tab flatbuffers.Table
 }
@@ -9500,6 +8350,7 @@ func UserChannelRemovedStartBadgeCountsVector(builder *flatbuffers.Builder, numE
 func UserChannelRemovedEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UserClanRemoved struct {
 	_tab flatbuffers.Table
 }
@@ -9588,6 +8439,7 @@ func UserClanRemovedStartUserIdsVector(builder *flatbuffers.Builder, numElems in
 func UserClanRemovedEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ClanCreatedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -9696,6 +8548,7 @@ func ClanCreatedEventAddWelcomeChannelId(builder *flatbuffers.Builder, welcomeCh
 func ClanCreatedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ClanUpdatedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -9904,6 +8757,7 @@ func ClanUpdatedEventAddPreventAnonymous(builder *flatbuffers.Builder, preventAn
 func ClanUpdatedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ClanProfileUpdatedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -9997,6 +8851,7 @@ func ClanProfileUpdatedEventAddClanId(builder *flatbuffers.Builder, clanId int64
 func ClanProfileUpdatedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UserProfileUpdatedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -10127,6 +8982,7 @@ func UserProfileUpdatedEventAddEncryptPrivateKey(builder *flatbuffers.Builder, e
 func UserProfileUpdatedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ConfirmLinkMezonOTPData struct {
 	_tab flatbuffers.Table
 }
@@ -10194,6 +9050,7 @@ func ConfirmLinkMezonOTPDataAddValue(builder *flatbuffers.Builder, value flatbuf
 func ConfirmLinkMezonOTPDataEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UserProfileRedis struct {
 	_tab flatbuffers.Table
 }
@@ -10441,6 +9298,7 @@ func UserProfileRedisAddVoipToken(builder *flatbuffers.Builder, voipToken flatbu
 func UserProfileRedisEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type FCMTokens struct {
 	_tab flatbuffers.Table
 }
@@ -10515,6 +9373,7 @@ func FCMTokensAddPlatform(builder *flatbuffers.Builder, platform flatbuffers.UOf
 func FCMTokensEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type CheckNameExistedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -10627,6 +9486,7 @@ func CheckNameExistedEventAddClanId(builder *flatbuffers.Builder, clanId int64) 
 func CheckNameExistedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type NotificationChannelCategorySetting struct {
 	_tab flatbuffers.Table
 }
@@ -10735,6 +9595,7 @@ func NotificationChannelCategorySettingAddAction(builder *flatbuffers.Builder, a
 func NotificationChannelCategorySettingEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type EventEmoji struct {
 	_tab flatbuffers.Table
 }
@@ -10906,6 +9767,7 @@ func EventEmojiAddIsForSale(builder *flatbuffers.Builder, isForSale bool) {
 func EventEmojiEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type PermissionSetEvent struct {
 	_tab flatbuffers.Table
 }
@@ -11029,6 +9891,7 @@ func PermissionSetEventStartPermissionUpdatesVector(builder *flatbuffers.Builder
 func PermissionSetEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type PermissionChangedEvent struct {
 	_tab flatbuffers.Table
 }
@@ -11178,6 +10041,7 @@ func PermissionChangedEventStartDefaultPermissionsVector(builder *flatbuffers.Bu
 func PermissionChangedEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type MessageButtonClicked struct {
 	_tab flatbuffers.Table
 }
@@ -11301,6 +10165,7 @@ func MessageButtonClickedAddExtraData(builder *flatbuffers.Builder, extraData fl
 func MessageButtonClickedEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UnmuteEvent struct {
 	_tab flatbuffers.Table
 }
@@ -11387,6 +10252,7 @@ func UnmuteEventAddClanId(builder *flatbuffers.Builder, clanId int64) {
 func UnmuteEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ListActivity struct {
 	_tab flatbuffers.Table
 }
@@ -11454,6 +10320,7 @@ func ListActivityStartActsVector(builder *flatbuffers.Builder, numElems int) fla
 func ListActivityEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type DropdownBoxSelected struct {
 	_tab flatbuffers.Table
 }
@@ -11589,6 +10456,7 @@ func DropdownBoxSelectedStartValuesVector(builder *flatbuffers.Builder, numElems
 func DropdownBoxSelectedEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type SdTopicEvent struct {
 	_tab flatbuffers.Table
 }
@@ -11737,6 +10605,7 @@ func SdTopicEventAddMessage(builder *flatbuffers.Builder, message flatbuffers.UO
 func SdTopicEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ChannelAppEvent struct {
 	_tab flatbuffers.Table
 }
@@ -11849,6 +10718,7 @@ func ChannelAppEventAddAction(builder *flatbuffers.Builder, action int32) {
 func ChannelAppEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UserStatusEvent struct {
 	_tab flatbuffers.Table
 }
@@ -11916,6 +10786,7 @@ func UserStatusEventAddCustomStatus(builder *flatbuffers.Builder, customStatus f
 func UserStatusEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type JoinChannelAppData struct {
 	_tab flatbuffers.Table
 }
@@ -11994,6 +10865,7 @@ func JoinChannelAppDataAddHash(builder *flatbuffers.Builder, hash flatbuffers.UO
 func JoinChannelAppDataEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type UnpinMessageEvent struct {
 	_tab flatbuffers.Table
 }
@@ -12095,6 +10967,7 @@ func UnpinMessageEventAddClanId(builder *flatbuffers.Builder, clanId int64) {
 func UnpinMessageEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type HandleParticipantMeetStateEvent struct {
 	_tab flatbuffers.Table
 }
@@ -12203,6 +11076,7 @@ func HandleParticipantMeetStateEventAddRoomName(builder *flatbuffers.Builder, ro
 func HandleParticipantMeetStateEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type DeleteAccountEvent struct {
 	_tab flatbuffers.Table
 }
@@ -12259,6 +11133,7 @@ func DeleteAccountEventAddUserId(builder *flatbuffers.Builder, userId int64) {
 func DeleteAccountEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ListDataSocket struct {
 	_tab flatbuffers.Table
 }
@@ -12391,6 +11266,7 @@ func ListDataSocketAddListLogedDevice(builder *flatbuffers.Builder, listLogedDev
 func ListDataSocketEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type MeetParticipantEvent struct {
 	_tab flatbuffers.Table
 }
@@ -12499,6 +11375,7 @@ func MeetParticipantEventAddAction(builder *flatbuffers.Builder, action int32) {
 func MeetParticipantEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type TransferOwnershipEvent struct {
 	_tab flatbuffers.Table
 }
@@ -12585,6 +11462,7 @@ func TransferOwnershipEventAddCurrOwner(builder *flatbuffers.Builder, currOwner 
 func TransferOwnershipEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ActiveArchivedThread struct {
 	_tab flatbuffers.Table
 }
@@ -12656,6 +11534,7 @@ func ActiveArchivedThreadAddChannelId(builder *flatbuffers.Builder, channelId in
 func ActiveArchivedThreadEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type AllowAnonymousEvent struct {
 	_tab flatbuffers.Table
 }
@@ -12727,6 +11606,7 @@ func AllowAnonymousEventAddAllow(builder *flatbuffers.Builder, allow bool) {
 func AllowAnonymousEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type FcmDataPayload struct {
 	_tab flatbuffers.Table
 }
@@ -13067,6 +11947,7 @@ func FcmDataPayloadStartAttachmentsVector(builder *flatbuffers.Builder, numElems
 func FcmDataPayloadEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type AIAgentEnabledEvent struct {
 	_tab flatbuffers.Table
 }
@@ -13164,6 +12045,7 @@ func AIAgentEnabledEventAddEnabled(builder *flatbuffers.Builder, enabled bool) {
 func AIAgentEnabledEventEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type GotifyMessage struct {
 	_tab flatbuffers.Table
 }
@@ -13371,6 +12253,7 @@ func GotifyMessageAddSenderId(builder *flatbuffers.Builder, senderId int64) {
 func GotifyMessageEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
+
 type ExtrasEntry struct {
 	_tab flatbuffers.Table
 }
