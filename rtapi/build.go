@@ -14,4 +14,4 @@
 
 package rtapi
 
-//go:generate protoc -I.. -I. --go_out=. --go_opt=paths=source_relative --go-vtproto_out=. --go-vtproto_opt=paths=source_relative --go-vtproto_opt=features=marshal+unmarshal+size+pool realtime.proto
+//go:generate flatc --go --gen-onefile  -I ../api realtime.fbs

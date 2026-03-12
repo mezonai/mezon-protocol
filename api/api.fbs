@@ -1,0 +1,2571 @@
+namespace mezon.api;
+
+enum State : int {
+  FRIEND = 0,
+  INVITE_SENT = 1,
+  INVITE_RECEIVED = 2,
+  BLOCKED = 3,
+}
+
+enum StoreProvider : int {
+  APPLE_APP_STORE = 0,
+  GOOGLE_PLAY_STORE = 1,
+  HUAWEI_APP_GALLERY = 2,
+  FACEBOOK_INSTANT_STORE = 3,
+}
+
+enum StoreEnvironment : int {
+  UNKNOWN = 0,
+  SANDBOX = 1,
+  PRODUCTION = 2,
+}
+
+enum Operator : int {
+  NO_OVERRIDE = 0,
+  BEST = 1,
+  SET = 2,
+  INCREMENT = 3,
+  DECREMENT = 4,
+}
+
+enum PollType : int {
+  SINGLE = 0,
+  MULTIPLE = 1,
+}
+
+table Account {
+  user:User;
+  email:string;
+  qr_code:string;
+  verify_time_seconds:uint;
+  disable_time_seconds:uint;
+  logo:string;
+  splash_screen:string;
+  encrypt_private_key:string;
+  password_setted:bool;
+}
+
+table AccountRefresh {
+  token:string;
+  vars:[VarsEntry];
+}
+
+table VarsEntry {
+  key:string (key);
+  value:string;
+}
+
+table AddFriendsRequest {
+  ids:[long];
+  usernames:[string];
+}
+
+table AddFriendsResponse {
+  ids:[long];
+  usernames:[string];
+}
+
+table AddGroupUsersRequest {
+  group_id:long;
+  user_ids:[long];
+}
+
+table SessionRefreshRequest {
+  token:string;
+  vars:[VarsEntry];
+  is_remember:bool;
+}
+
+table SessionLogoutRequest {
+  token:string;
+  refresh_token:string;
+  device_id:string;
+  fcm_token:string;
+  platform:string;
+}
+
+table IsBannedResponse {
+  is_banned:bool;
+  expired_ban_time:int;
+}
+
+table IsBannedRequest {
+  channel_id:long;
+}
+
+table BanGroupUsersRequest {
+  group_id:long;
+  user_ids:[long];
+}
+
+table BlockFriendsRequest {
+  ids:[long];
+  usernames:[string];
+}
+
+table ChannelMessage {
+  clan_id:long;
+  channel_id:long;
+  message_id:long;
+  code:int;
+  sender_id:long;
+  username:string;
+  avatar:string;
+  content:string;
+  channel_label:string;
+  clan_logo:string;
+  category_name:string;
+  display_name:string;
+  clan_nick:string;
+  clan_avatar:string;
+  reactions:[ubyte];
+  mentions:[ubyte];
+  attachments:[ubyte];
+  references:[ubyte];
+  referenced_message:[ubyte];
+  create_time_seconds:uint;
+  update_time_seconds:uint;
+  mode:int;
+  hide_editted:bool;
+  is_public:bool;
+  topic_id:long;
+}
+
+table MessageMention {
+  id:long;
+  user_id:long;
+  username:string;
+  role_id:long;
+  rolename:string;
+  create_time_seconds:uint;
+  s:int;
+  e:int;
+}
+
+table NotificationInfo {
+  username:string;
+  avatar:string;
+  clan_nick:string;
+  clan_avatar:string;
+  display_name:string;
+  channel_label:string;
+  channel_type:int;
+  category_name:string;
+  clan_name:string;
+  clan_logo:string;
+  channel:ChannelDescription;
+}
+
+table MessageReaction {
+  id:long;
+  emoji_id:long;
+  emoji:string;
+  sender_id:long;
+  sender_name:string;
+  sender_avatar:string;
+  action:bool;
+  count:int;
+  channel_id:long;
+  message_id:long;
+  clan_id:long;
+  mode:int;
+  message_sender_id:long;
+  is_public:bool;
+  topic_id:long;
+  emoji_recent_id:long;
+}
+
+table MessageAttachment {
+  filename:string;
+  size:int;
+  url:string;
+  filetype:string;
+  width:int;
+  height:int;
+  thumbnail:string;
+  duration:int;
+}
+
+table MessageRef {
+  message_id:long;
+  message_ref_id:long;
+  content:string;
+  has_attachment:bool;
+  ref_type:int;
+  message_sender_id:long;
+  message_sender_username:string;
+  mesages_sender_avatar:string;
+  message_sender_clan_nick:string;
+  message_sender_display_name:string;
+}
+
+table MessageDeleted {
+  message_id:long;
+  deletor:string;
+}
+
+table ChannelMessageList {
+  messages:[ChannelMessage];
+  last_seen_message:ChannelMessageHeader;
+  last_sent_message:ChannelMessageHeader;
+}
+
+table CreateGroupRequest {
+  name:string;
+  description:string;
+  lang_tag:string;
+  avatar_url:string;
+  open:bool;
+  max_count:int;
+}
+
+table DeleteFriendsRequest {
+  ids:[long];
+  usernames:[string];
+}
+
+table DeleteGroupRequest {
+  group_id:long;
+}
+
+table DeleteNotificationsRequest {
+  ids:[long];
+  category:int;
+}
+
+table Event {
+  name:string;
+  properties:[PropertiesEntry];
+  timestamp_seconds:uint;
+  external:bool;
+}
+
+table PropertiesEntry {
+  key:string (key);
+  value:string;
+}
+
+table Friend {
+  user:User;
+  state:int;
+  update_time_seconds:uint;
+  source_id:long;
+}
+
+table FriendList {
+  friends:[Friend];
+  cursor:string;
+}
+
+table UpdateUsersRequest {
+  display_name:string;
+  avatar_url:string;
+}
+
+table ChannelUserList {
+  channel_users:[ChannelUser];
+  cursor:string;
+  channel_id:long;
+}
+
+table ChannelUser {
+  user_id:long;
+  role_id:[long];
+  id:long;
+  thread_id:long;
+  clan_nick:string;
+  clan_avatar:string;
+  clan_id:long;
+  added_by:long;
+  is_banned:bool;
+  expired_ban_time:int;
+}
+
+table VoiceChannelUser {
+  user_ids:[string];
+  channel_id:long;
+  room_name:string;
+}
+
+table VoiceChannelUserList {
+  voice_channel_users:[ChannelUser];
+}
+
+table ChannelAttachment {
+  id:long;
+  filename:string;
+  filetype:string;
+  filesize:string;
+  url:string;
+  uploader:long;
+  create_time_seconds:uint;
+  message_id:long;
+  width:int;
+  height:int;
+}
+
+table ChannelAttachmentList {
+  attachments:[ChannelAttachment];
+}
+
+table ClanUserList {
+  clan_users:[ClanUser];
+  cursor:string;
+  clan_id:long;
+}
+
+table ClanUser {
+  user:User;
+  role_id:[long];
+  clan_nick:string;
+  clan_avatar:string;
+  clan_id:long;
+}
+
+table RegistFcmDeviceTokenRequest {
+  token:string;
+  device_id:string;
+  platform:string;
+  voip_token:string;
+}
+
+table RegistFcmDeviceTokenResponse {
+  token:string;
+  device_id:long;
+  platform:string;
+}
+
+table ListChannelMessagesRequest {
+  clan_id:long;
+  channel_id:long;
+  message_id:long;
+  limit:int;
+  direction:int;
+  topic_id:long;
+}
+
+table ListFriendsRequest {
+  limit:int;
+  state:int;
+  cursor:string;
+}
+
+table ListGroupsRequest {
+  name:string;
+  cursor:string;
+  limit:int;
+  lang_tag:string;
+  members:int;
+  open:bool;
+}
+
+table ListGroupUsersRequest {
+  group_id:long;
+  limit:int;
+  state:int;
+  cursor:string;
+}
+
+table ListChannelUsersRequest {
+  clan_id:long;
+  channel_id:long;
+  channel_type:int;
+  limit:int;
+  state:int;
+  cursor:string;
+}
+
+table ListChannelAttachmentRequest {
+  clan_id:long;
+  channel_id:long;
+  file_type:string;
+  limit:int;
+  state:int;
+  before:uint;
+  after:uint;
+  around:uint;
+}
+
+table ListClanUsersRequest {
+  clan_id:long;
+}
+
+table ListNotificationsRequest {
+  limit:int;
+  clan_id:long;
+  notification_id:long;
+  category:int;
+  direction:int;
+}
+
+table ListUserGroupsRequest {
+  user_id:long;
+  limit:int;
+  state:int;
+  cursor:string;
+}
+
+table Notification {
+  id:long;
+  subject:string;
+  content:[ubyte];
+  code:int;
+  sender_id:long;
+  create_time_seconds:uint;
+  persistent:bool;
+  clan_id:long;
+  channel_id:long;
+  channel_type:int;
+  avatar_url:string;
+  channel:ChannelDescription;
+  topic_id:long;
+  category:int;
+}
+
+table EmojiRecent {
+  emoji_recents_id:long;
+  emoji_id:long;
+  update_time_seconds:uint;
+}
+
+table EmojiRecentList {
+  emoji_recents:[EmojiRecent];
+}
+
+table NotificationList {
+  notifications:[Notification];
+  cacheable_cursor:string;
+}
+
+table PromoteGroupUsersRequest {
+  group_id:long;
+  user_ids:[long];
+}
+
+table DemoteGroupUsersRequest {
+  group_id:long;
+  user_ids:[long];
+}
+
+table Rpc {
+  id:string;
+  payload:string;
+  http_key:string;
+}
+
+table Session {
+  created:bool;
+  token:string;
+  refresh_token:string;
+  user_id:long;
+  is_remember:bool;
+  api_url:string;
+  id_token:string;
+  ws_url:string;
+}
+
+table UpdateUsernameRequest {
+  username:string;
+  display_name:string;
+}
+
+table UpdateAccountRequest {
+  display_name:string;
+  avatar_url:string;
+  lang_tag:string;
+  location:string;
+  timezone:string;
+  about_me:string;
+  dob_seconds:uint;
+  logo:string;
+  splash_screen:string;
+  encrypt_private_key:string;
+  email:string;
+}
+
+table UpdateGroupRequest {
+  group_id:long;
+  name:string;
+  description:string;
+  lang_tag:string;
+  avatar_url:string;
+  open:bool;
+}
+
+table UpdateCategoryDescRequest {
+  category_id:long;
+  category_name:string;
+  clan_id:long;
+}
+
+table User {
+  id:long;
+  username:string;
+  display_name:string;
+  avatar_url:string;
+  lang_tag:string;
+  location:string;
+  timezone:string;
+  user_status:string;
+  online:bool;
+  phone_number:string;
+  edge_count:int;
+  create_time_seconds:uint;
+  update_time_seconds:uint;
+  about_me:string;
+  join_time_seconds:uint;
+  is_mobile:bool;
+  dob_seconds:uint;
+  mezon_id:string;
+  list_nick_names:[string];
+  status:string;
+}
+
+table Users {
+  users:[User];
+}
+
+table ClanDescProfile {
+  clan_id:long;
+  creator_id:long;
+  nick_name:string;
+  profile_banner:string;
+  profile_theme:string;
+  avatar_url:string;
+}
+
+table UpdateClanDescProfileRequest {
+  clan_id:long;
+  nick_name:string;
+  profile_banner:string;
+  profile_theme:string;
+  avatar_url:string;
+}
+
+table ClanDescProfileRequest {
+  clan_id:long;
+}
+
+table ClanDesc {
+  creator_id:long;
+  clan_name:string;
+  logo:string;
+  banner:string;
+  clan_id:long;
+  status:int;
+  badge_count:int;
+  is_onboarding:bool;
+  welcome_channel_id:long;
+  onboarding_banner:string;
+  clan_order:int;
+  is_community:bool;
+  community_banner:string;
+  description:string;
+  about:string;
+  short_url:string;
+  prevent_anonymous:bool;
+  has_unread_message:bool;
+}
+
+table CreateClanDescRequest {
+  clan_name:string;
+  logo:string;
+  banner:string;
+}
+
+table UpdateClanDescRequest {
+  clan_id:long;
+  clan_name:string;
+  logo:string;
+  banner:string;
+  status:int;
+  is_onboarding:bool;
+  welcome_channel_id:long;
+  onboarding_banner:string;
+  is_community:bool;
+  community_banner:string;
+  description:string;
+  about:string;
+  short_url:string;
+  prevent_anonymous:bool;
+}
+
+table DeleteClanDescRequest {
+  clan_desc_id:long;
+}
+
+table ListClanDescRequest {
+  limit:int;
+  state:int;
+  cursor:string;
+}
+
+table ListClanUnreadMsgIndicatorRequest {
+  clan_id:long;
+}
+
+table ListClanUnreadMsgIndicatorResponse {
+  has_unread_message:bool;
+}
+
+table ClanDescList {
+  clandesc:[ClanDesc];
+}
+
+table LinkInviteUserRequest {
+  clan_id:long;
+  channel_id:long;
+  expiry_time:int;
+}
+
+table InviteUserRequest {
+  invite_id:long;
+}
+
+table InviteUserRes {
+  clan_id:long;
+  channel_id:long;
+  clan_name:string;
+  channel_label:string;
+  user_joined:bool;
+  expiry_time_seconds:uint;
+  clan_logo:string;
+  member_count:int;
+  banner:string;
+  community_banner:string;
+  is_community:bool;
+}
+
+table JoinClanChannelRequest {
+  clan_id:long;
+  channel_id:long;
+}
+
+table LinkInviteUser {
+  clan_id:long;
+  creator_id:long;
+  channel_id:long;
+  invite_link:string;
+  create_time_seconds:uint;
+  expiry_time_seconds:uint;
+  id:long;
+}
+
+table ClanProfile {
+  user_id:long;
+  nick_name:string;
+  avatar:string;
+  clan_id:long;
+  about:string;
+}
+
+table ClanProfileRequest {
+  clan_id:long;
+}
+
+table UpdateClanProfileRequest {
+  clan_id:long;
+  nick_name:string;
+  avatar:string;
+}
+
+table UpdateClanOrderRequest {
+  clans_order:[ClanOrder];
+}
+
+table ClanOrder {
+  order:int;
+  clan_id:long;
+}
+
+table CategoryDesc {
+  creator_id:long;
+  clan_id:long;
+  category_name:string;
+  category_id:long;
+  category_order:int;
+}
+
+table UpdateCategoryOrderRequest {
+  clan_id:long;
+  categories:[CategoryOrderUpdate];
+}
+
+table UpdateRoleOrderRequest {
+  clan_id:long;
+  roles:[RoleOrderUpdate];
+}
+
+table RoleOrderUpdate {
+  role_id:long;
+  order:int;
+}
+
+table CategoryOrderUpdate {
+  category_id:long;
+  order:int;
+}
+
+table CreateCategoryDescRequest {
+  category_name:string;
+  clan_id:long;
+}
+
+table DeleteCategoryDescRequest {
+  category_id:long;
+  clan_id:long;
+  category_label:string;
+}
+
+table CategoryDescList {
+  categorydesc:[CategoryDesc];
+}
+
+table ListCategoryDescsRequest {
+  limit:int;
+  state:int;
+  cursor:string;
+}
+
+table ChannelMessageHeader {
+  id:long;
+  timestamp_seconds:uint;
+  sender_id:long;
+  content:string;
+}
+
+table ChannelDescription {
+  clan_id:long;
+  parent_id:long;
+  channel_id:long;
+  category_id:long;
+  category_name:string;
+  type:int;
+  creator_id:long;
+  channel_label:string;
+  channel_private:int;
+  avatars:[string];
+  user_ids:[long];
+  last_sent_message:ChannelMessageHeader;
+  last_seen_message:ChannelMessageHeader;
+  onlines:[bool];
+  meeting_code:string;
+  count_mess_unread:int;
+  active:int;
+  last_pin_message:string;
+  usernames:[string];
+  creator_name:string;
+  create_time_seconds:uint;
+  update_time_seconds:uint;
+  display_names:[string];
+  channel_avatar:string;
+  clan_name:string;
+  app_id:long;
+  is_mute:bool;
+  age_restricted:int;
+  topic:string;
+  e2ee:int;
+  member_count:int;
+}
+
+table ChannelDescList {
+  channeldesc:[ChannelDescription];
+}
+
+table ChannelDescListNoPool {
+  channeldesc:[ChannelDescription];
+  page:int;
+}
+
+table ListThreadRequest {
+  limit:int;
+  state:int;
+  clan_id:long;
+  channel_id:long;
+  thread_id:long;
+  page:int;
+}
+
+table ListChannelDescsRequest {
+  limit:int;
+  state:int;
+  cursor:string;
+  clan_id:long;
+  channel_type:int;
+  is_mobile:bool;
+  page:int;
+}
+
+table ListChannelDetailRequest {
+  channel_id:long;
+}
+
+table AddRoleChannelDescRequest {
+  role_ids:[long];
+  channel_id:long;
+}
+
+table CreateChannelDescRequest {
+  clan_id:long;
+  parent_id:long;
+  channel_id:long;
+  category_id:long;
+  type:int;
+  channel_label:string;
+  channel_private:int;
+  user_ids:[long];
+  app_id:long;
+}
+
+table DeleteChannelDescRequest {
+  clan_id:long;
+  channel_id:long;
+}
+
+table UpdateChannelDescRequest {
+  clan_id:long;
+  channel_id:long;
+  channel_label:string;
+  category_id:long;
+  app_id:long;
+  topic:string;
+  age_restricted:int;
+  e2ee:int;
+  channel_avatar:string;
+}
+
+table ChangeChannelPrivateRequest {
+  clan_id:long;
+  channel_id:long;
+  channel_private:int;
+  user_ids:[long];
+  role_ids:[long];
+}
+
+table AddChannelUsersRequest {
+  channel_id:long;
+  user_ids:[long];
+}
+
+table RemoveChannelUsersRequest {
+  channel_id:long;
+  user_ids:[long];
+}
+
+table RemoveClanUsersRequest {
+  clan_id:long;
+  user_ids:[long];
+}
+
+table BanClanUsersRequest {
+  clan_id:long;
+  channel_id:long;
+  user_ids:[long];
+  ban_time:int;
+  reason:string;
+}
+
+table BannedUser {
+  channel_id:long;
+  banned_id:long;
+  banner_id:long;
+  ban_time:int;
+  reason:string;
+}
+
+table BannedUserListRequest {
+  clan_id:long;
+  channel_id:long;
+}
+
+table BannedUserList {
+  banned_users:[BannedUser];
+}
+
+table LeaveThreadRequest {
+  clan_id:long;
+  channel_id:long;
+}
+
+table Role {
+  id:long;
+  title:string;
+  color:string;
+  role_icon:string;
+  slug:string;
+  description:string;
+  creator_id:long;
+  clan_id:long;
+  active:int;
+  display_online:int;
+  allow_mention:int;
+  role_user_list:RoleUserList;
+  permission_list:PermissionList;
+  role_channel_active:int;
+  channel_ids:[long];
+  max_level_permission:int;
+  order_role:int;
+}
+
+table EventManagement {
+  id:long;
+  title:string;
+  logo:string;
+  description:string;
+  active:int;
+  start_event:int;
+  creator_id:long;
+  clan_id:long;
+  channel_voice_id:long;
+  address:string;
+  start_time_seconds:uint;
+  end_time_seconds:uint;
+  user_ids:[long];
+  create_time_seconds:uint;
+  max_permission:int;
+  channel_id:long;
+  event_status:int;
+  repeat_type:int;
+  is_private:bool;
+  meet_room:GenerateMezonMeetResponse;
+}
+
+table Permission {
+  id:long;
+  title:string;
+  slug:string;
+  description:string;
+  active:int;
+  scope:int;
+  level:int;
+}
+
+table NotificationSetting {
+  id:long;
+  notification_setting_type:int;
+}
+
+table DeletePinMessage {
+  id:long;
+  message_id:long;
+  channel_id:long;
+  clan_id:long;
+}
+
+table PinMessage {
+  id:long;
+  message_id:long;
+  channel_id:long;
+  sender_id:long;
+  content:string;
+  username:string;
+  avatar:string;
+  create_time_seconds:uint;
+  attachment:[ubyte];
+}
+
+table PinMessagesList {
+  pin_messages_list:[PinMessage];
+}
+
+table NotificationUserChannel {
+  id:long;
+  notification_setting_type:int;
+  time_mute_seconds:uint;
+  active:int;
+  channel_id:long;
+}
+
+table NotifiReactMessage {
+  id:long;
+  user_id:long;
+  channel_id:long;
+}
+
+table DefaultNotificationClan {
+  clan_id:long;
+}
+
+table DefaultNotificationCategory {
+  category_id:long;
+}
+
+table NotificationChannel {
+  channel_id:long;
+}
+
+table NotificationClan {
+  clan_id:long;
+}
+
+table NotificationSettingList {
+  notification_setting:[NotificationSetting];
+}
+
+table SetNotificationRequest {
+  channel_category_id:long;
+  notification_type:int;
+  clan_id:long;
+}
+
+table PinMessageRequest {
+  message_id:long;
+  channel_id:long;
+  clan_id:long;
+}
+
+table SetMuteRequest {
+  id:long;
+  mute_time:int;
+  active:int;
+  clan_id:long;
+}
+
+table NotificationChannelCategorySettingList {
+  notification_channel_category_settings_list:[NotificationChannelCategorySetting];
+}
+
+table NotificationChannelCategorySetting {
+  id:long;
+  channel_category_label:string;
+  notification_setting_type:int;
+  channel_category_title:string;
+  action:int;
+}
+
+table SetDefaultNotificationRequest {
+  clan_id:long;
+  notification_type:int;
+  category_id:long;
+}
+
+table RoleList {
+  roles:[Role];
+  max_level_permission:int;
+}
+
+table EventList {
+  events:[EventManagement];
+}
+
+table PermissionList {
+  permissions:[Permission];
+  max_level_permission:int;
+}
+
+table ListPermissionsRequest {
+  role_id:long;
+}
+
+table ListRoleUsersRequest {
+  role_id:long;
+  limit:int;
+  cursor:string;
+}
+
+table ListPermissionOfUsersRequest {
+  clan_id:long;
+  channel_id:long;
+}
+
+table RoleUserList {
+  role_users:[RoleUser];
+  cursor:string;
+}
+
+table RoleUser {
+  id:long;
+  username:string;
+  display_name:string;
+  avatar_url:string;
+  lang_tag:string;
+  location:string;
+  online:bool;
+}
+
+table UserEventRequest {
+  clan_id:long;
+  event_id:long;
+}
+
+table ListEventsRequest {
+  clan_id:long;
+}
+
+table CreateRoleRequest {
+  title:string;
+  color:string;
+  role_icon:string;
+  description:string;
+  clan_id:long;
+  display_online:int;
+  allow_mention:int;
+  max_permission_id:long;
+  add_user_ids:[long];
+  active_permission_ids:[long];
+  order_role:int;
+}
+
+table CreateEventRequest {
+  title:string;
+  logo:string;
+  description:string;
+  clan_id:long;
+  channel_voice_id:long;
+  address:string;
+  start_time_seconds:uint;
+  end_time_seconds:uint;
+  event_id:long;
+  event_status:int;
+  channel_id:long;
+  action:int;
+  repeat_type:int;
+  creator_id:long;
+  user_id:long;
+  is_private:bool;
+  meet_room:GenerateMezonMeetResponse;
+}
+
+table UpdateEventRequest {
+  title:string;
+  logo:string;
+  description:string;
+  event_id:long;
+  channel_id:long;
+  address:string;
+  start_time_seconds:uint;
+  end_time_seconds:uint;
+  clan_id:long;
+  creator_id:long;
+  channel_voice_id:long;
+  channel_id_old:long;
+  repeat_type:int;
+}
+
+table DeleteRoleRequest {
+  role_id:long;
+  channel_id:long;
+  clan_id:long;
+  role_label:string;
+}
+
+table DeleteEventRequest {
+  event_id:long;
+  clan_id:long;
+  creator_id:long;
+  event_label:string;
+  channel_id:long;
+}
+
+table UpdateRoleRequest {
+  role_id:long;
+  title:string;
+  color:string;
+  role_icon:string;
+  description:string;
+  display_online:int;
+  allow_mention:int;
+  add_user_ids:[long];
+  active_permission_ids:[long];
+  remove_user_ids:[long];
+  remove_permission_ids:[long];
+  clan_id:long;
+  max_permission_id:long;
+}
+
+table UpdateRoleChannelRequest {
+  role_id:long;
+  permission_update:[PermissionUpdate];
+  max_permission_id:long;
+  channel_id:long;
+  user_id:long;
+  role_label:string;
+}
+
+table PermissionUpdate {
+  permission_id:long;
+  slug:string;
+  type:int;
+}
+
+table UploadAttachmentRequest {
+  filename:string;
+  filetype:string;
+  size:int;
+  width:int;
+  height:int;
+}
+
+table ListMessageMentionRequest {
+  limit:int;
+  forward:bool;
+  cursor:string;
+}
+
+table UploadAttachment {
+  filename:string;
+  url:string;
+}
+
+table MultipartUploadAttachment {
+  filename:string;
+  urls:[string];
+  upload_id:string;
+}
+
+table MultipartUploadAttachmentPart {
+  part_number:int;
+  e_tag:string;
+}
+
+table MultipartUploadAttachmentFinishRequest {
+  upload_id:string;
+  parts:[MultipartUploadAttachmentPart];
+}
+
+table SearchMessageRequest {
+  filters:[FilterParam];
+  from:int;
+  size:int;
+  sorts:[SortParam];
+}
+
+table SortParam {
+  field_name:string;
+  order:string;
+}
+
+table FilterParam {
+  field_name:string;
+  field_value:string;
+}
+
+table SearchMessageDocument {
+  message_id:string;
+  channel_id:string;
+  clan_id:string;
+  sender_id:string;
+  content:string;
+  mentions:string;
+  reactions:string;
+  attachments:string;
+  references:string;
+  create_time:string;
+  update_time:string;
+  channel_label:string;
+  channel_type:int;
+  clan_name:string;
+  username:string;
+  display_name:string;
+  avatar_url:string;
+}
+
+table SearchMessageResponse {
+  messages:[SearchMessageDocument];
+  total:int;
+}
+
+table RegistrationEmailRequest {
+  email:string;
+  password:string;
+  old_password:string;
+  username:string;
+  display_name:string;
+  avatar_url:string;
+  dob:string;
+  vars:[VarsEntry];
+}
+
+table ClanEmoji {
+  id:long;
+  src:string;
+  shortname:string;
+  category:string;
+  creator_id:long;
+  clan_id:long;
+  logo:string;
+  clan_name:string;
+  is_for_sale:bool;
+}
+
+table EmojiListedResponse {
+  emoji_list:[ClanEmoji];
+}
+
+table StickerListedResponse {
+  stickers:[ClanSticker];
+}
+
+table ClanSticker {
+  id:long;
+  source:string;
+  shortname:string;
+  category:string;
+  creator_id:long;
+  create_time_seconds:uint;
+  clan_id:long;
+  logo:string;
+  clan_name:string;
+  media_type:int;
+  is_for_sale:bool;
+}
+
+table AllUsersAddChannelRequest {
+  channel_id:long;
+  limit:int;
+}
+
+table AllUsersAddChannelResponse {
+  channel_id:long;
+  user_ids:[long];
+  limit:int;
+  usernames:[string];
+  display_names:[string];
+  avatars:[string];
+  onlines:[bool];
+}
+
+table ClanEmojiCreateRequest {
+  clan_id:long;
+  source:string;
+  shortname:string;
+  category:string;
+  id:long;
+  is_for_sale:bool;
+}
+
+table ClanEmojiGetByClanIdRequest {
+  clan_id:long;
+}
+
+table ClanEmojiDeleteRequest {
+  id:long;
+  clan_id:long;
+  emoji_label:string;
+}
+
+table ClanEmojiUpdateRequest {
+  id:long;
+  shortname:string;
+  clan_id:long;
+}
+
+table Webhook {
+  id:long;
+  webhook_name:string;
+  channel_id:long;
+  active:int;
+  url:string;
+  creator_id:long;
+  create_time:string;
+  update_time:string;
+  avatar:string;
+  status:int;
+  clan_id:long;
+}
+
+table WebhookCreateRequest {
+  webhook_name:string;
+  channel_id:long;
+  avatar:string;
+  clan_id:long;
+}
+
+table WebhookListRequestById {
+  id:long;
+}
+
+table WebhookUpdateRequestById {
+  id:long;
+  webhook_name:string;
+  channel_id_update:long;
+  avatar:string;
+  channel_id:long;
+  clan_id:long;
+}
+
+table WebhookDeleteRequestById {
+  id:long;
+  clan_id:long;
+  channel_id:long;
+}
+
+table WebhookListRequest {
+  channel_id:long;
+  clan_id:long;
+}
+
+table WebhookListResponse {
+  webhooks:[Webhook];
+}
+
+table WebhookGenerateResponse {
+  url:string;
+  hook_name:string;
+  channel_id:long;
+  avatar:string;
+}
+
+table CheckDuplicateClanNameRequest {
+  clan_name:string;
+}
+
+table CheckDuplicateClanNameResponse {
+  is_duplicate:bool;
+}
+
+table ClanStickerAddRequest {
+  source:string;
+  shortname:string;
+  category:string;
+  clan_id:long;
+  id:long;
+  media_type:int;
+  is_for_sale:bool;
+}
+
+table ClanStickerListByClanIdRequest {
+  clan_id:long;
+}
+
+table ClanStickerUpdateByIdRequest {
+  id:long;
+  source:string;
+  shortname:string;
+  category:string;
+  clan_id:long;
+}
+
+table ClanStickerDeleteRequest {
+  id:long;
+  clan_id:long;
+  sticker_label:string;
+}
+
+table ChangeChannelCategoryRequest {
+  clan_id:long;
+  channel_id:long;
+  new_category_id:long;
+}
+
+table App {
+  id:long;
+  appname:string;
+  creator_id:long;
+  applogo:string;
+  is_shadow:bool;
+  disable_time_seconds:uint;
+  create_time_seconds:uint;
+  token:string;
+  role:int;
+  about:string;
+  app_url:string;
+}
+
+table AppDeleteRequest {
+  id:long;
+  record_deletion:bool;
+}
+
+table AppList {
+  apps:[App];
+  total_count:int;
+  next_cursor:string;
+}
+
+table AddAppRequest {
+  appname:string;
+  token:string;
+  creator_id:long;
+  role:int;
+  is_shadow:bool;
+  app_url:string;
+  app_logo:string;
+  about_me:string;
+}
+
+table ListAppsRequest {
+  filter:string;
+  tombstones:bool;
+  cursor:string;
+}
+
+table UpdateAppRequest {
+  id:long;
+  appname:string;
+  metadata:string;
+  applogo:string;
+  token:string;
+  about:string;
+  app_url:string;
+  is_shadow:string;
+}
+
+table AppId {
+  id:long;
+}
+
+table AppClan {
+  app_id:long;
+  clan_id:long;
+}
+
+table DeleteChannelMessagesRequest {
+  before_seconds:uint;
+  ids:[long];
+}
+
+table DeleteChannelMessagesResponse {
+  total:long;
+}
+
+table SystemMessage {
+  id:long;
+  clan_id:long;
+  channel_id:long;
+  welcome_random:string;
+  welcome_sticker:string;
+  boost_message:string;
+  setup_tips:string;
+  hide_audit_log:bool;
+}
+
+table SystemMessagesList {
+  system_messages_list:[SystemMessage];
+}
+
+table SystemMessageRequest {
+  clan_id:long;
+  channel_id:long;
+  welcome_random:string;
+  welcome_sticker:string;
+  boost_message:string;
+  setup_tips:string;
+  hide_audit_log:bool;
+}
+
+table DeleteSystemMessage {
+  clan_id:long;
+}
+
+table GetSystemMessage {
+  clan_id:long;
+}
+
+table DeleteCategoryOrderRequest {
+  clan_id:long;
+}
+
+table StreamHttpCallbackRequest {
+  id:long;
+  client_id:long;
+  clan_id:long;
+  channel_id:long;
+  user_id:long;
+  action:int;
+  is_publisher:bool;
+  token:string;
+}
+
+table StreamHttpCallbackResponse {
+  code:int;
+  msg:string;
+}
+
+table StreamingChannelUser {
+  id:long;
+  user_id:long;
+  channel_id:long;
+  participant:string;
+}
+
+table StreamingChannelUserList {
+  streaming_channel_users:[ChannelUser];
+}
+
+table RegisterStreamingChannelRequest {
+  clan_id:long;
+  channel_id:long;
+}
+
+table RegisterStreamingChannelResponse {
+  clan_id:long;
+  channel_id:long;
+  streaming_url:string;
+}
+
+table GiveCoffeeEvent {
+  sender_id:long;
+  receiver_id:long;
+  token_count:int;
+  message_ref_id:long;
+  channel_id:long;
+  clan_id:long;
+}
+
+table ListChannelAppsRequest {
+  clan_id:long;
+}
+
+table ListChannelAppsResponse {
+  channel_apps:[ChannelAppResponse];
+}
+
+table ChannelAppResponse {
+  id:long;
+  clan_id:long;
+  channel_id:long;
+  app_id:long;
+  app_url:string;
+  app_name:string;
+  app_logo:string;
+}
+
+table AllUserClans {
+  users:[User];
+}
+
+table RoleListEventRequest {
+  clan_id:long;
+  limit:int;
+  state:int;
+  cursor:string;
+}
+
+table RoleListEventResponse {
+  limit:int;
+  state:int;
+  cursor:string;
+  clan_id:long;
+  roles:RoleList;
+}
+
+table UserPermissionInChannelListRequest {
+  clan_id:long;
+  channel_id:long;
+}
+
+table UserPermissionInChannelListResponse {
+  clan_id:long;
+  channel_id:long;
+  permissions:PermissionList;
+}
+
+table PermissionRoleChannel {
+  permission_id:long;
+  active:bool;
+}
+
+table PermissionRoleChannelListEventRequest {
+  role_id:long;
+  channel_id:long;
+  user_id:long;
+}
+
+table PermissionRoleChannelListEventResponse {
+  role_id:long;
+  channel_id:long;
+  user_id:long;
+  permission_role_channel:[PermissionRoleChannel];
+}
+
+table ChannelSettingListRequest {
+  clan_id:long;
+  parent_id:long;
+  category_id:long;
+  private_channel:int;
+  active:int;
+  status:int;
+  type:int;
+  limit:int;
+  page:int;
+  channel_label:string;
+}
+
+table ChannelSettingItem {
+  id:long;
+  creator_id:long;
+  parent_id:long;
+  channel_label:string;
+  category_id:long;
+  meeting_code:string;
+  channel_private:int;
+  channel_type:int;
+  active:int;
+  user_ids:[long];
+  message_count:long;
+  last_sent_message:ChannelMessageHeader;
+}
+
+table ChannelSettingListResponse {
+  clan_id:long;
+  channel_count:int;
+  thread_count:int;
+  channel_setting_list:[ChannelSettingItem];
+}
+
+table MarkAsReadRequest {
+  channel_id:long;
+  category_id:long;
+  clan_id:long;
+}
+
+table EditChannelCanvasRequest {
+  id:long;
+  channel_id:long;
+  clan_id:long;
+  title:string;
+  content:string;
+  is_default:bool;
+  status:int;
+}
+
+table EditChannelCanvasResponse {
+  id:long;
+}
+
+table DeleteChannelCanvasRequest {
+  clan_id:long;
+  channel_id:long;
+  canvas_id:long;
+}
+
+table ChannelCanvasListRequest {
+  clan_id:long;
+  channel_id:long;
+  limit:int;
+  page:int;
+  cursor:string;
+}
+
+table ChannelCanvasItem {
+  id:long;
+  title:string;
+  is_default:bool;
+  content:string;
+  creator_id:long;
+  update_time_seconds:uint;
+  create_time_seconds:uint;
+}
+
+table ChannelCanvasListResponse {
+  clan_id:long;
+  channel_id:long;
+  channel_canvases:[ChannelCanvasItem];
+  count:int;
+}
+
+table ChannelCanvasDetailRequest {
+  id:long;
+  clan_id:long;
+  channel_id:long;
+}
+
+table ChannelCanvasDetailResponse {
+  id:long;
+  title:string;
+  content:string;
+  creator_id:long;
+  editor_id:long;
+  is_default:bool;
+}
+
+table AddFavoriteChannelRequest {
+  channel_id:long;
+  clan_id:long;
+}
+
+table RemoveFavoriteChannelRequest {
+  clan_id:long;
+  channel_id:long;
+}
+
+table AddFavoriteChannelResponse {
+  channel_id:long;
+}
+
+table ListFavoriteChannelRequest {
+  clan_id:long;
+}
+
+table ListFavoriteChannelResponse {
+  channel_ids:[long];
+}
+
+table UserActivity {
+  user_id:long;
+  activity_name:string;
+  activity_type:int;
+  activity_description:string;
+  start_time_seconds:uint;
+  end_time_seconds:uint;
+  application_id:long;
+  status:int;
+}
+
+table ListUserActivity {
+  activities:[UserActivity];
+}
+
+table CreateActivityRequest {
+  activity_name:string;
+  activity_type:int;
+  activity_description:string;
+  start_time_seconds:uint;
+  application_id:long;
+  status:int;
+}
+
+table LoginIDResponse {
+  login_id:long;
+  status:int;
+  create_time_seconds:long;
+  platform:string;
+  user_id:long;
+  username:string;
+  address:string;
+}
+
+table LoginRequest {
+  platform:string;
+  address:string;
+}
+
+table ConfirmLoginRequest {
+  login_id:long;
+  is_remember:bool;
+}
+
+table PubKey {
+  encr:[ubyte];
+  sign:[ubyte];
+}
+
+table PushPubKeyRequest {
+  PK:PubKey;
+}
+
+table GetPubKeysRequest {
+  user_ids:[long];
+}
+
+table GetPubKeysResponse {
+  pub_keys:[UserPubKey];
+}
+
+table UserPubKey {
+  user_id:long;
+  PK:PubKey;
+}
+
+table ChanEncryptionMethod {
+  method:string;
+  channel_id:long;
+}
+
+table GetKeyServerResp {
+  url:string;
+}
+
+table AuditLog {
+  id:long;
+  user_id:long;
+  clan_id:long;
+  action_log:string;
+  entity_name:string;
+  entity_id:long;
+  details:string;
+  time_log_seconds:uint;
+  channel_id:long;
+  channel_label:string;
+}
+
+table ListAuditLog {
+  total_count:int;
+  date_log:string;
+  logs:[AuditLog];
+}
+
+table ListAuditLogRequest {
+  action_log:string;
+  user_id:long;
+  clan_id:long;
+  date_log:string;
+}
+
+table TokenSentEvent {
+  sender_id:long;
+  sender_name:string;
+  receiver_id:long;
+  amount:int;
+  note:string;
+  extra_attribute:string;
+  transaction_id:string;
+}
+
+table UnlockItemRequest {
+  item_id:long;
+  item_type:int;
+}
+
+table UnlockedItemResponse {
+  source:string;
+}
+
+table ListOnboardingRequest {
+  clan_id:long;
+  guide_type:int;
+  limit:int;
+  page:int;
+}
+
+table ListOnboardingResponse {
+  list_onboarding:[OnboardingItem];
+}
+
+table OnboardingItem {
+  id:long;
+  clan_id:long;
+  guide_type:int;
+  task_type:int;
+  channel_id:long;
+  title:string;
+  content:string;
+  image_url:string;
+  answers:[OnboardingAnswer];
+  create_time_seconds:uint;
+  update_time_seconds:uint;
+}
+
+table OnboardingAnswer {
+  title:string;
+  description:string;
+  emoji:string;
+  image_url:string;
+}
+
+table OnboardingContent {
+  guide_type:int;
+  task_type:int;
+  channel_id:long;
+  title:string;
+  content:string;
+  image_url:string;
+  answers:[OnboardingAnswer];
+}
+
+table CreateOnboardingRequest {
+  clan_id:long;
+  contents:[OnboardingContent];
+}
+
+table UpdateOnboardingRequest {
+  id:long;
+  clan_id:long;
+  task_type:int;
+  channel_id:long;
+  title:string;
+  content:string;
+  image_url:string;
+  answers:[OnboardingAnswer];
+}
+
+table OnboardingRequest {
+  id:long;
+  clan_id:long;
+}
+
+table ClanWebhook {
+  id:long;
+  webhook_name:string;
+  clan_id:long;
+  active:int;
+  url:string;
+  creator_id:long;
+  avatar:string;
+  create_time:string;
+  update_time:string;
+}
+
+table GenerateClanWebhookRequest {
+  clan_id:long;
+  webhook_name:string;
+  avatar:string;
+}
+
+table GenerateClanWebhookResponse {
+  clan_id:long;
+  url:string;
+  webhook_name:string;
+  avatar:string;
+}
+
+table ClanWebhookRequest {
+  id:long;
+  clan_id:long;
+}
+
+table UpdateClanWebhookRequest {
+  id:long;
+  clan_id:long;
+  webhook_name:string;
+  avatar:string;
+  reset_token:bool;
+}
+
+table ListClanWebhookRequest {
+  clan_id:long;
+}
+
+table ListClanWebhookResponse {
+  list_clan_webhooks:[ClanWebhook];
+}
+
+table ClanWebhookHandlerBody {
+  content:string;
+  attachments:[MessageAttachment];
+}
+
+table ClanWebhookHandlerRequest {
+  body:ClanWebhookHandlerBody;
+  token:string;
+  username:string;
+}
+
+table UserStatus {
+  user_id:long;
+  status:string;
+}
+
+table UserStatusUpdate {
+  status:string;
+  minutes:int;
+  until_turn_on:bool;
+}
+
+table OnboardingSteps {
+  id:long;
+  user_id:long;
+  clan_id:long;
+  onboarding_step:int;
+}
+
+table ListOnboardingStepResponse {
+  list_onboarding_step:[OnboardingSteps];
+}
+
+table ListOnboardingStepRequest {
+  clan_id:long;
+  limit:int;
+  page:int;
+}
+
+table UpdateOnboardingStepRequest {
+  clan_id:long;
+  onboarding_step:int;
+}
+
+table SdTopic {
+  id:long;
+  creator_id:long;
+  message_id:long;
+  clan_id:long;
+  channel_id:long;
+  status:int;
+  create_time_seconds:uint;
+  update_time_seconds:uint;
+  content:string;
+  last_sent_message:ChannelMessageHeader;
+}
+
+table SdTopicRequest {
+  message_id:long;
+  clan_id:long;
+  channel_id:long;
+}
+
+table SdTopicList {
+  count:int;
+  topics:[SdTopic];
+}
+
+table ListSdTopicRequest {
+  clan_id:long;
+  limit:int;
+}
+
+table SdTopicDetailRequest {
+  topic_id:long;
+}
+
+table DeleteSdTopicRequest {
+  channel_id:long;
+  id:long;
+  clan_id:long;
+}
+
+table GenerateMeetTokenRequest {
+  channel_id:long;
+  room_name:string;
+}
+
+table MeetParticipantRequest {
+  username:string;
+  room_name:string;
+  channel_id:long;
+  clan_id:long;
+}
+
+table GenerateMeetTokenResponse {
+  token:string;
+}
+
+table GenerateMezonMeetResponse {
+  meet_id:long;
+  room_name:string;
+  external_link:string;
+  creator_id:long;
+  event_id:long;
+}
+
+table CreateRoomChannelApps {
+  channel_id:long;
+  room_name:string;
+}
+
+table MezonOauthClient {
+  access_token_strategy:string;
+  allowed_cors_origins:[string];
+  audience:[string];
+  authorization_code_grant_access_token_lifespan:string;
+  authorization_code_grant_id_token_lifespan:string;
+  authorization_code_grant_refresh_token_lifespan:string;
+  backchannel_logout_session_required:bool;
+  backchannel_logout_uri:string;
+  client_credentials_grant_access_token_lifespan:string;
+  client_id:string;
+  client_name:string;
+  client_secret:string;
+  client_secret_expires_at:int;
+  client_uri:string;
+  contacts:[string];
+  created_at_seconds:uint;
+  frontchannel_logout_session_required:bool;
+  frontchannel_logout_uri:string;
+  grant_types:[string];
+  implicit_grant_access_token_lifespan:string;
+  implicit_grant_id_token_lifespan:string;
+  jwks:[string];
+  jwks_uri:string;
+  jwt_bearer_grant_access_token_lifespan:string;
+  logo_uri:string;
+  owner:string;
+  policy_uri:string;
+  post_logout_redirect_uris:[string];
+  redirect_uris:[string];
+  refresh_token_grant_access_token_lifespan:string;
+  refresh_token_grant_id_token_lifespan:string;
+  refresh_token_grant_refresh_token_lifespan:string;
+  registration_access_token:string;
+  registration_client_uri:string;
+  request_object_signing_alg:string;
+  request_uris:[string];
+  response_types:[string];
+  scope:string;
+  sector_identifier_uri:string;
+  skip_consent:bool;
+  skip_logout_consent:bool;
+  subject_type:string;
+  token_endpoint_auth_method:string;
+  token_endpoint_auth_signing_alg:string;
+  tos_uri:string;
+  updated_at_seconds:uint;
+  userinfo_signed_response_alg:string;
+}
+
+table MezonOauthClientList {
+  list_mezon_oauth_client:[MezonOauthClient];
+}
+
+table GetMezonOauthClientRequest {
+  client_id:string;
+  client_name:string;
+}
+
+table SearchThreadRequest {
+  clan_id:long;
+  channel_id:long;
+  label:string;
+}
+
+table GenerateHashChannelAppsRequest {
+  app_id:long;
+}
+
+table GenerateHashChannelAppsResponse {
+  web_app_data:string;
+}
+
+table Message2InboxRequest {
+  message_id:long;
+  channel_id:long;
+  clan_id:long;
+  avatar:string;
+  content:string;
+  mentions:[MessageMention];
+  attachments:[MessageAttachment];
+  reactions:[MessageReaction];
+  references:[MessageRef];
+}
+
+table AccountEmail {
+  email:string;
+  password:string;
+  prev_email:string;
+  vars:[VarsEntry];
+}
+
+table AccountMezon {
+  phone_number:string;
+  vars:[VarsEntry];
+}
+
+table LinkAccountConfirmRequest {
+  req_id:string;
+  status:int;
+  otp_code:string;
+}
+
+table QuickMenuAccess {
+  id:long;
+  bot_id:long;
+  clan_id:long;
+  channel_id:long;
+  menu_name:string;
+  background:string;
+  action_msg:string;
+  menu_type:int;
+}
+
+table ListQuickMenuAccessRequest {
+  bot_id:long;
+  channel_id:long;
+  menu_type:int;
+}
+
+table QuickMenuAccessList {
+  list_menus:[QuickMenuAccess];
+}
+
+table ListForSaleItemsRequest {
+  page:int;
+}
+
+table ForSaleItem {
+  type:int;
+  preview_url:string;
+}
+
+table ForSaleItemList {
+  for_sale_items:[ForSaleItem];
+}
+
+table IsFollowerRequest {
+  follow_id:long;
+}
+
+table IsFollowerResponse {
+  follow_id:long;
+  is_follower:bool;
+}
+
+table TransferOwnershipRequest {
+  clan_id:long;
+  new_owner_id:long;
+}
+
+table UserIds {
+  user_ids:[long];
+}
+
+table ReportMessageAbuseReqest {
+  message_id:long;
+  abuse_type:string;
+}
+
+table LogedDeviceList {
+  devices:[LogedDevice];
+}
+
+table LogedDevice {
+  device_id:string;
+  device_name:string;
+  login_at_seconds:uint;
+  status:int;
+  platform:string;
+  ip:string;
+  last_active_seconds:uint;
+  location:string;
+  is_current:bool;
+}
+
+table DirectFcmProto {
+  title:string;
+  link:string;
+  content:string;
+  channel_id:long;
+  sender_id:long;
+  avatar:string;
+  clan_id:long;
+  attachment_link:string;
+  display_name:string;
+  create_time_seconds:int;
+  update_time_seconds:int;
+  username:string;
+  mention_ids:[long];
+  position_s:[int];
+  position_e:[int];
+  attachment_type:string;
+  has_more_attachment:bool;
+  is_mention_role:[bool];
+  message_id:long;
+}
+
+table MessageMentionList {
+  mentions:[MessageMention];
+}
+
+table MessageAttachmentList {
+  attachments:[MessageAttachment];
+}
+
+table MessageRefList {
+  refs:[MessageRef];
+}
+
+table MessageReactionList {
+  reactions:[MessageReaction];
+}
+
+table ListClanBadgeCountRequest {
+  clan_id:long;
+}
+
+table ListClanBadgeCountResponse {
+  badge_count:int;
+}
+
+table ClanDiscover {
+  clan_id:long;
+  clan_name:string;
+  invite_id:long;
+  clan_logo:string;
+  online_members:int;
+  total_members:int;
+  verified:bool;
+  description:string;
+  banner:string;
+  about:string;
+  short_url:string;
+  create_time_seconds:uint;
+}
+
+table ListClanDiscover {
+  clan_discover:[ClanDiscover];
+  page_number:int;
+  page_count:int;
+}
+
+table GenerateMeetTokenExternalResponse {
+  token:string;
+  guest_user_id:long;
+  guest_access_token:string;
+}
+
+table KafkaActionMsg {
+  clan_id:long;
+  channel_id:long;
+  friend_ids:[long];
+  user_ids:[long];
+  mode:int;
+  stream:[ubyte];
+}
+
+table UpdateAIAgentRequest {
+  channel_id:long;
+  room_name:string;
+}
+
+table ChannelTimelineAttachment {
+  id:long;
+  file_name:string;
+  file_url:string;
+  file_type:string;
+  file_size:long;
+  width:int;
+  height:int;
+  thumbnail:string;
+  duration:int;
+  message_id:long;
+}
+
+table ListChannelTimelineAttachment {
+  attachments:[ChannelTimelineAttachment];
+}
+
+table ChannelTimeline {
+  id:long;
+  clan_id:long;
+  channel_id:long;
+  start_time_seconds:uint;
+  title:string;
+  description:string;
+  end_time_seconds:uint;
+  location:string;
+  status:int;
+  creator_id:long;
+  create_time_seconds:uint;
+  update_time_seconds:uint;
+  type:int;
+  attachments:[ubyte];
+  preview_imgs:[ubyte];
+}
+
+table ListChannelTimelineRequest {
+  clan_id:long;
+  channel_id:long;
+  year:int;
+  start_time:uint;
+  end_time:uint;
+  limit:int;
+}
+
+table ListChannelTimelineResponse {
+  events:[ChannelTimeline];
+}
+
+table CreateChannelTimelineRequest {
+  clan_id:long;
+  channel_id:long;
+  start_time_seconds:uint;
+  title:string;
+  description:string;
+  end_time_seconds:uint;
+  location:string;
+  type:int;
+  attachments:[ChannelTimelineAttachment];
+}
+
+table CreateChannelTimelineResponse {
+  event:ChannelTimeline;
+}
+
+table UpdateChannelTimelineRequest {
+  clan_id:long;
+  channel_id:long;
+  id:long;
+  start_time_seconds:uint;
+  title:string;
+  description:string;
+  location:string;
+  type:int;
+  attachments:[ChannelTimelineAttachment];
+}
+
+table UpdateChannelTimelineResponse {
+  event:ChannelTimeline;
+}
+
+table ChannelTimelineDetailRequest {
+  clan_id:long;
+  channel_id:long;
+  id:long;
+  start_time_seconds:uint;
+}
+
+table ChannelTimelineDetailResponse {
+  event:ChannelTimeline;
+}
+
+table ListMutedChannelRequest {
+  clan_id:long;
+}
+
+table MutedChannelList {
+  muted_list:[long];
+}
+
+table NotificationBatchRequest {
+  notifications:[NotificationsEntry];
+}
+
+table NotificationsEntry {
+  key:long (key);
+  value:NotificationList;
+}
+
+table CreatePollRequest {
+  channel_id:long;
+  clan_id:long;
+  question:string;
+  answers:[string];
+  expire_hours:int;
+  type:PollType;
+}
+
+table CreatePollResponse {
+  poll_id:long;
+  message_id:long;
+  question:string;
+  answers:[PollAnswer];
+  answer_counts:[int];
+  exp:long;
+  is_closed:bool;
+  creator_id:long;
+  type:PollType;
+  total_votes:int;
+}
+
+table VotePollRequest {
+  poll_id:long;
+  message_id:long;
+  channel_id:long;
+  answer_indices:[int];
+}
+
+table ClosePollRequest {
+  poll_id:long;
+  message_id:long;
+  channel_id:long;
+}
+
+table GetPollRequest {
+  poll_id:long;
+  message_id:long;
+  channel_id:long;
+}
+
+table PollAnswer {
+  index:int;
+  label:string;
+}
+
+table PollVoterDetail {
+  answer_index:int;
+  user_ids:[long];
+}
+
+table GetPollResponse {
+  poll_id:long;
+  message_id:long;
+  question:string;
+  answers:[PollAnswer];
+  answer_counts:[int];
+  exp:long;
+  is_closed:bool;
+  creator_id:long;
+  type:PollType;
+  total_votes:int;
+  voter_details:[PollVoterDetail];
+}
+
