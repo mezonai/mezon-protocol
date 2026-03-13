@@ -217,7 +217,10 @@ message Envelope {
     UpdateLocalCacheEvent update_localcache_event = 92;
     // Clan Created Event
     ClanCreatedEvent clan_created_event = 93;
+    // Voice Agent Event
     AIAgentEnabledEvent aiagent_enabled_event = 94;
+    // Channel Listed Event
+    api.ChannelDescList channel_listed_event = 95;
   }
 }
 

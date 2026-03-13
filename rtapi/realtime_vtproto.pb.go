@@ -2092,6 +2092,39 @@ func (m *Envelope_AiagentEnabledEvent) MarshalToSizedBufferVT(dAtA []byte) (int,
 	}
 	return len(dAtA) - i, nil
 }
+func (m *Envelope_ChannelListedEvent) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *Envelope_ChannelListedEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.ChannelListedEvent != nil {
+		if vtmsg, ok := interface{}(m.ChannelListedEvent).(interface {
+			MarshalToSizedBufferVT([]byte) (int, error)
+		}); ok {
+			size, err := vtmsg.MarshalToSizedBufferVT(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
+		} else {
+			encoded, err := proto.Marshal(m.ChannelListedEvent)
+			if err != nil {
+				return 0, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = protohelpers.EncodeVarint(dAtA, i, uint64(len(encoded)))
+		}
+		i--
+		dAtA[i] = 0x5
+		i--
+		dAtA[i] = 0xfa
+	}
+	return len(dAtA) - i, nil
+}
 func (m *UpdateLocalCacheEvent) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -10369,6 +10402,24 @@ func (m *Envelope_AiagentEnabledEvent) SizeVT() (n int) {
 	}
 	return n
 }
+func (m *Envelope_ChannelListedEvent) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.ChannelListedEvent != nil {
+		if size, ok := interface{}(m.ChannelListedEvent).(interface {
+			SizeVT() int
+		}); ok {
+			l = size.SizeVT()
+		} else {
+			l = proto.Size(m.ChannelListedEvent)
+		}
+		n += 2 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
+	return n
+}
 func (m *UpdateLocalCacheEvent) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -17315,6 +17366,63 @@ func (m *Envelope) UnmarshalVT(dAtA []byte) error {
 					return err
 				}
 				m.Message = &Envelope_AiagentEnabledEvent{AiagentEnabledEvent: v}
+			}
+			iNdEx = postIndex
+		case 95:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ChannelListedEvent", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Message.(*Envelope_ChannelListedEvent); ok {
+				if unmarshal, ok := interface{}(oneof.ChannelListedEvent).(interface {
+					UnmarshalVT([]byte) error
+				}); ok {
+					if err := unmarshal.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+						return err
+					}
+				} else {
+					if err := proto.Unmarshal(dAtA[iNdEx:postIndex], oneof.ChannelListedEvent); err != nil {
+						return err
+					}
+				}
+			} else {
+				v := &api.ChannelDescList{}
+				if unmarshal, ok := interface{}(v).(interface {
+					UnmarshalVT([]byte) error
+				}); ok {
+					if err := unmarshal.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+						return err
+					}
+				} else {
+					if err := proto.Unmarshal(dAtA[iNdEx:postIndex], v); err != nil {
+						return err
+					}
+				}
+				m.Message = &Envelope_ChannelListedEvent{ChannelListedEvent: v}
 			}
 			iNdEx = postIndex
 		default:
