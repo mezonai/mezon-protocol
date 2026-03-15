@@ -1,0 +1,82 @@
+
+namespace proto;
+
+table ChannelMessage {
+  clan_id:long;
+  channel_id:long;
+  message_id:long;
+  code:int;
+  sender_id:long;
+  username:string;
+  avatar:string;
+  content:string;
+  channel_label:string;
+  clan_logo:string;
+  category_name:string;
+  display_name:string;
+  clan_nick:string;
+  clan_avatar:string;
+  reactions:[ubyte];
+  mentions:[ubyte];
+  attachments:[ubyte];
+  references:[ubyte];
+  referenced_message:[ubyte];
+  create_time_seconds:uint;
+  update_time_seconds:uint;
+  mode:int;
+  hide_editted:bool;
+  is_public:bool;
+  topic_id:long;
+}
+
+table MessageMention {
+  id:long;
+  user_id:long;
+  username:string;
+  role_id:long;
+  rolename:string;
+  create_time_seconds:uint;
+  s:int;
+  e:int;
+}
+
+table MessageAttachment {
+  filename:string;
+  size:int;
+  url:string;
+  filetype:string;
+  width:int;
+  height:int;
+  thumbnail:string;
+  duration:int;
+}
+
+table MessageRef {
+  message_id:long;
+  message_ref_id:long;
+  content:string;
+  has_attachment:bool;
+  ref_type:int;
+  message_sender_id:long;
+  message_sender_username:string;
+  mesages_sender_avatar:string;
+  message_sender_clan_nick:string;
+  message_sender_display_name:string;
+}
+
+table FcmDataPayload {
+  command_type:int;
+  receiver_id:long;
+  title:string;
+  body:[ubyte];
+  user_role_ids:[long];
+  user_sent_ids:[long];
+  priority:int;
+  message:ChannelMessage;
+  is_e2ee:bool;
+  is_dm:bool;
+  mention_here:bool;
+  mentions:[MessageMention];
+  references:[MessageRef];
+  attachments:[MessageAttachment];
+}
