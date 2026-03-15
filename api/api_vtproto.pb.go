@@ -1367,10 +1367,10 @@ func (m *MessageRef) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x4a
 	}
-	if len(m.MesagesSenderAvatar) > 0 {
-		i -= len(m.MesagesSenderAvatar)
-		copy(dAtA[i:], m.MesagesSenderAvatar)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.MesagesSenderAvatar)))
+	if len(m.MessagesSenderAvatar) > 0 {
+		i -= len(m.MessagesSenderAvatar)
+		copy(dAtA[i:], m.MessagesSenderAvatar)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.MessagesSenderAvatar)))
 		i--
 		dAtA[i] = 0x42
 	}
@@ -22603,7 +22603,7 @@ func (m *MessageRef) SizeVT() (n int) {
 	if l > 0 {
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
-	l = len(m.MesagesSenderAvatar)
+	l = len(m.MessagesSenderAvatar)
 	if l > 0 {
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
@@ -35059,7 +35059,7 @@ func (m *MessageRef) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 8:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MesagesSenderAvatar", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MessagesSenderAvatar", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -35087,7 +35087,7 @@ func (m *MessageRef) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.MesagesSenderAvatar = string(dAtA[iNdEx:postIndex])
+			m.MessagesSenderAvatar = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 9:
 			if wireType != 2 {

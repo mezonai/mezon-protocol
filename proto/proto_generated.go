@@ -920,7 +920,7 @@ func (rcv *MessageRef) MessageSenderUsername() []byte {
 	return nil
 }
 
-func (rcv *MessageRef) MesagesSenderAvatar() []byte {
+func (rcv *MessageRef) MessagesSenderAvatar() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(18))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -968,8 +968,8 @@ func MessageRefAddMessageSenderId(builder *flatbuffers.Builder, messageSenderId 
 func MessageRefAddMessageSenderUsername(builder *flatbuffers.Builder, messageSenderUsername flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(6, flatbuffers.UOffsetT(messageSenderUsername), 0)
 }
-func MessageRefAddMesagesSenderAvatar(builder *flatbuffers.Builder, mesagesSenderAvatar flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(7, flatbuffers.UOffsetT(mesagesSenderAvatar), 0)
+func MessageRefAddMessagesSenderAvatar(builder *flatbuffers.Builder, messagesSenderAvatar flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(7, flatbuffers.UOffsetT(messagesSenderAvatar), 0)
 }
 func MessageRefAddMessageSenderClanNick(builder *flatbuffers.Builder, messageSenderClanNick flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(8, flatbuffers.UOffsetT(messageSenderClanNick), 0)
