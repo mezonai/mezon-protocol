@@ -305,7 +305,7 @@ message MessageRef {
   // original message sendre username
   string message_sender_username = 7;
   // original message sender avatar
-  string messages_sender_avatar = 8;
+  string message_sender_avatar = 8;
   // original sender clan nick name
   string message_sender_clan_nick = 9;
   // original sender display name
