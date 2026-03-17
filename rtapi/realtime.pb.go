@@ -1561,6 +1561,7 @@ type Envelope_ClanCreatedEvent struct {
 }
 
 type Envelope_AiagentEnabledEvent struct {
+	// Voice Agent Event
 	AiagentEnabledEvent *AIAgentEnabledEvent `protobuf:"bytes,94,opt,name=aiagent_enabled_event,json=aiagentEnabledEvent,proto3,oneof"`
 }
 
