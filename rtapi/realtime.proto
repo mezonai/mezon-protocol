@@ -219,8 +219,6 @@ message Envelope {
     ClanCreatedEvent clan_created_event = 93;
     // Voice Agent Event
     AIAgentEnabledEvent aiagent_enabled_event = 94;
-    // Channel Listed Event
-    api.ChannelDescList channel_listed_event = 95;
   }
 }
 
