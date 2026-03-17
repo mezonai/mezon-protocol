@@ -3441,6 +3441,7 @@ message ListClanBadgeCountRequest {
 
 message ListClanBadgeCountResponse {
   int32 badge_count = 1;
+  repeated ChannelDescription channeldesc = 2;
 }
 
 message ClanDiscover {
