@@ -184,6 +184,8 @@ message ChannelMessage {
   bool is_public = 24;
   // topic
   int64 topic_id = 25;
+  // Poll metadata for the calling user. Only set when code=POLL.
+  PollMeta poll_meta = 26;
 }
 
 // Mention to message
@@ -305,7 +307,7 @@ message MessageRef {
   // original message sendre username
   string message_sender_username = 7;
   // original message sender avatar
-  string mesages_sender_avatar = 8;
+  string message_sender_avatar = 8;
   // original sender clan nick name
   string message_sender_clan_nick = 9;
   // original sender display name
@@ -1919,6 +1921,25 @@ message UploadAttachment {
   string filename = 1;
   // The url
   string url = 2;
+}
+
+message MultipartUploadAttachment {
+  // The name of file that need to upload
+  string filename = 1;
+  // The url
+  repeated string urls = 2;
+  // the upload id
+  string upload_id = 3;
+}
+
+message MultipartUploadAttachmentPart {
+	int32 part_number = 1;
+	string e_tag = 2;       
+}
+
+message MultipartUploadAttachmentFinishRequest {
+	string upload_id = 1;
+	repeated MultipartUploadAttachmentPart parts = 2;
 }
 
 // Operator that can be used to override the one set in the leaderboard.
@@ -3653,6 +3674,10 @@ message VotePollRequest {
   repeated int32 answer_indices = 4;
 }
 
+message VotePollResponse {
+  repeated int32 my_answer_indices = 1;
+}
+
 message ClosePollRequest {
   int64 poll_id = 1;
   int64 message_id = 2;
@@ -3687,4 +3712,9 @@ message GetPollResponse {
   PollType type = 9;
   int32 total_votes = 10;
   repeated PollVoterDetail voter_details = 11;
+  repeated int32 my_answer_indices = 12;
+}
+
+message PollMeta {
+  repeated int32 my_answer_indices = 1;
 }
