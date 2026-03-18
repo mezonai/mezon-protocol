@@ -2636,10 +2636,12 @@ func (m *RegistFcmDeviceTokenResponse) MarshalToSizedBufferVT(dAtA []byte) (int,
 		i--
 		dAtA[i] = 0x1a
 	}
-	if m.DeviceId != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.DeviceId))
+	if len(m.DeviceId) > 0 {
+		i -= len(m.DeviceId)
+		copy(dAtA[i:], m.DeviceId)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.DeviceId)))
 		i--
-		dAtA[i] = 0x10
+		dAtA[i] = 0x12
 	}
 	if len(m.Token) > 0 {
 		i -= len(m.Token)
@@ -23108,8 +23110,9 @@ func (m *RegistFcmDeviceTokenResponse) SizeVT() (n int) {
 	if l > 0 {
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
-	if m.DeviceId != 0 {
-		n += 1 + protohelpers.SizeOfVarint(uint64(m.DeviceId))
+	l = len(m.DeviceId)
+	if l > 0 {
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	l = len(m.Platform)
 	if l > 0 {
@@ -38351,10 +38354,10 @@ func (m *RegistFcmDeviceTokenResponse) UnmarshalVT(dAtA []byte) error {
 			m.Token = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 2:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
 			}
-			m.DeviceId = 0
+			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protohelpers.ErrIntOverflow
@@ -38364,11 +38367,24 @@ func (m *RegistFcmDeviceTokenResponse) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.DeviceId |= int64(b&0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DeviceId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Platform", wireType)

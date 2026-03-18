@@ -511,7 +511,6 @@ func ChannelMessageAddTopicId(builder *flatbuffers.Builder, topicId int64) {
 func ChannelMessageEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
-
 type MessageMention struct {
 	_tab flatbuffers.Table
 }
@@ -665,7 +664,6 @@ func MessageMentionAddE(builder *flatbuffers.Builder, e int32) {
 func MessageMentionEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
-
 type MessageAttachment struct {
 	_tab flatbuffers.Table
 }
@@ -811,7 +809,6 @@ func MessageAttachmentAddDuration(builder *flatbuffers.Builder, duration int32) 
 func MessageAttachmentEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
-
 type MessageRef struct {
 	_tab flatbuffers.Table
 }
@@ -983,7 +980,6 @@ func MessageRefAddMessageSenderDisplayName(builder *flatbuffers.Builder, message
 func MessageRefEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
 }
-
 type FcmDataPayload struct {
 	_tab flatbuffers.Table
 }
