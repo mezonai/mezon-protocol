@@ -539,7 +539,7 @@ message RegistFcmDeviceTokenResponse {
   // The token
   string token = 1;
   //
-  int64 device_id = 2;
+  string device_id = 2;
   //
   string platform = 3;
 }
