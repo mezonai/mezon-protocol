@@ -1367,6 +1367,8 @@ message ListDataSocket {
   api.ListClanBadgeCountRequest list_clan_badge_count_req = 4;
   api.ListClanBadgeCountResponse clan_badge_count = 5;
   api.LogedDeviceList list_loged_device = 6;
+  api.ListUserOnlineRequest list_user_online_req = 7;
+  api.ListUserOnlineResponse user_online_list = 8;
 }
 
 message MeetParticipantEvent {

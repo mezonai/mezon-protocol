@@ -3712,3 +3712,11 @@ message GetPollResponse {
   int32 total_votes = 10;
   repeated PollVoterDetail voter_details = 11;
 }
+
+message ListUserOnlineRequest {
+  int64 clan_id = 1;
+}
+
+message ListUserOnlineResponse {
+  repeated User users = 1;
+}
