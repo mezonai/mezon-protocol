@@ -8560,8 +8560,8 @@ func (m *ListDataSocket) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x22
 	}
-	if m.UnreadMsgIndicator != nil {
-		if vtmsg, ok := interface{}(m.UnreadMsgIndicator).(interface {
+	if m.ChannelBadgeCount != nil {
+		if vtmsg, ok := interface{}(m.ChannelBadgeCount).(interface {
 			MarshalToSizedBufferVT([]byte) (int, error)
 		}); ok {
 			size, err := vtmsg.MarshalToSizedBufferVT(dAtA[:i])
@@ -8571,7 +8571,7 @@ func (m *ListDataSocket) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 			i -= size
 			i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
 		} else {
-			encoded, err := proto.Marshal(m.UnreadMsgIndicator)
+			encoded, err := proto.Marshal(m.ChannelBadgeCount)
 			if err != nil {
 				return 0, err
 			}
@@ -8582,8 +8582,8 @@ func (m *ListDataSocket) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x1a
 	}
-	if m.ListUnreadMsgIndicatorReq != nil {
-		if vtmsg, ok := interface{}(m.ListUnreadMsgIndicatorReq).(interface {
+	if m.ListChannelBadgeCountReq != nil {
+		if vtmsg, ok := interface{}(m.ListChannelBadgeCountReq).(interface {
 			MarshalToSizedBufferVT([]byte) (int, error)
 		}); ok {
 			size, err := vtmsg.MarshalToSizedBufferVT(dAtA[:i])
@@ -8593,7 +8593,7 @@ func (m *ListDataSocket) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 			i -= size
 			i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
 		} else {
-			encoded, err := proto.Marshal(m.ListUnreadMsgIndicatorReq)
+			encoded, err := proto.Marshal(m.ListChannelBadgeCountReq)
 			if err != nil {
 				return 0, err
 			}
@@ -13035,23 +13035,23 @@ func (m *ListDataSocket) SizeVT() (n int) {
 	if l > 0 {
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
-	if m.ListUnreadMsgIndicatorReq != nil {
-		if size, ok := interface{}(m.ListUnreadMsgIndicatorReq).(interface {
+	if m.ListChannelBadgeCountReq != nil {
+		if size, ok := interface{}(m.ListChannelBadgeCountReq).(interface {
 			SizeVT() int
 		}); ok {
 			l = size.SizeVT()
 		} else {
-			l = proto.Size(m.ListUnreadMsgIndicatorReq)
+			l = proto.Size(m.ListChannelBadgeCountReq)
 		}
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
-	if m.UnreadMsgIndicator != nil {
-		if size, ok := interface{}(m.UnreadMsgIndicator).(interface {
+	if m.ChannelBadgeCount != nil {
+		if size, ok := interface{}(m.ChannelBadgeCount).(interface {
 			SizeVT() int
 		}); ok {
 			l = size.SizeVT()
 		} else {
-			l = proto.Size(m.UnreadMsgIndicator)
+			l = proto.Size(m.ChannelBadgeCount)
 		}
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
@@ -34156,7 +34156,7 @@ func (m *ListDataSocket) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ListUnreadMsgIndicatorReq", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ListChannelBadgeCountReq", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -34183,24 +34183,24 @@ func (m *ListDataSocket) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.ListUnreadMsgIndicatorReq == nil {
-				m.ListUnreadMsgIndicatorReq = &api.ListChannelBadgeCountRequest{}
+			if m.ListChannelBadgeCountReq == nil {
+				m.ListChannelBadgeCountReq = &api.ListChannelBadgeCountRequest{}
 			}
-			if unmarshal, ok := interface{}(m.ListUnreadMsgIndicatorReq).(interface {
+			if unmarshal, ok := interface{}(m.ListChannelBadgeCountReq).(interface {
 				UnmarshalVT([]byte) error
 			}); ok {
 				if err := unmarshal.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				if err := proto.Unmarshal(dAtA[iNdEx:postIndex], m.ListUnreadMsgIndicatorReq); err != nil {
+				if err := proto.Unmarshal(dAtA[iNdEx:postIndex], m.ListChannelBadgeCountReq); err != nil {
 					return err
 				}
 			}
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UnreadMsgIndicator", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ChannelBadgeCount", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -34227,17 +34227,17 @@ func (m *ListDataSocket) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.UnreadMsgIndicator == nil {
-				m.UnreadMsgIndicator = &api.ListChannelBadgeCountResponse{}
+			if m.ChannelBadgeCount == nil {
+				m.ChannelBadgeCount = &api.ListChannelBadgeCountResponse{}
 			}
-			if unmarshal, ok := interface{}(m.UnreadMsgIndicator).(interface {
+			if unmarshal, ok := interface{}(m.ChannelBadgeCount).(interface {
 				UnmarshalVT([]byte) error
 			}); ok {
 				if err := unmarshal.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				if err := proto.Unmarshal(dAtA[iNdEx:postIndex], m.UnreadMsgIndicator); err != nil {
+				if err := proto.Unmarshal(dAtA[iNdEx:postIndex], m.ChannelBadgeCount); err != nil {
 					return err
 				}
 			}
