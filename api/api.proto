@@ -1585,7 +1585,7 @@ message NotificationUserChannel {
   //
   int32 notification_setting_type = 2;
   //
-  uint32 time_mute_seconds = 3;
+  int32 time_mute_seconds = 3;
   //
   int32 active = 4;
   //

@@ -53127,7 +53127,7 @@ func (m *NotificationUserChannel) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.TimeMuteSeconds |= uint32(b&0x7F) << shift
+				m.TimeMuteSeconds |= int32(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
