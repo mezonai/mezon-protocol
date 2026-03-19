@@ -1362,13 +1362,12 @@ message DeleteAccountEvent {
 
 message ListDataSocket {
   string api_name = 1;
-  api.ListClanUnreadMsgIndicatorRequest list_unread_msg_indicator_req = 2;
-  api.ListClanUnreadMsgIndicatorResponse unread_msg_indicator = 3;
-  api.ListClanBadgeCountRequest list_clan_badge_count_req = 4;
-  api.ListClanBadgeCountResponse clan_badge_count = 5;
-  api.LogedDeviceList list_loged_device = 6;
-  api.ListUserOnlineRequest list_user_online_req = 7;
-  api.ListUserOnlineResponse user_online_list = 8;
+  api.ListChannelBadgeCountRequest list_unread_msg_indicator_req = 2;
+  api.ListChannelBadgeCountResponse unread_msg_indicator = 3;
+  api.ListClanBadgeCountResponse clan_badge_count = 4;
+  api.LogedDeviceList list_loged_device = 5;
+  api.ListUserOnlineRequest list_user_online_req = 6;
+  api.ListUserOnlineResponse user_online_list = 7;
 }
 
 message MeetParticipantEvent {

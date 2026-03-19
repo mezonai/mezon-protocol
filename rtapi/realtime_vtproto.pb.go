@@ -8492,7 +8492,7 @@ func (m *ListDataSocket) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 			i = protohelpers.EncodeVarint(dAtA, i, uint64(len(encoded)))
 		}
 		i--
-		dAtA[i] = 0x42
+		dAtA[i] = 0x3a
 	}
 	if m.ListUserOnlineReq != nil {
 		if vtmsg, ok := interface{}(m.ListUserOnlineReq).(interface {
@@ -8514,7 +8514,7 @@ func (m *ListDataSocket) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 			i = protohelpers.EncodeVarint(dAtA, i, uint64(len(encoded)))
 		}
 		i--
-		dAtA[i] = 0x3a
+		dAtA[i] = 0x32
 	}
 	if m.ListLogedDevice != nil {
 		if vtmsg, ok := interface{}(m.ListLogedDevice).(interface {
@@ -8536,7 +8536,7 @@ func (m *ListDataSocket) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 			i = protohelpers.EncodeVarint(dAtA, i, uint64(len(encoded)))
 		}
 		i--
-		dAtA[i] = 0x32
+		dAtA[i] = 0x2a
 	}
 	if m.ClanBadgeCount != nil {
 		if vtmsg, ok := interface{}(m.ClanBadgeCount).(interface {
@@ -8550,28 +8550,6 @@ func (m *ListDataSocket) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 			i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
 		} else {
 			encoded, err := proto.Marshal(m.ClanBadgeCount)
-			if err != nil {
-				return 0, err
-			}
-			i -= len(encoded)
-			copy(dAtA[i:], encoded)
-			i = protohelpers.EncodeVarint(dAtA, i, uint64(len(encoded)))
-		}
-		i--
-		dAtA[i] = 0x2a
-	}
-	if m.ListClanBadgeCountReq != nil {
-		if vtmsg, ok := interface{}(m.ListClanBadgeCountReq).(interface {
-			MarshalToSizedBufferVT([]byte) (int, error)
-		}); ok {
-			size, err := vtmsg.MarshalToSizedBufferVT(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
-		} else {
-			encoded, err := proto.Marshal(m.ListClanBadgeCountReq)
 			if err != nil {
 				return 0, err
 			}
@@ -13074,16 +13052,6 @@ func (m *ListDataSocket) SizeVT() (n int) {
 			l = size.SizeVT()
 		} else {
 			l = proto.Size(m.UnreadMsgIndicator)
-		}
-		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
-	}
-	if m.ListClanBadgeCountReq != nil {
-		if size, ok := interface{}(m.ListClanBadgeCountReq).(interface {
-			SizeVT() int
-		}); ok {
-			l = size.SizeVT()
-		} else {
-			l = proto.Size(m.ListClanBadgeCountReq)
 		}
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
@@ -34216,7 +34184,7 @@ func (m *ListDataSocket) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.ListUnreadMsgIndicatorReq == nil {
-				m.ListUnreadMsgIndicatorReq = &api.ListClanUnreadMsgIndicatorRequest{}
+				m.ListUnreadMsgIndicatorReq = &api.ListChannelBadgeCountRequest{}
 			}
 			if unmarshal, ok := interface{}(m.ListUnreadMsgIndicatorReq).(interface {
 				UnmarshalVT([]byte) error
@@ -34260,7 +34228,7 @@ func (m *ListDataSocket) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.UnreadMsgIndicator == nil {
-				m.UnreadMsgIndicator = &api.ListClanUnreadMsgIndicatorResponse{}
+				m.UnreadMsgIndicator = &api.ListChannelBadgeCountResponse{}
 			}
 			if unmarshal, ok := interface{}(m.UnreadMsgIndicator).(interface {
 				UnmarshalVT([]byte) error
@@ -34275,50 +34243,6 @@ func (m *ListDataSocket) UnmarshalVT(dAtA []byte) error {
 			}
 			iNdEx = postIndex
 		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ListClanBadgeCountReq", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.ListClanBadgeCountReq == nil {
-				m.ListClanBadgeCountReq = &api.ListClanBadgeCountRequest{}
-			}
-			if unmarshal, ok := interface{}(m.ListClanBadgeCountReq).(interface {
-				UnmarshalVT([]byte) error
-			}); ok {
-				if err := unmarshal.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-			} else {
-				if err := proto.Unmarshal(dAtA[iNdEx:postIndex], m.ListClanBadgeCountReq); err != nil {
-					return err
-				}
-			}
-			iNdEx = postIndex
-		case 5:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ClanBadgeCount", wireType)
 			}
@@ -34362,7 +34286,7 @@ func (m *ListDataSocket) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 			iNdEx = postIndex
-		case 6:
+		case 5:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ListLogedDevice", wireType)
 			}
@@ -34406,7 +34330,7 @@ func (m *ListDataSocket) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 			iNdEx = postIndex
-		case 7:
+		case 6:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ListUserOnlineReq", wireType)
 			}
@@ -34450,7 +34374,7 @@ func (m *ListDataSocket) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 			iNdEx = postIndex
-		case 8:
+		case 7:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field UserOnlineList", wireType)
 			}
