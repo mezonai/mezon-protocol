@@ -219,6 +219,8 @@ message Envelope {
     ClanCreatedEvent clan_created_event = 93;
     // Voice Agent Event
     AIAgentEnabledEvent aiagent_enabled_event = 94;
+    // Ban Channel User Event
+    ListChannelUsersBannedEvent list_channel_users_banned_event = 95;
   }
 }
 
@@ -237,6 +239,10 @@ message BannedUserEvent {
   int64 channel_id = 4;
   int64 clan_id = 5;
   int32 ban_time = 6;
+}
+
+message ListChannelUsersBannedEvent {
+  repeated int64 banned_user_ids = 1;
 }
 
 message ChannelCanvas {
