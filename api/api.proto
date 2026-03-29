@@ -3437,10 +3437,14 @@ message MessageReactionList {
 
 message ListChannelBadgeCountRequest {
   int64 clan_id = 1;
+  int32 limit = 2;
+  string cursor = 3;
 }
 
 message ListChannelBadgeCountResponse {
   repeated ChannelDescription channeldesc = 1;
+  string next_cursor = 2;
+  bool has_more = 3;
 }
 
 message ClanBadgeCount {
@@ -3724,8 +3728,12 @@ message GetPollResponse {
 
 message ListUserOnlineRequest {
   int64 clan_id = 1;
+  int32 limit = 2;
+  string cursor = 3;
 }
 
 message ListUserOnlineResponse {
   repeated User users = 1;
+  string next_cursor = 2;
+  bool has_more = 3;
 }
