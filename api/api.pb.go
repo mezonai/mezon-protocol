@@ -23326,7 +23326,7 @@ type ListChannelBadgeCountRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ClanId        int64                  `protobuf:"varint,1,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
 	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	Cursor        string                 `protobuf:"bytes,3,opt,name=cursor,proto3" json:"cursor,omitempty"`
+	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -23375,18 +23375,17 @@ func (x *ListChannelBadgeCountRequest) GetLimit() int32 {
 	return 0
 }
 
-func (x *ListChannelBadgeCountRequest) GetCursor() string {
+func (x *ListChannelBadgeCountRequest) GetPage() int32 {
 	if x != nil {
-		return x.Cursor
+		return x.Page
 	}
-	return ""
+	return 0
 }
 
 type ListChannelBadgeCountResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Channeldesc   []*ChannelDescription  `protobuf:"bytes,1,rep,name=channeldesc,proto3" json:"channeldesc,omitempty"`
-	NextCursor    string                 `protobuf:"bytes,2,opt,name=next_cursor,json=nextCursor,proto3" json:"next_cursor,omitempty"`
-	HasMore       bool                   `protobuf:"varint,3,opt,name=has_more,json=hasMore,proto3" json:"has_more,omitempty"`
+	TotalCount    int32                  `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -23428,18 +23427,11 @@ func (x *ListChannelBadgeCountResponse) GetChanneldesc() []*ChannelDescription {
 	return nil
 }
 
-func (x *ListChannelBadgeCountResponse) GetNextCursor() string {
+func (x *ListChannelBadgeCountResponse) GetTotalCount() int32 {
 	if x != nil {
-		return x.NextCursor
+		return x.TotalCount
 	}
-	return ""
-}
-
-func (x *ListChannelBadgeCountResponse) GetHasMore() bool {
-	if x != nil {
-		return x.HasMore
-	}
-	return false
+	return 0
 }
 
 type ClanBadgeCount struct {
@@ -25673,7 +25665,7 @@ type ListUserOnlineRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ClanId        int64                  `protobuf:"varint,1,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
 	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	Cursor        string                 `protobuf:"bytes,3,opt,name=cursor,proto3" json:"cursor,omitempty"`
+	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -25722,18 +25714,17 @@ func (x *ListUserOnlineRequest) GetLimit() int32 {
 	return 0
 }
 
-func (x *ListUserOnlineRequest) GetCursor() string {
+func (x *ListUserOnlineRequest) GetPage() int32 {
 	if x != nil {
-		return x.Cursor
+		return x.Page
 	}
-	return ""
+	return 0
 }
 
 type ListUserOnlineResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Users         []*User                `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
-	NextCursor    string                 `protobuf:"bytes,2,opt,name=next_cursor,json=nextCursor,proto3" json:"next_cursor,omitempty"`
-	HasMore       bool                   `protobuf:"varint,3,opt,name=has_more,json=hasMore,proto3" json:"has_more,omitempty"`
+	TotalCount    int32                  `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -25775,18 +25766,11 @@ func (x *ListUserOnlineResponse) GetUsers() []*User {
 	return nil
 }
 
-func (x *ListUserOnlineResponse) GetNextCursor() string {
+func (x *ListUserOnlineResponse) GetTotalCount() int32 {
 	if x != nil {
-		return x.NextCursor
+		return x.TotalCount
 	}
-	return ""
-}
-
-func (x *ListUserOnlineResponse) GetHasMore() bool {
-	if x != nil {
-		return x.HasMore
-	}
-	return false
+	return 0
 }
 
 // A single user-role pair.
@@ -28190,16 +28174,15 @@ const file_api_proto_rawDesc = "" +
 	"\x0eMessageRefList\x12)\n" +
 	"\x04refs\x18\x01 \x03(\v2\x15.mezon.api.MessageRefR\x04refs\"O\n" +
 	"\x13MessageReactionList\x128\n" +
-	"\treactions\x18\x01 \x03(\v2\x1a.mezon.api.MessageReactionR\treactions\"e\n" +
+	"\treactions\x18\x01 \x03(\v2\x1a.mezon.api.MessageReactionR\treactions\"a\n" +
 	"\x1cListChannelBadgeCountRequest\x12\x17\n" +
 	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\x12\x14\n" +
-	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x16\n" +
-	"\x06cursor\x18\x03 \x01(\tR\x06cursor\"\x9c\x01\n" +
+	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\"\x81\x01\n" +
 	"\x1dListChannelBadgeCountResponse\x12?\n" +
 	"\vchanneldesc\x18\x01 \x03(\v2\x1d.mezon.api.ChannelDescriptionR\vchanneldesc\x12\x1f\n" +
-	"\vnext_cursor\x18\x02 \x01(\tR\n" +
-	"nextCursor\x12\x19\n" +
-	"\bhas_more\x18\x03 \x01(\bR\ahasMore\"^\n" +
+	"\vtotal_count\x18\x02 \x01(\x05R\n" +
+	"totalCount\"^\n" +
 	"\x0eClanBadgeCount\x12\x17\n" +
 	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\x12\x14\n" +
 	"\x05badge\x18\x02 \x01(\x05R\x05badge\x12\x1d\n" +
@@ -28430,16 +28413,15 @@ const file_api_proto_rawDesc = "" +
 	"\vtotal_votes\x18\n" +
 	" \x01(\x05R\n" +
 	"totalVotes\x12?\n" +
-	"\rvoter_details\x18\v \x03(\v2\x1a.mezon.api.PollVoterDetailR\fvoterDetails\"^\n" +
+	"\rvoter_details\x18\v \x03(\v2\x1a.mezon.api.PollVoterDetailR\fvoterDetails\"Z\n" +
 	"\x15ListUserOnlineRequest\x12\x17\n" +
 	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\x12\x14\n" +
-	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x16\n" +
-	"\x06cursor\x18\x03 \x01(\tR\x06cursor\"{\n" +
+	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\"`\n" +
 	"\x16ListUserOnlineResponse\x12%\n" +
 	"\x05users\x18\x01 \x03(\v2\x0f.mezon.api.UserR\x05users\x12\x1f\n" +
-	"\vnext_cursor\x18\x02 \x01(\tR\n" +
-	"nextCursor\x12\x19\n" +
-	"\bhas_more\x18\x03 \x01(\bR\ahasMore*o\n" +
+	"\vtotal_count\x18\x02 \x01(\x05R\n" +
+	"totalCount*o\n" +
 	"\rStoreProvider\x12\x13\n" +
 	"\x0fAPPLE_APP_STORE\x10\x00\x12\x15\n" +
 	"\x11GOOGLE_PLAY_STORE\x10\x01\x12\x16\n" +
