@@ -640,6 +640,22 @@ message ListClanUsersRequest {
   int64 clan_id = 1;
 }
 
+// List clan members' custom status strings (user_status) by clan.
+message ListClanUsersStatusRequest {
+  // The clan ID to list from.
+  int64 clan_id = 1;
+}
+
+message ClanUserStatusEntry {
+  int64 user_id = 1;
+  string user_status = 2;
+}
+
+// User id and custom status text for members of a clan.
+message ClanUserStatusList {
+  repeated ClanUserStatusEntry clan_user_statuses = 1;
+}
+
 // Get a list of unexpired notifications.
 message ListNotificationsRequest {
   // The number of notifications to get. Between 1 and 100.
