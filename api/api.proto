@@ -2211,6 +2211,16 @@ message CheckDuplicateClanNameResponse {
   bool is_duplicate = 1;
 }
 
+message CheckDuplicateNameRequest {
+  string name = 1;
+  int32 type = 2;
+  int64 condition_id = 3;
+}
+
+message CheckDuplicateNameResponse {
+  bool is_duplicate = 1;
+}
+
 message ClanStickerAddRequest {
   string source = 1;
   string shortname = 2;
