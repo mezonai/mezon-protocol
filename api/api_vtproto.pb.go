@@ -7576,6 +7576,70 @@ func (m *LeaveThreadRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *ArchiveInactiveChannelThreadsRequest) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ArchiveInactiveChannelThreadsRequest) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *ArchiveInactiveChannelThreadsRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.ThreadIds) > 0 {
+		var pksize2 int
+		for _, num := range m.ThreadIds {
+			pksize2 += protohelpers.SizeOfVarint(uint64(num))
+		}
+		i -= pksize2
+		j1 := i
+		for _, num1 := range m.ThreadIds {
+			num := uint64(num1)
+			for num >= 1<<7 {
+				dAtA[j1] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j1++
+			}
+			dAtA[j1] = uint8(num)
+			j1++
+		}
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(pksize2))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if m.ParentId != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ParentId))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.ClanId != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ClanId))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *Role) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -25574,6 +25638,29 @@ func (m *LeaveThreadRequest) SizeVT() (n int) {
 	}
 	if m.ChannelId != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.ChannelId))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *ArchiveInactiveChannelThreadsRequest) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.ClanId != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.ClanId))
+	}
+	if m.ParentId != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.ParentId))
+	}
+	if len(m.ThreadIds) > 0 {
+		l = 0
+		for _, e := range m.ThreadIds {
+			l += protohelpers.SizeOfVarint(uint64(e))
+		}
+		n += 1 + protohelpers.SizeOfVarint(uint64(l)) + l
 	}
 	n += len(m.unknownFields)
 	return n
@@ -51865,6 +51952,171 @@ func (m *LeaveThreadRequest) UnmarshalVT(dAtA []byte) error {
 				if b < 0x80 {
 					break
 				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ArchiveInactiveChannelThreadsRequest) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protohelpers.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ArchiveInactiveChannelThreadsRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ArchiveInactiveChannelThreadsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClanId", wireType)
+			}
+			m.ClanId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ClanId |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ParentId", wireType)
+			}
+			m.ParentId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ParentId |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType == 0 {
+				var v int64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protohelpers.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					v |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.ThreadIds = append(m.ThreadIds, v)
+			} else if wireType == 2 {
+				var packedLen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protohelpers.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					packedLen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if packedLen < 0 {
+					return protohelpers.ErrInvalidLength
+				}
+				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return protohelpers.ErrInvalidLength
+				}
+				if postIndex > l {
+					return io.ErrUnexpectedEOF
+				}
+				var elementCount int
+				var count int
+				for _, integer := range dAtA[iNdEx:postIndex] {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
+				if elementCount != 0 && len(m.ThreadIds) == 0 {
+					m.ThreadIds = make([]int64, 0, elementCount)
+				}
+				for iNdEx < postIndex {
+					var v int64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protohelpers.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= int64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					m.ThreadIds = append(m.ThreadIds, v)
+				}
+			} else {
+				return fmt.Errorf("proto: wrong wireType = %d for field ThreadIds", wireType)
 			}
 		default:
 			iNdEx = preIndex
