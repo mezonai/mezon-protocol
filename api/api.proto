@@ -1490,13 +1490,21 @@ message LeaveThreadRequest {
   int64 channel_id = 2;
 }
 
-// Set forum threads inactive (archived).
-message ArchiveInactiveChannelThreadsRequest {
+// Archive channel/thread inactive (archived).
+message ArchiveChannelRequest {
   int64 clan_id = 1;
-  // Parent channel that owns the threads.
-  int64 parent_id = 2;
-  // Thread channel IDs to mark inactive.
-  repeated int64 thread_ids = 3;
+  // Channel (thread) ID to inactive.
+  int64 channel_id = 2;
+}
+
+message ListArchivedChannelDescsRequest {
+  // The clan of this list archived channels
+  int64 clan_id = 1;
+}
+
+message ListArchivedChannelDescsResponse {
+  // A list of channel.
+  repeated ChannelDescription channeldesc = 1;
 }
 
 // Role record

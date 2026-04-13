@@ -367,7 +367,7 @@ func (x ParticipantInfo_State) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ParticipantInfo_State.Descriptor instead.
 func (ParticipantInfo_State) EnumDescriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{327, 0}
+	return file_api_proto_rawDescGZIP(), []int{329, 0}
 }
 
 type ParticipantInfo_Kind int32
@@ -435,7 +435,7 @@ func (x ParticipantInfo_Kind) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ParticipantInfo_Kind.Descriptor instead.
 func (ParticipantInfo_Kind) EnumDescriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{327, 1}
+	return file_api_proto_rawDescGZIP(), []int{329, 1}
 }
 
 type ParticipantInfo_KindDetail int32
@@ -490,7 +490,7 @@ func (x ParticipantInfo_KindDetail) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ParticipantInfo_KindDetail.Descriptor instead.
 func (ParticipantInfo_KindDetail) EnumDescriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{327, 2}
+	return file_api_proto_rawDescGZIP(), []int{329, 2}
 }
 
 // A user with additional account details. Always the current user.
@@ -9002,32 +9002,30 @@ func (x *LeaveThreadRequest) GetChannelId() int64 {
 	return 0
 }
 
-// Set forum threads inactive (archived) for the current user context; requires membership on each thread under parent_id.
-type ArchiveInactiveChannelThreadsRequest struct {
+// Archive channel/thread inactive (archived).
+type ArchiveChannelRequest struct {
 	state  protoimpl.MessageState `protogen:"open.v1"`
 	ClanId int64                  `protobuf:"varint,1,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
-	// Parent channel (e.g. forum) that owns the threads.
-	ParentId int64 `protobuf:"varint,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	// Thread channel IDs to mark inactive (active = 0).
-	ThreadIds     []int64 `protobuf:"varint,3,rep,packed,name=thread_ids,json=threadIds,proto3" json:"thread_ids,omitempty"`
+	// Channel (thread) ID to inactive.
+	ChannelId     int64 `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ArchiveInactiveChannelThreadsRequest) Reset() {
-	*x = ArchiveInactiveChannelThreadsRequest{}
+func (x *ArchiveChannelRequest) Reset() {
+	*x = ArchiveChannelRequest{}
 	mi := &file_api_proto_msgTypes[110]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ArchiveInactiveChannelThreadsRequest) String() string {
+func (x *ArchiveChannelRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ArchiveInactiveChannelThreadsRequest) ProtoMessage() {}
+func (*ArchiveChannelRequest) ProtoMessage() {}
 
-func (x *ArchiveInactiveChannelThreadsRequest) ProtoReflect() protoreflect.Message {
+func (x *ArchiveChannelRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_api_proto_msgTypes[110]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9039,28 +9037,111 @@ func (x *ArchiveInactiveChannelThreadsRequest) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ArchiveInactiveChannelThreadsRequest.ProtoReflect.Descriptor instead.
-func (*ArchiveInactiveChannelThreadsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ArchiveChannelRequest.ProtoReflect.Descriptor instead.
+func (*ArchiveChannelRequest) Descriptor() ([]byte, []int) {
 	return file_api_proto_rawDescGZIP(), []int{110}
 }
 
-func (x *ArchiveInactiveChannelThreadsRequest) GetClanId() int64 {
+func (x *ArchiveChannelRequest) GetClanId() int64 {
 	if x != nil {
 		return x.ClanId
 	}
 	return 0
 }
 
-func (x *ArchiveInactiveChannelThreadsRequest) GetParentId() int64 {
+func (x *ArchiveChannelRequest) GetChannelId() int64 {
 	if x != nil {
-		return x.ParentId
+		return x.ChannelId
 	}
 	return 0
 }
 
-func (x *ArchiveInactiveChannelThreadsRequest) GetThreadIds() []int64 {
+type ListArchivedChannelDescsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The clan of this list archived channels
+	ClanId        int64 `protobuf:"varint,1,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListArchivedChannelDescsRequest) Reset() {
+	*x = ListArchivedChannelDescsRequest{}
+	mi := &file_api_proto_msgTypes[111]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListArchivedChannelDescsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListArchivedChannelDescsRequest) ProtoMessage() {}
+
+func (x *ListArchivedChannelDescsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_msgTypes[111]
 	if x != nil {
-		return x.ThreadIds
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListArchivedChannelDescsRequest.ProtoReflect.Descriptor instead.
+func (*ListArchivedChannelDescsRequest) Descriptor() ([]byte, []int) {
+	return file_api_proto_rawDescGZIP(), []int{111}
+}
+
+func (x *ListArchivedChannelDescsRequest) GetClanId() int64 {
+	if x != nil {
+		return x.ClanId
+	}
+	return 0
+}
+
+type ListArchivedChannelDescsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// A list of channel.
+	Channeldesc   []*ChannelDescription `protobuf:"bytes,1,rep,name=channeldesc,proto3" json:"channeldesc,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListArchivedChannelDescsResponse) Reset() {
+	*x = ListArchivedChannelDescsResponse{}
+	mi := &file_api_proto_msgTypes[112]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListArchivedChannelDescsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListArchivedChannelDescsResponse) ProtoMessage() {}
+
+func (x *ListArchivedChannelDescsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_msgTypes[112]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListArchivedChannelDescsResponse.ProtoReflect.Descriptor instead.
+func (*ListArchivedChannelDescsResponse) Descriptor() ([]byte, []int) {
+	return file_api_proto_rawDescGZIP(), []int{112}
+}
+
+func (x *ListArchivedChannelDescsResponse) GetChanneldesc() []*ChannelDescription {
+	if x != nil {
+		return x.Channeldesc
 	}
 	return nil
 }
@@ -9092,7 +9173,7 @@ type Role struct {
 
 func (x *Role) Reset() {
 	*x = Role{}
-	mi := &file_api_proto_msgTypes[111]
+	mi := &file_api_proto_msgTypes[113]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9104,7 +9185,7 @@ func (x *Role) String() string {
 func (*Role) ProtoMessage() {}
 
 func (x *Role) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[111]
+	mi := &file_api_proto_msgTypes[113]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9117,7 +9198,7 @@ func (x *Role) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Role.ProtoReflect.Descriptor instead.
 func (*Role) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{111}
+	return file_api_proto_rawDescGZIP(), []int{113}
 }
 
 func (x *Role) GetId() int64 {
@@ -9268,7 +9349,7 @@ type EventManagement struct {
 
 func (x *EventManagement) Reset() {
 	*x = EventManagement{}
-	mi := &file_api_proto_msgTypes[112]
+	mi := &file_api_proto_msgTypes[114]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9280,7 +9361,7 @@ func (x *EventManagement) String() string {
 func (*EventManagement) ProtoMessage() {}
 
 func (x *EventManagement) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[112]
+	mi := &file_api_proto_msgTypes[114]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9293,7 +9374,7 @@ func (x *EventManagement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventManagement.ProtoReflect.Descriptor instead.
 func (*EventManagement) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{112}
+	return file_api_proto_rawDescGZIP(), []int{114}
 }
 
 func (x *EventManagement) GetId() int64 {
@@ -9453,7 +9534,7 @@ type Permission struct {
 
 func (x *Permission) Reset() {
 	*x = Permission{}
-	mi := &file_api_proto_msgTypes[113]
+	mi := &file_api_proto_msgTypes[115]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9465,7 +9546,7 @@ func (x *Permission) String() string {
 func (*Permission) ProtoMessage() {}
 
 func (x *Permission) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[113]
+	mi := &file_api_proto_msgTypes[115]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9478,7 +9559,7 @@ func (x *Permission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Permission.ProtoReflect.Descriptor instead.
 func (*Permission) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{113}
+	return file_api_proto_rawDescGZIP(), []int{115}
 }
 
 func (x *Permission) GetId() int64 {
@@ -9543,7 +9624,7 @@ type NotificationSetting struct {
 
 func (x *NotificationSetting) Reset() {
 	*x = NotificationSetting{}
-	mi := &file_api_proto_msgTypes[114]
+	mi := &file_api_proto_msgTypes[116]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9555,7 +9636,7 @@ func (x *NotificationSetting) String() string {
 func (*NotificationSetting) ProtoMessage() {}
 
 func (x *NotificationSetting) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[114]
+	mi := &file_api_proto_msgTypes[116]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9568,7 +9649,7 @@ func (x *NotificationSetting) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NotificationSetting.ProtoReflect.Descriptor instead.
 func (*NotificationSetting) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{114}
+	return file_api_proto_rawDescGZIP(), []int{116}
 }
 
 func (x *NotificationSetting) GetId() int64 {
@@ -9597,7 +9678,7 @@ type DeletePinMessage struct {
 
 func (x *DeletePinMessage) Reset() {
 	*x = DeletePinMessage{}
-	mi := &file_api_proto_msgTypes[115]
+	mi := &file_api_proto_msgTypes[117]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9609,7 +9690,7 @@ func (x *DeletePinMessage) String() string {
 func (*DeletePinMessage) ProtoMessage() {}
 
 func (x *DeletePinMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[115]
+	mi := &file_api_proto_msgTypes[117]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9622,7 +9703,7 @@ func (x *DeletePinMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePinMessage.ProtoReflect.Descriptor instead.
 func (*DeletePinMessage) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{115}
+	return file_api_proto_rawDescGZIP(), []int{117}
 }
 
 func (x *DeletePinMessage) GetId() int64 {
@@ -9672,7 +9753,7 @@ type PinMessage struct {
 
 func (x *PinMessage) Reset() {
 	*x = PinMessage{}
-	mi := &file_api_proto_msgTypes[116]
+	mi := &file_api_proto_msgTypes[118]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9684,7 +9765,7 @@ func (x *PinMessage) String() string {
 func (*PinMessage) ProtoMessage() {}
 
 func (x *PinMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[116]
+	mi := &file_api_proto_msgTypes[118]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9697,7 +9778,7 @@ func (x *PinMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PinMessage.ProtoReflect.Descriptor instead.
 func (*PinMessage) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{116}
+	return file_api_proto_rawDescGZIP(), []int{118}
 }
 
 func (x *PinMessage) GetId() int64 {
@@ -9772,7 +9853,7 @@ type PinMessagesList struct {
 
 func (x *PinMessagesList) Reset() {
 	*x = PinMessagesList{}
-	mi := &file_api_proto_msgTypes[117]
+	mi := &file_api_proto_msgTypes[119]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9784,7 +9865,7 @@ func (x *PinMessagesList) String() string {
 func (*PinMessagesList) ProtoMessage() {}
 
 func (x *PinMessagesList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[117]
+	mi := &file_api_proto_msgTypes[119]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9797,7 +9878,7 @@ func (x *PinMessagesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PinMessagesList.ProtoReflect.Descriptor instead.
 func (*PinMessagesList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{117}
+	return file_api_proto_rawDescGZIP(), []int{119}
 }
 
 func (x *PinMessagesList) GetPinMessagesList() []*PinMessage {
@@ -9822,7 +9903,7 @@ type NotificationUserChannel struct {
 
 func (x *NotificationUserChannel) Reset() {
 	*x = NotificationUserChannel{}
-	mi := &file_api_proto_msgTypes[118]
+	mi := &file_api_proto_msgTypes[120]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9834,7 +9915,7 @@ func (x *NotificationUserChannel) String() string {
 func (*NotificationUserChannel) ProtoMessage() {}
 
 func (x *NotificationUserChannel) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[118]
+	mi := &file_api_proto_msgTypes[120]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9847,7 +9928,7 @@ func (x *NotificationUserChannel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NotificationUserChannel.ProtoReflect.Descriptor instead.
 func (*NotificationUserChannel) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{118}
+	return file_api_proto_rawDescGZIP(), []int{120}
 }
 
 func (x *NotificationUserChannel) GetId() int64 {
@@ -9898,7 +9979,7 @@ type NotifiReactMessage struct {
 
 func (x *NotifiReactMessage) Reset() {
 	*x = NotifiReactMessage{}
-	mi := &file_api_proto_msgTypes[119]
+	mi := &file_api_proto_msgTypes[121]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9910,7 +9991,7 @@ func (x *NotifiReactMessage) String() string {
 func (*NotifiReactMessage) ProtoMessage() {}
 
 func (x *NotifiReactMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[119]
+	mi := &file_api_proto_msgTypes[121]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9923,7 +10004,7 @@ func (x *NotifiReactMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NotifiReactMessage.ProtoReflect.Descriptor instead.
 func (*NotifiReactMessage) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{119}
+	return file_api_proto_rawDescGZIP(), []int{121}
 }
 
 func (x *NotifiReactMessage) GetId() int64 {
@@ -9956,7 +10037,7 @@ type DefaultNotificationClan struct {
 
 func (x *DefaultNotificationClan) Reset() {
 	*x = DefaultNotificationClan{}
-	mi := &file_api_proto_msgTypes[120]
+	mi := &file_api_proto_msgTypes[122]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9968,7 +10049,7 @@ func (x *DefaultNotificationClan) String() string {
 func (*DefaultNotificationClan) ProtoMessage() {}
 
 func (x *DefaultNotificationClan) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[120]
+	mi := &file_api_proto_msgTypes[122]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9981,7 +10062,7 @@ func (x *DefaultNotificationClan) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DefaultNotificationClan.ProtoReflect.Descriptor instead.
 func (*DefaultNotificationClan) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{120}
+	return file_api_proto_rawDescGZIP(), []int{122}
 }
 
 func (x *DefaultNotificationClan) GetClanId() int64 {
@@ -10000,7 +10081,7 @@ type DefaultNotificationCategory struct {
 
 func (x *DefaultNotificationCategory) Reset() {
 	*x = DefaultNotificationCategory{}
-	mi := &file_api_proto_msgTypes[121]
+	mi := &file_api_proto_msgTypes[123]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10012,7 +10093,7 @@ func (x *DefaultNotificationCategory) String() string {
 func (*DefaultNotificationCategory) ProtoMessage() {}
 
 func (x *DefaultNotificationCategory) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[121]
+	mi := &file_api_proto_msgTypes[123]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10025,7 +10106,7 @@ func (x *DefaultNotificationCategory) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DefaultNotificationCategory.ProtoReflect.Descriptor instead.
 func (*DefaultNotificationCategory) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{121}
+	return file_api_proto_rawDescGZIP(), []int{123}
 }
 
 func (x *DefaultNotificationCategory) GetCategoryId() int64 {
@@ -10044,7 +10125,7 @@ type NotificationChannel struct {
 
 func (x *NotificationChannel) Reset() {
 	*x = NotificationChannel{}
-	mi := &file_api_proto_msgTypes[122]
+	mi := &file_api_proto_msgTypes[124]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10056,7 +10137,7 @@ func (x *NotificationChannel) String() string {
 func (*NotificationChannel) ProtoMessage() {}
 
 func (x *NotificationChannel) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[122]
+	mi := &file_api_proto_msgTypes[124]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10069,7 +10150,7 @@ func (x *NotificationChannel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NotificationChannel.ProtoReflect.Descriptor instead.
 func (*NotificationChannel) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{122}
+	return file_api_proto_rawDescGZIP(), []int{124}
 }
 
 func (x *NotificationChannel) GetChannelId() int64 {
@@ -10088,7 +10169,7 @@ type NotificationClan struct {
 
 func (x *NotificationClan) Reset() {
 	*x = NotificationClan{}
-	mi := &file_api_proto_msgTypes[123]
+	mi := &file_api_proto_msgTypes[125]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10100,7 +10181,7 @@ func (x *NotificationClan) String() string {
 func (*NotificationClan) ProtoMessage() {}
 
 func (x *NotificationClan) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[123]
+	mi := &file_api_proto_msgTypes[125]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10113,7 +10194,7 @@ func (x *NotificationClan) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NotificationClan.ProtoReflect.Descriptor instead.
 func (*NotificationClan) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{123}
+	return file_api_proto_rawDescGZIP(), []int{125}
 }
 
 func (x *NotificationClan) GetClanId() int64 {
@@ -10133,7 +10214,7 @@ type NotificationSettingList struct {
 
 func (x *NotificationSettingList) Reset() {
 	*x = NotificationSettingList{}
-	mi := &file_api_proto_msgTypes[124]
+	mi := &file_api_proto_msgTypes[126]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10145,7 +10226,7 @@ func (x *NotificationSettingList) String() string {
 func (*NotificationSettingList) ProtoMessage() {}
 
 func (x *NotificationSettingList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[124]
+	mi := &file_api_proto_msgTypes[126]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10158,7 +10239,7 @@ func (x *NotificationSettingList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NotificationSettingList.ProtoReflect.Descriptor instead.
 func (*NotificationSettingList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{124}
+	return file_api_proto_rawDescGZIP(), []int{126}
 }
 
 func (x *NotificationSettingList) GetNotificationSetting() []*NotificationSetting {
@@ -10182,7 +10263,7 @@ type SetNotificationRequest struct {
 
 func (x *SetNotificationRequest) Reset() {
 	*x = SetNotificationRequest{}
-	mi := &file_api_proto_msgTypes[125]
+	mi := &file_api_proto_msgTypes[127]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10194,7 +10275,7 @@ func (x *SetNotificationRequest) String() string {
 func (*SetNotificationRequest) ProtoMessage() {}
 
 func (x *SetNotificationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[125]
+	mi := &file_api_proto_msgTypes[127]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10207,7 +10288,7 @@ func (x *SetNotificationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetNotificationRequest.ProtoReflect.Descriptor instead.
 func (*SetNotificationRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{125}
+	return file_api_proto_rawDescGZIP(), []int{127}
 }
 
 func (x *SetNotificationRequest) GetChannelCategoryId() int64 {
@@ -10242,7 +10323,7 @@ type PinMessageRequest struct {
 
 func (x *PinMessageRequest) Reset() {
 	*x = PinMessageRequest{}
-	mi := &file_api_proto_msgTypes[126]
+	mi := &file_api_proto_msgTypes[128]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10254,7 +10335,7 @@ func (x *PinMessageRequest) String() string {
 func (*PinMessageRequest) ProtoMessage() {}
 
 func (x *PinMessageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[126]
+	mi := &file_api_proto_msgTypes[128]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10267,7 +10348,7 @@ func (x *PinMessageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PinMessageRequest.ProtoReflect.Descriptor instead.
 func (*PinMessageRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{126}
+	return file_api_proto_rawDescGZIP(), []int{128}
 }
 
 func (x *PinMessageRequest) GetMessageId() int64 {
@@ -10305,7 +10386,7 @@ type SetMuteRequest struct {
 
 func (x *SetMuteRequest) Reset() {
 	*x = SetMuteRequest{}
-	mi := &file_api_proto_msgTypes[127]
+	mi := &file_api_proto_msgTypes[129]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10317,7 +10398,7 @@ func (x *SetMuteRequest) String() string {
 func (*SetMuteRequest) ProtoMessage() {}
 
 func (x *SetMuteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[127]
+	mi := &file_api_proto_msgTypes[129]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10330,7 +10411,7 @@ func (x *SetMuteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetMuteRequest.ProtoReflect.Descriptor instead.
 func (*SetMuteRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{127}
+	return file_api_proto_rawDescGZIP(), []int{129}
 }
 
 func (x *SetMuteRequest) GetId() int64 {
@@ -10370,7 +10451,7 @@ type NotificationChannelCategorySettingList struct {
 
 func (x *NotificationChannelCategorySettingList) Reset() {
 	*x = NotificationChannelCategorySettingList{}
-	mi := &file_api_proto_msgTypes[128]
+	mi := &file_api_proto_msgTypes[130]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10382,7 +10463,7 @@ func (x *NotificationChannelCategorySettingList) String() string {
 func (*NotificationChannelCategorySettingList) ProtoMessage() {}
 
 func (x *NotificationChannelCategorySettingList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[128]
+	mi := &file_api_proto_msgTypes[130]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10395,7 +10476,7 @@ func (x *NotificationChannelCategorySettingList) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use NotificationChannelCategorySettingList.ProtoReflect.Descriptor instead.
 func (*NotificationChannelCategorySettingList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{128}
+	return file_api_proto_rawDescGZIP(), []int{130}
 }
 
 func (x *NotificationChannelCategorySettingList) GetNotificationChannelCategorySettingsList() []*NotificationChannelCategorySetting {
@@ -10420,7 +10501,7 @@ type NotificationChannelCategorySetting struct {
 
 func (x *NotificationChannelCategorySetting) Reset() {
 	*x = NotificationChannelCategorySetting{}
-	mi := &file_api_proto_msgTypes[129]
+	mi := &file_api_proto_msgTypes[131]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10432,7 +10513,7 @@ func (x *NotificationChannelCategorySetting) String() string {
 func (*NotificationChannelCategorySetting) ProtoMessage() {}
 
 func (x *NotificationChannelCategorySetting) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[129]
+	mi := &file_api_proto_msgTypes[131]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10445,7 +10526,7 @@ func (x *NotificationChannelCategorySetting) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use NotificationChannelCategorySetting.ProtoReflect.Descriptor instead.
 func (*NotificationChannelCategorySetting) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{129}
+	return file_api_proto_rawDescGZIP(), []int{131}
 }
 
 func (x *NotificationChannelCategorySetting) GetId() int64 {
@@ -10495,7 +10576,7 @@ type SetDefaultNotificationRequest struct {
 
 func (x *SetDefaultNotificationRequest) Reset() {
 	*x = SetDefaultNotificationRequest{}
-	mi := &file_api_proto_msgTypes[130]
+	mi := &file_api_proto_msgTypes[132]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10507,7 +10588,7 @@ func (x *SetDefaultNotificationRequest) String() string {
 func (*SetDefaultNotificationRequest) ProtoMessage() {}
 
 func (x *SetDefaultNotificationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[130]
+	mi := &file_api_proto_msgTypes[132]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10520,7 +10601,7 @@ func (x *SetDefaultNotificationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetDefaultNotificationRequest.ProtoReflect.Descriptor instead.
 func (*SetDefaultNotificationRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{130}
+	return file_api_proto_rawDescGZIP(), []int{132}
 }
 
 func (x *SetDefaultNotificationRequest) GetClanId() int64 {
@@ -10557,7 +10638,7 @@ type RoleList struct {
 
 func (x *RoleList) Reset() {
 	*x = RoleList{}
-	mi := &file_api_proto_msgTypes[131]
+	mi := &file_api_proto_msgTypes[133]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10569,7 +10650,7 @@ func (x *RoleList) String() string {
 func (*RoleList) ProtoMessage() {}
 
 func (x *RoleList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[131]
+	mi := &file_api_proto_msgTypes[133]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10582,7 +10663,7 @@ func (x *RoleList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleList.ProtoReflect.Descriptor instead.
 func (*RoleList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{131}
+	return file_api_proto_rawDescGZIP(), []int{133}
 }
 
 func (x *RoleList) GetRoles() []*Role {
@@ -10609,7 +10690,7 @@ type EventList struct {
 
 func (x *EventList) Reset() {
 	*x = EventList{}
-	mi := &file_api_proto_msgTypes[132]
+	mi := &file_api_proto_msgTypes[134]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10621,7 +10702,7 @@ func (x *EventList) String() string {
 func (*EventList) ProtoMessage() {}
 
 func (x *EventList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[132]
+	mi := &file_api_proto_msgTypes[134]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10634,7 +10715,7 @@ func (x *EventList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventList.ProtoReflect.Descriptor instead.
 func (*EventList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{132}
+	return file_api_proto_rawDescGZIP(), []int{134}
 }
 
 func (x *EventList) GetEvents() []*EventManagement {
@@ -10657,7 +10738,7 @@ type PermissionList struct {
 
 func (x *PermissionList) Reset() {
 	*x = PermissionList{}
-	mi := &file_api_proto_msgTypes[133]
+	mi := &file_api_proto_msgTypes[135]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10669,7 +10750,7 @@ func (x *PermissionList) String() string {
 func (*PermissionList) ProtoMessage() {}
 
 func (x *PermissionList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[133]
+	mi := &file_api_proto_msgTypes[135]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10682,7 +10763,7 @@ func (x *PermissionList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PermissionList.ProtoReflect.Descriptor instead.
 func (*PermissionList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{133}
+	return file_api_proto_rawDescGZIP(), []int{135}
 }
 
 func (x *PermissionList) GetPermissions() []*Permission {
@@ -10709,7 +10790,7 @@ type ListPermissionsRequest struct {
 
 func (x *ListPermissionsRequest) Reset() {
 	*x = ListPermissionsRequest{}
-	mi := &file_api_proto_msgTypes[134]
+	mi := &file_api_proto_msgTypes[136]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10721,7 +10802,7 @@ func (x *ListPermissionsRequest) String() string {
 func (*ListPermissionsRequest) ProtoMessage() {}
 
 func (x *ListPermissionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[134]
+	mi := &file_api_proto_msgTypes[136]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10734,7 +10815,7 @@ func (x *ListPermissionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPermissionsRequest.ProtoReflect.Descriptor instead.
 func (*ListPermissionsRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{134}
+	return file_api_proto_rawDescGZIP(), []int{136}
 }
 
 func (x *ListPermissionsRequest) GetRoleId() int64 {
@@ -10758,7 +10839,7 @@ type ListRoleUsersRequest struct {
 
 func (x *ListRoleUsersRequest) Reset() {
 	*x = ListRoleUsersRequest{}
-	mi := &file_api_proto_msgTypes[135]
+	mi := &file_api_proto_msgTypes[137]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10770,7 +10851,7 @@ func (x *ListRoleUsersRequest) String() string {
 func (*ListRoleUsersRequest) ProtoMessage() {}
 
 func (x *ListRoleUsersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[135]
+	mi := &file_api_proto_msgTypes[137]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10783,7 +10864,7 @@ func (x *ListRoleUsersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRoleUsersRequest.ProtoReflect.Descriptor instead.
 func (*ListRoleUsersRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{135}
+	return file_api_proto_rawDescGZIP(), []int{137}
 }
 
 func (x *ListRoleUsersRequest) GetRoleId() int64 {
@@ -10820,7 +10901,7 @@ type ListPermissionOfUsersRequest struct {
 
 func (x *ListPermissionOfUsersRequest) Reset() {
 	*x = ListPermissionOfUsersRequest{}
-	mi := &file_api_proto_msgTypes[136]
+	mi := &file_api_proto_msgTypes[138]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10832,7 +10913,7 @@ func (x *ListPermissionOfUsersRequest) String() string {
 func (*ListPermissionOfUsersRequest) ProtoMessage() {}
 
 func (x *ListPermissionOfUsersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[136]
+	mi := &file_api_proto_msgTypes[138]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10845,7 +10926,7 @@ func (x *ListPermissionOfUsersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPermissionOfUsersRequest.ProtoReflect.Descriptor instead.
 func (*ListPermissionOfUsersRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{136}
+	return file_api_proto_rawDescGZIP(), []int{138}
 }
 
 func (x *ListPermissionOfUsersRequest) GetClanId() int64 {
@@ -10874,7 +10955,7 @@ type RoleUserList struct {
 
 func (x *RoleUserList) Reset() {
 	*x = RoleUserList{}
-	mi := &file_api_proto_msgTypes[137]
+	mi := &file_api_proto_msgTypes[139]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10886,7 +10967,7 @@ func (x *RoleUserList) String() string {
 func (*RoleUserList) ProtoMessage() {}
 
 func (x *RoleUserList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[137]
+	mi := &file_api_proto_msgTypes[139]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10899,7 +10980,7 @@ func (x *RoleUserList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleUserList.ProtoReflect.Descriptor instead.
 func (*RoleUserList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{137}
+	return file_api_proto_rawDescGZIP(), []int{139}
 }
 
 func (x *RoleUserList) GetRoleUsers() []*RoleUserList_RoleUser {
@@ -10928,7 +11009,7 @@ type UserEventRequest struct {
 
 func (x *UserEventRequest) Reset() {
 	*x = UserEventRequest{}
-	mi := &file_api_proto_msgTypes[138]
+	mi := &file_api_proto_msgTypes[140]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10940,7 +11021,7 @@ func (x *UserEventRequest) String() string {
 func (*UserEventRequest) ProtoMessage() {}
 
 func (x *UserEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[138]
+	mi := &file_api_proto_msgTypes[140]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10953,7 +11034,7 @@ func (x *UserEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserEventRequest.ProtoReflect.Descriptor instead.
 func (*UserEventRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{138}
+	return file_api_proto_rawDescGZIP(), []int{140}
 }
 
 func (x *UserEventRequest) GetClanId() int64 {
@@ -10980,7 +11061,7 @@ type ListEventsRequest struct {
 
 func (x *ListEventsRequest) Reset() {
 	*x = ListEventsRequest{}
-	mi := &file_api_proto_msgTypes[139]
+	mi := &file_api_proto_msgTypes[141]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10992,7 +11073,7 @@ func (x *ListEventsRequest) String() string {
 func (*ListEventsRequest) ProtoMessage() {}
 
 func (x *ListEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[139]
+	mi := &file_api_proto_msgTypes[141]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11005,7 +11086,7 @@ func (x *ListEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEventsRequest.ProtoReflect.Descriptor instead.
 func (*ListEventsRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{139}
+	return file_api_proto_rawDescGZIP(), []int{141}
 }
 
 func (x *ListEventsRequest) GetClanId() int64 {
@@ -11039,7 +11120,7 @@ type CreateRoleRequest struct {
 
 func (x *CreateRoleRequest) Reset() {
 	*x = CreateRoleRequest{}
-	mi := &file_api_proto_msgTypes[140]
+	mi := &file_api_proto_msgTypes[142]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11051,7 +11132,7 @@ func (x *CreateRoleRequest) String() string {
 func (*CreateRoleRequest) ProtoMessage() {}
 
 func (x *CreateRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[140]
+	mi := &file_api_proto_msgTypes[142]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11064,7 +11145,7 @@ func (x *CreateRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRoleRequest.ProtoReflect.Descriptor instead.
 func (*CreateRoleRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{140}
+	return file_api_proto_rawDescGZIP(), []int{142}
 }
 
 func (x *CreateRoleRequest) GetTitle() string {
@@ -11170,7 +11251,7 @@ type CreateEventRequest struct {
 
 func (x *CreateEventRequest) Reset() {
 	*x = CreateEventRequest{}
-	mi := &file_api_proto_msgTypes[141]
+	mi := &file_api_proto_msgTypes[143]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11182,7 +11263,7 @@ func (x *CreateEventRequest) String() string {
 func (*CreateEventRequest) ProtoMessage() {}
 
 func (x *CreateEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[141]
+	mi := &file_api_proto_msgTypes[143]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11195,7 +11276,7 @@ func (x *CreateEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateEventRequest.ProtoReflect.Descriptor instead.
 func (*CreateEventRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{141}
+	return file_api_proto_rawDescGZIP(), []int{143}
 }
 
 func (x *CreateEventRequest) GetTitle() string {
@@ -11339,7 +11420,7 @@ type UpdateEventRequest struct {
 
 func (x *UpdateEventRequest) Reset() {
 	*x = UpdateEventRequest{}
-	mi := &file_api_proto_msgTypes[142]
+	mi := &file_api_proto_msgTypes[144]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11351,7 +11432,7 @@ func (x *UpdateEventRequest) String() string {
 func (*UpdateEventRequest) ProtoMessage() {}
 
 func (x *UpdateEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[142]
+	mi := &file_api_proto_msgTypes[144]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11364,7 +11445,7 @@ func (x *UpdateEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateEventRequest.ProtoReflect.Descriptor instead.
 func (*UpdateEventRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{142}
+	return file_api_proto_rawDescGZIP(), []int{144}
 }
 
 func (x *UpdateEventRequest) GetTitle() string {
@@ -11475,7 +11556,7 @@ type DeleteRoleRequest struct {
 
 func (x *DeleteRoleRequest) Reset() {
 	*x = DeleteRoleRequest{}
-	mi := &file_api_proto_msgTypes[143]
+	mi := &file_api_proto_msgTypes[145]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11487,7 +11568,7 @@ func (x *DeleteRoleRequest) String() string {
 func (*DeleteRoleRequest) ProtoMessage() {}
 
 func (x *DeleteRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[143]
+	mi := &file_api_proto_msgTypes[145]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11500,7 +11581,7 @@ func (x *DeleteRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteRoleRequest.ProtoReflect.Descriptor instead.
 func (*DeleteRoleRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{143}
+	return file_api_proto_rawDescGZIP(), []int{145}
 }
 
 func (x *DeleteRoleRequest) GetRoleId() int64 {
@@ -11549,7 +11630,7 @@ type DeleteEventRequest struct {
 
 func (x *DeleteEventRequest) Reset() {
 	*x = DeleteEventRequest{}
-	mi := &file_api_proto_msgTypes[144]
+	mi := &file_api_proto_msgTypes[146]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11561,7 +11642,7 @@ func (x *DeleteEventRequest) String() string {
 func (*DeleteEventRequest) ProtoMessage() {}
 
 func (x *DeleteEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[144]
+	mi := &file_api_proto_msgTypes[146]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11574,7 +11655,7 @@ func (x *DeleteEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteEventRequest.ProtoReflect.Descriptor instead.
 func (*DeleteEventRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{144}
+	return file_api_proto_rawDescGZIP(), []int{146}
 }
 
 func (x *DeleteEventRequest) GetEventId() int64 {
@@ -11641,7 +11722,7 @@ type UpdateRoleRequest struct {
 
 func (x *UpdateRoleRequest) Reset() {
 	*x = UpdateRoleRequest{}
-	mi := &file_api_proto_msgTypes[145]
+	mi := &file_api_proto_msgTypes[147]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11653,7 +11734,7 @@ func (x *UpdateRoleRequest) String() string {
 func (*UpdateRoleRequest) ProtoMessage() {}
 
 func (x *UpdateRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[145]
+	mi := &file_api_proto_msgTypes[147]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11666,7 +11747,7 @@ func (x *UpdateRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateRoleRequest.ProtoReflect.Descriptor instead.
 func (*UpdateRoleRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{145}
+	return file_api_proto_rawDescGZIP(), []int{147}
 }
 
 func (x *UpdateRoleRequest) GetRoleId() int64 {
@@ -11780,7 +11861,7 @@ type UpdateRoleChannelRequest struct {
 
 func (x *UpdateRoleChannelRequest) Reset() {
 	*x = UpdateRoleChannelRequest{}
-	mi := &file_api_proto_msgTypes[146]
+	mi := &file_api_proto_msgTypes[148]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11792,7 +11873,7 @@ func (x *UpdateRoleChannelRequest) String() string {
 func (*UpdateRoleChannelRequest) ProtoMessage() {}
 
 func (x *UpdateRoleChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[146]
+	mi := &file_api_proto_msgTypes[148]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11805,7 +11886,7 @@ func (x *UpdateRoleChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateRoleChannelRequest.ProtoReflect.Descriptor instead.
 func (*UpdateRoleChannelRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{146}
+	return file_api_proto_rawDescGZIP(), []int{148}
 }
 
 func (x *UpdateRoleChannelRequest) GetRoleId() int64 {
@@ -11864,7 +11945,7 @@ type PermissionUpdate struct {
 
 func (x *PermissionUpdate) Reset() {
 	*x = PermissionUpdate{}
-	mi := &file_api_proto_msgTypes[147]
+	mi := &file_api_proto_msgTypes[149]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11876,7 +11957,7 @@ func (x *PermissionUpdate) String() string {
 func (*PermissionUpdate) ProtoMessage() {}
 
 func (x *PermissionUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[147]
+	mi := &file_api_proto_msgTypes[149]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11889,7 +11970,7 @@ func (x *PermissionUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PermissionUpdate.ProtoReflect.Descriptor instead.
 func (*PermissionUpdate) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{147}
+	return file_api_proto_rawDescGZIP(), []int{149}
 }
 
 func (x *PermissionUpdate) GetPermissionId() int64 {
@@ -11931,7 +12012,7 @@ type UploadAttachmentRequest struct {
 
 func (x *UploadAttachmentRequest) Reset() {
 	*x = UploadAttachmentRequest{}
-	mi := &file_api_proto_msgTypes[148]
+	mi := &file_api_proto_msgTypes[150]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11943,7 +12024,7 @@ func (x *UploadAttachmentRequest) String() string {
 func (*UploadAttachmentRequest) ProtoMessage() {}
 
 func (x *UploadAttachmentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[148]
+	mi := &file_api_proto_msgTypes[150]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11956,7 +12037,7 @@ func (x *UploadAttachmentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadAttachmentRequest.ProtoReflect.Descriptor instead.
 func (*UploadAttachmentRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{148}
+	return file_api_proto_rawDescGZIP(), []int{150}
 }
 
 func (x *UploadAttachmentRequest) GetFilename() string {
@@ -12008,7 +12089,7 @@ type ListMessageMentionRequest struct {
 
 func (x *ListMessageMentionRequest) Reset() {
 	*x = ListMessageMentionRequest{}
-	mi := &file_api_proto_msgTypes[149]
+	mi := &file_api_proto_msgTypes[151]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12020,7 +12101,7 @@ func (x *ListMessageMentionRequest) String() string {
 func (*ListMessageMentionRequest) ProtoMessage() {}
 
 func (x *ListMessageMentionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[149]
+	mi := &file_api_proto_msgTypes[151]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12033,7 +12114,7 @@ func (x *ListMessageMentionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMessageMentionRequest.ProtoReflect.Descriptor instead.
 func (*ListMessageMentionRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{149}
+	return file_api_proto_rawDescGZIP(), []int{151}
 }
 
 func (x *ListMessageMentionRequest) GetLimit() int32 {
@@ -12069,7 +12150,7 @@ type UploadAttachment struct {
 
 func (x *UploadAttachment) Reset() {
 	*x = UploadAttachment{}
-	mi := &file_api_proto_msgTypes[150]
+	mi := &file_api_proto_msgTypes[152]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12081,7 +12162,7 @@ func (x *UploadAttachment) String() string {
 func (*UploadAttachment) ProtoMessage() {}
 
 func (x *UploadAttachment) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[150]
+	mi := &file_api_proto_msgTypes[152]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12094,7 +12175,7 @@ func (x *UploadAttachment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadAttachment.ProtoReflect.Descriptor instead.
 func (*UploadAttachment) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{150}
+	return file_api_proto_rawDescGZIP(), []int{152}
 }
 
 func (x *UploadAttachment) GetFilename() string {
@@ -12125,7 +12206,7 @@ type MultipartUploadAttachment struct {
 
 func (x *MultipartUploadAttachment) Reset() {
 	*x = MultipartUploadAttachment{}
-	mi := &file_api_proto_msgTypes[151]
+	mi := &file_api_proto_msgTypes[153]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12137,7 +12218,7 @@ func (x *MultipartUploadAttachment) String() string {
 func (*MultipartUploadAttachment) ProtoMessage() {}
 
 func (x *MultipartUploadAttachment) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[151]
+	mi := &file_api_proto_msgTypes[153]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12150,7 +12231,7 @@ func (x *MultipartUploadAttachment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MultipartUploadAttachment.ProtoReflect.Descriptor instead.
 func (*MultipartUploadAttachment) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{151}
+	return file_api_proto_rawDescGZIP(), []int{153}
 }
 
 func (x *MultipartUploadAttachment) GetFilename() string {
@@ -12184,7 +12265,7 @@ type MultipartUploadAttachmentPart struct {
 
 func (x *MultipartUploadAttachmentPart) Reset() {
 	*x = MultipartUploadAttachmentPart{}
-	mi := &file_api_proto_msgTypes[152]
+	mi := &file_api_proto_msgTypes[154]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12196,7 +12277,7 @@ func (x *MultipartUploadAttachmentPart) String() string {
 func (*MultipartUploadAttachmentPart) ProtoMessage() {}
 
 func (x *MultipartUploadAttachmentPart) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[152]
+	mi := &file_api_proto_msgTypes[154]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12209,7 +12290,7 @@ func (x *MultipartUploadAttachmentPart) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MultipartUploadAttachmentPart.ProtoReflect.Descriptor instead.
 func (*MultipartUploadAttachmentPart) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{152}
+	return file_api_proto_rawDescGZIP(), []int{154}
 }
 
 func (x *MultipartUploadAttachmentPart) GetPartNumber() int32 {
@@ -12236,7 +12317,7 @@ type MultipartUploadAttachmentFinishRequest struct {
 
 func (x *MultipartUploadAttachmentFinishRequest) Reset() {
 	*x = MultipartUploadAttachmentFinishRequest{}
-	mi := &file_api_proto_msgTypes[153]
+	mi := &file_api_proto_msgTypes[155]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12248,7 +12329,7 @@ func (x *MultipartUploadAttachmentFinishRequest) String() string {
 func (*MultipartUploadAttachmentFinishRequest) ProtoMessage() {}
 
 func (x *MultipartUploadAttachmentFinishRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[153]
+	mi := &file_api_proto_msgTypes[155]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12261,7 +12342,7 @@ func (x *MultipartUploadAttachmentFinishRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use MultipartUploadAttachmentFinishRequest.ProtoReflect.Descriptor instead.
 func (*MultipartUploadAttachmentFinishRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{153}
+	return file_api_proto_rawDescGZIP(), []int{155}
 }
 
 func (x *MultipartUploadAttachmentFinishRequest) GetUploadId() string {
@@ -12293,7 +12374,7 @@ type SearchMessageRequest struct {
 
 func (x *SearchMessageRequest) Reset() {
 	*x = SearchMessageRequest{}
-	mi := &file_api_proto_msgTypes[154]
+	mi := &file_api_proto_msgTypes[156]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12305,7 +12386,7 @@ func (x *SearchMessageRequest) String() string {
 func (*SearchMessageRequest) ProtoMessage() {}
 
 func (x *SearchMessageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[154]
+	mi := &file_api_proto_msgTypes[156]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12318,7 +12399,7 @@ func (x *SearchMessageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchMessageRequest.ProtoReflect.Descriptor instead.
 func (*SearchMessageRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{154}
+	return file_api_proto_rawDescGZIP(), []int{156}
 }
 
 func (x *SearchMessageRequest) GetFilters() []*FilterParam {
@@ -12361,7 +12442,7 @@ type SortParam struct {
 
 func (x *SortParam) Reset() {
 	*x = SortParam{}
-	mi := &file_api_proto_msgTypes[155]
+	mi := &file_api_proto_msgTypes[157]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12373,7 +12454,7 @@ func (x *SortParam) String() string {
 func (*SortParam) ProtoMessage() {}
 
 func (x *SortParam) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[155]
+	mi := &file_api_proto_msgTypes[157]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12386,7 +12467,7 @@ func (x *SortParam) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SortParam.ProtoReflect.Descriptor instead.
 func (*SortParam) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{155}
+	return file_api_proto_rawDescGZIP(), []int{157}
 }
 
 func (x *SortParam) GetFieldName() string {
@@ -12415,7 +12496,7 @@ type FilterParam struct {
 
 func (x *FilterParam) Reset() {
 	*x = FilterParam{}
-	mi := &file_api_proto_msgTypes[156]
+	mi := &file_api_proto_msgTypes[158]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12427,7 +12508,7 @@ func (x *FilterParam) String() string {
 func (*FilterParam) ProtoMessage() {}
 
 func (x *FilterParam) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[156]
+	mi := &file_api_proto_msgTypes[158]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12440,7 +12521,7 @@ func (x *FilterParam) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FilterParam.ProtoReflect.Descriptor instead.
 func (*FilterParam) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{156}
+	return file_api_proto_rawDescGZIP(), []int{158}
 }
 
 func (x *FilterParam) GetFieldName() string {
@@ -12499,7 +12580,7 @@ type SearchMessageDocument struct {
 
 func (x *SearchMessageDocument) Reset() {
 	*x = SearchMessageDocument{}
-	mi := &file_api_proto_msgTypes[157]
+	mi := &file_api_proto_msgTypes[159]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12511,7 +12592,7 @@ func (x *SearchMessageDocument) String() string {
 func (*SearchMessageDocument) ProtoMessage() {}
 
 func (x *SearchMessageDocument) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[157]
+	mi := &file_api_proto_msgTypes[159]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12524,7 +12605,7 @@ func (x *SearchMessageDocument) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchMessageDocument.ProtoReflect.Descriptor instead.
 func (*SearchMessageDocument) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{157}
+	return file_api_proto_rawDescGZIP(), []int{159}
 }
 
 func (x *SearchMessageDocument) GetMessageId() string {
@@ -12658,7 +12739,7 @@ type SearchMessageResponse struct {
 
 func (x *SearchMessageResponse) Reset() {
 	*x = SearchMessageResponse{}
-	mi := &file_api_proto_msgTypes[158]
+	mi := &file_api_proto_msgTypes[160]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12670,7 +12751,7 @@ func (x *SearchMessageResponse) String() string {
 func (*SearchMessageResponse) ProtoMessage() {}
 
 func (x *SearchMessageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[158]
+	mi := &file_api_proto_msgTypes[160]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12683,7 +12764,7 @@ func (x *SearchMessageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchMessageResponse.ProtoReflect.Descriptor instead.
 func (*SearchMessageResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{158}
+	return file_api_proto_rawDescGZIP(), []int{160}
 }
 
 func (x *SearchMessageResponse) GetMessages() []*SearchMessageDocument {
@@ -12724,7 +12805,7 @@ type RegistrationEmailRequest struct {
 
 func (x *RegistrationEmailRequest) Reset() {
 	*x = RegistrationEmailRequest{}
-	mi := &file_api_proto_msgTypes[159]
+	mi := &file_api_proto_msgTypes[161]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12736,7 +12817,7 @@ func (x *RegistrationEmailRequest) String() string {
 func (*RegistrationEmailRequest) ProtoMessage() {}
 
 func (x *RegistrationEmailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[159]
+	mi := &file_api_proto_msgTypes[161]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12749,7 +12830,7 @@ func (x *RegistrationEmailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegistrationEmailRequest.ProtoReflect.Descriptor instead.
 func (*RegistrationEmailRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{159}
+	return file_api_proto_rawDescGZIP(), []int{161}
 }
 
 func (x *RegistrationEmailRequest) GetEmail() string {
@@ -12833,7 +12914,7 @@ type ClanEmoji struct {
 
 func (x *ClanEmoji) Reset() {
 	*x = ClanEmoji{}
-	mi := &file_api_proto_msgTypes[160]
+	mi := &file_api_proto_msgTypes[162]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12845,7 +12926,7 @@ func (x *ClanEmoji) String() string {
 func (*ClanEmoji) ProtoMessage() {}
 
 func (x *ClanEmoji) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[160]
+	mi := &file_api_proto_msgTypes[162]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12858,7 +12939,7 @@ func (x *ClanEmoji) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanEmoji.ProtoReflect.Descriptor instead.
 func (*ClanEmoji) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{160}
+	return file_api_proto_rawDescGZIP(), []int{162}
 }
 
 func (x *ClanEmoji) GetId() int64 {
@@ -12933,7 +13014,7 @@ type EmojiListedResponse struct {
 
 func (x *EmojiListedResponse) Reset() {
 	*x = EmojiListedResponse{}
-	mi := &file_api_proto_msgTypes[161]
+	mi := &file_api_proto_msgTypes[163]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12945,7 +13026,7 @@ func (x *EmojiListedResponse) String() string {
 func (*EmojiListedResponse) ProtoMessage() {}
 
 func (x *EmojiListedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[161]
+	mi := &file_api_proto_msgTypes[163]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12958,7 +13039,7 @@ func (x *EmojiListedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmojiListedResponse.ProtoReflect.Descriptor instead.
 func (*EmojiListedResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{161}
+	return file_api_proto_rawDescGZIP(), []int{163}
 }
 
 func (x *EmojiListedResponse) GetEmojiList() []*ClanEmoji {
@@ -12977,7 +13058,7 @@ type StickerListedResponse struct {
 
 func (x *StickerListedResponse) Reset() {
 	*x = StickerListedResponse{}
-	mi := &file_api_proto_msgTypes[162]
+	mi := &file_api_proto_msgTypes[164]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12989,7 +13070,7 @@ func (x *StickerListedResponse) String() string {
 func (*StickerListedResponse) ProtoMessage() {}
 
 func (x *StickerListedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[162]
+	mi := &file_api_proto_msgTypes[164]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13002,7 +13083,7 @@ func (x *StickerListedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StickerListedResponse.ProtoReflect.Descriptor instead.
 func (*StickerListedResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{162}
+	return file_api_proto_rawDescGZIP(), []int{164}
 }
 
 func (x *StickerListedResponse) GetStickers() []*ClanSticker {
@@ -13032,7 +13113,7 @@ type ClanSticker struct {
 
 func (x *ClanSticker) Reset() {
 	*x = ClanSticker{}
-	mi := &file_api_proto_msgTypes[163]
+	mi := &file_api_proto_msgTypes[165]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13044,7 +13125,7 @@ func (x *ClanSticker) String() string {
 func (*ClanSticker) ProtoMessage() {}
 
 func (x *ClanSticker) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[163]
+	mi := &file_api_proto_msgTypes[165]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13057,7 +13138,7 @@ func (x *ClanSticker) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanSticker.ProtoReflect.Descriptor instead.
 func (*ClanSticker) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{163}
+	return file_api_proto_rawDescGZIP(), []int{165}
 }
 
 func (x *ClanSticker) GetId() int64 {
@@ -13147,7 +13228,7 @@ type AllUsersAddChannelRequest struct {
 
 func (x *AllUsersAddChannelRequest) Reset() {
 	*x = AllUsersAddChannelRequest{}
-	mi := &file_api_proto_msgTypes[164]
+	mi := &file_api_proto_msgTypes[166]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13159,7 +13240,7 @@ func (x *AllUsersAddChannelRequest) String() string {
 func (*AllUsersAddChannelRequest) ProtoMessage() {}
 
 func (x *AllUsersAddChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[164]
+	mi := &file_api_proto_msgTypes[166]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13172,7 +13253,7 @@ func (x *AllUsersAddChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AllUsersAddChannelRequest.ProtoReflect.Descriptor instead.
 func (*AllUsersAddChannelRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{164}
+	return file_api_proto_rawDescGZIP(), []int{166}
 }
 
 func (x *AllUsersAddChannelRequest) GetChannelId() int64 {
@@ -13204,7 +13285,7 @@ type AllUsersAddChannelResponse struct {
 
 func (x *AllUsersAddChannelResponse) Reset() {
 	*x = AllUsersAddChannelResponse{}
-	mi := &file_api_proto_msgTypes[165]
+	mi := &file_api_proto_msgTypes[167]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13216,7 +13297,7 @@ func (x *AllUsersAddChannelResponse) String() string {
 func (*AllUsersAddChannelResponse) ProtoMessage() {}
 
 func (x *AllUsersAddChannelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[165]
+	mi := &file_api_proto_msgTypes[167]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13229,7 +13310,7 @@ func (x *AllUsersAddChannelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AllUsersAddChannelResponse.ProtoReflect.Descriptor instead.
 func (*AllUsersAddChannelResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{165}
+	return file_api_proto_rawDescGZIP(), []int{167}
 }
 
 func (x *AllUsersAddChannelResponse) GetChannelId() int64 {
@@ -13295,7 +13376,7 @@ type ClanEmojiCreateRequest struct {
 
 func (x *ClanEmojiCreateRequest) Reset() {
 	*x = ClanEmojiCreateRequest{}
-	mi := &file_api_proto_msgTypes[166]
+	mi := &file_api_proto_msgTypes[168]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13307,7 +13388,7 @@ func (x *ClanEmojiCreateRequest) String() string {
 func (*ClanEmojiCreateRequest) ProtoMessage() {}
 
 func (x *ClanEmojiCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[166]
+	mi := &file_api_proto_msgTypes[168]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13320,7 +13401,7 @@ func (x *ClanEmojiCreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanEmojiCreateRequest.ProtoReflect.Descriptor instead.
 func (*ClanEmojiCreateRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{166}
+	return file_api_proto_rawDescGZIP(), []int{168}
 }
 
 func (x *ClanEmojiCreateRequest) GetClanId() int64 {
@@ -13374,7 +13455,7 @@ type ClanEmojiGetByClanIdRequest struct {
 
 func (x *ClanEmojiGetByClanIdRequest) Reset() {
 	*x = ClanEmojiGetByClanIdRequest{}
-	mi := &file_api_proto_msgTypes[167]
+	mi := &file_api_proto_msgTypes[169]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13386,7 +13467,7 @@ func (x *ClanEmojiGetByClanIdRequest) String() string {
 func (*ClanEmojiGetByClanIdRequest) ProtoMessage() {}
 
 func (x *ClanEmojiGetByClanIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[167]
+	mi := &file_api_proto_msgTypes[169]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13399,7 +13480,7 @@ func (x *ClanEmojiGetByClanIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanEmojiGetByClanIdRequest.ProtoReflect.Descriptor instead.
 func (*ClanEmojiGetByClanIdRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{167}
+	return file_api_proto_rawDescGZIP(), []int{169}
 }
 
 func (x *ClanEmojiGetByClanIdRequest) GetClanId() int64 {
@@ -13420,7 +13501,7 @@ type ClanEmojiDeleteRequest struct {
 
 func (x *ClanEmojiDeleteRequest) Reset() {
 	*x = ClanEmojiDeleteRequest{}
-	mi := &file_api_proto_msgTypes[168]
+	mi := &file_api_proto_msgTypes[170]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13432,7 +13513,7 @@ func (x *ClanEmojiDeleteRequest) String() string {
 func (*ClanEmojiDeleteRequest) ProtoMessage() {}
 
 func (x *ClanEmojiDeleteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[168]
+	mi := &file_api_proto_msgTypes[170]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13445,7 +13526,7 @@ func (x *ClanEmojiDeleteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanEmojiDeleteRequest.ProtoReflect.Descriptor instead.
 func (*ClanEmojiDeleteRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{168}
+	return file_api_proto_rawDescGZIP(), []int{170}
 }
 
 func (x *ClanEmojiDeleteRequest) GetId() int64 {
@@ -13480,7 +13561,7 @@ type ClanEmojiUpdateRequest struct {
 
 func (x *ClanEmojiUpdateRequest) Reset() {
 	*x = ClanEmojiUpdateRequest{}
-	mi := &file_api_proto_msgTypes[169]
+	mi := &file_api_proto_msgTypes[171]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13492,7 +13573,7 @@ func (x *ClanEmojiUpdateRequest) String() string {
 func (*ClanEmojiUpdateRequest) ProtoMessage() {}
 
 func (x *ClanEmojiUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[169]
+	mi := &file_api_proto_msgTypes[171]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13505,7 +13586,7 @@ func (x *ClanEmojiUpdateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanEmojiUpdateRequest.ProtoReflect.Descriptor instead.
 func (*ClanEmojiUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{169}
+	return file_api_proto_rawDescGZIP(), []int{171}
 }
 
 func (x *ClanEmojiUpdateRequest) GetId() int64 {
@@ -13549,7 +13630,7 @@ type Webhook struct {
 
 func (x *Webhook) Reset() {
 	*x = Webhook{}
-	mi := &file_api_proto_msgTypes[170]
+	mi := &file_api_proto_msgTypes[172]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13561,7 +13642,7 @@ func (x *Webhook) String() string {
 func (*Webhook) ProtoMessage() {}
 
 func (x *Webhook) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[170]
+	mi := &file_api_proto_msgTypes[172]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13574,7 +13655,7 @@ func (x *Webhook) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Webhook.ProtoReflect.Descriptor instead.
 func (*Webhook) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{170}
+	return file_api_proto_rawDescGZIP(), []int{172}
 }
 
 func (x *Webhook) GetId() int64 {
@@ -13666,7 +13747,7 @@ type WebhookCreateRequest struct {
 
 func (x *WebhookCreateRequest) Reset() {
 	*x = WebhookCreateRequest{}
-	mi := &file_api_proto_msgTypes[171]
+	mi := &file_api_proto_msgTypes[173]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13678,7 +13759,7 @@ func (x *WebhookCreateRequest) String() string {
 func (*WebhookCreateRequest) ProtoMessage() {}
 
 func (x *WebhookCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[171]
+	mi := &file_api_proto_msgTypes[173]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13691,7 +13772,7 @@ func (x *WebhookCreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WebhookCreateRequest.ProtoReflect.Descriptor instead.
 func (*WebhookCreateRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{171}
+	return file_api_proto_rawDescGZIP(), []int{173}
 }
 
 func (x *WebhookCreateRequest) GetWebhookName() string {
@@ -13731,7 +13812,7 @@ type WebhookListRequestById struct {
 
 func (x *WebhookListRequestById) Reset() {
 	*x = WebhookListRequestById{}
-	mi := &file_api_proto_msgTypes[172]
+	mi := &file_api_proto_msgTypes[174]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13743,7 +13824,7 @@ func (x *WebhookListRequestById) String() string {
 func (*WebhookListRequestById) ProtoMessage() {}
 
 func (x *WebhookListRequestById) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[172]
+	mi := &file_api_proto_msgTypes[174]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13756,7 +13837,7 @@ func (x *WebhookListRequestById) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WebhookListRequestById.ProtoReflect.Descriptor instead.
 func (*WebhookListRequestById) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{172}
+	return file_api_proto_rawDescGZIP(), []int{174}
 }
 
 func (x *WebhookListRequestById) GetId() int64 {
@@ -13786,7 +13867,7 @@ type WebhookUpdateRequestById struct {
 
 func (x *WebhookUpdateRequestById) Reset() {
 	*x = WebhookUpdateRequestById{}
-	mi := &file_api_proto_msgTypes[173]
+	mi := &file_api_proto_msgTypes[175]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13798,7 +13879,7 @@ func (x *WebhookUpdateRequestById) String() string {
 func (*WebhookUpdateRequestById) ProtoMessage() {}
 
 func (x *WebhookUpdateRequestById) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[173]
+	mi := &file_api_proto_msgTypes[175]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13811,7 +13892,7 @@ func (x *WebhookUpdateRequestById) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WebhookUpdateRequestById.ProtoReflect.Descriptor instead.
 func (*WebhookUpdateRequestById) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{173}
+	return file_api_proto_rawDescGZIP(), []int{175}
 }
 
 func (x *WebhookUpdateRequestById) GetId() int64 {
@@ -13867,7 +13948,7 @@ type WebhookDeleteRequestById struct {
 
 func (x *WebhookDeleteRequestById) Reset() {
 	*x = WebhookDeleteRequestById{}
-	mi := &file_api_proto_msgTypes[174]
+	mi := &file_api_proto_msgTypes[176]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13879,7 +13960,7 @@ func (x *WebhookDeleteRequestById) String() string {
 func (*WebhookDeleteRequestById) ProtoMessage() {}
 
 func (x *WebhookDeleteRequestById) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[174]
+	mi := &file_api_proto_msgTypes[176]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13892,7 +13973,7 @@ func (x *WebhookDeleteRequestById) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WebhookDeleteRequestById.ProtoReflect.Descriptor instead.
 func (*WebhookDeleteRequestById) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{174}
+	return file_api_proto_rawDescGZIP(), []int{176}
 }
 
 func (x *WebhookDeleteRequestById) GetId() int64 {
@@ -13926,7 +14007,7 @@ type WebhookListRequest struct {
 
 func (x *WebhookListRequest) Reset() {
 	*x = WebhookListRequest{}
-	mi := &file_api_proto_msgTypes[175]
+	mi := &file_api_proto_msgTypes[177]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13938,7 +14019,7 @@ func (x *WebhookListRequest) String() string {
 func (*WebhookListRequest) ProtoMessage() {}
 
 func (x *WebhookListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[175]
+	mi := &file_api_proto_msgTypes[177]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13951,7 +14032,7 @@ func (x *WebhookListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WebhookListRequest.ProtoReflect.Descriptor instead.
 func (*WebhookListRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{175}
+	return file_api_proto_rawDescGZIP(), []int{177}
 }
 
 func (x *WebhookListRequest) GetChannelId() int64 {
@@ -13977,7 +14058,7 @@ type WebhookListResponse struct {
 
 func (x *WebhookListResponse) Reset() {
 	*x = WebhookListResponse{}
-	mi := &file_api_proto_msgTypes[176]
+	mi := &file_api_proto_msgTypes[178]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13989,7 +14070,7 @@ func (x *WebhookListResponse) String() string {
 func (*WebhookListResponse) ProtoMessage() {}
 
 func (x *WebhookListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[176]
+	mi := &file_api_proto_msgTypes[178]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14002,7 +14083,7 @@ func (x *WebhookListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WebhookListResponse.ProtoReflect.Descriptor instead.
 func (*WebhookListResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{176}
+	return file_api_proto_rawDescGZIP(), []int{178}
 }
 
 func (x *WebhookListResponse) GetWebhooks() []*Webhook {
@@ -14024,7 +14105,7 @@ type WebhookGenerateResponse struct {
 
 func (x *WebhookGenerateResponse) Reset() {
 	*x = WebhookGenerateResponse{}
-	mi := &file_api_proto_msgTypes[177]
+	mi := &file_api_proto_msgTypes[179]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14036,7 +14117,7 @@ func (x *WebhookGenerateResponse) String() string {
 func (*WebhookGenerateResponse) ProtoMessage() {}
 
 func (x *WebhookGenerateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[177]
+	mi := &file_api_proto_msgTypes[179]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14049,7 +14130,7 @@ func (x *WebhookGenerateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WebhookGenerateResponse.ProtoReflect.Descriptor instead.
 func (*WebhookGenerateResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{177}
+	return file_api_proto_rawDescGZIP(), []int{179}
 }
 
 func (x *WebhookGenerateResponse) GetUrl() string {
@@ -14089,7 +14170,7 @@ type CheckDuplicateClanNameRequest struct {
 
 func (x *CheckDuplicateClanNameRequest) Reset() {
 	*x = CheckDuplicateClanNameRequest{}
-	mi := &file_api_proto_msgTypes[178]
+	mi := &file_api_proto_msgTypes[180]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14101,7 +14182,7 @@ func (x *CheckDuplicateClanNameRequest) String() string {
 func (*CheckDuplicateClanNameRequest) ProtoMessage() {}
 
 func (x *CheckDuplicateClanNameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[178]
+	mi := &file_api_proto_msgTypes[180]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14114,7 +14195,7 @@ func (x *CheckDuplicateClanNameRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckDuplicateClanNameRequest.ProtoReflect.Descriptor instead.
 func (*CheckDuplicateClanNameRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{178}
+	return file_api_proto_rawDescGZIP(), []int{180}
 }
 
 func (x *CheckDuplicateClanNameRequest) GetClanName() string {
@@ -14133,7 +14214,7 @@ type CheckDuplicateClanNameResponse struct {
 
 func (x *CheckDuplicateClanNameResponse) Reset() {
 	*x = CheckDuplicateClanNameResponse{}
-	mi := &file_api_proto_msgTypes[179]
+	mi := &file_api_proto_msgTypes[181]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14145,7 +14226,7 @@ func (x *CheckDuplicateClanNameResponse) String() string {
 func (*CheckDuplicateClanNameResponse) ProtoMessage() {}
 
 func (x *CheckDuplicateClanNameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[179]
+	mi := &file_api_proto_msgTypes[181]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14158,7 +14239,7 @@ func (x *CheckDuplicateClanNameResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckDuplicateClanNameResponse.ProtoReflect.Descriptor instead.
 func (*CheckDuplicateClanNameResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{179}
+	return file_api_proto_rawDescGZIP(), []int{181}
 }
 
 func (x *CheckDuplicateClanNameResponse) GetIsDuplicate() bool {
@@ -14179,7 +14260,7 @@ type CheckDuplicateNameRequest struct {
 
 func (x *CheckDuplicateNameRequest) Reset() {
 	*x = CheckDuplicateNameRequest{}
-	mi := &file_api_proto_msgTypes[180]
+	mi := &file_api_proto_msgTypes[182]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14191,7 +14272,7 @@ func (x *CheckDuplicateNameRequest) String() string {
 func (*CheckDuplicateNameRequest) ProtoMessage() {}
 
 func (x *CheckDuplicateNameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[180]
+	mi := &file_api_proto_msgTypes[182]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14204,7 +14285,7 @@ func (x *CheckDuplicateNameRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckDuplicateNameRequest.ProtoReflect.Descriptor instead.
 func (*CheckDuplicateNameRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{180}
+	return file_api_proto_rawDescGZIP(), []int{182}
 }
 
 func (x *CheckDuplicateNameRequest) GetName() string {
@@ -14237,7 +14318,7 @@ type CheckDuplicateNameResponse struct {
 
 func (x *CheckDuplicateNameResponse) Reset() {
 	*x = CheckDuplicateNameResponse{}
-	mi := &file_api_proto_msgTypes[181]
+	mi := &file_api_proto_msgTypes[183]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14249,7 +14330,7 @@ func (x *CheckDuplicateNameResponse) String() string {
 func (*CheckDuplicateNameResponse) ProtoMessage() {}
 
 func (x *CheckDuplicateNameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[181]
+	mi := &file_api_proto_msgTypes[183]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14262,7 +14343,7 @@ func (x *CheckDuplicateNameResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckDuplicateNameResponse.ProtoReflect.Descriptor instead.
 func (*CheckDuplicateNameResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{181}
+	return file_api_proto_rawDescGZIP(), []int{183}
 }
 
 func (x *CheckDuplicateNameResponse) GetIsDuplicate() bool {
@@ -14290,7 +14371,7 @@ type ClanStickerAddRequest struct {
 
 func (x *ClanStickerAddRequest) Reset() {
 	*x = ClanStickerAddRequest{}
-	mi := &file_api_proto_msgTypes[182]
+	mi := &file_api_proto_msgTypes[184]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14302,7 +14383,7 @@ func (x *ClanStickerAddRequest) String() string {
 func (*ClanStickerAddRequest) ProtoMessage() {}
 
 func (x *ClanStickerAddRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[182]
+	mi := &file_api_proto_msgTypes[184]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14315,7 +14396,7 @@ func (x *ClanStickerAddRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanStickerAddRequest.ProtoReflect.Descriptor instead.
 func (*ClanStickerAddRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{182}
+	return file_api_proto_rawDescGZIP(), []int{184}
 }
 
 func (x *ClanStickerAddRequest) GetSource() string {
@@ -14376,7 +14457,7 @@ type ClanStickerListByClanIdRequest struct {
 
 func (x *ClanStickerListByClanIdRequest) Reset() {
 	*x = ClanStickerListByClanIdRequest{}
-	mi := &file_api_proto_msgTypes[183]
+	mi := &file_api_proto_msgTypes[185]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14388,7 +14469,7 @@ func (x *ClanStickerListByClanIdRequest) String() string {
 func (*ClanStickerListByClanIdRequest) ProtoMessage() {}
 
 func (x *ClanStickerListByClanIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[183]
+	mi := &file_api_proto_msgTypes[185]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14401,7 +14482,7 @@ func (x *ClanStickerListByClanIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanStickerListByClanIdRequest.ProtoReflect.Descriptor instead.
 func (*ClanStickerListByClanIdRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{183}
+	return file_api_proto_rawDescGZIP(), []int{185}
 }
 
 func (x *ClanStickerListByClanIdRequest) GetClanId() int64 {
@@ -14424,7 +14505,7 @@ type ClanStickerUpdateByIdRequest struct {
 
 func (x *ClanStickerUpdateByIdRequest) Reset() {
 	*x = ClanStickerUpdateByIdRequest{}
-	mi := &file_api_proto_msgTypes[184]
+	mi := &file_api_proto_msgTypes[186]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14436,7 +14517,7 @@ func (x *ClanStickerUpdateByIdRequest) String() string {
 func (*ClanStickerUpdateByIdRequest) ProtoMessage() {}
 
 func (x *ClanStickerUpdateByIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[184]
+	mi := &file_api_proto_msgTypes[186]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14449,7 +14530,7 @@ func (x *ClanStickerUpdateByIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanStickerUpdateByIdRequest.ProtoReflect.Descriptor instead.
 func (*ClanStickerUpdateByIdRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{184}
+	return file_api_proto_rawDescGZIP(), []int{186}
 }
 
 func (x *ClanStickerUpdateByIdRequest) GetId() int64 {
@@ -14498,7 +14579,7 @@ type ClanStickerDeleteRequest struct {
 
 func (x *ClanStickerDeleteRequest) Reset() {
 	*x = ClanStickerDeleteRequest{}
-	mi := &file_api_proto_msgTypes[185]
+	mi := &file_api_proto_msgTypes[187]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14510,7 +14591,7 @@ func (x *ClanStickerDeleteRequest) String() string {
 func (*ClanStickerDeleteRequest) ProtoMessage() {}
 
 func (x *ClanStickerDeleteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[185]
+	mi := &file_api_proto_msgTypes[187]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14523,7 +14604,7 @@ func (x *ClanStickerDeleteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanStickerDeleteRequest.ProtoReflect.Descriptor instead.
 func (*ClanStickerDeleteRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{185}
+	return file_api_proto_rawDescGZIP(), []int{187}
 }
 
 func (x *ClanStickerDeleteRequest) GetId() int64 {
@@ -14558,7 +14639,7 @@ type ChangeChannelCategoryRequest struct {
 
 func (x *ChangeChannelCategoryRequest) Reset() {
 	*x = ChangeChannelCategoryRequest{}
-	mi := &file_api_proto_msgTypes[186]
+	mi := &file_api_proto_msgTypes[188]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14570,7 +14651,7 @@ func (x *ChangeChannelCategoryRequest) String() string {
 func (*ChangeChannelCategoryRequest) ProtoMessage() {}
 
 func (x *ChangeChannelCategoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[186]
+	mi := &file_api_proto_msgTypes[188]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14583,7 +14664,7 @@ func (x *ChangeChannelCategoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangeChannelCategoryRequest.ProtoReflect.Descriptor instead.
 func (*ChangeChannelCategoryRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{186}
+	return file_api_proto_rawDescGZIP(), []int{188}
 }
 
 func (x *ChangeChannelCategoryRequest) GetClanId() int64 {
@@ -14638,7 +14719,7 @@ type App struct {
 
 func (x *App) Reset() {
 	*x = App{}
-	mi := &file_api_proto_msgTypes[187]
+	mi := &file_api_proto_msgTypes[189]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14650,7 +14731,7 @@ func (x *App) String() string {
 func (*App) ProtoMessage() {}
 
 func (x *App) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[187]
+	mi := &file_api_proto_msgTypes[189]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14663,7 +14744,7 @@ func (x *App) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use App.ProtoReflect.Descriptor instead.
 func (*App) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{187}
+	return file_api_proto_rawDescGZIP(), []int{189}
 }
 
 func (x *App) GetId() int64 {
@@ -14756,7 +14837,7 @@ type AppDeleteRequest struct {
 
 func (x *AppDeleteRequest) Reset() {
 	*x = AppDeleteRequest{}
-	mi := &file_api_proto_msgTypes[188]
+	mi := &file_api_proto_msgTypes[190]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14768,7 +14849,7 @@ func (x *AppDeleteRequest) String() string {
 func (*AppDeleteRequest) ProtoMessage() {}
 
 func (x *AppDeleteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[188]
+	mi := &file_api_proto_msgTypes[190]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14781,7 +14862,7 @@ func (x *AppDeleteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AppDeleteRequest.ProtoReflect.Descriptor instead.
 func (*AppDeleteRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{188}
+	return file_api_proto_rawDescGZIP(), []int{190}
 }
 
 func (x *AppDeleteRequest) GetId() int64 {
@@ -14813,7 +14894,7 @@ type AppList struct {
 
 func (x *AppList) Reset() {
 	*x = AppList{}
-	mi := &file_api_proto_msgTypes[189]
+	mi := &file_api_proto_msgTypes[191]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14825,7 +14906,7 @@ func (x *AppList) String() string {
 func (*AppList) ProtoMessage() {}
 
 func (x *AppList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[189]
+	mi := &file_api_proto_msgTypes[191]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14838,7 +14919,7 @@ func (x *AppList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AppList.ProtoReflect.Descriptor instead.
 func (*AppList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{189}
+	return file_api_proto_rawDescGZIP(), []int{191}
 }
 
 func (x *AppList) GetApps() []*App {
@@ -14887,7 +14968,7 @@ type AddAppRequest struct {
 
 func (x *AddAppRequest) Reset() {
 	*x = AddAppRequest{}
-	mi := &file_api_proto_msgTypes[190]
+	mi := &file_api_proto_msgTypes[192]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14899,7 +14980,7 @@ func (x *AddAppRequest) String() string {
 func (*AddAppRequest) ProtoMessage() {}
 
 func (x *AddAppRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[190]
+	mi := &file_api_proto_msgTypes[192]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14912,7 +14993,7 @@ func (x *AddAppRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddAppRequest.ProtoReflect.Descriptor instead.
 func (*AddAppRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{190}
+	return file_api_proto_rawDescGZIP(), []int{192}
 }
 
 func (x *AddAppRequest) GetAppname() string {
@@ -14986,7 +15067,7 @@ type ListAppsRequest struct {
 
 func (x *ListAppsRequest) Reset() {
 	*x = ListAppsRequest{}
-	mi := &file_api_proto_msgTypes[191]
+	mi := &file_api_proto_msgTypes[193]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14998,7 +15079,7 @@ func (x *ListAppsRequest) String() string {
 func (*ListAppsRequest) ProtoMessage() {}
 
 func (x *ListAppsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[191]
+	mi := &file_api_proto_msgTypes[193]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15011,7 +15092,7 @@ func (x *ListAppsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAppsRequest.ProtoReflect.Descriptor instead.
 func (*ListAppsRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{191}
+	return file_api_proto_rawDescGZIP(), []int{193}
 }
 
 func (x *ListAppsRequest) GetFilter() string {
@@ -15060,7 +15141,7 @@ type UpdateAppRequest struct {
 
 func (x *UpdateAppRequest) Reset() {
 	*x = UpdateAppRequest{}
-	mi := &file_api_proto_msgTypes[192]
+	mi := &file_api_proto_msgTypes[194]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15072,7 +15153,7 @@ func (x *UpdateAppRequest) String() string {
 func (*UpdateAppRequest) ProtoMessage() {}
 
 func (x *UpdateAppRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[192]
+	mi := &file_api_proto_msgTypes[194]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15085,7 +15166,7 @@ func (x *UpdateAppRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAppRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAppRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{192}
+	return file_api_proto_rawDescGZIP(), []int{194}
 }
 
 func (x *UpdateAppRequest) GetId() int64 {
@@ -15155,7 +15236,7 @@ type AppId struct {
 
 func (x *AppId) Reset() {
 	*x = AppId{}
-	mi := &file_api_proto_msgTypes[193]
+	mi := &file_api_proto_msgTypes[195]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15167,7 +15248,7 @@ func (x *AppId) String() string {
 func (*AppId) ProtoMessage() {}
 
 func (x *AppId) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[193]
+	mi := &file_api_proto_msgTypes[195]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15180,7 +15261,7 @@ func (x *AppId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AppId.ProtoReflect.Descriptor instead.
 func (*AppId) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{193}
+	return file_api_proto_rawDescGZIP(), []int{195}
 }
 
 func (x *AppId) GetId() int64 {
@@ -15202,7 +15283,7 @@ type AppClan struct {
 
 func (x *AppClan) Reset() {
 	*x = AppClan{}
-	mi := &file_api_proto_msgTypes[194]
+	mi := &file_api_proto_msgTypes[196]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15214,7 +15295,7 @@ func (x *AppClan) String() string {
 func (*AppClan) ProtoMessage() {}
 
 func (x *AppClan) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[194]
+	mi := &file_api_proto_msgTypes[196]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15227,7 +15308,7 @@ func (x *AppClan) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AppClan.ProtoReflect.Descriptor instead.
 func (*AppClan) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{194}
+	return file_api_proto_rawDescGZIP(), []int{196}
 }
 
 func (x *AppClan) GetAppId() int64 {
@@ -15257,7 +15338,7 @@ type DeleteChannelMessagesRequest struct {
 
 func (x *DeleteChannelMessagesRequest) Reset() {
 	*x = DeleteChannelMessagesRequest{}
-	mi := &file_api_proto_msgTypes[195]
+	mi := &file_api_proto_msgTypes[197]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15269,7 +15350,7 @@ func (x *DeleteChannelMessagesRequest) String() string {
 func (*DeleteChannelMessagesRequest) ProtoMessage() {}
 
 func (x *DeleteChannelMessagesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[195]
+	mi := &file_api_proto_msgTypes[197]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15282,7 +15363,7 @@ func (x *DeleteChannelMessagesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteChannelMessagesRequest.ProtoReflect.Descriptor instead.
 func (*DeleteChannelMessagesRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{195}
+	return file_api_proto_rawDescGZIP(), []int{197}
 }
 
 func (x *DeleteChannelMessagesRequest) GetBeforeSeconds() uint32 {
@@ -15309,7 +15390,7 @@ type DeleteChannelMessagesResponse struct {
 
 func (x *DeleteChannelMessagesResponse) Reset() {
 	*x = DeleteChannelMessagesResponse{}
-	mi := &file_api_proto_msgTypes[196]
+	mi := &file_api_proto_msgTypes[198]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15321,7 +15402,7 @@ func (x *DeleteChannelMessagesResponse) String() string {
 func (*DeleteChannelMessagesResponse) ProtoMessage() {}
 
 func (x *DeleteChannelMessagesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[196]
+	mi := &file_api_proto_msgTypes[198]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15334,7 +15415,7 @@ func (x *DeleteChannelMessagesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteChannelMessagesResponse.ProtoReflect.Descriptor instead.
 func (*DeleteChannelMessagesResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{196}
+	return file_api_proto_rawDescGZIP(), []int{198}
 }
 
 func (x *DeleteChannelMessagesResponse) GetTotal() int64 {
@@ -15369,7 +15450,7 @@ type SystemMessage struct {
 
 func (x *SystemMessage) Reset() {
 	*x = SystemMessage{}
-	mi := &file_api_proto_msgTypes[197]
+	mi := &file_api_proto_msgTypes[199]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15381,7 +15462,7 @@ func (x *SystemMessage) String() string {
 func (*SystemMessage) ProtoMessage() {}
 
 func (x *SystemMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[197]
+	mi := &file_api_proto_msgTypes[199]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15394,7 +15475,7 @@ func (x *SystemMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SystemMessage.ProtoReflect.Descriptor instead.
 func (*SystemMessage) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{197}
+	return file_api_proto_rawDescGZIP(), []int{199}
 }
 
 func (x *SystemMessage) GetId() int64 {
@@ -15463,7 +15544,7 @@ type SystemMessagesList struct {
 
 func (x *SystemMessagesList) Reset() {
 	*x = SystemMessagesList{}
-	mi := &file_api_proto_msgTypes[198]
+	mi := &file_api_proto_msgTypes[200]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15475,7 +15556,7 @@ func (x *SystemMessagesList) String() string {
 func (*SystemMessagesList) ProtoMessage() {}
 
 func (x *SystemMessagesList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[198]
+	mi := &file_api_proto_msgTypes[200]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15488,7 +15569,7 @@ func (x *SystemMessagesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SystemMessagesList.ProtoReflect.Descriptor instead.
 func (*SystemMessagesList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{198}
+	return file_api_proto_rawDescGZIP(), []int{200}
 }
 
 func (x *SystemMessagesList) GetSystemMessagesList() []*SystemMessage {
@@ -15521,7 +15602,7 @@ type SystemMessageRequest struct {
 
 func (x *SystemMessageRequest) Reset() {
 	*x = SystemMessageRequest{}
-	mi := &file_api_proto_msgTypes[199]
+	mi := &file_api_proto_msgTypes[201]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15533,7 +15614,7 @@ func (x *SystemMessageRequest) String() string {
 func (*SystemMessageRequest) ProtoMessage() {}
 
 func (x *SystemMessageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[199]
+	mi := &file_api_proto_msgTypes[201]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15546,7 +15627,7 @@ func (x *SystemMessageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SystemMessageRequest.ProtoReflect.Descriptor instead.
 func (*SystemMessageRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{199}
+	return file_api_proto_rawDescGZIP(), []int{201}
 }
 
 func (x *SystemMessageRequest) GetClanId() int64 {
@@ -15609,7 +15690,7 @@ type DeleteSystemMessage struct {
 
 func (x *DeleteSystemMessage) Reset() {
 	*x = DeleteSystemMessage{}
-	mi := &file_api_proto_msgTypes[200]
+	mi := &file_api_proto_msgTypes[202]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15621,7 +15702,7 @@ func (x *DeleteSystemMessage) String() string {
 func (*DeleteSystemMessage) ProtoMessage() {}
 
 func (x *DeleteSystemMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[200]
+	mi := &file_api_proto_msgTypes[202]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15634,7 +15715,7 @@ func (x *DeleteSystemMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSystemMessage.ProtoReflect.Descriptor instead.
 func (*DeleteSystemMessage) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{200}
+	return file_api_proto_rawDescGZIP(), []int{202}
 }
 
 func (x *DeleteSystemMessage) GetClanId() int64 {
@@ -15655,7 +15736,7 @@ type GetSystemMessage struct {
 
 func (x *GetSystemMessage) Reset() {
 	*x = GetSystemMessage{}
-	mi := &file_api_proto_msgTypes[201]
+	mi := &file_api_proto_msgTypes[203]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15667,7 +15748,7 @@ func (x *GetSystemMessage) String() string {
 func (*GetSystemMessage) ProtoMessage() {}
 
 func (x *GetSystemMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[201]
+	mi := &file_api_proto_msgTypes[203]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15680,7 +15761,7 @@ func (x *GetSystemMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSystemMessage.ProtoReflect.Descriptor instead.
 func (*GetSystemMessage) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{201}
+	return file_api_proto_rawDescGZIP(), []int{203}
 }
 
 func (x *GetSystemMessage) GetClanId() int64 {
@@ -15699,7 +15780,7 @@ type DeleteCategoryOrderRequest struct {
 
 func (x *DeleteCategoryOrderRequest) Reset() {
 	*x = DeleteCategoryOrderRequest{}
-	mi := &file_api_proto_msgTypes[202]
+	mi := &file_api_proto_msgTypes[204]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15711,7 +15792,7 @@ func (x *DeleteCategoryOrderRequest) String() string {
 func (*DeleteCategoryOrderRequest) ProtoMessage() {}
 
 func (x *DeleteCategoryOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[202]
+	mi := &file_api_proto_msgTypes[204]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15724,7 +15805,7 @@ func (x *DeleteCategoryOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCategoryOrderRequest.ProtoReflect.Descriptor instead.
 func (*DeleteCategoryOrderRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{202}
+	return file_api_proto_rawDescGZIP(), []int{204}
 }
 
 func (x *DeleteCategoryOrderRequest) GetClanId() int64 {
@@ -15758,7 +15839,7 @@ type StreamHttpCallbackRequest struct {
 
 func (x *StreamHttpCallbackRequest) Reset() {
 	*x = StreamHttpCallbackRequest{}
-	mi := &file_api_proto_msgTypes[203]
+	mi := &file_api_proto_msgTypes[205]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15770,7 +15851,7 @@ func (x *StreamHttpCallbackRequest) String() string {
 func (*StreamHttpCallbackRequest) ProtoMessage() {}
 
 func (x *StreamHttpCallbackRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[203]
+	mi := &file_api_proto_msgTypes[205]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15783,7 +15864,7 @@ func (x *StreamHttpCallbackRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamHttpCallbackRequest.ProtoReflect.Descriptor instead.
 func (*StreamHttpCallbackRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{203}
+	return file_api_proto_rawDescGZIP(), []int{205}
 }
 
 func (x *StreamHttpCallbackRequest) GetId() int64 {
@@ -15852,7 +15933,7 @@ type StreamHttpCallbackResponse struct {
 
 func (x *StreamHttpCallbackResponse) Reset() {
 	*x = StreamHttpCallbackResponse{}
-	mi := &file_api_proto_msgTypes[204]
+	mi := &file_api_proto_msgTypes[206]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15864,7 +15945,7 @@ func (x *StreamHttpCallbackResponse) String() string {
 func (*StreamHttpCallbackResponse) ProtoMessage() {}
 
 func (x *StreamHttpCallbackResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[204]
+	mi := &file_api_proto_msgTypes[206]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15877,7 +15958,7 @@ func (x *StreamHttpCallbackResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamHttpCallbackResponse.ProtoReflect.Descriptor instead.
 func (*StreamHttpCallbackResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{204}
+	return file_api_proto_rawDescGZIP(), []int{206}
 }
 
 func (x *StreamHttpCallbackResponse) GetCode() int32 {
@@ -15911,7 +15992,7 @@ type StreamingChannelUser struct {
 
 func (x *StreamingChannelUser) Reset() {
 	*x = StreamingChannelUser{}
-	mi := &file_api_proto_msgTypes[205]
+	mi := &file_api_proto_msgTypes[207]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15923,7 +16004,7 @@ func (x *StreamingChannelUser) String() string {
 func (*StreamingChannelUser) ProtoMessage() {}
 
 func (x *StreamingChannelUser) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[205]
+	mi := &file_api_proto_msgTypes[207]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15936,7 +16017,7 @@ func (x *StreamingChannelUser) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamingChannelUser.ProtoReflect.Descriptor instead.
 func (*StreamingChannelUser) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{205}
+	return file_api_proto_rawDescGZIP(), []int{207}
 }
 
 func (x *StreamingChannelUser) GetId() int64 {
@@ -15978,7 +16059,7 @@ type StreamingChannelUserList struct {
 
 func (x *StreamingChannelUserList) Reset() {
 	*x = StreamingChannelUserList{}
-	mi := &file_api_proto_msgTypes[206]
+	mi := &file_api_proto_msgTypes[208]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15990,7 +16071,7 @@ func (x *StreamingChannelUserList) String() string {
 func (*StreamingChannelUserList) ProtoMessage() {}
 
 func (x *StreamingChannelUserList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[206]
+	mi := &file_api_proto_msgTypes[208]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16003,7 +16084,7 @@ func (x *StreamingChannelUserList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamingChannelUserList.ProtoReflect.Descriptor instead.
 func (*StreamingChannelUserList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{206}
+	return file_api_proto_rawDescGZIP(), []int{208}
 }
 
 func (x *StreamingChannelUserList) GetStreamingChannelUsers() []*StreamingChannelUser {
@@ -16025,7 +16106,7 @@ type RegisterStreamingChannelRequest struct {
 
 func (x *RegisterStreamingChannelRequest) Reset() {
 	*x = RegisterStreamingChannelRequest{}
-	mi := &file_api_proto_msgTypes[207]
+	mi := &file_api_proto_msgTypes[209]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16037,7 +16118,7 @@ func (x *RegisterStreamingChannelRequest) String() string {
 func (*RegisterStreamingChannelRequest) ProtoMessage() {}
 
 func (x *RegisterStreamingChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[207]
+	mi := &file_api_proto_msgTypes[209]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16050,7 +16131,7 @@ func (x *RegisterStreamingChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterStreamingChannelRequest.ProtoReflect.Descriptor instead.
 func (*RegisterStreamingChannelRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{207}
+	return file_api_proto_rawDescGZIP(), []int{209}
 }
 
 func (x *RegisterStreamingChannelRequest) GetClanId() int64 {
@@ -16081,7 +16162,7 @@ type RegisterStreamingChannelResponse struct {
 
 func (x *RegisterStreamingChannelResponse) Reset() {
 	*x = RegisterStreamingChannelResponse{}
-	mi := &file_api_proto_msgTypes[208]
+	mi := &file_api_proto_msgTypes[210]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16093,7 +16174,7 @@ func (x *RegisterStreamingChannelResponse) String() string {
 func (*RegisterStreamingChannelResponse) ProtoMessage() {}
 
 func (x *RegisterStreamingChannelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[208]
+	mi := &file_api_proto_msgTypes[210]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16106,7 +16187,7 @@ func (x *RegisterStreamingChannelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterStreamingChannelResponse.ProtoReflect.Descriptor instead.
 func (*RegisterStreamingChannelResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{208}
+	return file_api_proto_rawDescGZIP(), []int{210}
 }
 
 func (x *RegisterStreamingChannelResponse) GetClanId() int64 {
@@ -16150,7 +16231,7 @@ type GiveCoffeeEvent struct {
 
 func (x *GiveCoffeeEvent) Reset() {
 	*x = GiveCoffeeEvent{}
-	mi := &file_api_proto_msgTypes[209]
+	mi := &file_api_proto_msgTypes[211]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16162,7 +16243,7 @@ func (x *GiveCoffeeEvent) String() string {
 func (*GiveCoffeeEvent) ProtoMessage() {}
 
 func (x *GiveCoffeeEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[209]
+	mi := &file_api_proto_msgTypes[211]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16175,7 +16256,7 @@ func (x *GiveCoffeeEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GiveCoffeeEvent.ProtoReflect.Descriptor instead.
 func (*GiveCoffeeEvent) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{209}
+	return file_api_proto_rawDescGZIP(), []int{211}
 }
 
 func (x *GiveCoffeeEvent) GetSenderId() int64 {
@@ -16230,7 +16311,7 @@ type ListChannelAppsRequest struct {
 
 func (x *ListChannelAppsRequest) Reset() {
 	*x = ListChannelAppsRequest{}
-	mi := &file_api_proto_msgTypes[210]
+	mi := &file_api_proto_msgTypes[212]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16242,7 +16323,7 @@ func (x *ListChannelAppsRequest) String() string {
 func (*ListChannelAppsRequest) ProtoMessage() {}
 
 func (x *ListChannelAppsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[210]
+	mi := &file_api_proto_msgTypes[212]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16255,7 +16336,7 @@ func (x *ListChannelAppsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListChannelAppsRequest.ProtoReflect.Descriptor instead.
 func (*ListChannelAppsRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{210}
+	return file_api_proto_rawDescGZIP(), []int{212}
 }
 
 func (x *ListChannelAppsRequest) GetClanId() int64 {
@@ -16275,7 +16356,7 @@ type ListChannelAppsResponse struct {
 
 func (x *ListChannelAppsResponse) Reset() {
 	*x = ListChannelAppsResponse{}
-	mi := &file_api_proto_msgTypes[211]
+	mi := &file_api_proto_msgTypes[213]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16287,7 +16368,7 @@ func (x *ListChannelAppsResponse) String() string {
 func (*ListChannelAppsResponse) ProtoMessage() {}
 
 func (x *ListChannelAppsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[211]
+	mi := &file_api_proto_msgTypes[213]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16300,7 +16381,7 @@ func (x *ListChannelAppsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListChannelAppsResponse.ProtoReflect.Descriptor instead.
 func (*ListChannelAppsResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{211}
+	return file_api_proto_rawDescGZIP(), []int{213}
 }
 
 func (x *ListChannelAppsResponse) GetChannelApps() []*ChannelAppResponse {
@@ -16332,7 +16413,7 @@ type ChannelAppResponse struct {
 
 func (x *ChannelAppResponse) Reset() {
 	*x = ChannelAppResponse{}
-	mi := &file_api_proto_msgTypes[212]
+	mi := &file_api_proto_msgTypes[214]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16344,7 +16425,7 @@ func (x *ChannelAppResponse) String() string {
 func (*ChannelAppResponse) ProtoMessage() {}
 
 func (x *ChannelAppResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[212]
+	mi := &file_api_proto_msgTypes[214]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16357,7 +16438,7 @@ func (x *ChannelAppResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelAppResponse.ProtoReflect.Descriptor instead.
 func (*ChannelAppResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{212}
+	return file_api_proto_rawDescGZIP(), []int{214}
 }
 
 func (x *ChannelAppResponse) GetId() int64 {
@@ -16418,7 +16499,7 @@ type AllUserClans struct {
 
 func (x *AllUserClans) Reset() {
 	*x = AllUserClans{}
-	mi := &file_api_proto_msgTypes[213]
+	mi := &file_api_proto_msgTypes[215]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16430,7 +16511,7 @@ func (x *AllUserClans) String() string {
 func (*AllUserClans) ProtoMessage() {}
 
 func (x *AllUserClans) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[213]
+	mi := &file_api_proto_msgTypes[215]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16443,7 +16524,7 @@ func (x *AllUserClans) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AllUserClans.ProtoReflect.Descriptor instead.
 func (*AllUserClans) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{213}
+	return file_api_proto_rawDescGZIP(), []int{215}
 }
 
 func (x *AllUserClans) GetUsers() []*User {
@@ -16469,7 +16550,7 @@ type RoleListEventRequest struct {
 
 func (x *RoleListEventRequest) Reset() {
 	*x = RoleListEventRequest{}
-	mi := &file_api_proto_msgTypes[214]
+	mi := &file_api_proto_msgTypes[216]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16481,7 +16562,7 @@ func (x *RoleListEventRequest) String() string {
 func (*RoleListEventRequest) ProtoMessage() {}
 
 func (x *RoleListEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[214]
+	mi := &file_api_proto_msgTypes[216]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16494,7 +16575,7 @@ func (x *RoleListEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleListEventRequest.ProtoReflect.Descriptor instead.
 func (*RoleListEventRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{214}
+	return file_api_proto_rawDescGZIP(), []int{216}
 }
 
 func (x *RoleListEventRequest) GetClanId() int64 {
@@ -16543,7 +16624,7 @@ type RoleListEventResponse struct {
 
 func (x *RoleListEventResponse) Reset() {
 	*x = RoleListEventResponse{}
-	mi := &file_api_proto_msgTypes[215]
+	mi := &file_api_proto_msgTypes[217]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16555,7 +16636,7 @@ func (x *RoleListEventResponse) String() string {
 func (*RoleListEventResponse) ProtoMessage() {}
 
 func (x *RoleListEventResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[215]
+	mi := &file_api_proto_msgTypes[217]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16568,7 +16649,7 @@ func (x *RoleListEventResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleListEventResponse.ProtoReflect.Descriptor instead.
 func (*RoleListEventResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{215}
+	return file_api_proto_rawDescGZIP(), []int{217}
 }
 
 func (x *RoleListEventResponse) GetLimit() int32 {
@@ -16618,7 +16699,7 @@ type UserPermissionInChannelListRequest struct {
 
 func (x *UserPermissionInChannelListRequest) Reset() {
 	*x = UserPermissionInChannelListRequest{}
-	mi := &file_api_proto_msgTypes[216]
+	mi := &file_api_proto_msgTypes[218]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16630,7 +16711,7 @@ func (x *UserPermissionInChannelListRequest) String() string {
 func (*UserPermissionInChannelListRequest) ProtoMessage() {}
 
 func (x *UserPermissionInChannelListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[216]
+	mi := &file_api_proto_msgTypes[218]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16643,7 +16724,7 @@ func (x *UserPermissionInChannelListRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use UserPermissionInChannelListRequest.ProtoReflect.Descriptor instead.
 func (*UserPermissionInChannelListRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{216}
+	return file_api_proto_rawDescGZIP(), []int{218}
 }
 
 func (x *UserPermissionInChannelListRequest) GetClanId() int64 {
@@ -16674,7 +16755,7 @@ type UserPermissionInChannelListResponse struct {
 
 func (x *UserPermissionInChannelListResponse) Reset() {
 	*x = UserPermissionInChannelListResponse{}
-	mi := &file_api_proto_msgTypes[217]
+	mi := &file_api_proto_msgTypes[219]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16686,7 +16767,7 @@ func (x *UserPermissionInChannelListResponse) String() string {
 func (*UserPermissionInChannelListResponse) ProtoMessage() {}
 
 func (x *UserPermissionInChannelListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[217]
+	mi := &file_api_proto_msgTypes[219]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16699,7 +16780,7 @@ func (x *UserPermissionInChannelListResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use UserPermissionInChannelListResponse.ProtoReflect.Descriptor instead.
 func (*UserPermissionInChannelListResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{217}
+	return file_api_proto_rawDescGZIP(), []int{219}
 }
 
 func (x *UserPermissionInChannelListResponse) GetClanId() int64 {
@@ -16736,7 +16817,7 @@ type PermissionRoleChannel struct {
 
 func (x *PermissionRoleChannel) Reset() {
 	*x = PermissionRoleChannel{}
-	mi := &file_api_proto_msgTypes[218]
+	mi := &file_api_proto_msgTypes[220]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16748,7 +16829,7 @@ func (x *PermissionRoleChannel) String() string {
 func (*PermissionRoleChannel) ProtoMessage() {}
 
 func (x *PermissionRoleChannel) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[218]
+	mi := &file_api_proto_msgTypes[220]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16761,7 +16842,7 @@ func (x *PermissionRoleChannel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PermissionRoleChannel.ProtoReflect.Descriptor instead.
 func (*PermissionRoleChannel) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{218}
+	return file_api_proto_rawDescGZIP(), []int{220}
 }
 
 func (x *PermissionRoleChannel) GetPermissionId() int64 {
@@ -16792,7 +16873,7 @@ type PermissionRoleChannelListEventRequest struct {
 
 func (x *PermissionRoleChannelListEventRequest) Reset() {
 	*x = PermissionRoleChannelListEventRequest{}
-	mi := &file_api_proto_msgTypes[219]
+	mi := &file_api_proto_msgTypes[221]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16804,7 +16885,7 @@ func (x *PermissionRoleChannelListEventRequest) String() string {
 func (*PermissionRoleChannelListEventRequest) ProtoMessage() {}
 
 func (x *PermissionRoleChannelListEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[219]
+	mi := &file_api_proto_msgTypes[221]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16817,7 +16898,7 @@ func (x *PermissionRoleChannelListEventRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use PermissionRoleChannelListEventRequest.ProtoReflect.Descriptor instead.
 func (*PermissionRoleChannelListEventRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{219}
+	return file_api_proto_rawDescGZIP(), []int{221}
 }
 
 func (x *PermissionRoleChannelListEventRequest) GetRoleId() int64 {
@@ -16858,7 +16939,7 @@ type PermissionRoleChannelListEventResponse struct {
 
 func (x *PermissionRoleChannelListEventResponse) Reset() {
 	*x = PermissionRoleChannelListEventResponse{}
-	mi := &file_api_proto_msgTypes[220]
+	mi := &file_api_proto_msgTypes[222]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16870,7 +16951,7 @@ func (x *PermissionRoleChannelListEventResponse) String() string {
 func (*PermissionRoleChannelListEventResponse) ProtoMessage() {}
 
 func (x *PermissionRoleChannelListEventResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[220]
+	mi := &file_api_proto_msgTypes[222]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16883,7 +16964,7 @@ func (x *PermissionRoleChannelListEventResponse) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use PermissionRoleChannelListEventResponse.ProtoReflect.Descriptor instead.
 func (*PermissionRoleChannelListEventResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{220}
+	return file_api_proto_rawDescGZIP(), []int{222}
 }
 
 func (x *PermissionRoleChannelListEventResponse) GetRoleId() int64 {
@@ -16942,7 +17023,7 @@ type ChannelSettingListRequest struct {
 
 func (x *ChannelSettingListRequest) Reset() {
 	*x = ChannelSettingListRequest{}
-	mi := &file_api_proto_msgTypes[221]
+	mi := &file_api_proto_msgTypes[223]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16954,7 +17035,7 @@ func (x *ChannelSettingListRequest) String() string {
 func (*ChannelSettingListRequest) ProtoMessage() {}
 
 func (x *ChannelSettingListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[221]
+	mi := &file_api_proto_msgTypes[223]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16967,7 +17048,7 @@ func (x *ChannelSettingListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelSettingListRequest.ProtoReflect.Descriptor instead.
 func (*ChannelSettingListRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{221}
+	return file_api_proto_rawDescGZIP(), []int{223}
 }
 
 func (x *ChannelSettingListRequest) GetClanId() int64 {
@@ -17072,7 +17153,7 @@ type ChannelSettingItem struct {
 
 func (x *ChannelSettingItem) Reset() {
 	*x = ChannelSettingItem{}
-	mi := &file_api_proto_msgTypes[222]
+	mi := &file_api_proto_msgTypes[224]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17084,7 +17165,7 @@ func (x *ChannelSettingItem) String() string {
 func (*ChannelSettingItem) ProtoMessage() {}
 
 func (x *ChannelSettingItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[222]
+	mi := &file_api_proto_msgTypes[224]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17097,7 +17178,7 @@ func (x *ChannelSettingItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelSettingItem.ProtoReflect.Descriptor instead.
 func (*ChannelSettingItem) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{222}
+	return file_api_proto_rawDescGZIP(), []int{224}
 }
 
 func (x *ChannelSettingItem) GetId() int64 {
@@ -17200,7 +17281,7 @@ type ChannelSettingListResponse struct {
 
 func (x *ChannelSettingListResponse) Reset() {
 	*x = ChannelSettingListResponse{}
-	mi := &file_api_proto_msgTypes[223]
+	mi := &file_api_proto_msgTypes[225]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17212,7 +17293,7 @@ func (x *ChannelSettingListResponse) String() string {
 func (*ChannelSettingListResponse) ProtoMessage() {}
 
 func (x *ChannelSettingListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[223]
+	mi := &file_api_proto_msgTypes[225]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17225,7 +17306,7 @@ func (x *ChannelSettingListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelSettingListResponse.ProtoReflect.Descriptor instead.
 func (*ChannelSettingListResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{223}
+	return file_api_proto_rawDescGZIP(), []int{225}
 }
 
 func (x *ChannelSettingListResponse) GetClanId() int64 {
@@ -17270,7 +17351,7 @@ type MarkAsReadRequest struct {
 
 func (x *MarkAsReadRequest) Reset() {
 	*x = MarkAsReadRequest{}
-	mi := &file_api_proto_msgTypes[224]
+	mi := &file_api_proto_msgTypes[226]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17282,7 +17363,7 @@ func (x *MarkAsReadRequest) String() string {
 func (*MarkAsReadRequest) ProtoMessage() {}
 
 func (x *MarkAsReadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[224]
+	mi := &file_api_proto_msgTypes[226]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17295,7 +17376,7 @@ func (x *MarkAsReadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MarkAsReadRequest.ProtoReflect.Descriptor instead.
 func (*MarkAsReadRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{224}
+	return file_api_proto_rawDescGZIP(), []int{226}
 }
 
 func (x *MarkAsReadRequest) GetChannelId() int64 {
@@ -17341,7 +17422,7 @@ type EditChannelCanvasRequest struct {
 
 func (x *EditChannelCanvasRequest) Reset() {
 	*x = EditChannelCanvasRequest{}
-	mi := &file_api_proto_msgTypes[225]
+	mi := &file_api_proto_msgTypes[227]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17353,7 +17434,7 @@ func (x *EditChannelCanvasRequest) String() string {
 func (*EditChannelCanvasRequest) ProtoMessage() {}
 
 func (x *EditChannelCanvasRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[225]
+	mi := &file_api_proto_msgTypes[227]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17366,7 +17447,7 @@ func (x *EditChannelCanvasRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EditChannelCanvasRequest.ProtoReflect.Descriptor instead.
 func (*EditChannelCanvasRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{225}
+	return file_api_proto_rawDescGZIP(), []int{227}
 }
 
 func (x *EditChannelCanvasRequest) GetId() int64 {
@@ -17428,7 +17509,7 @@ type EditChannelCanvasResponse struct {
 
 func (x *EditChannelCanvasResponse) Reset() {
 	*x = EditChannelCanvasResponse{}
-	mi := &file_api_proto_msgTypes[226]
+	mi := &file_api_proto_msgTypes[228]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17440,7 +17521,7 @@ func (x *EditChannelCanvasResponse) String() string {
 func (*EditChannelCanvasResponse) ProtoMessage() {}
 
 func (x *EditChannelCanvasResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[226]
+	mi := &file_api_proto_msgTypes[228]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17453,7 +17534,7 @@ func (x *EditChannelCanvasResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EditChannelCanvasResponse.ProtoReflect.Descriptor instead.
 func (*EditChannelCanvasResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{226}
+	return file_api_proto_rawDescGZIP(), []int{228}
 }
 
 func (x *EditChannelCanvasResponse) GetId() int64 {
@@ -17477,7 +17558,7 @@ type DeleteChannelCanvasRequest struct {
 
 func (x *DeleteChannelCanvasRequest) Reset() {
 	*x = DeleteChannelCanvasRequest{}
-	mi := &file_api_proto_msgTypes[227]
+	mi := &file_api_proto_msgTypes[229]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17489,7 +17570,7 @@ func (x *DeleteChannelCanvasRequest) String() string {
 func (*DeleteChannelCanvasRequest) ProtoMessage() {}
 
 func (x *DeleteChannelCanvasRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[227]
+	mi := &file_api_proto_msgTypes[229]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17502,7 +17583,7 @@ func (x *DeleteChannelCanvasRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteChannelCanvasRequest.ProtoReflect.Descriptor instead.
 func (*DeleteChannelCanvasRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{227}
+	return file_api_proto_rawDescGZIP(), []int{229}
 }
 
 func (x *DeleteChannelCanvasRequest) GetClanId() int64 {
@@ -17543,7 +17624,7 @@ type ChannelCanvasListRequest struct {
 
 func (x *ChannelCanvasListRequest) Reset() {
 	*x = ChannelCanvasListRequest{}
-	mi := &file_api_proto_msgTypes[228]
+	mi := &file_api_proto_msgTypes[230]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17555,7 +17636,7 @@ func (x *ChannelCanvasListRequest) String() string {
 func (*ChannelCanvasListRequest) ProtoMessage() {}
 
 func (x *ChannelCanvasListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[228]
+	mi := &file_api_proto_msgTypes[230]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17568,7 +17649,7 @@ func (x *ChannelCanvasListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelCanvasListRequest.ProtoReflect.Descriptor instead.
 func (*ChannelCanvasListRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{228}
+	return file_api_proto_rawDescGZIP(), []int{230}
 }
 
 func (x *ChannelCanvasListRequest) GetClanId() int64 {
@@ -17626,7 +17707,7 @@ type ChannelCanvasItem struct {
 
 func (x *ChannelCanvasItem) Reset() {
 	*x = ChannelCanvasItem{}
-	mi := &file_api_proto_msgTypes[229]
+	mi := &file_api_proto_msgTypes[231]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17638,7 +17719,7 @@ func (x *ChannelCanvasItem) String() string {
 func (*ChannelCanvasItem) ProtoMessage() {}
 
 func (x *ChannelCanvasItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[229]
+	mi := &file_api_proto_msgTypes[231]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17651,7 +17732,7 @@ func (x *ChannelCanvasItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelCanvasItem.ProtoReflect.Descriptor instead.
 func (*ChannelCanvasItem) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{229}
+	return file_api_proto_rawDescGZIP(), []int{231}
 }
 
 func (x *ChannelCanvasItem) GetId() int64 {
@@ -17718,7 +17799,7 @@ type ChannelCanvasListResponse struct {
 
 func (x *ChannelCanvasListResponse) Reset() {
 	*x = ChannelCanvasListResponse{}
-	mi := &file_api_proto_msgTypes[230]
+	mi := &file_api_proto_msgTypes[232]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17730,7 +17811,7 @@ func (x *ChannelCanvasListResponse) String() string {
 func (*ChannelCanvasListResponse) ProtoMessage() {}
 
 func (x *ChannelCanvasListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[230]
+	mi := &file_api_proto_msgTypes[232]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17743,7 +17824,7 @@ func (x *ChannelCanvasListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelCanvasListResponse.ProtoReflect.Descriptor instead.
 func (*ChannelCanvasListResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{230}
+	return file_api_proto_rawDescGZIP(), []int{232}
 }
 
 func (x *ChannelCanvasListResponse) GetClanId() int64 {
@@ -17788,7 +17869,7 @@ type ChannelCanvasDetailRequest struct {
 
 func (x *ChannelCanvasDetailRequest) Reset() {
 	*x = ChannelCanvasDetailRequest{}
-	mi := &file_api_proto_msgTypes[231]
+	mi := &file_api_proto_msgTypes[233]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17800,7 +17881,7 @@ func (x *ChannelCanvasDetailRequest) String() string {
 func (*ChannelCanvasDetailRequest) ProtoMessage() {}
 
 func (x *ChannelCanvasDetailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[231]
+	mi := &file_api_proto_msgTypes[233]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17813,7 +17894,7 @@ func (x *ChannelCanvasDetailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelCanvasDetailRequest.ProtoReflect.Descriptor instead.
 func (*ChannelCanvasDetailRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{231}
+	return file_api_proto_rawDescGZIP(), []int{233}
 }
 
 func (x *ChannelCanvasDetailRequest) GetId() int64 {
@@ -17857,7 +17938,7 @@ type ChannelCanvasDetailResponse struct {
 
 func (x *ChannelCanvasDetailResponse) Reset() {
 	*x = ChannelCanvasDetailResponse{}
-	mi := &file_api_proto_msgTypes[232]
+	mi := &file_api_proto_msgTypes[234]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17869,7 +17950,7 @@ func (x *ChannelCanvasDetailResponse) String() string {
 func (*ChannelCanvasDetailResponse) ProtoMessage() {}
 
 func (x *ChannelCanvasDetailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[232]
+	mi := &file_api_proto_msgTypes[234]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17882,7 +17963,7 @@ func (x *ChannelCanvasDetailResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelCanvasDetailResponse.ProtoReflect.Descriptor instead.
 func (*ChannelCanvasDetailResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{232}
+	return file_api_proto_rawDescGZIP(), []int{234}
 }
 
 func (x *ChannelCanvasDetailResponse) GetId() int64 {
@@ -17937,7 +18018,7 @@ type AddFavoriteChannelRequest struct {
 
 func (x *AddFavoriteChannelRequest) Reset() {
 	*x = AddFavoriteChannelRequest{}
-	mi := &file_api_proto_msgTypes[233]
+	mi := &file_api_proto_msgTypes[235]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17949,7 +18030,7 @@ func (x *AddFavoriteChannelRequest) String() string {
 func (*AddFavoriteChannelRequest) ProtoMessage() {}
 
 func (x *AddFavoriteChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[233]
+	mi := &file_api_proto_msgTypes[235]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17962,7 +18043,7 @@ func (x *AddFavoriteChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddFavoriteChannelRequest.ProtoReflect.Descriptor instead.
 func (*AddFavoriteChannelRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{233}
+	return file_api_proto_rawDescGZIP(), []int{235}
 }
 
 func (x *AddFavoriteChannelRequest) GetChannelId() int64 {
@@ -17989,7 +18070,7 @@ type RemoveFavoriteChannelRequest struct {
 
 func (x *RemoveFavoriteChannelRequest) Reset() {
 	*x = RemoveFavoriteChannelRequest{}
-	mi := &file_api_proto_msgTypes[234]
+	mi := &file_api_proto_msgTypes[236]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18001,7 +18082,7 @@ func (x *RemoveFavoriteChannelRequest) String() string {
 func (*RemoveFavoriteChannelRequest) ProtoMessage() {}
 
 func (x *RemoveFavoriteChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[234]
+	mi := &file_api_proto_msgTypes[236]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18014,7 +18095,7 @@ func (x *RemoveFavoriteChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveFavoriteChannelRequest.ProtoReflect.Descriptor instead.
 func (*RemoveFavoriteChannelRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{234}
+	return file_api_proto_rawDescGZIP(), []int{236}
 }
 
 func (x *RemoveFavoriteChannelRequest) GetClanId() int64 {
@@ -18040,7 +18121,7 @@ type AddFavoriteChannelResponse struct {
 
 func (x *AddFavoriteChannelResponse) Reset() {
 	*x = AddFavoriteChannelResponse{}
-	mi := &file_api_proto_msgTypes[235]
+	mi := &file_api_proto_msgTypes[237]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18052,7 +18133,7 @@ func (x *AddFavoriteChannelResponse) String() string {
 func (*AddFavoriteChannelResponse) ProtoMessage() {}
 
 func (x *AddFavoriteChannelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[235]
+	mi := &file_api_proto_msgTypes[237]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18065,7 +18146,7 @@ func (x *AddFavoriteChannelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddFavoriteChannelResponse.ProtoReflect.Descriptor instead.
 func (*AddFavoriteChannelResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{235}
+	return file_api_proto_rawDescGZIP(), []int{237}
 }
 
 func (x *AddFavoriteChannelResponse) GetChannelId() int64 {
@@ -18084,7 +18165,7 @@ type ListFavoriteChannelRequest struct {
 
 func (x *ListFavoriteChannelRequest) Reset() {
 	*x = ListFavoriteChannelRequest{}
-	mi := &file_api_proto_msgTypes[236]
+	mi := &file_api_proto_msgTypes[238]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18096,7 +18177,7 @@ func (x *ListFavoriteChannelRequest) String() string {
 func (*ListFavoriteChannelRequest) ProtoMessage() {}
 
 func (x *ListFavoriteChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[236]
+	mi := &file_api_proto_msgTypes[238]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18109,7 +18190,7 @@ func (x *ListFavoriteChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListFavoriteChannelRequest.ProtoReflect.Descriptor instead.
 func (*ListFavoriteChannelRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{236}
+	return file_api_proto_rawDescGZIP(), []int{238}
 }
 
 func (x *ListFavoriteChannelRequest) GetClanId() int64 {
@@ -18128,7 +18209,7 @@ type ListFavoriteChannelResponse struct {
 
 func (x *ListFavoriteChannelResponse) Reset() {
 	*x = ListFavoriteChannelResponse{}
-	mi := &file_api_proto_msgTypes[237]
+	mi := &file_api_proto_msgTypes[239]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18140,7 +18221,7 @@ func (x *ListFavoriteChannelResponse) String() string {
 func (*ListFavoriteChannelResponse) ProtoMessage() {}
 
 func (x *ListFavoriteChannelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[237]
+	mi := &file_api_proto_msgTypes[239]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18153,7 +18234,7 @@ func (x *ListFavoriteChannelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListFavoriteChannelResponse.ProtoReflect.Descriptor instead.
 func (*ListFavoriteChannelResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{237}
+	return file_api_proto_rawDescGZIP(), []int{239}
 }
 
 func (x *ListFavoriteChannelResponse) GetChannelIds() []int64 {
@@ -18179,7 +18260,7 @@ type UserActivity struct {
 
 func (x *UserActivity) Reset() {
 	*x = UserActivity{}
-	mi := &file_api_proto_msgTypes[238]
+	mi := &file_api_proto_msgTypes[240]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18191,7 +18272,7 @@ func (x *UserActivity) String() string {
 func (*UserActivity) ProtoMessage() {}
 
 func (x *UserActivity) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[238]
+	mi := &file_api_proto_msgTypes[240]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18204,7 +18285,7 @@ func (x *UserActivity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserActivity.ProtoReflect.Descriptor instead.
 func (*UserActivity) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{238}
+	return file_api_proto_rawDescGZIP(), []int{240}
 }
 
 func (x *UserActivity) GetUserId() int64 {
@@ -18272,7 +18353,7 @@ type ListUserActivity struct {
 
 func (x *ListUserActivity) Reset() {
 	*x = ListUserActivity{}
-	mi := &file_api_proto_msgTypes[239]
+	mi := &file_api_proto_msgTypes[241]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18284,7 +18365,7 @@ func (x *ListUserActivity) String() string {
 func (*ListUserActivity) ProtoMessage() {}
 
 func (x *ListUserActivity) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[239]
+	mi := &file_api_proto_msgTypes[241]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18297,7 +18378,7 @@ func (x *ListUserActivity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserActivity.ProtoReflect.Descriptor instead.
 func (*ListUserActivity) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{239}
+	return file_api_proto_rawDescGZIP(), []int{241}
 }
 
 func (x *ListUserActivity) GetActivities() []*UserActivity {
@@ -18321,7 +18402,7 @@ type CreateActivityRequest struct {
 
 func (x *CreateActivityRequest) Reset() {
 	*x = CreateActivityRequest{}
-	mi := &file_api_proto_msgTypes[240]
+	mi := &file_api_proto_msgTypes[242]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18333,7 +18414,7 @@ func (x *CreateActivityRequest) String() string {
 func (*CreateActivityRequest) ProtoMessage() {}
 
 func (x *CreateActivityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[240]
+	mi := &file_api_proto_msgTypes[242]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18346,7 +18427,7 @@ func (x *CreateActivityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateActivityRequest.ProtoReflect.Descriptor instead.
 func (*CreateActivityRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{240}
+	return file_api_proto_rawDescGZIP(), []int{242}
 }
 
 func (x *CreateActivityRequest) GetActivityName() string {
@@ -18413,7 +18494,7 @@ type LoginIDResponse struct {
 
 func (x *LoginIDResponse) Reset() {
 	*x = LoginIDResponse{}
-	mi := &file_api_proto_msgTypes[241]
+	mi := &file_api_proto_msgTypes[243]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18425,7 +18506,7 @@ func (x *LoginIDResponse) String() string {
 func (*LoginIDResponse) ProtoMessage() {}
 
 func (x *LoginIDResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[241]
+	mi := &file_api_proto_msgTypes[243]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18438,7 +18519,7 @@ func (x *LoginIDResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginIDResponse.ProtoReflect.Descriptor instead.
 func (*LoginIDResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{241}
+	return file_api_proto_rawDescGZIP(), []int{243}
 }
 
 func (x *LoginIDResponse) GetLoginId() int64 {
@@ -18502,7 +18583,7 @@ type LoginRequest struct {
 
 func (x *LoginRequest) Reset() {
 	*x = LoginRequest{}
-	mi := &file_api_proto_msgTypes[242]
+	mi := &file_api_proto_msgTypes[244]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18514,7 +18595,7 @@ func (x *LoginRequest) String() string {
 func (*LoginRequest) ProtoMessage() {}
 
 func (x *LoginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[242]
+	mi := &file_api_proto_msgTypes[244]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18527,7 +18608,7 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
 func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{242}
+	return file_api_proto_rawDescGZIP(), []int{244}
 }
 
 func (x *LoginRequest) GetPlatform() string {
@@ -18556,7 +18637,7 @@ type ConfirmLoginRequest struct {
 
 func (x *ConfirmLoginRequest) Reset() {
 	*x = ConfirmLoginRequest{}
-	mi := &file_api_proto_msgTypes[243]
+	mi := &file_api_proto_msgTypes[245]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18568,7 +18649,7 @@ func (x *ConfirmLoginRequest) String() string {
 func (*ConfirmLoginRequest) ProtoMessage() {}
 
 func (x *ConfirmLoginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[243]
+	mi := &file_api_proto_msgTypes[245]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18581,7 +18662,7 @@ func (x *ConfirmLoginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfirmLoginRequest.ProtoReflect.Descriptor instead.
 func (*ConfirmLoginRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{243}
+	return file_api_proto_rawDescGZIP(), []int{245}
 }
 
 func (x *ConfirmLoginRequest) GetLoginId() int64 {
@@ -18608,7 +18689,7 @@ type PubKey struct {
 
 func (x *PubKey) Reset() {
 	*x = PubKey{}
-	mi := &file_api_proto_msgTypes[244]
+	mi := &file_api_proto_msgTypes[246]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18620,7 +18701,7 @@ func (x *PubKey) String() string {
 func (*PubKey) ProtoMessage() {}
 
 func (x *PubKey) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[244]
+	mi := &file_api_proto_msgTypes[246]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18633,7 +18714,7 @@ func (x *PubKey) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PubKey.ProtoReflect.Descriptor instead.
 func (*PubKey) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{244}
+	return file_api_proto_rawDescGZIP(), []int{246}
 }
 
 func (x *PubKey) GetEncr() []byte {
@@ -18659,7 +18740,7 @@ type PushPubKeyRequest struct {
 
 func (x *PushPubKeyRequest) Reset() {
 	*x = PushPubKeyRequest{}
-	mi := &file_api_proto_msgTypes[245]
+	mi := &file_api_proto_msgTypes[247]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18671,7 +18752,7 @@ func (x *PushPubKeyRequest) String() string {
 func (*PushPubKeyRequest) ProtoMessage() {}
 
 func (x *PushPubKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[245]
+	mi := &file_api_proto_msgTypes[247]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18684,7 +18765,7 @@ func (x *PushPubKeyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PushPubKeyRequest.ProtoReflect.Descriptor instead.
 func (*PushPubKeyRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{245}
+	return file_api_proto_rawDescGZIP(), []int{247}
 }
 
 func (x *PushPubKeyRequest) GetPK() *PubKey {
@@ -18703,7 +18784,7 @@ type GetPubKeysRequest struct {
 
 func (x *GetPubKeysRequest) Reset() {
 	*x = GetPubKeysRequest{}
-	mi := &file_api_proto_msgTypes[246]
+	mi := &file_api_proto_msgTypes[248]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18715,7 +18796,7 @@ func (x *GetPubKeysRequest) String() string {
 func (*GetPubKeysRequest) ProtoMessage() {}
 
 func (x *GetPubKeysRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[246]
+	mi := &file_api_proto_msgTypes[248]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18728,7 +18809,7 @@ func (x *GetPubKeysRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPubKeysRequest.ProtoReflect.Descriptor instead.
 func (*GetPubKeysRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{246}
+	return file_api_proto_rawDescGZIP(), []int{248}
 }
 
 func (x *GetPubKeysRequest) GetUserIds() []int64 {
@@ -18747,7 +18828,7 @@ type GetPubKeysResponse struct {
 
 func (x *GetPubKeysResponse) Reset() {
 	*x = GetPubKeysResponse{}
-	mi := &file_api_proto_msgTypes[247]
+	mi := &file_api_proto_msgTypes[249]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18759,7 +18840,7 @@ func (x *GetPubKeysResponse) String() string {
 func (*GetPubKeysResponse) ProtoMessage() {}
 
 func (x *GetPubKeysResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[247]
+	mi := &file_api_proto_msgTypes[249]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18772,7 +18853,7 @@ func (x *GetPubKeysResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPubKeysResponse.ProtoReflect.Descriptor instead.
 func (*GetPubKeysResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{247}
+	return file_api_proto_rawDescGZIP(), []int{249}
 }
 
 func (x *GetPubKeysResponse) GetPubKeys() []*GetPubKeysResponse_UserPubKey {
@@ -18792,7 +18873,7 @@ type ChanEncryptionMethod struct {
 
 func (x *ChanEncryptionMethod) Reset() {
 	*x = ChanEncryptionMethod{}
-	mi := &file_api_proto_msgTypes[248]
+	mi := &file_api_proto_msgTypes[250]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18804,7 +18885,7 @@ func (x *ChanEncryptionMethod) String() string {
 func (*ChanEncryptionMethod) ProtoMessage() {}
 
 func (x *ChanEncryptionMethod) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[248]
+	mi := &file_api_proto_msgTypes[250]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18817,7 +18898,7 @@ func (x *ChanEncryptionMethod) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChanEncryptionMethod.ProtoReflect.Descriptor instead.
 func (*ChanEncryptionMethod) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{248}
+	return file_api_proto_rawDescGZIP(), []int{250}
 }
 
 func (x *ChanEncryptionMethod) GetMethod() string {
@@ -18843,7 +18924,7 @@ type GetKeyServerResp struct {
 
 func (x *GetKeyServerResp) Reset() {
 	*x = GetKeyServerResp{}
-	mi := &file_api_proto_msgTypes[249]
+	mi := &file_api_proto_msgTypes[251]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18855,7 +18936,7 @@ func (x *GetKeyServerResp) String() string {
 func (*GetKeyServerResp) ProtoMessage() {}
 
 func (x *GetKeyServerResp) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[249]
+	mi := &file_api_proto_msgTypes[251]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18868,7 +18949,7 @@ func (x *GetKeyServerResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKeyServerResp.ProtoReflect.Descriptor instead.
 func (*GetKeyServerResp) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{249}
+	return file_api_proto_rawDescGZIP(), []int{251}
 }
 
 func (x *GetKeyServerResp) GetUrl() string {
@@ -18896,7 +18977,7 @@ type AuditLog struct {
 
 func (x *AuditLog) Reset() {
 	*x = AuditLog{}
-	mi := &file_api_proto_msgTypes[250]
+	mi := &file_api_proto_msgTypes[252]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18908,7 +18989,7 @@ func (x *AuditLog) String() string {
 func (*AuditLog) ProtoMessage() {}
 
 func (x *AuditLog) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[250]
+	mi := &file_api_proto_msgTypes[252]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18921,7 +19002,7 @@ func (x *AuditLog) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuditLog.ProtoReflect.Descriptor instead.
 func (*AuditLog) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{250}
+	return file_api_proto_rawDescGZIP(), []int{252}
 }
 
 func (x *AuditLog) GetId() int64 {
@@ -19005,7 +19086,7 @@ type ListAuditLog struct {
 
 func (x *ListAuditLog) Reset() {
 	*x = ListAuditLog{}
-	mi := &file_api_proto_msgTypes[251]
+	mi := &file_api_proto_msgTypes[253]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -19017,7 +19098,7 @@ func (x *ListAuditLog) String() string {
 func (*ListAuditLog) ProtoMessage() {}
 
 func (x *ListAuditLog) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[251]
+	mi := &file_api_proto_msgTypes[253]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -19030,7 +19111,7 @@ func (x *ListAuditLog) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAuditLog.ProtoReflect.Descriptor instead.
 func (*ListAuditLog) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{251}
+	return file_api_proto_rawDescGZIP(), []int{253}
 }
 
 func (x *ListAuditLog) GetTotalCount() int32 {
@@ -19066,7 +19147,7 @@ type ListAuditLogRequest struct {
 
 func (x *ListAuditLogRequest) Reset() {
 	*x = ListAuditLogRequest{}
-	mi := &file_api_proto_msgTypes[252]
+	mi := &file_api_proto_msgTypes[254]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -19078,7 +19159,7 @@ func (x *ListAuditLogRequest) String() string {
 func (*ListAuditLogRequest) ProtoMessage() {}
 
 func (x *ListAuditLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[252]
+	mi := &file_api_proto_msgTypes[254]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -19091,7 +19172,7 @@ func (x *ListAuditLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAuditLogRequest.ProtoReflect.Descriptor instead.
 func (*ListAuditLogRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{252}
+	return file_api_proto_rawDescGZIP(), []int{254}
 }
 
 func (x *ListAuditLogRequest) GetActionLog() string {
@@ -19144,7 +19225,7 @@ type TokenSentEvent struct {
 
 func (x *TokenSentEvent) Reset() {
 	*x = TokenSentEvent{}
-	mi := &file_api_proto_msgTypes[253]
+	mi := &file_api_proto_msgTypes[255]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -19156,7 +19237,7 @@ func (x *TokenSentEvent) String() string {
 func (*TokenSentEvent) ProtoMessage() {}
 
 func (x *TokenSentEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[253]
+	mi := &file_api_proto_msgTypes[255]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -19169,7 +19250,7 @@ func (x *TokenSentEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TokenSentEvent.ProtoReflect.Descriptor instead.
 func (*TokenSentEvent) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{253}
+	return file_api_proto_rawDescGZIP(), []int{255}
 }
 
 func (x *TokenSentEvent) GetSenderId() int64 {
@@ -19233,7 +19314,7 @@ type UnlockItemRequest struct {
 
 func (x *UnlockItemRequest) Reset() {
 	*x = UnlockItemRequest{}
-	mi := &file_api_proto_msgTypes[254]
+	mi := &file_api_proto_msgTypes[256]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -19245,7 +19326,7 @@ func (x *UnlockItemRequest) String() string {
 func (*UnlockItemRequest) ProtoMessage() {}
 
 func (x *UnlockItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[254]
+	mi := &file_api_proto_msgTypes[256]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -19258,7 +19339,7 @@ func (x *UnlockItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnlockItemRequest.ProtoReflect.Descriptor instead.
 func (*UnlockItemRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{254}
+	return file_api_proto_rawDescGZIP(), []int{256}
 }
 
 func (x *UnlockItemRequest) GetItemId() int64 {
@@ -19284,7 +19365,7 @@ type UnlockedItemResponse struct {
 
 func (x *UnlockedItemResponse) Reset() {
 	*x = UnlockedItemResponse{}
-	mi := &file_api_proto_msgTypes[255]
+	mi := &file_api_proto_msgTypes[257]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -19296,7 +19377,7 @@ func (x *UnlockedItemResponse) String() string {
 func (*UnlockedItemResponse) ProtoMessage() {}
 
 func (x *UnlockedItemResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[255]
+	mi := &file_api_proto_msgTypes[257]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -19309,7 +19390,7 @@ func (x *UnlockedItemResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnlockedItemResponse.ProtoReflect.Descriptor instead.
 func (*UnlockedItemResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{255}
+	return file_api_proto_rawDescGZIP(), []int{257}
 }
 
 func (x *UnlockedItemResponse) GetSource() string {
@@ -19335,7 +19416,7 @@ type ListOnboardingRequest struct {
 
 func (x *ListOnboardingRequest) Reset() {
 	*x = ListOnboardingRequest{}
-	mi := &file_api_proto_msgTypes[256]
+	mi := &file_api_proto_msgTypes[258]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -19347,7 +19428,7 @@ func (x *ListOnboardingRequest) String() string {
 func (*ListOnboardingRequest) ProtoMessage() {}
 
 func (x *ListOnboardingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[256]
+	mi := &file_api_proto_msgTypes[258]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -19360,7 +19441,7 @@ func (x *ListOnboardingRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOnboardingRequest.ProtoReflect.Descriptor instead.
 func (*ListOnboardingRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{256}
+	return file_api_proto_rawDescGZIP(), []int{258}
 }
 
 func (x *ListOnboardingRequest) GetClanId() int64 {
@@ -19400,7 +19481,7 @@ type ListOnboardingResponse struct {
 
 func (x *ListOnboardingResponse) Reset() {
 	*x = ListOnboardingResponse{}
-	mi := &file_api_proto_msgTypes[257]
+	mi := &file_api_proto_msgTypes[259]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -19412,7 +19493,7 @@ func (x *ListOnboardingResponse) String() string {
 func (*ListOnboardingResponse) ProtoMessage() {}
 
 func (x *ListOnboardingResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[257]
+	mi := &file_api_proto_msgTypes[259]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -19425,7 +19506,7 @@ func (x *ListOnboardingResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOnboardingResponse.ProtoReflect.Descriptor instead.
 func (*ListOnboardingResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{257}
+	return file_api_proto_rawDescGZIP(), []int{259}
 }
 
 func (x *ListOnboardingResponse) GetListOnboarding() []*OnboardingItem {
@@ -19465,7 +19546,7 @@ type OnboardingItem struct {
 
 func (x *OnboardingItem) Reset() {
 	*x = OnboardingItem{}
-	mi := &file_api_proto_msgTypes[258]
+	mi := &file_api_proto_msgTypes[260]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -19477,7 +19558,7 @@ func (x *OnboardingItem) String() string {
 func (*OnboardingItem) ProtoMessage() {}
 
 func (x *OnboardingItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[258]
+	mi := &file_api_proto_msgTypes[260]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -19490,7 +19571,7 @@ func (x *OnboardingItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OnboardingItem.ProtoReflect.Descriptor instead.
 func (*OnboardingItem) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{258}
+	return file_api_proto_rawDescGZIP(), []int{260}
 }
 
 func (x *OnboardingItem) GetId() int64 {
@@ -19586,7 +19667,7 @@ type OnboardingAnswer struct {
 
 func (x *OnboardingAnswer) Reset() {
 	*x = OnboardingAnswer{}
-	mi := &file_api_proto_msgTypes[259]
+	mi := &file_api_proto_msgTypes[261]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -19598,7 +19679,7 @@ func (x *OnboardingAnswer) String() string {
 func (*OnboardingAnswer) ProtoMessage() {}
 
 func (x *OnboardingAnswer) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[259]
+	mi := &file_api_proto_msgTypes[261]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -19611,7 +19692,7 @@ func (x *OnboardingAnswer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OnboardingAnswer.ProtoReflect.Descriptor instead.
 func (*OnboardingAnswer) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{259}
+	return file_api_proto_rawDescGZIP(), []int{261}
 }
 
 func (x *OnboardingAnswer) GetTitle() string {
@@ -19664,7 +19745,7 @@ type OnboardingContent struct {
 
 func (x *OnboardingContent) Reset() {
 	*x = OnboardingContent{}
-	mi := &file_api_proto_msgTypes[260]
+	mi := &file_api_proto_msgTypes[262]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -19676,7 +19757,7 @@ func (x *OnboardingContent) String() string {
 func (*OnboardingContent) ProtoMessage() {}
 
 func (x *OnboardingContent) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[260]
+	mi := &file_api_proto_msgTypes[262]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -19689,7 +19770,7 @@ func (x *OnboardingContent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OnboardingContent.ProtoReflect.Descriptor instead.
 func (*OnboardingContent) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{260}
+	return file_api_proto_rawDescGZIP(), []int{262}
 }
 
 func (x *OnboardingContent) GetGuideType() int32 {
@@ -19753,7 +19834,7 @@ type CreateOnboardingRequest struct {
 
 func (x *CreateOnboardingRequest) Reset() {
 	*x = CreateOnboardingRequest{}
-	mi := &file_api_proto_msgTypes[261]
+	mi := &file_api_proto_msgTypes[263]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -19765,7 +19846,7 @@ func (x *CreateOnboardingRequest) String() string {
 func (*CreateOnboardingRequest) ProtoMessage() {}
 
 func (x *CreateOnboardingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[261]
+	mi := &file_api_proto_msgTypes[263]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -19778,7 +19859,7 @@ func (x *CreateOnboardingRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOnboardingRequest.ProtoReflect.Descriptor instead.
 func (*CreateOnboardingRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{261}
+	return file_api_proto_rawDescGZIP(), []int{263}
 }
 
 func (x *CreateOnboardingRequest) GetClanId() int64 {
@@ -19819,7 +19900,7 @@ type UpdateOnboardingRequest struct {
 
 func (x *UpdateOnboardingRequest) Reset() {
 	*x = UpdateOnboardingRequest{}
-	mi := &file_api_proto_msgTypes[262]
+	mi := &file_api_proto_msgTypes[264]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -19831,7 +19912,7 @@ func (x *UpdateOnboardingRequest) String() string {
 func (*UpdateOnboardingRequest) ProtoMessage() {}
 
 func (x *UpdateOnboardingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[262]
+	mi := &file_api_proto_msgTypes[264]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -19844,7 +19925,7 @@ func (x *UpdateOnboardingRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOnboardingRequest.ProtoReflect.Descriptor instead.
 func (*UpdateOnboardingRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{262}
+	return file_api_proto_rawDescGZIP(), []int{264}
 }
 
 func (x *UpdateOnboardingRequest) GetId() int64 {
@@ -19915,7 +19996,7 @@ type OnboardingRequest struct {
 
 func (x *OnboardingRequest) Reset() {
 	*x = OnboardingRequest{}
-	mi := &file_api_proto_msgTypes[263]
+	mi := &file_api_proto_msgTypes[265]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -19927,7 +20008,7 @@ func (x *OnboardingRequest) String() string {
 func (*OnboardingRequest) ProtoMessage() {}
 
 func (x *OnboardingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[263]
+	mi := &file_api_proto_msgTypes[265]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -19940,7 +20021,7 @@ func (x *OnboardingRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OnboardingRequest.ProtoReflect.Descriptor instead.
 func (*OnboardingRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{263}
+	return file_api_proto_rawDescGZIP(), []int{265}
 }
 
 func (x *OnboardingRequest) GetId() int64 {
@@ -19983,7 +20064,7 @@ type ClanWebhook struct {
 
 func (x *ClanWebhook) Reset() {
 	*x = ClanWebhook{}
-	mi := &file_api_proto_msgTypes[264]
+	mi := &file_api_proto_msgTypes[266]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -19995,7 +20076,7 @@ func (x *ClanWebhook) String() string {
 func (*ClanWebhook) ProtoMessage() {}
 
 func (x *ClanWebhook) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[264]
+	mi := &file_api_proto_msgTypes[266]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20008,7 +20089,7 @@ func (x *ClanWebhook) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanWebhook.ProtoReflect.Descriptor instead.
 func (*ClanWebhook) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{264}
+	return file_api_proto_rawDescGZIP(), []int{266}
 }
 
 func (x *ClanWebhook) GetId() int64 {
@@ -20088,7 +20169,7 @@ type GenerateClanWebhookRequest struct {
 
 func (x *GenerateClanWebhookRequest) Reset() {
 	*x = GenerateClanWebhookRequest{}
-	mi := &file_api_proto_msgTypes[265]
+	mi := &file_api_proto_msgTypes[267]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20100,7 +20181,7 @@ func (x *GenerateClanWebhookRequest) String() string {
 func (*GenerateClanWebhookRequest) ProtoMessage() {}
 
 func (x *GenerateClanWebhookRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[265]
+	mi := &file_api_proto_msgTypes[267]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20113,7 +20194,7 @@ func (x *GenerateClanWebhookRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateClanWebhookRequest.ProtoReflect.Descriptor instead.
 func (*GenerateClanWebhookRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{265}
+	return file_api_proto_rawDescGZIP(), []int{267}
 }
 
 func (x *GenerateClanWebhookRequest) GetClanId() int64 {
@@ -20153,7 +20234,7 @@ type GenerateClanWebhookResponse struct {
 
 func (x *GenerateClanWebhookResponse) Reset() {
 	*x = GenerateClanWebhookResponse{}
-	mi := &file_api_proto_msgTypes[266]
+	mi := &file_api_proto_msgTypes[268]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20165,7 +20246,7 @@ func (x *GenerateClanWebhookResponse) String() string {
 func (*GenerateClanWebhookResponse) ProtoMessage() {}
 
 func (x *GenerateClanWebhookResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[266]
+	mi := &file_api_proto_msgTypes[268]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20178,7 +20259,7 @@ func (x *GenerateClanWebhookResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateClanWebhookResponse.ProtoReflect.Descriptor instead.
 func (*GenerateClanWebhookResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{266}
+	return file_api_proto_rawDescGZIP(), []int{268}
 }
 
 func (x *GenerateClanWebhookResponse) GetClanId() int64 {
@@ -20221,7 +20302,7 @@ type ClanWebhookRequest struct {
 
 func (x *ClanWebhookRequest) Reset() {
 	*x = ClanWebhookRequest{}
-	mi := &file_api_proto_msgTypes[267]
+	mi := &file_api_proto_msgTypes[269]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20233,7 +20314,7 @@ func (x *ClanWebhookRequest) String() string {
 func (*ClanWebhookRequest) ProtoMessage() {}
 
 func (x *ClanWebhookRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[267]
+	mi := &file_api_proto_msgTypes[269]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20246,7 +20327,7 @@ func (x *ClanWebhookRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanWebhookRequest.ProtoReflect.Descriptor instead.
 func (*ClanWebhookRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{267}
+	return file_api_proto_rawDescGZIP(), []int{269}
 }
 
 func (x *ClanWebhookRequest) GetId() int64 {
@@ -20281,7 +20362,7 @@ type UpdateClanWebhookRequest struct {
 
 func (x *UpdateClanWebhookRequest) Reset() {
 	*x = UpdateClanWebhookRequest{}
-	mi := &file_api_proto_msgTypes[268]
+	mi := &file_api_proto_msgTypes[270]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20293,7 +20374,7 @@ func (x *UpdateClanWebhookRequest) String() string {
 func (*UpdateClanWebhookRequest) ProtoMessage() {}
 
 func (x *UpdateClanWebhookRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[268]
+	mi := &file_api_proto_msgTypes[270]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20306,7 +20387,7 @@ func (x *UpdateClanWebhookRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClanWebhookRequest.ProtoReflect.Descriptor instead.
 func (*UpdateClanWebhookRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{268}
+	return file_api_proto_rawDescGZIP(), []int{270}
 }
 
 func (x *UpdateClanWebhookRequest) GetId() int64 {
@@ -20354,7 +20435,7 @@ type ListClanWebhookRequest struct {
 
 func (x *ListClanWebhookRequest) Reset() {
 	*x = ListClanWebhookRequest{}
-	mi := &file_api_proto_msgTypes[269]
+	mi := &file_api_proto_msgTypes[271]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20366,7 +20447,7 @@ func (x *ListClanWebhookRequest) String() string {
 func (*ListClanWebhookRequest) ProtoMessage() {}
 
 func (x *ListClanWebhookRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[269]
+	mi := &file_api_proto_msgTypes[271]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20379,7 +20460,7 @@ func (x *ListClanWebhookRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClanWebhookRequest.ProtoReflect.Descriptor instead.
 func (*ListClanWebhookRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{269}
+	return file_api_proto_rawDescGZIP(), []int{271}
 }
 
 func (x *ListClanWebhookRequest) GetClanId() int64 {
@@ -20399,7 +20480,7 @@ type ListClanWebhookResponse struct {
 
 func (x *ListClanWebhookResponse) Reset() {
 	*x = ListClanWebhookResponse{}
-	mi := &file_api_proto_msgTypes[270]
+	mi := &file_api_proto_msgTypes[272]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20411,7 +20492,7 @@ func (x *ListClanWebhookResponse) String() string {
 func (*ListClanWebhookResponse) ProtoMessage() {}
 
 func (x *ListClanWebhookResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[270]
+	mi := &file_api_proto_msgTypes[272]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20424,7 +20505,7 @@ func (x *ListClanWebhookResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClanWebhookResponse.ProtoReflect.Descriptor instead.
 func (*ListClanWebhookResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{270}
+	return file_api_proto_rawDescGZIP(), []int{272}
 }
 
 func (x *ListClanWebhookResponse) GetListClanWebhooks() []*ClanWebhook {
@@ -20446,7 +20527,7 @@ type ClanWebhookHandlerBody struct {
 
 func (x *ClanWebhookHandlerBody) Reset() {
 	*x = ClanWebhookHandlerBody{}
-	mi := &file_api_proto_msgTypes[271]
+	mi := &file_api_proto_msgTypes[273]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20458,7 +20539,7 @@ func (x *ClanWebhookHandlerBody) String() string {
 func (*ClanWebhookHandlerBody) ProtoMessage() {}
 
 func (x *ClanWebhookHandlerBody) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[271]
+	mi := &file_api_proto_msgTypes[273]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20471,7 +20552,7 @@ func (x *ClanWebhookHandlerBody) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanWebhookHandlerBody.ProtoReflect.Descriptor instead.
 func (*ClanWebhookHandlerBody) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{271}
+	return file_api_proto_rawDescGZIP(), []int{273}
 }
 
 func (x *ClanWebhookHandlerBody) GetContent() string {
@@ -20502,7 +20583,7 @@ type ClanWebhookHandlerRequest struct {
 
 func (x *ClanWebhookHandlerRequest) Reset() {
 	*x = ClanWebhookHandlerRequest{}
-	mi := &file_api_proto_msgTypes[272]
+	mi := &file_api_proto_msgTypes[274]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20514,7 +20595,7 @@ func (x *ClanWebhookHandlerRequest) String() string {
 func (*ClanWebhookHandlerRequest) ProtoMessage() {}
 
 func (x *ClanWebhookHandlerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[272]
+	mi := &file_api_proto_msgTypes[274]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20527,7 +20608,7 @@ func (x *ClanWebhookHandlerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanWebhookHandlerRequest.ProtoReflect.Descriptor instead.
 func (*ClanWebhookHandlerRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{272}
+	return file_api_proto_rawDescGZIP(), []int{274}
 }
 
 func (x *ClanWebhookHandlerRequest) GetBody() *ClanWebhookHandlerBody {
@@ -20561,7 +20642,7 @@ type UserStatus struct {
 
 func (x *UserStatus) Reset() {
 	*x = UserStatus{}
-	mi := &file_api_proto_msgTypes[273]
+	mi := &file_api_proto_msgTypes[275]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20573,7 +20654,7 @@ func (x *UserStatus) String() string {
 func (*UserStatus) ProtoMessage() {}
 
 func (x *UserStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[273]
+	mi := &file_api_proto_msgTypes[275]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20586,7 +20667,7 @@ func (x *UserStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserStatus.ProtoReflect.Descriptor instead.
 func (*UserStatus) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{273}
+	return file_api_proto_rawDescGZIP(), []int{275}
 }
 
 func (x *UserStatus) GetUserId() int64 {
@@ -20614,7 +20695,7 @@ type UserStatusUpdate struct {
 
 func (x *UserStatusUpdate) Reset() {
 	*x = UserStatusUpdate{}
-	mi := &file_api_proto_msgTypes[274]
+	mi := &file_api_proto_msgTypes[276]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20626,7 +20707,7 @@ func (x *UserStatusUpdate) String() string {
 func (*UserStatusUpdate) ProtoMessage() {}
 
 func (x *UserStatusUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[274]
+	mi := &file_api_proto_msgTypes[276]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20639,7 +20720,7 @@ func (x *UserStatusUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserStatusUpdate.ProtoReflect.Descriptor instead.
 func (*UserStatusUpdate) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{274}
+	return file_api_proto_rawDescGZIP(), []int{276}
 }
 
 func (x *UserStatusUpdate) GetStatus() string {
@@ -20679,7 +20760,7 @@ type OnboardingSteps struct {
 
 func (x *OnboardingSteps) Reset() {
 	*x = OnboardingSteps{}
-	mi := &file_api_proto_msgTypes[275]
+	mi := &file_api_proto_msgTypes[277]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20691,7 +20772,7 @@ func (x *OnboardingSteps) String() string {
 func (*OnboardingSteps) ProtoMessage() {}
 
 func (x *OnboardingSteps) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[275]
+	mi := &file_api_proto_msgTypes[277]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20704,7 +20785,7 @@ func (x *OnboardingSteps) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OnboardingSteps.ProtoReflect.Descriptor instead.
 func (*OnboardingSteps) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{275}
+	return file_api_proto_rawDescGZIP(), []int{277}
 }
 
 func (x *OnboardingSteps) GetId() int64 {
@@ -20745,7 +20826,7 @@ type ListOnboardingStepResponse struct {
 
 func (x *ListOnboardingStepResponse) Reset() {
 	*x = ListOnboardingStepResponse{}
-	mi := &file_api_proto_msgTypes[276]
+	mi := &file_api_proto_msgTypes[278]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20757,7 +20838,7 @@ func (x *ListOnboardingStepResponse) String() string {
 func (*ListOnboardingStepResponse) ProtoMessage() {}
 
 func (x *ListOnboardingStepResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[276]
+	mi := &file_api_proto_msgTypes[278]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20770,7 +20851,7 @@ func (x *ListOnboardingStepResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOnboardingStepResponse.ProtoReflect.Descriptor instead.
 func (*ListOnboardingStepResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{276}
+	return file_api_proto_rawDescGZIP(), []int{278}
 }
 
 func (x *ListOnboardingStepResponse) GetListOnboardingStep() []*OnboardingSteps {
@@ -20794,7 +20875,7 @@ type ListOnboardingStepRequest struct {
 
 func (x *ListOnboardingStepRequest) Reset() {
 	*x = ListOnboardingStepRequest{}
-	mi := &file_api_proto_msgTypes[277]
+	mi := &file_api_proto_msgTypes[279]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20806,7 +20887,7 @@ func (x *ListOnboardingStepRequest) String() string {
 func (*ListOnboardingStepRequest) ProtoMessage() {}
 
 func (x *ListOnboardingStepRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[277]
+	mi := &file_api_proto_msgTypes[279]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20819,7 +20900,7 @@ func (x *ListOnboardingStepRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOnboardingStepRequest.ProtoReflect.Descriptor instead.
 func (*ListOnboardingStepRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{277}
+	return file_api_proto_rawDescGZIP(), []int{279}
 }
 
 func (x *ListOnboardingStepRequest) GetClanId() int64 {
@@ -20855,7 +20936,7 @@ type UpdateOnboardingStepRequest struct {
 
 func (x *UpdateOnboardingStepRequest) Reset() {
 	*x = UpdateOnboardingStepRequest{}
-	mi := &file_api_proto_msgTypes[278]
+	mi := &file_api_proto_msgTypes[280]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20867,7 +20948,7 @@ func (x *UpdateOnboardingStepRequest) String() string {
 func (*UpdateOnboardingStepRequest) ProtoMessage() {}
 
 func (x *UpdateOnboardingStepRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[278]
+	mi := &file_api_proto_msgTypes[280]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20880,7 +20961,7 @@ func (x *UpdateOnboardingStepRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOnboardingStepRequest.ProtoReflect.Descriptor instead.
 func (*UpdateOnboardingStepRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{278}
+	return file_api_proto_rawDescGZIP(), []int{280}
 }
 
 func (x *UpdateOnboardingStepRequest) GetClanId() int64 {
@@ -20915,7 +20996,7 @@ type SdTopic struct {
 
 func (x *SdTopic) Reset() {
 	*x = SdTopic{}
-	mi := &file_api_proto_msgTypes[279]
+	mi := &file_api_proto_msgTypes[281]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -20927,7 +21008,7 @@ func (x *SdTopic) String() string {
 func (*SdTopic) ProtoMessage() {}
 
 func (x *SdTopic) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[279]
+	mi := &file_api_proto_msgTypes[281]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20940,7 +21021,7 @@ func (x *SdTopic) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SdTopic.ProtoReflect.Descriptor instead.
 func (*SdTopic) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{279}
+	return file_api_proto_rawDescGZIP(), []int{281}
 }
 
 func (x *SdTopic) GetId() int64 {
@@ -21024,7 +21105,7 @@ type SdTopicRequest struct {
 
 func (x *SdTopicRequest) Reset() {
 	*x = SdTopicRequest{}
-	mi := &file_api_proto_msgTypes[280]
+	mi := &file_api_proto_msgTypes[282]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -21036,7 +21117,7 @@ func (x *SdTopicRequest) String() string {
 func (*SdTopicRequest) ProtoMessage() {}
 
 func (x *SdTopicRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[280]
+	mi := &file_api_proto_msgTypes[282]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -21049,7 +21130,7 @@ func (x *SdTopicRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SdTopicRequest.ProtoReflect.Descriptor instead.
 func (*SdTopicRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{280}
+	return file_api_proto_rawDescGZIP(), []int{282}
 }
 
 func (x *SdTopicRequest) GetMessageId() int64 {
@@ -21083,7 +21164,7 @@ type SdTopicList struct {
 
 func (x *SdTopicList) Reset() {
 	*x = SdTopicList{}
-	mi := &file_api_proto_msgTypes[281]
+	mi := &file_api_proto_msgTypes[283]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -21095,7 +21176,7 @@ func (x *SdTopicList) String() string {
 func (*SdTopicList) ProtoMessage() {}
 
 func (x *SdTopicList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[281]
+	mi := &file_api_proto_msgTypes[283]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -21108,7 +21189,7 @@ func (x *SdTopicList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SdTopicList.ProtoReflect.Descriptor instead.
 func (*SdTopicList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{281}
+	return file_api_proto_rawDescGZIP(), []int{283}
 }
 
 func (x *SdTopicList) GetCount() int32 {
@@ -21135,7 +21216,7 @@ type ListSdTopicRequest struct {
 
 func (x *ListSdTopicRequest) Reset() {
 	*x = ListSdTopicRequest{}
-	mi := &file_api_proto_msgTypes[282]
+	mi := &file_api_proto_msgTypes[284]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -21147,7 +21228,7 @@ func (x *ListSdTopicRequest) String() string {
 func (*ListSdTopicRequest) ProtoMessage() {}
 
 func (x *ListSdTopicRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[282]
+	mi := &file_api_proto_msgTypes[284]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -21160,7 +21241,7 @@ func (x *ListSdTopicRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSdTopicRequest.ProtoReflect.Descriptor instead.
 func (*ListSdTopicRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{282}
+	return file_api_proto_rawDescGZIP(), []int{284}
 }
 
 func (x *ListSdTopicRequest) GetClanId() int64 {
@@ -21186,7 +21267,7 @@ type SdTopicDetailRequest struct {
 
 func (x *SdTopicDetailRequest) Reset() {
 	*x = SdTopicDetailRequest{}
-	mi := &file_api_proto_msgTypes[283]
+	mi := &file_api_proto_msgTypes[285]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -21198,7 +21279,7 @@ func (x *SdTopicDetailRequest) String() string {
 func (*SdTopicDetailRequest) ProtoMessage() {}
 
 func (x *SdTopicDetailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[283]
+	mi := &file_api_proto_msgTypes[285]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -21211,7 +21292,7 @@ func (x *SdTopicDetailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SdTopicDetailRequest.ProtoReflect.Descriptor instead.
 func (*SdTopicDetailRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{283}
+	return file_api_proto_rawDescGZIP(), []int{285}
 }
 
 func (x *SdTopicDetailRequest) GetTopicId() int64 {
@@ -21232,7 +21313,7 @@ type DeleteSdTopicRequest struct {
 
 func (x *DeleteSdTopicRequest) Reset() {
 	*x = DeleteSdTopicRequest{}
-	mi := &file_api_proto_msgTypes[284]
+	mi := &file_api_proto_msgTypes[286]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -21244,7 +21325,7 @@ func (x *DeleteSdTopicRequest) String() string {
 func (*DeleteSdTopicRequest) ProtoMessage() {}
 
 func (x *DeleteSdTopicRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[284]
+	mi := &file_api_proto_msgTypes[286]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -21257,7 +21338,7 @@ func (x *DeleteSdTopicRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSdTopicRequest.ProtoReflect.Descriptor instead.
 func (*DeleteSdTopicRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{284}
+	return file_api_proto_rawDescGZIP(), []int{286}
 }
 
 func (x *DeleteSdTopicRequest) GetChannelId() int64 {
@@ -21291,7 +21372,7 @@ type GenerateMeetTokenRequest struct {
 
 func (x *GenerateMeetTokenRequest) Reset() {
 	*x = GenerateMeetTokenRequest{}
-	mi := &file_api_proto_msgTypes[285]
+	mi := &file_api_proto_msgTypes[287]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -21303,7 +21384,7 @@ func (x *GenerateMeetTokenRequest) String() string {
 func (*GenerateMeetTokenRequest) ProtoMessage() {}
 
 func (x *GenerateMeetTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[285]
+	mi := &file_api_proto_msgTypes[287]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -21316,7 +21397,7 @@ func (x *GenerateMeetTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateMeetTokenRequest.ProtoReflect.Descriptor instead.
 func (*GenerateMeetTokenRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{285}
+	return file_api_proto_rawDescGZIP(), []int{287}
 }
 
 func (x *GenerateMeetTokenRequest) GetChannelId() int64 {
@@ -21345,7 +21426,7 @@ type MeetParticipantRequest struct {
 
 func (x *MeetParticipantRequest) Reset() {
 	*x = MeetParticipantRequest{}
-	mi := &file_api_proto_msgTypes[286]
+	mi := &file_api_proto_msgTypes[288]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -21357,7 +21438,7 @@ func (x *MeetParticipantRequest) String() string {
 func (*MeetParticipantRequest) ProtoMessage() {}
 
 func (x *MeetParticipantRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[286]
+	mi := &file_api_proto_msgTypes[288]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -21370,7 +21451,7 @@ func (x *MeetParticipantRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MeetParticipantRequest.ProtoReflect.Descriptor instead.
 func (*MeetParticipantRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{286}
+	return file_api_proto_rawDescGZIP(), []int{288}
 }
 
 func (x *MeetParticipantRequest) GetUsername() string {
@@ -21410,7 +21491,7 @@ type GenerateMeetTokenResponse struct {
 
 func (x *GenerateMeetTokenResponse) Reset() {
 	*x = GenerateMeetTokenResponse{}
-	mi := &file_api_proto_msgTypes[287]
+	mi := &file_api_proto_msgTypes[289]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -21422,7 +21503,7 @@ func (x *GenerateMeetTokenResponse) String() string {
 func (*GenerateMeetTokenResponse) ProtoMessage() {}
 
 func (x *GenerateMeetTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[287]
+	mi := &file_api_proto_msgTypes[289]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -21435,7 +21516,7 @@ func (x *GenerateMeetTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateMeetTokenResponse.ProtoReflect.Descriptor instead.
 func (*GenerateMeetTokenResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{287}
+	return file_api_proto_rawDescGZIP(), []int{289}
 }
 
 func (x *GenerateMeetTokenResponse) GetToken() string {
@@ -21458,7 +21539,7 @@ type GenerateMezonMeetResponse struct {
 
 func (x *GenerateMezonMeetResponse) Reset() {
 	*x = GenerateMezonMeetResponse{}
-	mi := &file_api_proto_msgTypes[288]
+	mi := &file_api_proto_msgTypes[290]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -21470,7 +21551,7 @@ func (x *GenerateMezonMeetResponse) String() string {
 func (*GenerateMezonMeetResponse) ProtoMessage() {}
 
 func (x *GenerateMezonMeetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[288]
+	mi := &file_api_proto_msgTypes[290]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -21483,7 +21564,7 @@ func (x *GenerateMezonMeetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateMezonMeetResponse.ProtoReflect.Descriptor instead.
 func (*GenerateMezonMeetResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{288}
+	return file_api_proto_rawDescGZIP(), []int{290}
 }
 
 func (x *GenerateMezonMeetResponse) GetMeetId() int64 {
@@ -21531,7 +21612,7 @@ type CreateRoomChannelApps struct {
 
 func (x *CreateRoomChannelApps) Reset() {
 	*x = CreateRoomChannelApps{}
-	mi := &file_api_proto_msgTypes[289]
+	mi := &file_api_proto_msgTypes[291]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -21543,7 +21624,7 @@ func (x *CreateRoomChannelApps) String() string {
 func (*CreateRoomChannelApps) ProtoMessage() {}
 
 func (x *CreateRoomChannelApps) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[289]
+	mi := &file_api_proto_msgTypes[291]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -21556,7 +21637,7 @@ func (x *CreateRoomChannelApps) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRoomChannelApps.ProtoReflect.Descriptor instead.
 func (*CreateRoomChannelApps) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{289}
+	return file_api_proto_rawDescGZIP(), []int{291}
 }
 
 func (x *CreateRoomChannelApps) GetChannelId() int64 {
@@ -21628,7 +21709,7 @@ type MezonOauthClient struct {
 
 func (x *MezonOauthClient) Reset() {
 	*x = MezonOauthClient{}
-	mi := &file_api_proto_msgTypes[290]
+	mi := &file_api_proto_msgTypes[292]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -21640,7 +21721,7 @@ func (x *MezonOauthClient) String() string {
 func (*MezonOauthClient) ProtoMessage() {}
 
 func (x *MezonOauthClient) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[290]
+	mi := &file_api_proto_msgTypes[292]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -21653,7 +21734,7 @@ func (x *MezonOauthClient) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MezonOauthClient.ProtoReflect.Descriptor instead.
 func (*MezonOauthClient) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{290}
+	return file_api_proto_rawDescGZIP(), []int{292}
 }
 
 func (x *MezonOauthClient) GetAccessTokenStrategy() string {
@@ -21994,7 +22075,7 @@ type MezonOauthClientList struct {
 
 func (x *MezonOauthClientList) Reset() {
 	*x = MezonOauthClientList{}
-	mi := &file_api_proto_msgTypes[291]
+	mi := &file_api_proto_msgTypes[293]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22006,7 +22087,7 @@ func (x *MezonOauthClientList) String() string {
 func (*MezonOauthClientList) ProtoMessage() {}
 
 func (x *MezonOauthClientList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[291]
+	mi := &file_api_proto_msgTypes[293]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22019,7 +22100,7 @@ func (x *MezonOauthClientList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MezonOauthClientList.ProtoReflect.Descriptor instead.
 func (*MezonOauthClientList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{291}
+	return file_api_proto_rawDescGZIP(), []int{293}
 }
 
 func (x *MezonOauthClientList) GetListMezonOauthClient() []*MezonOauthClient {
@@ -22039,7 +22120,7 @@ type GetMezonOauthClientRequest struct {
 
 func (x *GetMezonOauthClientRequest) Reset() {
 	*x = GetMezonOauthClientRequest{}
-	mi := &file_api_proto_msgTypes[292]
+	mi := &file_api_proto_msgTypes[294]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22051,7 +22132,7 @@ func (x *GetMezonOauthClientRequest) String() string {
 func (*GetMezonOauthClientRequest) ProtoMessage() {}
 
 func (x *GetMezonOauthClientRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[292]
+	mi := &file_api_proto_msgTypes[294]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22064,7 +22145,7 @@ func (x *GetMezonOauthClientRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMezonOauthClientRequest.ProtoReflect.Descriptor instead.
 func (*GetMezonOauthClientRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{292}
+	return file_api_proto_rawDescGZIP(), []int{294}
 }
 
 func (x *GetMezonOauthClientRequest) GetClientId() string {
@@ -22092,7 +22173,7 @@ type SearchThreadRequest struct {
 
 func (x *SearchThreadRequest) Reset() {
 	*x = SearchThreadRequest{}
-	mi := &file_api_proto_msgTypes[293]
+	mi := &file_api_proto_msgTypes[295]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22104,7 +22185,7 @@ func (x *SearchThreadRequest) String() string {
 func (*SearchThreadRequest) ProtoMessage() {}
 
 func (x *SearchThreadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[293]
+	mi := &file_api_proto_msgTypes[295]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22117,7 +22198,7 @@ func (x *SearchThreadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchThreadRequest.ProtoReflect.Descriptor instead.
 func (*SearchThreadRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{293}
+	return file_api_proto_rawDescGZIP(), []int{295}
 }
 
 func (x *SearchThreadRequest) GetClanId() int64 {
@@ -22150,7 +22231,7 @@ type GenerateHashChannelAppsRequest struct {
 
 func (x *GenerateHashChannelAppsRequest) Reset() {
 	*x = GenerateHashChannelAppsRequest{}
-	mi := &file_api_proto_msgTypes[294]
+	mi := &file_api_proto_msgTypes[296]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22162,7 +22243,7 @@ func (x *GenerateHashChannelAppsRequest) String() string {
 func (*GenerateHashChannelAppsRequest) ProtoMessage() {}
 
 func (x *GenerateHashChannelAppsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[294]
+	mi := &file_api_proto_msgTypes[296]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22175,7 +22256,7 @@ func (x *GenerateHashChannelAppsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateHashChannelAppsRequest.ProtoReflect.Descriptor instead.
 func (*GenerateHashChannelAppsRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{294}
+	return file_api_proto_rawDescGZIP(), []int{296}
 }
 
 func (x *GenerateHashChannelAppsRequest) GetAppId() int64 {
@@ -22194,7 +22275,7 @@ type GenerateHashChannelAppsResponse struct {
 
 func (x *GenerateHashChannelAppsResponse) Reset() {
 	*x = GenerateHashChannelAppsResponse{}
-	mi := &file_api_proto_msgTypes[295]
+	mi := &file_api_proto_msgTypes[297]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22206,7 +22287,7 @@ func (x *GenerateHashChannelAppsResponse) String() string {
 func (*GenerateHashChannelAppsResponse) ProtoMessage() {}
 
 func (x *GenerateHashChannelAppsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[295]
+	mi := &file_api_proto_msgTypes[297]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22219,7 +22300,7 @@ func (x *GenerateHashChannelAppsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateHashChannelAppsResponse.ProtoReflect.Descriptor instead.
 func (*GenerateHashChannelAppsResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{295}
+	return file_api_proto_rawDescGZIP(), []int{297}
 }
 
 func (x *GenerateHashChannelAppsResponse) GetWebAppData() string {
@@ -22246,7 +22327,7 @@ type Message2InboxRequest struct {
 
 func (x *Message2InboxRequest) Reset() {
 	*x = Message2InboxRequest{}
-	mi := &file_api_proto_msgTypes[296]
+	mi := &file_api_proto_msgTypes[298]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22258,7 +22339,7 @@ func (x *Message2InboxRequest) String() string {
 func (*Message2InboxRequest) ProtoMessage() {}
 
 func (x *Message2InboxRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[296]
+	mi := &file_api_proto_msgTypes[298]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22271,7 +22352,7 @@ func (x *Message2InboxRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Message2InboxRequest.ProtoReflect.Descriptor instead.
 func (*Message2InboxRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{296}
+	return file_api_proto_rawDescGZIP(), []int{298}
 }
 
 func (x *Message2InboxRequest) GetMessageId() int64 {
@@ -22354,7 +22435,7 @@ type AccountEmail struct {
 
 func (x *AccountEmail) Reset() {
 	*x = AccountEmail{}
-	mi := &file_api_proto_msgTypes[297]
+	mi := &file_api_proto_msgTypes[299]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22366,7 +22447,7 @@ func (x *AccountEmail) String() string {
 func (*AccountEmail) ProtoMessage() {}
 
 func (x *AccountEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[297]
+	mi := &file_api_proto_msgTypes[299]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22379,7 +22460,7 @@ func (x *AccountEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountEmail.ProtoReflect.Descriptor instead.
 func (*AccountEmail) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{297}
+	return file_api_proto_rawDescGZIP(), []int{299}
 }
 
 func (x *AccountEmail) GetEmail() string {
@@ -22423,7 +22504,7 @@ type AccountMezon struct {
 
 func (x *AccountMezon) Reset() {
 	*x = AccountMezon{}
-	mi := &file_api_proto_msgTypes[298]
+	mi := &file_api_proto_msgTypes[300]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22435,7 +22516,7 @@ func (x *AccountMezon) String() string {
 func (*AccountMezon) ProtoMessage() {}
 
 func (x *AccountMezon) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[298]
+	mi := &file_api_proto_msgTypes[300]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22448,7 +22529,7 @@ func (x *AccountMezon) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountMezon.ProtoReflect.Descriptor instead.
 func (*AccountMezon) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{298}
+	return file_api_proto_rawDescGZIP(), []int{300}
 }
 
 func (x *AccountMezon) GetPhoneNumber() string {
@@ -22479,7 +22560,7 @@ type LinkAccountConfirmRequest struct {
 
 func (x *LinkAccountConfirmRequest) Reset() {
 	*x = LinkAccountConfirmRequest{}
-	mi := &file_api_proto_msgTypes[299]
+	mi := &file_api_proto_msgTypes[301]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22491,7 +22572,7 @@ func (x *LinkAccountConfirmRequest) String() string {
 func (*LinkAccountConfirmRequest) ProtoMessage() {}
 
 func (x *LinkAccountConfirmRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[299]
+	mi := &file_api_proto_msgTypes[301]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22504,7 +22585,7 @@ func (x *LinkAccountConfirmRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LinkAccountConfirmRequest.ProtoReflect.Descriptor instead.
 func (*LinkAccountConfirmRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{299}
+	return file_api_proto_rawDescGZIP(), []int{301}
 }
 
 func (x *LinkAccountConfirmRequest) GetReqId() string {
@@ -22544,7 +22625,7 @@ type QuickMenuAccess struct {
 
 func (x *QuickMenuAccess) Reset() {
 	*x = QuickMenuAccess{}
-	mi := &file_api_proto_msgTypes[300]
+	mi := &file_api_proto_msgTypes[302]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22556,7 +22637,7 @@ func (x *QuickMenuAccess) String() string {
 func (*QuickMenuAccess) ProtoMessage() {}
 
 func (x *QuickMenuAccess) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[300]
+	mi := &file_api_proto_msgTypes[302]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22569,7 +22650,7 @@ func (x *QuickMenuAccess) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuickMenuAccess.ProtoReflect.Descriptor instead.
 func (*QuickMenuAccess) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{300}
+	return file_api_proto_rawDescGZIP(), []int{302}
 }
 
 func (x *QuickMenuAccess) GetId() int64 {
@@ -22639,7 +22720,7 @@ type ListQuickMenuAccessRequest struct {
 
 func (x *ListQuickMenuAccessRequest) Reset() {
 	*x = ListQuickMenuAccessRequest{}
-	mi := &file_api_proto_msgTypes[301]
+	mi := &file_api_proto_msgTypes[303]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22651,7 +22732,7 @@ func (x *ListQuickMenuAccessRequest) String() string {
 func (*ListQuickMenuAccessRequest) ProtoMessage() {}
 
 func (x *ListQuickMenuAccessRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[301]
+	mi := &file_api_proto_msgTypes[303]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22664,7 +22745,7 @@ func (x *ListQuickMenuAccessRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListQuickMenuAccessRequest.ProtoReflect.Descriptor instead.
 func (*ListQuickMenuAccessRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{301}
+	return file_api_proto_rawDescGZIP(), []int{303}
 }
 
 func (x *ListQuickMenuAccessRequest) GetBotId() int64 {
@@ -22697,7 +22778,7 @@ type QuickMenuAccessList struct {
 
 func (x *QuickMenuAccessList) Reset() {
 	*x = QuickMenuAccessList{}
-	mi := &file_api_proto_msgTypes[302]
+	mi := &file_api_proto_msgTypes[304]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22709,7 +22790,7 @@ func (x *QuickMenuAccessList) String() string {
 func (*QuickMenuAccessList) ProtoMessage() {}
 
 func (x *QuickMenuAccessList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[302]
+	mi := &file_api_proto_msgTypes[304]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22722,7 +22803,7 @@ func (x *QuickMenuAccessList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuickMenuAccessList.ProtoReflect.Descriptor instead.
 func (*QuickMenuAccessList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{302}
+	return file_api_proto_rawDescGZIP(), []int{304}
 }
 
 func (x *QuickMenuAccessList) GetListMenus() []*QuickMenuAccess {
@@ -22741,7 +22822,7 @@ type ListForSaleItemsRequest struct {
 
 func (x *ListForSaleItemsRequest) Reset() {
 	*x = ListForSaleItemsRequest{}
-	mi := &file_api_proto_msgTypes[303]
+	mi := &file_api_proto_msgTypes[305]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22753,7 +22834,7 @@ func (x *ListForSaleItemsRequest) String() string {
 func (*ListForSaleItemsRequest) ProtoMessage() {}
 
 func (x *ListForSaleItemsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[303]
+	mi := &file_api_proto_msgTypes[305]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22766,7 +22847,7 @@ func (x *ListForSaleItemsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListForSaleItemsRequest.ProtoReflect.Descriptor instead.
 func (*ListForSaleItemsRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{303}
+	return file_api_proto_rawDescGZIP(), []int{305}
 }
 
 func (x *ListForSaleItemsRequest) GetPage() int32 {
@@ -22786,7 +22867,7 @@ type ForSaleItem struct {
 
 func (x *ForSaleItem) Reset() {
 	*x = ForSaleItem{}
-	mi := &file_api_proto_msgTypes[304]
+	mi := &file_api_proto_msgTypes[306]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22798,7 +22879,7 @@ func (x *ForSaleItem) String() string {
 func (*ForSaleItem) ProtoMessage() {}
 
 func (x *ForSaleItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[304]
+	mi := &file_api_proto_msgTypes[306]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22811,7 +22892,7 @@ func (x *ForSaleItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ForSaleItem.ProtoReflect.Descriptor instead.
 func (*ForSaleItem) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{304}
+	return file_api_proto_rawDescGZIP(), []int{306}
 }
 
 func (x *ForSaleItem) GetType() int32 {
@@ -22837,7 +22918,7 @@ type ForSaleItemList struct {
 
 func (x *ForSaleItemList) Reset() {
 	*x = ForSaleItemList{}
-	mi := &file_api_proto_msgTypes[305]
+	mi := &file_api_proto_msgTypes[307]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22849,7 +22930,7 @@ func (x *ForSaleItemList) String() string {
 func (*ForSaleItemList) ProtoMessage() {}
 
 func (x *ForSaleItemList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[305]
+	mi := &file_api_proto_msgTypes[307]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22862,7 +22943,7 @@ func (x *ForSaleItemList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ForSaleItemList.ProtoReflect.Descriptor instead.
 func (*ForSaleItemList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{305}
+	return file_api_proto_rawDescGZIP(), []int{307}
 }
 
 func (x *ForSaleItemList) GetForSaleItems() []*ForSaleItem {
@@ -22881,7 +22962,7 @@ type IsFollowerRequest struct {
 
 func (x *IsFollowerRequest) Reset() {
 	*x = IsFollowerRequest{}
-	mi := &file_api_proto_msgTypes[306]
+	mi := &file_api_proto_msgTypes[308]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22893,7 +22974,7 @@ func (x *IsFollowerRequest) String() string {
 func (*IsFollowerRequest) ProtoMessage() {}
 
 func (x *IsFollowerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[306]
+	mi := &file_api_proto_msgTypes[308]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22906,7 +22987,7 @@ func (x *IsFollowerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsFollowerRequest.ProtoReflect.Descriptor instead.
 func (*IsFollowerRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{306}
+	return file_api_proto_rawDescGZIP(), []int{308}
 }
 
 func (x *IsFollowerRequest) GetFollowId() int64 {
@@ -22926,7 +23007,7 @@ type IsFollowerResponse struct {
 
 func (x *IsFollowerResponse) Reset() {
 	*x = IsFollowerResponse{}
-	mi := &file_api_proto_msgTypes[307]
+	mi := &file_api_proto_msgTypes[309]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22938,7 +23019,7 @@ func (x *IsFollowerResponse) String() string {
 func (*IsFollowerResponse) ProtoMessage() {}
 
 func (x *IsFollowerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[307]
+	mi := &file_api_proto_msgTypes[309]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -22951,7 +23032,7 @@ func (x *IsFollowerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsFollowerResponse.ProtoReflect.Descriptor instead.
 func (*IsFollowerResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{307}
+	return file_api_proto_rawDescGZIP(), []int{309}
 }
 
 func (x *IsFollowerResponse) GetFollowId() int64 {
@@ -22978,7 +23059,7 @@ type TransferOwnershipRequest struct {
 
 func (x *TransferOwnershipRequest) Reset() {
 	*x = TransferOwnershipRequest{}
-	mi := &file_api_proto_msgTypes[308]
+	mi := &file_api_proto_msgTypes[310]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -22990,7 +23071,7 @@ func (x *TransferOwnershipRequest) String() string {
 func (*TransferOwnershipRequest) ProtoMessage() {}
 
 func (x *TransferOwnershipRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[308]
+	mi := &file_api_proto_msgTypes[310]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23003,7 +23084,7 @@ func (x *TransferOwnershipRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferOwnershipRequest.ProtoReflect.Descriptor instead.
 func (*TransferOwnershipRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{308}
+	return file_api_proto_rawDescGZIP(), []int{310}
 }
 
 func (x *TransferOwnershipRequest) GetClanId() int64 {
@@ -23029,7 +23110,7 @@ type UserIds struct {
 
 func (x *UserIds) Reset() {
 	*x = UserIds{}
-	mi := &file_api_proto_msgTypes[309]
+	mi := &file_api_proto_msgTypes[311]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -23041,7 +23122,7 @@ func (x *UserIds) String() string {
 func (*UserIds) ProtoMessage() {}
 
 func (x *UserIds) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[309]
+	mi := &file_api_proto_msgTypes[311]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23054,7 +23135,7 @@ func (x *UserIds) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserIds.ProtoReflect.Descriptor instead.
 func (*UserIds) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{309}
+	return file_api_proto_rawDescGZIP(), []int{311}
 }
 
 func (x *UserIds) GetUserIds() []int64 {
@@ -23074,7 +23155,7 @@ type ReportMessageAbuseReqest struct {
 
 func (x *ReportMessageAbuseReqest) Reset() {
 	*x = ReportMessageAbuseReqest{}
-	mi := &file_api_proto_msgTypes[310]
+	mi := &file_api_proto_msgTypes[312]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -23086,7 +23167,7 @@ func (x *ReportMessageAbuseReqest) String() string {
 func (*ReportMessageAbuseReqest) ProtoMessage() {}
 
 func (x *ReportMessageAbuseReqest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[310]
+	mi := &file_api_proto_msgTypes[312]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23099,7 +23180,7 @@ func (x *ReportMessageAbuseReqest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReportMessageAbuseReqest.ProtoReflect.Descriptor instead.
 func (*ReportMessageAbuseReqest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{310}
+	return file_api_proto_rawDescGZIP(), []int{312}
 }
 
 func (x *ReportMessageAbuseReqest) GetMessageId() int64 {
@@ -23125,7 +23206,7 @@ type LogedDeviceList struct {
 
 func (x *LogedDeviceList) Reset() {
 	*x = LogedDeviceList{}
-	mi := &file_api_proto_msgTypes[311]
+	mi := &file_api_proto_msgTypes[313]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -23137,7 +23218,7 @@ func (x *LogedDeviceList) String() string {
 func (*LogedDeviceList) ProtoMessage() {}
 
 func (x *LogedDeviceList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[311]
+	mi := &file_api_proto_msgTypes[313]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23150,7 +23231,7 @@ func (x *LogedDeviceList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogedDeviceList.ProtoReflect.Descriptor instead.
 func (*LogedDeviceList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{311}
+	return file_api_proto_rawDescGZIP(), []int{313}
 }
 
 func (x *LogedDeviceList) GetDevices() []*LogedDevice {
@@ -23177,7 +23258,7 @@ type LogedDevice struct {
 
 func (x *LogedDevice) Reset() {
 	*x = LogedDevice{}
-	mi := &file_api_proto_msgTypes[312]
+	mi := &file_api_proto_msgTypes[314]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -23189,7 +23270,7 @@ func (x *LogedDevice) String() string {
 func (*LogedDevice) ProtoMessage() {}
 
 func (x *LogedDevice) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[312]
+	mi := &file_api_proto_msgTypes[314]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23202,7 +23283,7 @@ func (x *LogedDevice) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogedDevice.ProtoReflect.Descriptor instead.
 func (*LogedDevice) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{312}
+	return file_api_proto_rawDescGZIP(), []int{314}
 }
 
 func (x *LogedDevice) GetDeviceId() string {
@@ -23295,7 +23376,7 @@ type DirectFcmProto struct {
 
 func (x *DirectFcmProto) Reset() {
 	*x = DirectFcmProto{}
-	mi := &file_api_proto_msgTypes[313]
+	mi := &file_api_proto_msgTypes[315]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -23307,7 +23388,7 @@ func (x *DirectFcmProto) String() string {
 func (*DirectFcmProto) ProtoMessage() {}
 
 func (x *DirectFcmProto) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[313]
+	mi := &file_api_proto_msgTypes[315]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23320,7 +23401,7 @@ func (x *DirectFcmProto) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DirectFcmProto.ProtoReflect.Descriptor instead.
 func (*DirectFcmProto) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{313}
+	return file_api_proto_rawDescGZIP(), []int{315}
 }
 
 func (x *DirectFcmProto) GetTitle() string {
@@ -23465,7 +23546,7 @@ type MessageMentionList struct {
 
 func (x *MessageMentionList) Reset() {
 	*x = MessageMentionList{}
-	mi := &file_api_proto_msgTypes[314]
+	mi := &file_api_proto_msgTypes[316]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -23477,7 +23558,7 @@ func (x *MessageMentionList) String() string {
 func (*MessageMentionList) ProtoMessage() {}
 
 func (x *MessageMentionList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[314]
+	mi := &file_api_proto_msgTypes[316]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23490,7 +23571,7 @@ func (x *MessageMentionList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessageMentionList.ProtoReflect.Descriptor instead.
 func (*MessageMentionList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{314}
+	return file_api_proto_rawDescGZIP(), []int{316}
 }
 
 func (x *MessageMentionList) GetMentions() []*MessageMention {
@@ -23509,7 +23590,7 @@ type MessageAttachmentList struct {
 
 func (x *MessageAttachmentList) Reset() {
 	*x = MessageAttachmentList{}
-	mi := &file_api_proto_msgTypes[315]
+	mi := &file_api_proto_msgTypes[317]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -23521,7 +23602,7 @@ func (x *MessageAttachmentList) String() string {
 func (*MessageAttachmentList) ProtoMessage() {}
 
 func (x *MessageAttachmentList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[315]
+	mi := &file_api_proto_msgTypes[317]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23534,7 +23615,7 @@ func (x *MessageAttachmentList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessageAttachmentList.ProtoReflect.Descriptor instead.
 func (*MessageAttachmentList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{315}
+	return file_api_proto_rawDescGZIP(), []int{317}
 }
 
 func (x *MessageAttachmentList) GetAttachments() []*MessageAttachment {
@@ -23553,7 +23634,7 @@ type MessageRefList struct {
 
 func (x *MessageRefList) Reset() {
 	*x = MessageRefList{}
-	mi := &file_api_proto_msgTypes[316]
+	mi := &file_api_proto_msgTypes[318]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -23565,7 +23646,7 @@ func (x *MessageRefList) String() string {
 func (*MessageRefList) ProtoMessage() {}
 
 func (x *MessageRefList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[316]
+	mi := &file_api_proto_msgTypes[318]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23578,7 +23659,7 @@ func (x *MessageRefList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessageRefList.ProtoReflect.Descriptor instead.
 func (*MessageRefList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{316}
+	return file_api_proto_rawDescGZIP(), []int{318}
 }
 
 func (x *MessageRefList) GetRefs() []*MessageRef {
@@ -23597,7 +23678,7 @@ type MessageReactionList struct {
 
 func (x *MessageReactionList) Reset() {
 	*x = MessageReactionList{}
-	mi := &file_api_proto_msgTypes[317]
+	mi := &file_api_proto_msgTypes[319]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -23609,7 +23690,7 @@ func (x *MessageReactionList) String() string {
 func (*MessageReactionList) ProtoMessage() {}
 
 func (x *MessageReactionList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[317]
+	mi := &file_api_proto_msgTypes[319]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23622,7 +23703,7 @@ func (x *MessageReactionList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessageReactionList.ProtoReflect.Descriptor instead.
 func (*MessageReactionList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{317}
+	return file_api_proto_rawDescGZIP(), []int{319}
 }
 
 func (x *MessageReactionList) GetReactions() []*MessageReaction {
@@ -23643,7 +23724,7 @@ type ListChannelBadgeCountRequest struct {
 
 func (x *ListChannelBadgeCountRequest) Reset() {
 	*x = ListChannelBadgeCountRequest{}
-	mi := &file_api_proto_msgTypes[318]
+	mi := &file_api_proto_msgTypes[320]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -23655,7 +23736,7 @@ func (x *ListChannelBadgeCountRequest) String() string {
 func (*ListChannelBadgeCountRequest) ProtoMessage() {}
 
 func (x *ListChannelBadgeCountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[318]
+	mi := &file_api_proto_msgTypes[320]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23668,7 +23749,7 @@ func (x *ListChannelBadgeCountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListChannelBadgeCountRequest.ProtoReflect.Descriptor instead.
 func (*ListChannelBadgeCountRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{318}
+	return file_api_proto_rawDescGZIP(), []int{320}
 }
 
 func (x *ListChannelBadgeCountRequest) GetClanId() int64 {
@@ -23702,7 +23783,7 @@ type ListChannelBadgeCountResponse struct {
 
 func (x *ListChannelBadgeCountResponse) Reset() {
 	*x = ListChannelBadgeCountResponse{}
-	mi := &file_api_proto_msgTypes[319]
+	mi := &file_api_proto_msgTypes[321]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -23714,7 +23795,7 @@ func (x *ListChannelBadgeCountResponse) String() string {
 func (*ListChannelBadgeCountResponse) ProtoMessage() {}
 
 func (x *ListChannelBadgeCountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[319]
+	mi := &file_api_proto_msgTypes[321]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23727,7 +23808,7 @@ func (x *ListChannelBadgeCountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListChannelBadgeCountResponse.ProtoReflect.Descriptor instead.
 func (*ListChannelBadgeCountResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{319}
+	return file_api_proto_rawDescGZIP(), []int{321}
 }
 
 func (x *ListChannelBadgeCountResponse) GetChanneldesc() []*ChannelDescription {
@@ -23755,7 +23836,7 @@ type ClanBadgeCount struct {
 
 func (x *ClanBadgeCount) Reset() {
 	*x = ClanBadgeCount{}
-	mi := &file_api_proto_msgTypes[320]
+	mi := &file_api_proto_msgTypes[322]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -23767,7 +23848,7 @@ func (x *ClanBadgeCount) String() string {
 func (*ClanBadgeCount) ProtoMessage() {}
 
 func (x *ClanBadgeCount) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[320]
+	mi := &file_api_proto_msgTypes[322]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23780,7 +23861,7 @@ func (x *ClanBadgeCount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanBadgeCount.ProtoReflect.Descriptor instead.
 func (*ClanBadgeCount) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{320}
+	return file_api_proto_rawDescGZIP(), []int{322}
 }
 
 func (x *ClanBadgeCount) GetClanId() int64 {
@@ -23813,7 +23894,7 @@ type ListClanBadgeCountResponse struct {
 
 func (x *ListClanBadgeCountResponse) Reset() {
 	*x = ListClanBadgeCountResponse{}
-	mi := &file_api_proto_msgTypes[321]
+	mi := &file_api_proto_msgTypes[323]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -23825,7 +23906,7 @@ func (x *ListClanBadgeCountResponse) String() string {
 func (*ListClanBadgeCountResponse) ProtoMessage() {}
 
 func (x *ListClanBadgeCountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[321]
+	mi := &file_api_proto_msgTypes[323]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23838,7 +23919,7 @@ func (x *ListClanBadgeCountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClanBadgeCountResponse.ProtoReflect.Descriptor instead.
 func (*ListClanBadgeCountResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{321}
+	return file_api_proto_rawDescGZIP(), []int{323}
 }
 
 func (x *ListClanBadgeCountResponse) GetListBadge() []*ClanBadgeCount {
@@ -23868,7 +23949,7 @@ type ClanDiscover struct {
 
 func (x *ClanDiscover) Reset() {
 	*x = ClanDiscover{}
-	mi := &file_api_proto_msgTypes[322]
+	mi := &file_api_proto_msgTypes[324]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -23880,7 +23961,7 @@ func (x *ClanDiscover) String() string {
 func (*ClanDiscover) ProtoMessage() {}
 
 func (x *ClanDiscover) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[322]
+	mi := &file_api_proto_msgTypes[324]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -23893,7 +23974,7 @@ func (x *ClanDiscover) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanDiscover.ProtoReflect.Descriptor instead.
 func (*ClanDiscover) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{322}
+	return file_api_proto_rawDescGZIP(), []int{324}
 }
 
 func (x *ClanDiscover) GetClanId() int64 {
@@ -23991,7 +24072,7 @@ type ListClanDiscover struct {
 
 func (x *ListClanDiscover) Reset() {
 	*x = ListClanDiscover{}
-	mi := &file_api_proto_msgTypes[323]
+	mi := &file_api_proto_msgTypes[325]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -24003,7 +24084,7 @@ func (x *ListClanDiscover) String() string {
 func (*ListClanDiscover) ProtoMessage() {}
 
 func (x *ListClanDiscover) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[323]
+	mi := &file_api_proto_msgTypes[325]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -24016,7 +24097,7 @@ func (x *ListClanDiscover) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClanDiscover.ProtoReflect.Descriptor instead.
 func (*ListClanDiscover) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{323}
+	return file_api_proto_rawDescGZIP(), []int{325}
 }
 
 func (x *ListClanDiscover) GetClanDiscover() []*ClanDiscover {
@@ -24051,7 +24132,7 @@ type GenerateMeetTokenExternalResponse struct {
 
 func (x *GenerateMeetTokenExternalResponse) Reset() {
 	*x = GenerateMeetTokenExternalResponse{}
-	mi := &file_api_proto_msgTypes[324]
+	mi := &file_api_proto_msgTypes[326]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -24063,7 +24144,7 @@ func (x *GenerateMeetTokenExternalResponse) String() string {
 func (*GenerateMeetTokenExternalResponse) ProtoMessage() {}
 
 func (x *GenerateMeetTokenExternalResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[324]
+	mi := &file_api_proto_msgTypes[326]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -24076,7 +24157,7 @@ func (x *GenerateMeetTokenExternalResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use GenerateMeetTokenExternalResponse.ProtoReflect.Descriptor instead.
 func (*GenerateMeetTokenExternalResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{324}
+	return file_api_proto_rawDescGZIP(), []int{326}
 }
 
 func (x *GenerateMeetTokenExternalResponse) GetToken() string {
@@ -24114,7 +24195,7 @@ type KafkaActionMsg struct {
 
 func (x *KafkaActionMsg) Reset() {
 	*x = KafkaActionMsg{}
-	mi := &file_api_proto_msgTypes[325]
+	mi := &file_api_proto_msgTypes[327]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -24126,7 +24207,7 @@ func (x *KafkaActionMsg) String() string {
 func (*KafkaActionMsg) ProtoMessage() {}
 
 func (x *KafkaActionMsg) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[325]
+	mi := &file_api_proto_msgTypes[327]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -24139,7 +24220,7 @@ func (x *KafkaActionMsg) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KafkaActionMsg.ProtoReflect.Descriptor instead.
 func (*KafkaActionMsg) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{325}
+	return file_api_proto_rawDescGZIP(), []int{327}
 }
 
 func (x *KafkaActionMsg) GetClanId() int64 {
@@ -24194,7 +24275,7 @@ type UpdateAIAgentRequest struct {
 
 func (x *UpdateAIAgentRequest) Reset() {
 	*x = UpdateAIAgentRequest{}
-	mi := &file_api_proto_msgTypes[326]
+	mi := &file_api_proto_msgTypes[328]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -24206,7 +24287,7 @@ func (x *UpdateAIAgentRequest) String() string {
 func (*UpdateAIAgentRequest) ProtoMessage() {}
 
 func (x *UpdateAIAgentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[326]
+	mi := &file_api_proto_msgTypes[328]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -24219,7 +24300,7 @@ func (x *UpdateAIAgentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAIAgentRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAIAgentRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{326}
+	return file_api_proto_rawDescGZIP(), []int{328}
 }
 
 func (x *UpdateAIAgentRequest) GetChannelId() int64 {
@@ -24249,7 +24330,7 @@ type ParticipantInfo struct {
 
 func (x *ParticipantInfo) Reset() {
 	*x = ParticipantInfo{}
-	mi := &file_api_proto_msgTypes[327]
+	mi := &file_api_proto_msgTypes[329]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -24261,7 +24342,7 @@ func (x *ParticipantInfo) String() string {
 func (*ParticipantInfo) ProtoMessage() {}
 
 func (x *ParticipantInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[327]
+	mi := &file_api_proto_msgTypes[329]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -24274,7 +24355,7 @@ func (x *ParticipantInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ParticipantInfo.ProtoReflect.Descriptor instead.
 func (*ParticipantInfo) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{327}
+	return file_api_proto_rawDescGZIP(), []int{329}
 }
 
 func (x *ParticipantInfo) GetSid() string {
@@ -24331,7 +24412,7 @@ type ChannelTimelineAttachment struct {
 
 func (x *ChannelTimelineAttachment) Reset() {
 	*x = ChannelTimelineAttachment{}
-	mi := &file_api_proto_msgTypes[328]
+	mi := &file_api_proto_msgTypes[330]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -24343,7 +24424,7 @@ func (x *ChannelTimelineAttachment) String() string {
 func (*ChannelTimelineAttachment) ProtoMessage() {}
 
 func (x *ChannelTimelineAttachment) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[328]
+	mi := &file_api_proto_msgTypes[330]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -24356,7 +24437,7 @@ func (x *ChannelTimelineAttachment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelTimelineAttachment.ProtoReflect.Descriptor instead.
 func (*ChannelTimelineAttachment) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{328}
+	return file_api_proto_rawDescGZIP(), []int{330}
 }
 
 func (x *ChannelTimelineAttachment) GetId() int64 {
@@ -24439,7 +24520,7 @@ type ListChannelTimelineAttachment struct {
 
 func (x *ListChannelTimelineAttachment) Reset() {
 	*x = ListChannelTimelineAttachment{}
-	mi := &file_api_proto_msgTypes[329]
+	mi := &file_api_proto_msgTypes[331]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -24451,7 +24532,7 @@ func (x *ListChannelTimelineAttachment) String() string {
 func (*ListChannelTimelineAttachment) ProtoMessage() {}
 
 func (x *ListChannelTimelineAttachment) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[329]
+	mi := &file_api_proto_msgTypes[331]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -24464,7 +24545,7 @@ func (x *ListChannelTimelineAttachment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListChannelTimelineAttachment.ProtoReflect.Descriptor instead.
 func (*ListChannelTimelineAttachment) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{329}
+	return file_api_proto_rawDescGZIP(), []int{331}
 }
 
 func (x *ListChannelTimelineAttachment) GetAttachments() []*ChannelTimelineAttachment {
@@ -24498,7 +24579,7 @@ type ChannelTimeline struct {
 
 func (x *ChannelTimeline) Reset() {
 	*x = ChannelTimeline{}
-	mi := &file_api_proto_msgTypes[330]
+	mi := &file_api_proto_msgTypes[332]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -24510,7 +24591,7 @@ func (x *ChannelTimeline) String() string {
 func (*ChannelTimeline) ProtoMessage() {}
 
 func (x *ChannelTimeline) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[330]
+	mi := &file_api_proto_msgTypes[332]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -24523,7 +24604,7 @@ func (x *ChannelTimeline) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelTimeline.ProtoReflect.Descriptor instead.
 func (*ChannelTimeline) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{330}
+	return file_api_proto_rawDescGZIP(), []int{332}
 }
 
 func (x *ChannelTimeline) GetId() int64 {
@@ -24646,7 +24727,7 @@ type ListChannelTimelineRequest struct {
 
 func (x *ListChannelTimelineRequest) Reset() {
 	*x = ListChannelTimelineRequest{}
-	mi := &file_api_proto_msgTypes[331]
+	mi := &file_api_proto_msgTypes[333]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -24658,7 +24739,7 @@ func (x *ListChannelTimelineRequest) String() string {
 func (*ListChannelTimelineRequest) ProtoMessage() {}
 
 func (x *ListChannelTimelineRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[331]
+	mi := &file_api_proto_msgTypes[333]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -24671,7 +24752,7 @@ func (x *ListChannelTimelineRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListChannelTimelineRequest.ProtoReflect.Descriptor instead.
 func (*ListChannelTimelineRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{331}
+	return file_api_proto_rawDescGZIP(), []int{333}
 }
 
 func (x *ListChannelTimelineRequest) GetClanId() int64 {
@@ -24726,7 +24807,7 @@ type ListChannelTimelineResponse struct {
 
 func (x *ListChannelTimelineResponse) Reset() {
 	*x = ListChannelTimelineResponse{}
-	mi := &file_api_proto_msgTypes[332]
+	mi := &file_api_proto_msgTypes[334]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -24738,7 +24819,7 @@ func (x *ListChannelTimelineResponse) String() string {
 func (*ListChannelTimelineResponse) ProtoMessage() {}
 
 func (x *ListChannelTimelineResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[332]
+	mi := &file_api_proto_msgTypes[334]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -24751,7 +24832,7 @@ func (x *ListChannelTimelineResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListChannelTimelineResponse.ProtoReflect.Descriptor instead.
 func (*ListChannelTimelineResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{332}
+	return file_api_proto_rawDescGZIP(), []int{334}
 }
 
 func (x *ListChannelTimelineResponse) GetEvents() []*ChannelTimeline {
@@ -24779,7 +24860,7 @@ type CreateChannelTimelineRequest struct {
 
 func (x *CreateChannelTimelineRequest) Reset() {
 	*x = CreateChannelTimelineRequest{}
-	mi := &file_api_proto_msgTypes[333]
+	mi := &file_api_proto_msgTypes[335]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -24791,7 +24872,7 @@ func (x *CreateChannelTimelineRequest) String() string {
 func (*CreateChannelTimelineRequest) ProtoMessage() {}
 
 func (x *CreateChannelTimelineRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[333]
+	mi := &file_api_proto_msgTypes[335]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -24804,7 +24885,7 @@ func (x *CreateChannelTimelineRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateChannelTimelineRequest.ProtoReflect.Descriptor instead.
 func (*CreateChannelTimelineRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{333}
+	return file_api_proto_rawDescGZIP(), []int{335}
 }
 
 func (x *CreateChannelTimelineRequest) GetClanId() int64 {
@@ -24879,7 +24960,7 @@ type CreateChannelTimelineResponse struct {
 
 func (x *CreateChannelTimelineResponse) Reset() {
 	*x = CreateChannelTimelineResponse{}
-	mi := &file_api_proto_msgTypes[334]
+	mi := &file_api_proto_msgTypes[336]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -24891,7 +24972,7 @@ func (x *CreateChannelTimelineResponse) String() string {
 func (*CreateChannelTimelineResponse) ProtoMessage() {}
 
 func (x *CreateChannelTimelineResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[334]
+	mi := &file_api_proto_msgTypes[336]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -24904,7 +24985,7 @@ func (x *CreateChannelTimelineResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateChannelTimelineResponse.ProtoReflect.Descriptor instead.
 func (*CreateChannelTimelineResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{334}
+	return file_api_proto_rawDescGZIP(), []int{336}
 }
 
 func (x *CreateChannelTimelineResponse) GetEvent() *ChannelTimeline {
@@ -24932,7 +25013,7 @@ type UpdateChannelTimelineRequest struct {
 
 func (x *UpdateChannelTimelineRequest) Reset() {
 	*x = UpdateChannelTimelineRequest{}
-	mi := &file_api_proto_msgTypes[335]
+	mi := &file_api_proto_msgTypes[337]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -24944,7 +25025,7 @@ func (x *UpdateChannelTimelineRequest) String() string {
 func (*UpdateChannelTimelineRequest) ProtoMessage() {}
 
 func (x *UpdateChannelTimelineRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[335]
+	mi := &file_api_proto_msgTypes[337]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -24957,7 +25038,7 @@ func (x *UpdateChannelTimelineRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateChannelTimelineRequest.ProtoReflect.Descriptor instead.
 func (*UpdateChannelTimelineRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{335}
+	return file_api_proto_rawDescGZIP(), []int{337}
 }
 
 func (x *UpdateChannelTimelineRequest) GetClanId() int64 {
@@ -25032,7 +25113,7 @@ type UpdateChannelTimelineResponse struct {
 
 func (x *UpdateChannelTimelineResponse) Reset() {
 	*x = UpdateChannelTimelineResponse{}
-	mi := &file_api_proto_msgTypes[336]
+	mi := &file_api_proto_msgTypes[338]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25044,7 +25125,7 @@ func (x *UpdateChannelTimelineResponse) String() string {
 func (*UpdateChannelTimelineResponse) ProtoMessage() {}
 
 func (x *UpdateChannelTimelineResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[336]
+	mi := &file_api_proto_msgTypes[338]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25057,7 +25138,7 @@ func (x *UpdateChannelTimelineResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateChannelTimelineResponse.ProtoReflect.Descriptor instead.
 func (*UpdateChannelTimelineResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{336}
+	return file_api_proto_rawDescGZIP(), []int{338}
 }
 
 func (x *UpdateChannelTimelineResponse) GetEvent() *ChannelTimeline {
@@ -25079,7 +25160,7 @@ type ChannelTimelineDetailRequest struct {
 
 func (x *ChannelTimelineDetailRequest) Reset() {
 	*x = ChannelTimelineDetailRequest{}
-	mi := &file_api_proto_msgTypes[337]
+	mi := &file_api_proto_msgTypes[339]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25091,7 +25172,7 @@ func (x *ChannelTimelineDetailRequest) String() string {
 func (*ChannelTimelineDetailRequest) ProtoMessage() {}
 
 func (x *ChannelTimelineDetailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[337]
+	mi := &file_api_proto_msgTypes[339]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25104,7 +25185,7 @@ func (x *ChannelTimelineDetailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelTimelineDetailRequest.ProtoReflect.Descriptor instead.
 func (*ChannelTimelineDetailRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{337}
+	return file_api_proto_rawDescGZIP(), []int{339}
 }
 
 func (x *ChannelTimelineDetailRequest) GetClanId() int64 {
@@ -25144,7 +25225,7 @@ type ChannelTimelineDetailResponse struct {
 
 func (x *ChannelTimelineDetailResponse) Reset() {
 	*x = ChannelTimelineDetailResponse{}
-	mi := &file_api_proto_msgTypes[338]
+	mi := &file_api_proto_msgTypes[340]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25156,7 +25237,7 @@ func (x *ChannelTimelineDetailResponse) String() string {
 func (*ChannelTimelineDetailResponse) ProtoMessage() {}
 
 func (x *ChannelTimelineDetailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[338]
+	mi := &file_api_proto_msgTypes[340]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25169,7 +25250,7 @@ func (x *ChannelTimelineDetailResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelTimelineDetailResponse.ProtoReflect.Descriptor instead.
 func (*ChannelTimelineDetailResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{338}
+	return file_api_proto_rawDescGZIP(), []int{340}
 }
 
 func (x *ChannelTimelineDetailResponse) GetEvent() *ChannelTimeline {
@@ -25188,7 +25269,7 @@ type ListMutedChannelRequest struct {
 
 func (x *ListMutedChannelRequest) Reset() {
 	*x = ListMutedChannelRequest{}
-	mi := &file_api_proto_msgTypes[339]
+	mi := &file_api_proto_msgTypes[341]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25200,7 +25281,7 @@ func (x *ListMutedChannelRequest) String() string {
 func (*ListMutedChannelRequest) ProtoMessage() {}
 
 func (x *ListMutedChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[339]
+	mi := &file_api_proto_msgTypes[341]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25213,7 +25294,7 @@ func (x *ListMutedChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMutedChannelRequest.ProtoReflect.Descriptor instead.
 func (*ListMutedChannelRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{339}
+	return file_api_proto_rawDescGZIP(), []int{341}
 }
 
 func (x *ListMutedChannelRequest) GetClanId() int64 {
@@ -25232,7 +25313,7 @@ type MutedChannelList struct {
 
 func (x *MutedChannelList) Reset() {
 	*x = MutedChannelList{}
-	mi := &file_api_proto_msgTypes[340]
+	mi := &file_api_proto_msgTypes[342]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25244,7 +25325,7 @@ func (x *MutedChannelList) String() string {
 func (*MutedChannelList) ProtoMessage() {}
 
 func (x *MutedChannelList) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[340]
+	mi := &file_api_proto_msgTypes[342]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25257,7 +25338,7 @@ func (x *MutedChannelList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MutedChannelList.ProtoReflect.Descriptor instead.
 func (*MutedChannelList) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{340}
+	return file_api_proto_rawDescGZIP(), []int{342}
 }
 
 func (x *MutedChannelList) GetMutedList() []int64 {
@@ -25276,7 +25357,7 @@ type NotificationBatchRequest struct {
 
 func (x *NotificationBatchRequest) Reset() {
 	*x = NotificationBatchRequest{}
-	mi := &file_api_proto_msgTypes[341]
+	mi := &file_api_proto_msgTypes[343]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25288,7 +25369,7 @@ func (x *NotificationBatchRequest) String() string {
 func (*NotificationBatchRequest) ProtoMessage() {}
 
 func (x *NotificationBatchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[341]
+	mi := &file_api_proto_msgTypes[343]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25301,7 +25382,7 @@ func (x *NotificationBatchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NotificationBatchRequest.ProtoReflect.Descriptor instead.
 func (*NotificationBatchRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{341}
+	return file_api_proto_rawDescGZIP(), []int{343}
 }
 
 func (x *NotificationBatchRequest) GetNotifications() map[int64]*NotificationList {
@@ -25325,7 +25406,7 @@ type CreatePollRequest struct {
 
 func (x *CreatePollRequest) Reset() {
 	*x = CreatePollRequest{}
-	mi := &file_api_proto_msgTypes[342]
+	mi := &file_api_proto_msgTypes[344]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25337,7 +25418,7 @@ func (x *CreatePollRequest) String() string {
 func (*CreatePollRequest) ProtoMessage() {}
 
 func (x *CreatePollRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[342]
+	mi := &file_api_proto_msgTypes[344]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25350,7 +25431,7 @@ func (x *CreatePollRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePollRequest.ProtoReflect.Descriptor instead.
 func (*CreatePollRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{342}
+	return file_api_proto_rawDescGZIP(), []int{344}
 }
 
 func (x *CreatePollRequest) GetChannelId() int64 {
@@ -25413,7 +25494,7 @@ type CreatePollResponse struct {
 
 func (x *CreatePollResponse) Reset() {
 	*x = CreatePollResponse{}
-	mi := &file_api_proto_msgTypes[343]
+	mi := &file_api_proto_msgTypes[345]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25425,7 +25506,7 @@ func (x *CreatePollResponse) String() string {
 func (*CreatePollResponse) ProtoMessage() {}
 
 func (x *CreatePollResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[343]
+	mi := &file_api_proto_msgTypes[345]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25438,7 +25519,7 @@ func (x *CreatePollResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePollResponse.ProtoReflect.Descriptor instead.
 func (*CreatePollResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{343}
+	return file_api_proto_rawDescGZIP(), []int{345}
 }
 
 func (x *CreatePollResponse) GetPollId() int64 {
@@ -25523,7 +25604,7 @@ type VotePollRequest struct {
 
 func (x *VotePollRequest) Reset() {
 	*x = VotePollRequest{}
-	mi := &file_api_proto_msgTypes[344]
+	mi := &file_api_proto_msgTypes[346]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25535,7 +25616,7 @@ func (x *VotePollRequest) String() string {
 func (*VotePollRequest) ProtoMessage() {}
 
 func (x *VotePollRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[344]
+	mi := &file_api_proto_msgTypes[346]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25548,7 +25629,7 @@ func (x *VotePollRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VotePollRequest.ProtoReflect.Descriptor instead.
 func (*VotePollRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{344}
+	return file_api_proto_rawDescGZIP(), []int{346}
 }
 
 func (x *VotePollRequest) GetPollId() int64 {
@@ -25588,7 +25669,7 @@ type VotePollResponse struct {
 
 func (x *VotePollResponse) Reset() {
 	*x = VotePollResponse{}
-	mi := &file_api_proto_msgTypes[345]
+	mi := &file_api_proto_msgTypes[347]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25600,7 +25681,7 @@ func (x *VotePollResponse) String() string {
 func (*VotePollResponse) ProtoMessage() {}
 
 func (x *VotePollResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[345]
+	mi := &file_api_proto_msgTypes[347]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25613,7 +25694,7 @@ func (x *VotePollResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VotePollResponse.ProtoReflect.Descriptor instead.
 func (*VotePollResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{345}
+	return file_api_proto_rawDescGZIP(), []int{347}
 }
 
 func (x *VotePollResponse) GetMyAnswerIndices() []int32 {
@@ -25634,7 +25715,7 @@ type ClosePollRequest struct {
 
 func (x *ClosePollRequest) Reset() {
 	*x = ClosePollRequest{}
-	mi := &file_api_proto_msgTypes[346]
+	mi := &file_api_proto_msgTypes[348]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25646,7 +25727,7 @@ func (x *ClosePollRequest) String() string {
 func (*ClosePollRequest) ProtoMessage() {}
 
 func (x *ClosePollRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[346]
+	mi := &file_api_proto_msgTypes[348]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25659,7 +25740,7 @@ func (x *ClosePollRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClosePollRequest.ProtoReflect.Descriptor instead.
 func (*ClosePollRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{346}
+	return file_api_proto_rawDescGZIP(), []int{348}
 }
 
 func (x *ClosePollRequest) GetPollId() int64 {
@@ -25694,7 +25775,7 @@ type GetPollRequest struct {
 
 func (x *GetPollRequest) Reset() {
 	*x = GetPollRequest{}
-	mi := &file_api_proto_msgTypes[347]
+	mi := &file_api_proto_msgTypes[349]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25706,7 +25787,7 @@ func (x *GetPollRequest) String() string {
 func (*GetPollRequest) ProtoMessage() {}
 
 func (x *GetPollRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[347]
+	mi := &file_api_proto_msgTypes[349]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25719,7 +25800,7 @@ func (x *GetPollRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPollRequest.ProtoReflect.Descriptor instead.
 func (*GetPollRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{347}
+	return file_api_proto_rawDescGZIP(), []int{349}
 }
 
 func (x *GetPollRequest) GetPollId() int64 {
@@ -25753,7 +25834,7 @@ type PollAnswer struct {
 
 func (x *PollAnswer) Reset() {
 	*x = PollAnswer{}
-	mi := &file_api_proto_msgTypes[348]
+	mi := &file_api_proto_msgTypes[350]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25765,7 +25846,7 @@ func (x *PollAnswer) String() string {
 func (*PollAnswer) ProtoMessage() {}
 
 func (x *PollAnswer) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[348]
+	mi := &file_api_proto_msgTypes[350]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25778,7 +25859,7 @@ func (x *PollAnswer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PollAnswer.ProtoReflect.Descriptor instead.
 func (*PollAnswer) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{348}
+	return file_api_proto_rawDescGZIP(), []int{350}
 }
 
 func (x *PollAnswer) GetIndex() int32 {
@@ -25805,7 +25886,7 @@ type PollVoterDetail struct {
 
 func (x *PollVoterDetail) Reset() {
 	*x = PollVoterDetail{}
-	mi := &file_api_proto_msgTypes[349]
+	mi := &file_api_proto_msgTypes[351]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25817,7 +25898,7 @@ func (x *PollVoterDetail) String() string {
 func (*PollVoterDetail) ProtoMessage() {}
 
 func (x *PollVoterDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[349]
+	mi := &file_api_proto_msgTypes[351]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25830,7 +25911,7 @@ func (x *PollVoterDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PollVoterDetail.ProtoReflect.Descriptor instead.
 func (*PollVoterDetail) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{349}
+	return file_api_proto_rawDescGZIP(), []int{351}
 }
 
 func (x *PollVoterDetail) GetAnswerIndex() int32 {
@@ -25866,7 +25947,7 @@ type GetPollResponse struct {
 
 func (x *GetPollResponse) Reset() {
 	*x = GetPollResponse{}
-	mi := &file_api_proto_msgTypes[350]
+	mi := &file_api_proto_msgTypes[352]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25878,7 +25959,7 @@ func (x *GetPollResponse) String() string {
 func (*GetPollResponse) ProtoMessage() {}
 
 func (x *GetPollResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[350]
+	mi := &file_api_proto_msgTypes[352]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -25891,7 +25972,7 @@ func (x *GetPollResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPollResponse.ProtoReflect.Descriptor instead.
 func (*GetPollResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{350}
+	return file_api_proto_rawDescGZIP(), []int{352}
 }
 
 func (x *GetPollResponse) GetPollId() int64 {
@@ -25982,7 +26063,7 @@ type ListUserOnlineRequest struct {
 
 func (x *ListUserOnlineRequest) Reset() {
 	*x = ListUserOnlineRequest{}
-	mi := &file_api_proto_msgTypes[351]
+	mi := &file_api_proto_msgTypes[353]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -25994,7 +26075,7 @@ func (x *ListUserOnlineRequest) String() string {
 func (*ListUserOnlineRequest) ProtoMessage() {}
 
 func (x *ListUserOnlineRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[351]
+	mi := &file_api_proto_msgTypes[353]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -26007,7 +26088,7 @@ func (x *ListUserOnlineRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserOnlineRequest.ProtoReflect.Descriptor instead.
 func (*ListUserOnlineRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{351}
+	return file_api_proto_rawDescGZIP(), []int{353}
 }
 
 func (x *ListUserOnlineRequest) GetClanId() int64 {
@@ -26041,7 +26122,7 @@ type ListUserOnlineResponse struct {
 
 func (x *ListUserOnlineResponse) Reset() {
 	*x = ListUserOnlineResponse{}
-	mi := &file_api_proto_msgTypes[352]
+	mi := &file_api_proto_msgTypes[354]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -26053,7 +26134,7 @@ func (x *ListUserOnlineResponse) String() string {
 func (*ListUserOnlineResponse) ProtoMessage() {}
 
 func (x *ListUserOnlineResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[352]
+	mi := &file_api_proto_msgTypes[354]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -26066,7 +26147,7 @@ func (x *ListUserOnlineResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserOnlineResponse.ProtoReflect.Descriptor instead.
 func (*ListUserOnlineResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{352}
+	return file_api_proto_rawDescGZIP(), []int{354}
 }
 
 func (x *ListUserOnlineResponse) GetUsers() []*User {
@@ -26112,7 +26193,7 @@ type ChannelUserList_ChannelUser struct {
 
 func (x *ChannelUserList_ChannelUser) Reset() {
 	*x = ChannelUserList_ChannelUser{}
-	mi := &file_api_proto_msgTypes[356]
+	mi := &file_api_proto_msgTypes[358]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -26124,7 +26205,7 @@ func (x *ChannelUserList_ChannelUser) String() string {
 func (*ChannelUserList_ChannelUser) ProtoMessage() {}
 
 func (x *ChannelUserList_ChannelUser) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[356]
+	mi := &file_api_proto_msgTypes[358]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -26228,7 +26309,7 @@ type ClanUserList_ClanUser struct {
 
 func (x *ClanUserList_ClanUser) Reset() {
 	*x = ClanUserList_ClanUser{}
-	mi := &file_api_proto_msgTypes[357]
+	mi := &file_api_proto_msgTypes[359]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -26240,7 +26321,7 @@ func (x *ClanUserList_ClanUser) String() string {
 func (*ClanUserList_ClanUser) ProtoMessage() {}
 
 func (x *ClanUserList_ClanUser) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[357]
+	mi := &file_api_proto_msgTypes[359]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -26301,7 +26382,7 @@ type UpdateClanOrderRequest_ClanOrder struct {
 
 func (x *UpdateClanOrderRequest_ClanOrder) Reset() {
 	*x = UpdateClanOrderRequest_ClanOrder{}
-	mi := &file_api_proto_msgTypes[358]
+	mi := &file_api_proto_msgTypes[360]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -26313,7 +26394,7 @@ func (x *UpdateClanOrderRequest_ClanOrder) String() string {
 func (*UpdateClanOrderRequest_ClanOrder) ProtoMessage() {}
 
 func (x *UpdateClanOrderRequest_ClanOrder) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[358]
+	mi := &file_api_proto_msgTypes[360]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -26366,7 +26447,7 @@ type RoleUserList_RoleUser struct {
 
 func (x *RoleUserList_RoleUser) Reset() {
 	*x = RoleUserList_RoleUser{}
-	mi := &file_api_proto_msgTypes[359]
+	mi := &file_api_proto_msgTypes[361]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -26378,7 +26459,7 @@ func (x *RoleUserList_RoleUser) String() string {
 func (*RoleUserList_RoleUser) ProtoMessage() {}
 
 func (x *RoleUserList_RoleUser) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[359]
+	mi := &file_api_proto_msgTypes[361]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -26391,7 +26472,7 @@ func (x *RoleUserList_RoleUser) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleUserList_RoleUser.ProtoReflect.Descriptor instead.
 func (*RoleUserList_RoleUser) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{137, 0}
+	return file_api_proto_rawDescGZIP(), []int{139, 0}
 }
 
 func (x *RoleUserList_RoleUser) GetId() int64 {
@@ -26453,7 +26534,7 @@ type GetPubKeysResponse_UserPubKey struct {
 
 func (x *GetPubKeysResponse_UserPubKey) Reset() {
 	*x = GetPubKeysResponse_UserPubKey{}
-	mi := &file_api_proto_msgTypes[361]
+	mi := &file_api_proto_msgTypes[363]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -26465,7 +26546,7 @@ func (x *GetPubKeysResponse_UserPubKey) String() string {
 func (*GetPubKeysResponse_UserPubKey) ProtoMessage() {}
 
 func (x *GetPubKeysResponse_UserPubKey) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[361]
+	mi := &file_api_proto_msgTypes[363]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -26478,7 +26559,7 @@ func (x *GetPubKeysResponse_UserPubKey) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPubKeysResponse_UserPubKey.ProtoReflect.Descriptor instead.
 func (*GetPubKeysResponse_UserPubKey) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{247, 0}
+	return file_api_proto_rawDescGZIP(), []int{249, 0}
 }
 
 func (x *GetPubKeysResponse_UserPubKey) GetUserId() int64 {
@@ -27243,12 +27324,15 @@ const file_api_proto_rawDesc = "" +
 	"\x12LeaveThreadRequest\x12\x17\n" +
 	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x02 \x01(\x03R\tchannelId\"{\n" +
-	"$ArchiveInactiveChannelThreadsRequest\x12\x17\n" +
-	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\x12\x1b\n" +
-	"\tparent_id\x18\x02 \x01(\x03R\bparentId\x12\x1d\n" +
+	"channel_id\x18\x02 \x01(\x03R\tchannelId\"O\n" +
+	"\x15ArchiveChannelRequest\x12\x17\n" +
+	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\x12\x1d\n" +
 	"\n" +
-	"thread_ids\x18\x03 \x03(\x03R\tthreadIds\"\xd6\x04\n" +
+	"channel_id\x18\x02 \x01(\x03R\tchannelId\":\n" +
+	"\x1fListArchivedChannelDescsRequest\x12\x17\n" +
+	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\"c\n" +
+	" ListArchivedChannelDescsResponse\x12?\n" +
+	"\vchanneldesc\x18\x01 \x03(\v2\x1d.mezon.api.ChannelDescriptionR\vchanneldesc\"\xd6\x04\n" +
 	"\x04Role\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x14\n" +
@@ -28786,7 +28870,7 @@ func file_api_proto_rawDescGZIP() []byte {
 }
 
 var file_api_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_api_proto_msgTypes = make([]protoimpl.MessageInfo, 365)
+var file_api_proto_msgTypes = make([]protoimpl.MessageInfo, 367)
 var file_api_proto_goTypes = []any{
 	(StoreProvider)(0),                             // 0: mezon.api.StoreProvider
 	(StoreEnvironment)(0),                          // 1: mezon.api.StoreEnvironment
@@ -28906,310 +28990,312 @@ var file_api_proto_goTypes = []any{
 	(*BannedUserListRequest)(nil),                  // 115: mezon.api.BannedUserListRequest
 	(*BannedUserList)(nil),                         // 116: mezon.api.BannedUserList
 	(*LeaveThreadRequest)(nil),                     // 117: mezon.api.LeaveThreadRequest
-	(*ArchiveInactiveChannelThreadsRequest)(nil),   // 118: mezon.api.ArchiveInactiveChannelThreadsRequest
-	(*Role)(nil),                                   // 119: mezon.api.Role
-	(*EventManagement)(nil),                        // 120: mezon.api.EventManagement
-	(*Permission)(nil),                             // 121: mezon.api.Permission
-	(*NotificationSetting)(nil),                    // 122: mezon.api.NotificationSetting
-	(*DeletePinMessage)(nil),                       // 123: mezon.api.DeletePinMessage
-	(*PinMessage)(nil),                             // 124: mezon.api.PinMessage
-	(*PinMessagesList)(nil),                        // 125: mezon.api.PinMessagesList
-	(*NotificationUserChannel)(nil),                // 126: mezon.api.NotificationUserChannel
-	(*NotifiReactMessage)(nil),                     // 127: mezon.api.NotifiReactMessage
-	(*DefaultNotificationClan)(nil),                // 128: mezon.api.DefaultNotificationClan
-	(*DefaultNotificationCategory)(nil),            // 129: mezon.api.DefaultNotificationCategory
-	(*NotificationChannel)(nil),                    // 130: mezon.api.NotificationChannel
-	(*NotificationClan)(nil),                       // 131: mezon.api.NotificationClan
-	(*NotificationSettingList)(nil),                // 132: mezon.api.NotificationSettingList
-	(*SetNotificationRequest)(nil),                 // 133: mezon.api.SetNotificationRequest
-	(*PinMessageRequest)(nil),                      // 134: mezon.api.PinMessageRequest
-	(*SetMuteRequest)(nil),                         // 135: mezon.api.SetMuteRequest
-	(*NotificationChannelCategorySettingList)(nil), // 136: mezon.api.NotificationChannelCategorySettingList
-	(*NotificationChannelCategorySetting)(nil),     // 137: mezon.api.NotificationChannelCategorySetting
-	(*SetDefaultNotificationRequest)(nil),          // 138: mezon.api.SetDefaultNotificationRequest
-	(*RoleList)(nil),                               // 139: mezon.api.RoleList
-	(*EventList)(nil),                              // 140: mezon.api.EventList
-	(*PermissionList)(nil),                         // 141: mezon.api.PermissionList
-	(*ListPermissionsRequest)(nil),                 // 142: mezon.api.ListPermissionsRequest
-	(*ListRoleUsersRequest)(nil),                   // 143: mezon.api.ListRoleUsersRequest
-	(*ListPermissionOfUsersRequest)(nil),           // 144: mezon.api.ListPermissionOfUsersRequest
-	(*RoleUserList)(nil),                           // 145: mezon.api.RoleUserList
-	(*UserEventRequest)(nil),                       // 146: mezon.api.UserEventRequest
-	(*ListEventsRequest)(nil),                      // 147: mezon.api.ListEventsRequest
-	(*CreateRoleRequest)(nil),                      // 148: mezon.api.CreateRoleRequest
-	(*CreateEventRequest)(nil),                     // 149: mezon.api.CreateEventRequest
-	(*UpdateEventRequest)(nil),                     // 150: mezon.api.UpdateEventRequest
-	(*DeleteRoleRequest)(nil),                      // 151: mezon.api.DeleteRoleRequest
-	(*DeleteEventRequest)(nil),                     // 152: mezon.api.DeleteEventRequest
-	(*UpdateRoleRequest)(nil),                      // 153: mezon.api.UpdateRoleRequest
-	(*UpdateRoleChannelRequest)(nil),               // 154: mezon.api.UpdateRoleChannelRequest
-	(*PermissionUpdate)(nil),                       // 155: mezon.api.PermissionUpdate
-	(*UploadAttachmentRequest)(nil),                // 156: mezon.api.UploadAttachmentRequest
-	(*ListMessageMentionRequest)(nil),              // 157: mezon.api.ListMessageMentionRequest
-	(*UploadAttachment)(nil),                       // 158: mezon.api.UploadAttachment
-	(*MultipartUploadAttachment)(nil),              // 159: mezon.api.MultipartUploadAttachment
-	(*MultipartUploadAttachmentPart)(nil),          // 160: mezon.api.MultipartUploadAttachmentPart
-	(*MultipartUploadAttachmentFinishRequest)(nil), // 161: mezon.api.MultipartUploadAttachmentFinishRequest
-	(*SearchMessageRequest)(nil),                   // 162: mezon.api.SearchMessageRequest
-	(*SortParam)(nil),                              // 163: mezon.api.SortParam
-	(*FilterParam)(nil),                            // 164: mezon.api.FilterParam
-	(*SearchMessageDocument)(nil),                  // 165: mezon.api.SearchMessageDocument
-	(*SearchMessageResponse)(nil),                  // 166: mezon.api.SearchMessageResponse
-	(*RegistrationEmailRequest)(nil),               // 167: mezon.api.RegistrationEmailRequest
-	(*ClanEmoji)(nil),                              // 168: mezon.api.ClanEmoji
-	(*EmojiListedResponse)(nil),                    // 169: mezon.api.EmojiListedResponse
-	(*StickerListedResponse)(nil),                  // 170: mezon.api.StickerListedResponse
-	(*ClanSticker)(nil),                            // 171: mezon.api.ClanSticker
-	(*AllUsersAddChannelRequest)(nil),              // 172: mezon.api.AllUsersAddChannelRequest
-	(*AllUsersAddChannelResponse)(nil),             // 173: mezon.api.AllUsersAddChannelResponse
-	(*ClanEmojiCreateRequest)(nil),                 // 174: mezon.api.ClanEmojiCreateRequest
-	(*ClanEmojiGetByClanIdRequest)(nil),            // 175: mezon.api.ClanEmojiGetByClanIdRequest
-	(*ClanEmojiDeleteRequest)(nil),                 // 176: mezon.api.ClanEmojiDeleteRequest
-	(*ClanEmojiUpdateRequest)(nil),                 // 177: mezon.api.ClanEmojiUpdateRequest
-	(*Webhook)(nil),                                // 178: mezon.api.Webhook
-	(*WebhookCreateRequest)(nil),                   // 179: mezon.api.WebhookCreateRequest
-	(*WebhookListRequestById)(nil),                 // 180: mezon.api.WebhookListRequestById
-	(*WebhookUpdateRequestById)(nil),               // 181: mezon.api.WebhookUpdateRequestById
-	(*WebhookDeleteRequestById)(nil),               // 182: mezon.api.WebhookDeleteRequestById
-	(*WebhookListRequest)(nil),                     // 183: mezon.api.WebhookListRequest
-	(*WebhookListResponse)(nil),                    // 184: mezon.api.WebhookListResponse
-	(*WebhookGenerateResponse)(nil),                // 185: mezon.api.WebhookGenerateResponse
-	(*CheckDuplicateClanNameRequest)(nil),          // 186: mezon.api.CheckDuplicateClanNameRequest
-	(*CheckDuplicateClanNameResponse)(nil),         // 187: mezon.api.CheckDuplicateClanNameResponse
-	(*CheckDuplicateNameRequest)(nil),              // 188: mezon.api.CheckDuplicateNameRequest
-	(*CheckDuplicateNameResponse)(nil),             // 189: mezon.api.CheckDuplicateNameResponse
-	(*ClanStickerAddRequest)(nil),                  // 190: mezon.api.ClanStickerAddRequest
-	(*ClanStickerListByClanIdRequest)(nil),         // 191: mezon.api.ClanStickerListByClanIdRequest
-	(*ClanStickerUpdateByIdRequest)(nil),           // 192: mezon.api.ClanStickerUpdateByIdRequest
-	(*ClanStickerDeleteRequest)(nil),               // 193: mezon.api.ClanStickerDeleteRequest
-	(*ChangeChannelCategoryRequest)(nil),           // 194: mezon.api.ChangeChannelCategoryRequest
-	(*App)(nil),                                    // 195: mezon.api.App
-	(*AppDeleteRequest)(nil),                       // 196: mezon.api.AppDeleteRequest
-	(*AppList)(nil),                                // 197: mezon.api.AppList
-	(*AddAppRequest)(nil),                          // 198: mezon.api.AddAppRequest
-	(*ListAppsRequest)(nil),                        // 199: mezon.api.ListAppsRequest
-	(*UpdateAppRequest)(nil),                       // 200: mezon.api.UpdateAppRequest
-	(*AppId)(nil),                                  // 201: mezon.api.AppId
-	(*AppClan)(nil),                                // 202: mezon.api.AppClan
-	(*DeleteChannelMessagesRequest)(nil),           // 203: mezon.api.DeleteChannelMessagesRequest
-	(*DeleteChannelMessagesResponse)(nil),          // 204: mezon.api.DeleteChannelMessagesResponse
-	(*SystemMessage)(nil),                          // 205: mezon.api.SystemMessage
-	(*SystemMessagesList)(nil),                     // 206: mezon.api.SystemMessagesList
-	(*SystemMessageRequest)(nil),                   // 207: mezon.api.SystemMessageRequest
-	(*DeleteSystemMessage)(nil),                    // 208: mezon.api.DeleteSystemMessage
-	(*GetSystemMessage)(nil),                       // 209: mezon.api.GetSystemMessage
-	(*DeleteCategoryOrderRequest)(nil),             // 210: mezon.api.DeleteCategoryOrderRequest
-	(*StreamHttpCallbackRequest)(nil),              // 211: mezon.api.StreamHttpCallbackRequest
-	(*StreamHttpCallbackResponse)(nil),             // 212: mezon.api.StreamHttpCallbackResponse
-	(*StreamingChannelUser)(nil),                   // 213: mezon.api.StreamingChannelUser
-	(*StreamingChannelUserList)(nil),               // 214: mezon.api.StreamingChannelUserList
-	(*RegisterStreamingChannelRequest)(nil),        // 215: mezon.api.RegisterStreamingChannelRequest
-	(*RegisterStreamingChannelResponse)(nil),       // 216: mezon.api.RegisterStreamingChannelResponse
-	(*GiveCoffeeEvent)(nil),                        // 217: mezon.api.GiveCoffeeEvent
-	(*ListChannelAppsRequest)(nil),                 // 218: mezon.api.ListChannelAppsRequest
-	(*ListChannelAppsResponse)(nil),                // 219: mezon.api.ListChannelAppsResponse
-	(*ChannelAppResponse)(nil),                     // 220: mezon.api.ChannelAppResponse
-	(*AllUserClans)(nil),                           // 221: mezon.api.AllUserClans
-	(*RoleListEventRequest)(nil),                   // 222: mezon.api.RoleListEventRequest
-	(*RoleListEventResponse)(nil),                  // 223: mezon.api.RoleListEventResponse
-	(*UserPermissionInChannelListRequest)(nil),     // 224: mezon.api.UserPermissionInChannelListRequest
-	(*UserPermissionInChannelListResponse)(nil),    // 225: mezon.api.UserPermissionInChannelListResponse
-	(*PermissionRoleChannel)(nil),                  // 226: mezon.api.PermissionRoleChannel
-	(*PermissionRoleChannelListEventRequest)(nil),  // 227: mezon.api.PermissionRoleChannelListEventRequest
-	(*PermissionRoleChannelListEventResponse)(nil), // 228: mezon.api.PermissionRoleChannelListEventResponse
-	(*ChannelSettingListRequest)(nil),              // 229: mezon.api.ChannelSettingListRequest
-	(*ChannelSettingItem)(nil),                     // 230: mezon.api.ChannelSettingItem
-	(*ChannelSettingListResponse)(nil),             // 231: mezon.api.ChannelSettingListResponse
-	(*MarkAsReadRequest)(nil),                      // 232: mezon.api.MarkAsReadRequest
-	(*EditChannelCanvasRequest)(nil),               // 233: mezon.api.EditChannelCanvasRequest
-	(*EditChannelCanvasResponse)(nil),              // 234: mezon.api.EditChannelCanvasResponse
-	(*DeleteChannelCanvasRequest)(nil),             // 235: mezon.api.DeleteChannelCanvasRequest
-	(*ChannelCanvasListRequest)(nil),               // 236: mezon.api.ChannelCanvasListRequest
-	(*ChannelCanvasItem)(nil),                      // 237: mezon.api.ChannelCanvasItem
-	(*ChannelCanvasListResponse)(nil),              // 238: mezon.api.ChannelCanvasListResponse
-	(*ChannelCanvasDetailRequest)(nil),             // 239: mezon.api.ChannelCanvasDetailRequest
-	(*ChannelCanvasDetailResponse)(nil),            // 240: mezon.api.ChannelCanvasDetailResponse
-	(*AddFavoriteChannelRequest)(nil),              // 241: mezon.api.AddFavoriteChannelRequest
-	(*RemoveFavoriteChannelRequest)(nil),           // 242: mezon.api.RemoveFavoriteChannelRequest
-	(*AddFavoriteChannelResponse)(nil),             // 243: mezon.api.AddFavoriteChannelResponse
-	(*ListFavoriteChannelRequest)(nil),             // 244: mezon.api.ListFavoriteChannelRequest
-	(*ListFavoriteChannelResponse)(nil),            // 245: mezon.api.ListFavoriteChannelResponse
-	(*UserActivity)(nil),                           // 246: mezon.api.UserActivity
-	(*ListUserActivity)(nil),                       // 247: mezon.api.ListUserActivity
-	(*CreateActivityRequest)(nil),                  // 248: mezon.api.CreateActivityRequest
-	(*LoginIDResponse)(nil),                        // 249: mezon.api.LoginIDResponse
-	(*LoginRequest)(nil),                           // 250: mezon.api.LoginRequest
-	(*ConfirmLoginRequest)(nil),                    // 251: mezon.api.ConfirmLoginRequest
-	(*PubKey)(nil),                                 // 252: mezon.api.PubKey
-	(*PushPubKeyRequest)(nil),                      // 253: mezon.api.PushPubKeyRequest
-	(*GetPubKeysRequest)(nil),                      // 254: mezon.api.GetPubKeysRequest
-	(*GetPubKeysResponse)(nil),                     // 255: mezon.api.GetPubKeysResponse
-	(*ChanEncryptionMethod)(nil),                   // 256: mezon.api.ChanEncryptionMethod
-	(*GetKeyServerResp)(nil),                       // 257: mezon.api.GetKeyServerResp
-	(*AuditLog)(nil),                               // 258: mezon.api.AuditLog
-	(*ListAuditLog)(nil),                           // 259: mezon.api.ListAuditLog
-	(*ListAuditLogRequest)(nil),                    // 260: mezon.api.ListAuditLogRequest
-	(*TokenSentEvent)(nil),                         // 261: mezon.api.TokenSentEvent
-	(*UnlockItemRequest)(nil),                      // 262: mezon.api.UnlockItemRequest
-	(*UnlockedItemResponse)(nil),                   // 263: mezon.api.UnlockedItemResponse
-	(*ListOnboardingRequest)(nil),                  // 264: mezon.api.ListOnboardingRequest
-	(*ListOnboardingResponse)(nil),                 // 265: mezon.api.ListOnboardingResponse
-	(*OnboardingItem)(nil),                         // 266: mezon.api.OnboardingItem
-	(*OnboardingAnswer)(nil),                       // 267: mezon.api.OnboardingAnswer
-	(*OnboardingContent)(nil),                      // 268: mezon.api.OnboardingContent
-	(*CreateOnboardingRequest)(nil),                // 269: mezon.api.CreateOnboardingRequest
-	(*UpdateOnboardingRequest)(nil),                // 270: mezon.api.UpdateOnboardingRequest
-	(*OnboardingRequest)(nil),                      // 271: mezon.api.OnboardingRequest
-	(*ClanWebhook)(nil),                            // 272: mezon.api.ClanWebhook
-	(*GenerateClanWebhookRequest)(nil),             // 273: mezon.api.GenerateClanWebhookRequest
-	(*GenerateClanWebhookResponse)(nil),            // 274: mezon.api.GenerateClanWebhookResponse
-	(*ClanWebhookRequest)(nil),                     // 275: mezon.api.ClanWebhookRequest
-	(*UpdateClanWebhookRequest)(nil),               // 276: mezon.api.UpdateClanWebhookRequest
-	(*ListClanWebhookRequest)(nil),                 // 277: mezon.api.ListClanWebhookRequest
-	(*ListClanWebhookResponse)(nil),                // 278: mezon.api.ListClanWebhookResponse
-	(*ClanWebhookHandlerBody)(nil),                 // 279: mezon.api.ClanWebhookHandlerBody
-	(*ClanWebhookHandlerRequest)(nil),              // 280: mezon.api.ClanWebhookHandlerRequest
-	(*UserStatus)(nil),                             // 281: mezon.api.UserStatus
-	(*UserStatusUpdate)(nil),                       // 282: mezon.api.UserStatusUpdate
-	(*OnboardingSteps)(nil),                        // 283: mezon.api.OnboardingSteps
-	(*ListOnboardingStepResponse)(nil),             // 284: mezon.api.ListOnboardingStepResponse
-	(*ListOnboardingStepRequest)(nil),              // 285: mezon.api.ListOnboardingStepRequest
-	(*UpdateOnboardingStepRequest)(nil),            // 286: mezon.api.UpdateOnboardingStepRequest
-	(*SdTopic)(nil),                                // 287: mezon.api.SdTopic
-	(*SdTopicRequest)(nil),                         // 288: mezon.api.SdTopicRequest
-	(*SdTopicList)(nil),                            // 289: mezon.api.SdTopicList
-	(*ListSdTopicRequest)(nil),                     // 290: mezon.api.ListSdTopicRequest
-	(*SdTopicDetailRequest)(nil),                   // 291: mezon.api.SdTopicDetailRequest
-	(*DeleteSdTopicRequest)(nil),                   // 292: mezon.api.DeleteSdTopicRequest
-	(*GenerateMeetTokenRequest)(nil),               // 293: mezon.api.GenerateMeetTokenRequest
-	(*MeetParticipantRequest)(nil),                 // 294: mezon.api.MeetParticipantRequest
-	(*GenerateMeetTokenResponse)(nil),              // 295: mezon.api.GenerateMeetTokenResponse
-	(*GenerateMezonMeetResponse)(nil),              // 296: mezon.api.GenerateMezonMeetResponse
-	(*CreateRoomChannelApps)(nil),                  // 297: mezon.api.CreateRoomChannelApps
-	(*MezonOauthClient)(nil),                       // 298: mezon.api.MezonOauthClient
-	(*MezonOauthClientList)(nil),                   // 299: mezon.api.MezonOauthClientList
-	(*GetMezonOauthClientRequest)(nil),             // 300: mezon.api.GetMezonOauthClientRequest
-	(*SearchThreadRequest)(nil),                    // 301: mezon.api.SearchThreadRequest
-	(*GenerateHashChannelAppsRequest)(nil),         // 302: mezon.api.GenerateHashChannelAppsRequest
-	(*GenerateHashChannelAppsResponse)(nil),        // 303: mezon.api.GenerateHashChannelAppsResponse
-	(*Message2InboxRequest)(nil),                   // 304: mezon.api.Message2InboxRequest
-	(*AccountEmail)(nil),                           // 305: mezon.api.AccountEmail
-	(*AccountMezon)(nil),                           // 306: mezon.api.AccountMezon
-	(*LinkAccountConfirmRequest)(nil),              // 307: mezon.api.LinkAccountConfirmRequest
-	(*QuickMenuAccess)(nil),                        // 308: mezon.api.QuickMenuAccess
-	(*ListQuickMenuAccessRequest)(nil),             // 309: mezon.api.ListQuickMenuAccessRequest
-	(*QuickMenuAccessList)(nil),                    // 310: mezon.api.QuickMenuAccessList
-	(*ListForSaleItemsRequest)(nil),                // 311: mezon.api.ListForSaleItemsRequest
-	(*ForSaleItem)(nil),                            // 312: mezon.api.ForSaleItem
-	(*ForSaleItemList)(nil),                        // 313: mezon.api.ForSaleItemList
-	(*IsFollowerRequest)(nil),                      // 314: mezon.api.IsFollowerRequest
-	(*IsFollowerResponse)(nil),                     // 315: mezon.api.IsFollowerResponse
-	(*TransferOwnershipRequest)(nil),               // 316: mezon.api.TransferOwnershipRequest
-	(*UserIds)(nil),                                // 317: mezon.api.UserIds
-	(*ReportMessageAbuseReqest)(nil),               // 318: mezon.api.ReportMessageAbuseReqest
-	(*LogedDeviceList)(nil),                        // 319: mezon.api.LogedDeviceList
-	(*LogedDevice)(nil),                            // 320: mezon.api.LogedDevice
-	(*DirectFcmProto)(nil),                         // 321: mezon.api.DirectFcmProto
-	(*MessageMentionList)(nil),                     // 322: mezon.api.MessageMentionList
-	(*MessageAttachmentList)(nil),                  // 323: mezon.api.MessageAttachmentList
-	(*MessageRefList)(nil),                         // 324: mezon.api.MessageRefList
-	(*MessageReactionList)(nil),                    // 325: mezon.api.MessageReactionList
-	(*ListChannelBadgeCountRequest)(nil),           // 326: mezon.api.ListChannelBadgeCountRequest
-	(*ListChannelBadgeCountResponse)(nil),          // 327: mezon.api.ListChannelBadgeCountResponse
-	(*ClanBadgeCount)(nil),                         // 328: mezon.api.ClanBadgeCount
-	(*ListClanBadgeCountResponse)(nil),             // 329: mezon.api.ListClanBadgeCountResponse
-	(*ClanDiscover)(nil),                           // 330: mezon.api.ClanDiscover
-	(*ListClanDiscover)(nil),                       // 331: mezon.api.ListClanDiscover
-	(*GenerateMeetTokenExternalResponse)(nil),      // 332: mezon.api.GenerateMeetTokenExternalResponse
-	(*KafkaActionMsg)(nil),                         // 333: mezon.api.KafkaActionMsg
-	(*UpdateAIAgentRequest)(nil),                   // 334: mezon.api.UpdateAIAgentRequest
-	(*ParticipantInfo)(nil),                        // 335: mezon.api.ParticipantInfo
-	(*ChannelTimelineAttachment)(nil),              // 336: mezon.api.ChannelTimelineAttachment
-	(*ListChannelTimelineAttachment)(nil),          // 337: mezon.api.ListChannelTimelineAttachment
-	(*ChannelTimeline)(nil),                        // 338: mezon.api.ChannelTimeline
-	(*ListChannelTimelineRequest)(nil),             // 339: mezon.api.ListChannelTimelineRequest
-	(*ListChannelTimelineResponse)(nil),            // 340: mezon.api.ListChannelTimelineResponse
-	(*CreateChannelTimelineRequest)(nil),           // 341: mezon.api.CreateChannelTimelineRequest
-	(*CreateChannelTimelineResponse)(nil),          // 342: mezon.api.CreateChannelTimelineResponse
-	(*UpdateChannelTimelineRequest)(nil),           // 343: mezon.api.UpdateChannelTimelineRequest
-	(*UpdateChannelTimelineResponse)(nil),          // 344: mezon.api.UpdateChannelTimelineResponse
-	(*ChannelTimelineDetailRequest)(nil),           // 345: mezon.api.ChannelTimelineDetailRequest
-	(*ChannelTimelineDetailResponse)(nil),          // 346: mezon.api.ChannelTimelineDetailResponse
-	(*ListMutedChannelRequest)(nil),                // 347: mezon.api.ListMutedChannelRequest
-	(*MutedChannelList)(nil),                       // 348: mezon.api.MutedChannelList
-	(*NotificationBatchRequest)(nil),               // 349: mezon.api.NotificationBatchRequest
-	(*CreatePollRequest)(nil),                      // 350: mezon.api.CreatePollRequest
-	(*CreatePollResponse)(nil),                     // 351: mezon.api.CreatePollResponse
-	(*VotePollRequest)(nil),                        // 352: mezon.api.VotePollRequest
-	(*VotePollResponse)(nil),                       // 353: mezon.api.VotePollResponse
-	(*ClosePollRequest)(nil),                       // 354: mezon.api.ClosePollRequest
-	(*GetPollRequest)(nil),                         // 355: mezon.api.GetPollRequest
-	(*PollAnswer)(nil),                             // 356: mezon.api.PollAnswer
-	(*PollVoterDetail)(nil),                        // 357: mezon.api.PollVoterDetail
-	(*GetPollResponse)(nil),                        // 358: mezon.api.GetPollResponse
-	(*ListUserOnlineRequest)(nil),                  // 359: mezon.api.ListUserOnlineRequest
-	(*ListUserOnlineResponse)(nil),                 // 360: mezon.api.ListUserOnlineResponse
-	nil,                                            // 361: mezon.api.AccountRefresh.VarsEntry
-	nil,                                            // 362: mezon.api.SessionRefreshRequest.VarsEntry
-	nil,                                            // 363: mezon.api.Event.PropertiesEntry
-	(*ChannelUserList_ChannelUser)(nil),            // 364: mezon.api.ChannelUserList.ChannelUser
-	(*ClanUserList_ClanUser)(nil),                  // 365: mezon.api.ClanUserList.ClanUser
-	(*UpdateClanOrderRequest_ClanOrder)(nil),       // 366: mezon.api.UpdateClanOrderRequest.ClanOrder
-	(*RoleUserList_RoleUser)(nil),                  // 367: mezon.api.RoleUserList.RoleUser
-	nil,                                            // 368: mezon.api.RegistrationEmailRequest.VarsEntry
-	(*GetPubKeysResponse_UserPubKey)(nil),          // 369: mezon.api.GetPubKeysResponse.UserPubKey
-	nil,                                            // 370: mezon.api.AccountEmail.VarsEntry
-	nil,                                            // 371: mezon.api.AccountMezon.VarsEntry
-	nil,                                            // 372: mezon.api.NotificationBatchRequest.NotificationsEntry
-	(*wrapperspb.StringValue)(nil),                 // 373: google.protobuf.StringValue
-	(*wrapperspb.BoolValue)(nil),                   // 374: google.protobuf.BoolValue
+	(*ArchiveChannelRequest)(nil),                  // 118: mezon.api.ArchiveChannelRequest
+	(*ListArchivedChannelDescsRequest)(nil),        // 119: mezon.api.ListArchivedChannelDescsRequest
+	(*ListArchivedChannelDescsResponse)(nil),       // 120: mezon.api.ListArchivedChannelDescsResponse
+	(*Role)(nil),                                   // 121: mezon.api.Role
+	(*EventManagement)(nil),                        // 122: mezon.api.EventManagement
+	(*Permission)(nil),                             // 123: mezon.api.Permission
+	(*NotificationSetting)(nil),                    // 124: mezon.api.NotificationSetting
+	(*DeletePinMessage)(nil),                       // 125: mezon.api.DeletePinMessage
+	(*PinMessage)(nil),                             // 126: mezon.api.PinMessage
+	(*PinMessagesList)(nil),                        // 127: mezon.api.PinMessagesList
+	(*NotificationUserChannel)(nil),                // 128: mezon.api.NotificationUserChannel
+	(*NotifiReactMessage)(nil),                     // 129: mezon.api.NotifiReactMessage
+	(*DefaultNotificationClan)(nil),                // 130: mezon.api.DefaultNotificationClan
+	(*DefaultNotificationCategory)(nil),            // 131: mezon.api.DefaultNotificationCategory
+	(*NotificationChannel)(nil),                    // 132: mezon.api.NotificationChannel
+	(*NotificationClan)(nil),                       // 133: mezon.api.NotificationClan
+	(*NotificationSettingList)(nil),                // 134: mezon.api.NotificationSettingList
+	(*SetNotificationRequest)(nil),                 // 135: mezon.api.SetNotificationRequest
+	(*PinMessageRequest)(nil),                      // 136: mezon.api.PinMessageRequest
+	(*SetMuteRequest)(nil),                         // 137: mezon.api.SetMuteRequest
+	(*NotificationChannelCategorySettingList)(nil), // 138: mezon.api.NotificationChannelCategorySettingList
+	(*NotificationChannelCategorySetting)(nil),     // 139: mezon.api.NotificationChannelCategorySetting
+	(*SetDefaultNotificationRequest)(nil),          // 140: mezon.api.SetDefaultNotificationRequest
+	(*RoleList)(nil),                               // 141: mezon.api.RoleList
+	(*EventList)(nil),                              // 142: mezon.api.EventList
+	(*PermissionList)(nil),                         // 143: mezon.api.PermissionList
+	(*ListPermissionsRequest)(nil),                 // 144: mezon.api.ListPermissionsRequest
+	(*ListRoleUsersRequest)(nil),                   // 145: mezon.api.ListRoleUsersRequest
+	(*ListPermissionOfUsersRequest)(nil),           // 146: mezon.api.ListPermissionOfUsersRequest
+	(*RoleUserList)(nil),                           // 147: mezon.api.RoleUserList
+	(*UserEventRequest)(nil),                       // 148: mezon.api.UserEventRequest
+	(*ListEventsRequest)(nil),                      // 149: mezon.api.ListEventsRequest
+	(*CreateRoleRequest)(nil),                      // 150: mezon.api.CreateRoleRequest
+	(*CreateEventRequest)(nil),                     // 151: mezon.api.CreateEventRequest
+	(*UpdateEventRequest)(nil),                     // 152: mezon.api.UpdateEventRequest
+	(*DeleteRoleRequest)(nil),                      // 153: mezon.api.DeleteRoleRequest
+	(*DeleteEventRequest)(nil),                     // 154: mezon.api.DeleteEventRequest
+	(*UpdateRoleRequest)(nil),                      // 155: mezon.api.UpdateRoleRequest
+	(*UpdateRoleChannelRequest)(nil),               // 156: mezon.api.UpdateRoleChannelRequest
+	(*PermissionUpdate)(nil),                       // 157: mezon.api.PermissionUpdate
+	(*UploadAttachmentRequest)(nil),                // 158: mezon.api.UploadAttachmentRequest
+	(*ListMessageMentionRequest)(nil),              // 159: mezon.api.ListMessageMentionRequest
+	(*UploadAttachment)(nil),                       // 160: mezon.api.UploadAttachment
+	(*MultipartUploadAttachment)(nil),              // 161: mezon.api.MultipartUploadAttachment
+	(*MultipartUploadAttachmentPart)(nil),          // 162: mezon.api.MultipartUploadAttachmentPart
+	(*MultipartUploadAttachmentFinishRequest)(nil), // 163: mezon.api.MultipartUploadAttachmentFinishRequest
+	(*SearchMessageRequest)(nil),                   // 164: mezon.api.SearchMessageRequest
+	(*SortParam)(nil),                              // 165: mezon.api.SortParam
+	(*FilterParam)(nil),                            // 166: mezon.api.FilterParam
+	(*SearchMessageDocument)(nil),                  // 167: mezon.api.SearchMessageDocument
+	(*SearchMessageResponse)(nil),                  // 168: mezon.api.SearchMessageResponse
+	(*RegistrationEmailRequest)(nil),               // 169: mezon.api.RegistrationEmailRequest
+	(*ClanEmoji)(nil),                              // 170: mezon.api.ClanEmoji
+	(*EmojiListedResponse)(nil),                    // 171: mezon.api.EmojiListedResponse
+	(*StickerListedResponse)(nil),                  // 172: mezon.api.StickerListedResponse
+	(*ClanSticker)(nil),                            // 173: mezon.api.ClanSticker
+	(*AllUsersAddChannelRequest)(nil),              // 174: mezon.api.AllUsersAddChannelRequest
+	(*AllUsersAddChannelResponse)(nil),             // 175: mezon.api.AllUsersAddChannelResponse
+	(*ClanEmojiCreateRequest)(nil),                 // 176: mezon.api.ClanEmojiCreateRequest
+	(*ClanEmojiGetByClanIdRequest)(nil),            // 177: mezon.api.ClanEmojiGetByClanIdRequest
+	(*ClanEmojiDeleteRequest)(nil),                 // 178: mezon.api.ClanEmojiDeleteRequest
+	(*ClanEmojiUpdateRequest)(nil),                 // 179: mezon.api.ClanEmojiUpdateRequest
+	(*Webhook)(nil),                                // 180: mezon.api.Webhook
+	(*WebhookCreateRequest)(nil),                   // 181: mezon.api.WebhookCreateRequest
+	(*WebhookListRequestById)(nil),                 // 182: mezon.api.WebhookListRequestById
+	(*WebhookUpdateRequestById)(nil),               // 183: mezon.api.WebhookUpdateRequestById
+	(*WebhookDeleteRequestById)(nil),               // 184: mezon.api.WebhookDeleteRequestById
+	(*WebhookListRequest)(nil),                     // 185: mezon.api.WebhookListRequest
+	(*WebhookListResponse)(nil),                    // 186: mezon.api.WebhookListResponse
+	(*WebhookGenerateResponse)(nil),                // 187: mezon.api.WebhookGenerateResponse
+	(*CheckDuplicateClanNameRequest)(nil),          // 188: mezon.api.CheckDuplicateClanNameRequest
+	(*CheckDuplicateClanNameResponse)(nil),         // 189: mezon.api.CheckDuplicateClanNameResponse
+	(*CheckDuplicateNameRequest)(nil),              // 190: mezon.api.CheckDuplicateNameRequest
+	(*CheckDuplicateNameResponse)(nil),             // 191: mezon.api.CheckDuplicateNameResponse
+	(*ClanStickerAddRequest)(nil),                  // 192: mezon.api.ClanStickerAddRequest
+	(*ClanStickerListByClanIdRequest)(nil),         // 193: mezon.api.ClanStickerListByClanIdRequest
+	(*ClanStickerUpdateByIdRequest)(nil),           // 194: mezon.api.ClanStickerUpdateByIdRequest
+	(*ClanStickerDeleteRequest)(nil),               // 195: mezon.api.ClanStickerDeleteRequest
+	(*ChangeChannelCategoryRequest)(nil),           // 196: mezon.api.ChangeChannelCategoryRequest
+	(*App)(nil),                                    // 197: mezon.api.App
+	(*AppDeleteRequest)(nil),                       // 198: mezon.api.AppDeleteRequest
+	(*AppList)(nil),                                // 199: mezon.api.AppList
+	(*AddAppRequest)(nil),                          // 200: mezon.api.AddAppRequest
+	(*ListAppsRequest)(nil),                        // 201: mezon.api.ListAppsRequest
+	(*UpdateAppRequest)(nil),                       // 202: mezon.api.UpdateAppRequest
+	(*AppId)(nil),                                  // 203: mezon.api.AppId
+	(*AppClan)(nil),                                // 204: mezon.api.AppClan
+	(*DeleteChannelMessagesRequest)(nil),           // 205: mezon.api.DeleteChannelMessagesRequest
+	(*DeleteChannelMessagesResponse)(nil),          // 206: mezon.api.DeleteChannelMessagesResponse
+	(*SystemMessage)(nil),                          // 207: mezon.api.SystemMessage
+	(*SystemMessagesList)(nil),                     // 208: mezon.api.SystemMessagesList
+	(*SystemMessageRequest)(nil),                   // 209: mezon.api.SystemMessageRequest
+	(*DeleteSystemMessage)(nil),                    // 210: mezon.api.DeleteSystemMessage
+	(*GetSystemMessage)(nil),                       // 211: mezon.api.GetSystemMessage
+	(*DeleteCategoryOrderRequest)(nil),             // 212: mezon.api.DeleteCategoryOrderRequest
+	(*StreamHttpCallbackRequest)(nil),              // 213: mezon.api.StreamHttpCallbackRequest
+	(*StreamHttpCallbackResponse)(nil),             // 214: mezon.api.StreamHttpCallbackResponse
+	(*StreamingChannelUser)(nil),                   // 215: mezon.api.StreamingChannelUser
+	(*StreamingChannelUserList)(nil),               // 216: mezon.api.StreamingChannelUserList
+	(*RegisterStreamingChannelRequest)(nil),        // 217: mezon.api.RegisterStreamingChannelRequest
+	(*RegisterStreamingChannelResponse)(nil),       // 218: mezon.api.RegisterStreamingChannelResponse
+	(*GiveCoffeeEvent)(nil),                        // 219: mezon.api.GiveCoffeeEvent
+	(*ListChannelAppsRequest)(nil),                 // 220: mezon.api.ListChannelAppsRequest
+	(*ListChannelAppsResponse)(nil),                // 221: mezon.api.ListChannelAppsResponse
+	(*ChannelAppResponse)(nil),                     // 222: mezon.api.ChannelAppResponse
+	(*AllUserClans)(nil),                           // 223: mezon.api.AllUserClans
+	(*RoleListEventRequest)(nil),                   // 224: mezon.api.RoleListEventRequest
+	(*RoleListEventResponse)(nil),                  // 225: mezon.api.RoleListEventResponse
+	(*UserPermissionInChannelListRequest)(nil),     // 226: mezon.api.UserPermissionInChannelListRequest
+	(*UserPermissionInChannelListResponse)(nil),    // 227: mezon.api.UserPermissionInChannelListResponse
+	(*PermissionRoleChannel)(nil),                  // 228: mezon.api.PermissionRoleChannel
+	(*PermissionRoleChannelListEventRequest)(nil),  // 229: mezon.api.PermissionRoleChannelListEventRequest
+	(*PermissionRoleChannelListEventResponse)(nil), // 230: mezon.api.PermissionRoleChannelListEventResponse
+	(*ChannelSettingListRequest)(nil),              // 231: mezon.api.ChannelSettingListRequest
+	(*ChannelSettingItem)(nil),                     // 232: mezon.api.ChannelSettingItem
+	(*ChannelSettingListResponse)(nil),             // 233: mezon.api.ChannelSettingListResponse
+	(*MarkAsReadRequest)(nil),                      // 234: mezon.api.MarkAsReadRequest
+	(*EditChannelCanvasRequest)(nil),               // 235: mezon.api.EditChannelCanvasRequest
+	(*EditChannelCanvasResponse)(nil),              // 236: mezon.api.EditChannelCanvasResponse
+	(*DeleteChannelCanvasRequest)(nil),             // 237: mezon.api.DeleteChannelCanvasRequest
+	(*ChannelCanvasListRequest)(nil),               // 238: mezon.api.ChannelCanvasListRequest
+	(*ChannelCanvasItem)(nil),                      // 239: mezon.api.ChannelCanvasItem
+	(*ChannelCanvasListResponse)(nil),              // 240: mezon.api.ChannelCanvasListResponse
+	(*ChannelCanvasDetailRequest)(nil),             // 241: mezon.api.ChannelCanvasDetailRequest
+	(*ChannelCanvasDetailResponse)(nil),            // 242: mezon.api.ChannelCanvasDetailResponse
+	(*AddFavoriteChannelRequest)(nil),              // 243: mezon.api.AddFavoriteChannelRequest
+	(*RemoveFavoriteChannelRequest)(nil),           // 244: mezon.api.RemoveFavoriteChannelRequest
+	(*AddFavoriteChannelResponse)(nil),             // 245: mezon.api.AddFavoriteChannelResponse
+	(*ListFavoriteChannelRequest)(nil),             // 246: mezon.api.ListFavoriteChannelRequest
+	(*ListFavoriteChannelResponse)(nil),            // 247: mezon.api.ListFavoriteChannelResponse
+	(*UserActivity)(nil),                           // 248: mezon.api.UserActivity
+	(*ListUserActivity)(nil),                       // 249: mezon.api.ListUserActivity
+	(*CreateActivityRequest)(nil),                  // 250: mezon.api.CreateActivityRequest
+	(*LoginIDResponse)(nil),                        // 251: mezon.api.LoginIDResponse
+	(*LoginRequest)(nil),                           // 252: mezon.api.LoginRequest
+	(*ConfirmLoginRequest)(nil),                    // 253: mezon.api.ConfirmLoginRequest
+	(*PubKey)(nil),                                 // 254: mezon.api.PubKey
+	(*PushPubKeyRequest)(nil),                      // 255: mezon.api.PushPubKeyRequest
+	(*GetPubKeysRequest)(nil),                      // 256: mezon.api.GetPubKeysRequest
+	(*GetPubKeysResponse)(nil),                     // 257: mezon.api.GetPubKeysResponse
+	(*ChanEncryptionMethod)(nil),                   // 258: mezon.api.ChanEncryptionMethod
+	(*GetKeyServerResp)(nil),                       // 259: mezon.api.GetKeyServerResp
+	(*AuditLog)(nil),                               // 260: mezon.api.AuditLog
+	(*ListAuditLog)(nil),                           // 261: mezon.api.ListAuditLog
+	(*ListAuditLogRequest)(nil),                    // 262: mezon.api.ListAuditLogRequest
+	(*TokenSentEvent)(nil),                         // 263: mezon.api.TokenSentEvent
+	(*UnlockItemRequest)(nil),                      // 264: mezon.api.UnlockItemRequest
+	(*UnlockedItemResponse)(nil),                   // 265: mezon.api.UnlockedItemResponse
+	(*ListOnboardingRequest)(nil),                  // 266: mezon.api.ListOnboardingRequest
+	(*ListOnboardingResponse)(nil),                 // 267: mezon.api.ListOnboardingResponse
+	(*OnboardingItem)(nil),                         // 268: mezon.api.OnboardingItem
+	(*OnboardingAnswer)(nil),                       // 269: mezon.api.OnboardingAnswer
+	(*OnboardingContent)(nil),                      // 270: mezon.api.OnboardingContent
+	(*CreateOnboardingRequest)(nil),                // 271: mezon.api.CreateOnboardingRequest
+	(*UpdateOnboardingRequest)(nil),                // 272: mezon.api.UpdateOnboardingRequest
+	(*OnboardingRequest)(nil),                      // 273: mezon.api.OnboardingRequest
+	(*ClanWebhook)(nil),                            // 274: mezon.api.ClanWebhook
+	(*GenerateClanWebhookRequest)(nil),             // 275: mezon.api.GenerateClanWebhookRequest
+	(*GenerateClanWebhookResponse)(nil),            // 276: mezon.api.GenerateClanWebhookResponse
+	(*ClanWebhookRequest)(nil),                     // 277: mezon.api.ClanWebhookRequest
+	(*UpdateClanWebhookRequest)(nil),               // 278: mezon.api.UpdateClanWebhookRequest
+	(*ListClanWebhookRequest)(nil),                 // 279: mezon.api.ListClanWebhookRequest
+	(*ListClanWebhookResponse)(nil),                // 280: mezon.api.ListClanWebhookResponse
+	(*ClanWebhookHandlerBody)(nil),                 // 281: mezon.api.ClanWebhookHandlerBody
+	(*ClanWebhookHandlerRequest)(nil),              // 282: mezon.api.ClanWebhookHandlerRequest
+	(*UserStatus)(nil),                             // 283: mezon.api.UserStatus
+	(*UserStatusUpdate)(nil),                       // 284: mezon.api.UserStatusUpdate
+	(*OnboardingSteps)(nil),                        // 285: mezon.api.OnboardingSteps
+	(*ListOnboardingStepResponse)(nil),             // 286: mezon.api.ListOnboardingStepResponse
+	(*ListOnboardingStepRequest)(nil),              // 287: mezon.api.ListOnboardingStepRequest
+	(*UpdateOnboardingStepRequest)(nil),            // 288: mezon.api.UpdateOnboardingStepRequest
+	(*SdTopic)(nil),                                // 289: mezon.api.SdTopic
+	(*SdTopicRequest)(nil),                         // 290: mezon.api.SdTopicRequest
+	(*SdTopicList)(nil),                            // 291: mezon.api.SdTopicList
+	(*ListSdTopicRequest)(nil),                     // 292: mezon.api.ListSdTopicRequest
+	(*SdTopicDetailRequest)(nil),                   // 293: mezon.api.SdTopicDetailRequest
+	(*DeleteSdTopicRequest)(nil),                   // 294: mezon.api.DeleteSdTopicRequest
+	(*GenerateMeetTokenRequest)(nil),               // 295: mezon.api.GenerateMeetTokenRequest
+	(*MeetParticipantRequest)(nil),                 // 296: mezon.api.MeetParticipantRequest
+	(*GenerateMeetTokenResponse)(nil),              // 297: mezon.api.GenerateMeetTokenResponse
+	(*GenerateMezonMeetResponse)(nil),              // 298: mezon.api.GenerateMezonMeetResponse
+	(*CreateRoomChannelApps)(nil),                  // 299: mezon.api.CreateRoomChannelApps
+	(*MezonOauthClient)(nil),                       // 300: mezon.api.MezonOauthClient
+	(*MezonOauthClientList)(nil),                   // 301: mezon.api.MezonOauthClientList
+	(*GetMezonOauthClientRequest)(nil),             // 302: mezon.api.GetMezonOauthClientRequest
+	(*SearchThreadRequest)(nil),                    // 303: mezon.api.SearchThreadRequest
+	(*GenerateHashChannelAppsRequest)(nil),         // 304: mezon.api.GenerateHashChannelAppsRequest
+	(*GenerateHashChannelAppsResponse)(nil),        // 305: mezon.api.GenerateHashChannelAppsResponse
+	(*Message2InboxRequest)(nil),                   // 306: mezon.api.Message2InboxRequest
+	(*AccountEmail)(nil),                           // 307: mezon.api.AccountEmail
+	(*AccountMezon)(nil),                           // 308: mezon.api.AccountMezon
+	(*LinkAccountConfirmRequest)(nil),              // 309: mezon.api.LinkAccountConfirmRequest
+	(*QuickMenuAccess)(nil),                        // 310: mezon.api.QuickMenuAccess
+	(*ListQuickMenuAccessRequest)(nil),             // 311: mezon.api.ListQuickMenuAccessRequest
+	(*QuickMenuAccessList)(nil),                    // 312: mezon.api.QuickMenuAccessList
+	(*ListForSaleItemsRequest)(nil),                // 313: mezon.api.ListForSaleItemsRequest
+	(*ForSaleItem)(nil),                            // 314: mezon.api.ForSaleItem
+	(*ForSaleItemList)(nil),                        // 315: mezon.api.ForSaleItemList
+	(*IsFollowerRequest)(nil),                      // 316: mezon.api.IsFollowerRequest
+	(*IsFollowerResponse)(nil),                     // 317: mezon.api.IsFollowerResponse
+	(*TransferOwnershipRequest)(nil),               // 318: mezon.api.TransferOwnershipRequest
+	(*UserIds)(nil),                                // 319: mezon.api.UserIds
+	(*ReportMessageAbuseReqest)(nil),               // 320: mezon.api.ReportMessageAbuseReqest
+	(*LogedDeviceList)(nil),                        // 321: mezon.api.LogedDeviceList
+	(*LogedDevice)(nil),                            // 322: mezon.api.LogedDevice
+	(*DirectFcmProto)(nil),                         // 323: mezon.api.DirectFcmProto
+	(*MessageMentionList)(nil),                     // 324: mezon.api.MessageMentionList
+	(*MessageAttachmentList)(nil),                  // 325: mezon.api.MessageAttachmentList
+	(*MessageRefList)(nil),                         // 326: mezon.api.MessageRefList
+	(*MessageReactionList)(nil),                    // 327: mezon.api.MessageReactionList
+	(*ListChannelBadgeCountRequest)(nil),           // 328: mezon.api.ListChannelBadgeCountRequest
+	(*ListChannelBadgeCountResponse)(nil),          // 329: mezon.api.ListChannelBadgeCountResponse
+	(*ClanBadgeCount)(nil),                         // 330: mezon.api.ClanBadgeCount
+	(*ListClanBadgeCountResponse)(nil),             // 331: mezon.api.ListClanBadgeCountResponse
+	(*ClanDiscover)(nil),                           // 332: mezon.api.ClanDiscover
+	(*ListClanDiscover)(nil),                       // 333: mezon.api.ListClanDiscover
+	(*GenerateMeetTokenExternalResponse)(nil),      // 334: mezon.api.GenerateMeetTokenExternalResponse
+	(*KafkaActionMsg)(nil),                         // 335: mezon.api.KafkaActionMsg
+	(*UpdateAIAgentRequest)(nil),                   // 336: mezon.api.UpdateAIAgentRequest
+	(*ParticipantInfo)(nil),                        // 337: mezon.api.ParticipantInfo
+	(*ChannelTimelineAttachment)(nil),              // 338: mezon.api.ChannelTimelineAttachment
+	(*ListChannelTimelineAttachment)(nil),          // 339: mezon.api.ListChannelTimelineAttachment
+	(*ChannelTimeline)(nil),                        // 340: mezon.api.ChannelTimeline
+	(*ListChannelTimelineRequest)(nil),             // 341: mezon.api.ListChannelTimelineRequest
+	(*ListChannelTimelineResponse)(nil),            // 342: mezon.api.ListChannelTimelineResponse
+	(*CreateChannelTimelineRequest)(nil),           // 343: mezon.api.CreateChannelTimelineRequest
+	(*CreateChannelTimelineResponse)(nil),          // 344: mezon.api.CreateChannelTimelineResponse
+	(*UpdateChannelTimelineRequest)(nil),           // 345: mezon.api.UpdateChannelTimelineRequest
+	(*UpdateChannelTimelineResponse)(nil),          // 346: mezon.api.UpdateChannelTimelineResponse
+	(*ChannelTimelineDetailRequest)(nil),           // 347: mezon.api.ChannelTimelineDetailRequest
+	(*ChannelTimelineDetailResponse)(nil),          // 348: mezon.api.ChannelTimelineDetailResponse
+	(*ListMutedChannelRequest)(nil),                // 349: mezon.api.ListMutedChannelRequest
+	(*MutedChannelList)(nil),                       // 350: mezon.api.MutedChannelList
+	(*NotificationBatchRequest)(nil),               // 351: mezon.api.NotificationBatchRequest
+	(*CreatePollRequest)(nil),                      // 352: mezon.api.CreatePollRequest
+	(*CreatePollResponse)(nil),                     // 353: mezon.api.CreatePollResponse
+	(*VotePollRequest)(nil),                        // 354: mezon.api.VotePollRequest
+	(*VotePollResponse)(nil),                       // 355: mezon.api.VotePollResponse
+	(*ClosePollRequest)(nil),                       // 356: mezon.api.ClosePollRequest
+	(*GetPollRequest)(nil),                         // 357: mezon.api.GetPollRequest
+	(*PollAnswer)(nil),                             // 358: mezon.api.PollAnswer
+	(*PollVoterDetail)(nil),                        // 359: mezon.api.PollVoterDetail
+	(*GetPollResponse)(nil),                        // 360: mezon.api.GetPollResponse
+	(*ListUserOnlineRequest)(nil),                  // 361: mezon.api.ListUserOnlineRequest
+	(*ListUserOnlineResponse)(nil),                 // 362: mezon.api.ListUserOnlineResponse
+	nil,                                            // 363: mezon.api.AccountRefresh.VarsEntry
+	nil,                                            // 364: mezon.api.SessionRefreshRequest.VarsEntry
+	nil,                                            // 365: mezon.api.Event.PropertiesEntry
+	(*ChannelUserList_ChannelUser)(nil),            // 366: mezon.api.ChannelUserList.ChannelUser
+	(*ClanUserList_ClanUser)(nil),                  // 367: mezon.api.ClanUserList.ClanUser
+	(*UpdateClanOrderRequest_ClanOrder)(nil),       // 368: mezon.api.UpdateClanOrderRequest.ClanOrder
+	(*RoleUserList_RoleUser)(nil),                  // 369: mezon.api.RoleUserList.RoleUser
+	nil,                                            // 370: mezon.api.RegistrationEmailRequest.VarsEntry
+	(*GetPubKeysResponse_UserPubKey)(nil),          // 371: mezon.api.GetPubKeysResponse.UserPubKey
+	nil,                                            // 372: mezon.api.AccountEmail.VarsEntry
+	nil,                                            // 373: mezon.api.AccountMezon.VarsEntry
+	nil,                                            // 374: mezon.api.NotificationBatchRequest.NotificationsEntry
+	(*wrapperspb.StringValue)(nil),                 // 375: google.protobuf.StringValue
+	(*wrapperspb.BoolValue)(nil),                   // 376: google.protobuf.BoolValue
 }
 var file_api_proto_depIdxs = []int32{
 	67,  // 0: mezon.api.Account.user:type_name -> mezon.api.User
-	361, // 1: mezon.api.AccountRefresh.vars:type_name -> mezon.api.AccountRefresh.VarsEntry
-	362, // 2: mezon.api.SessionRefreshRequest.vars:type_name -> mezon.api.SessionRefreshRequest.VarsEntry
+	363, // 1: mezon.api.AccountRefresh.vars:type_name -> mezon.api.AccountRefresh.VarsEntry
+	364, // 2: mezon.api.SessionRefreshRequest.vars:type_name -> mezon.api.SessionRefreshRequest.VarsEntry
 	99,  // 3: mezon.api.NotificationInfo.channel:type_name -> mezon.api.ChannelDescription
 	19,  // 4: mezon.api.ChannelMessageList.messages:type_name -> mezon.api.ChannelMessage
 	98,  // 5: mezon.api.ChannelMessageList.last_seen_message:type_name -> mezon.api.ChannelMessageHeader
 	98,  // 6: mezon.api.ChannelMessageList.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
-	363, // 7: mezon.api.Event.properties:type_name -> mezon.api.Event.PropertiesEntry
+	365, // 7: mezon.api.Event.properties:type_name -> mezon.api.Event.PropertiesEntry
 	67,  // 8: mezon.api.Friend.user:type_name -> mezon.api.User
 	32,  // 9: mezon.api.FriendList.friends:type_name -> mezon.api.Friend
-	364, // 10: mezon.api.ChannelUserList.channel_users:type_name -> mezon.api.ChannelUserList.ChannelUser
+	366, // 10: mezon.api.ChannelUserList.channel_users:type_name -> mezon.api.ChannelUserList.ChannelUser
 	36,  // 11: mezon.api.VoiceChannelUserList.voice_channel_users:type_name -> mezon.api.VoiceChannelUser
 	38,  // 12: mezon.api.ChannelAttachmentList.attachments:type_name -> mezon.api.ChannelAttachment
-	365, // 13: mezon.api.ClanUserList.clan_users:type_name -> mezon.api.ClanUserList.ClanUser
+	367, // 13: mezon.api.ClanUserList.clan_users:type_name -> mezon.api.ClanUserList.ClanUser
 	51,  // 14: mezon.api.ClanUserStatusList.clan_user_statuses:type_name -> mezon.api.ClanUserStatusEntry
 	99,  // 15: mezon.api.Notification.channel:type_name -> mezon.api.ChannelDescription
 	56,  // 16: mezon.api.EmojiRecentList.emoji_recents:type_name -> mezon.api.EmojiRecent
 	55,  // 17: mezon.api.NotificationList.notifications:type_name -> mezon.api.Notification
-	373, // 18: mezon.api.UpdateAccountRequest.display_name:type_name -> google.protobuf.StringValue
-	373, // 19: mezon.api.UpdateAccountRequest.avatar_url:type_name -> google.protobuf.StringValue
-	373, // 20: mezon.api.UpdateAccountRequest.lang_tag:type_name -> google.protobuf.StringValue
-	373, // 21: mezon.api.UpdateAccountRequest.location:type_name -> google.protobuf.StringValue
-	373, // 22: mezon.api.UpdateAccountRequest.timezone:type_name -> google.protobuf.StringValue
-	373, // 23: mezon.api.UpdateAccountRequest.about_me:type_name -> google.protobuf.StringValue
-	373, // 24: mezon.api.UpdateAccountRequest.logo:type_name -> google.protobuf.StringValue
-	373, // 25: mezon.api.UpdateAccountRequest.splash_screen:type_name -> google.protobuf.StringValue
-	373, // 26: mezon.api.UpdateAccountRequest.email:type_name -> google.protobuf.StringValue
-	373, // 27: mezon.api.UpdateGroupRequest.name:type_name -> google.protobuf.StringValue
-	373, // 28: mezon.api.UpdateGroupRequest.description:type_name -> google.protobuf.StringValue
-	373, // 29: mezon.api.UpdateGroupRequest.lang_tag:type_name -> google.protobuf.StringValue
-	373, // 30: mezon.api.UpdateGroupRequest.avatar_url:type_name -> google.protobuf.StringValue
+	375, // 18: mezon.api.UpdateAccountRequest.display_name:type_name -> google.protobuf.StringValue
+	375, // 19: mezon.api.UpdateAccountRequest.avatar_url:type_name -> google.protobuf.StringValue
+	375, // 20: mezon.api.UpdateAccountRequest.lang_tag:type_name -> google.protobuf.StringValue
+	375, // 21: mezon.api.UpdateAccountRequest.location:type_name -> google.protobuf.StringValue
+	375, // 22: mezon.api.UpdateAccountRequest.timezone:type_name -> google.protobuf.StringValue
+	375, // 23: mezon.api.UpdateAccountRequest.about_me:type_name -> google.protobuf.StringValue
+	375, // 24: mezon.api.UpdateAccountRequest.logo:type_name -> google.protobuf.StringValue
+	375, // 25: mezon.api.UpdateAccountRequest.splash_screen:type_name -> google.protobuf.StringValue
+	375, // 26: mezon.api.UpdateAccountRequest.email:type_name -> google.protobuf.StringValue
+	375, // 27: mezon.api.UpdateGroupRequest.name:type_name -> google.protobuf.StringValue
+	375, // 28: mezon.api.UpdateGroupRequest.description:type_name -> google.protobuf.StringValue
+	375, // 29: mezon.api.UpdateGroupRequest.lang_tag:type_name -> google.protobuf.StringValue
+	375, // 30: mezon.api.UpdateGroupRequest.avatar_url:type_name -> google.protobuf.StringValue
 	67,  // 31: mezon.api.Users.users:type_name -> mezon.api.User
-	373, // 32: mezon.api.UpdateClanDescRequest.logo:type_name -> google.protobuf.StringValue
-	373, // 33: mezon.api.UpdateClanDescRequest.banner:type_name -> google.protobuf.StringValue
-	374, // 34: mezon.api.UpdateClanDescRequest.is_onboarding:type_name -> google.protobuf.BoolValue
-	373, // 35: mezon.api.UpdateClanDescRequest.onboarding_banner:type_name -> google.protobuf.StringValue
-	374, // 36: mezon.api.UpdateClanDescRequest.is_community:type_name -> google.protobuf.BoolValue
-	373, // 37: mezon.api.UpdateClanDescRequest.community_banner:type_name -> google.protobuf.StringValue
-	373, // 38: mezon.api.UpdateClanDescRequest.description:type_name -> google.protobuf.StringValue
-	373, // 39: mezon.api.UpdateClanDescRequest.about:type_name -> google.protobuf.StringValue
-	373, // 40: mezon.api.UpdateClanDescRequest.short_url:type_name -> google.protobuf.StringValue
+	375, // 32: mezon.api.UpdateClanDescRequest.logo:type_name -> google.protobuf.StringValue
+	375, // 33: mezon.api.UpdateClanDescRequest.banner:type_name -> google.protobuf.StringValue
+	376, // 34: mezon.api.UpdateClanDescRequest.is_onboarding:type_name -> google.protobuf.BoolValue
+	375, // 35: mezon.api.UpdateClanDescRequest.onboarding_banner:type_name -> google.protobuf.StringValue
+	376, // 36: mezon.api.UpdateClanDescRequest.is_community:type_name -> google.protobuf.BoolValue
+	375, // 37: mezon.api.UpdateClanDescRequest.community_banner:type_name -> google.protobuf.StringValue
+	375, // 38: mezon.api.UpdateClanDescRequest.description:type_name -> google.protobuf.StringValue
+	375, // 39: mezon.api.UpdateClanDescRequest.about:type_name -> google.protobuf.StringValue
+	375, // 40: mezon.api.UpdateClanDescRequest.short_url:type_name -> google.protobuf.StringValue
 	72,  // 41: mezon.api.ClanDescList.clandesc:type_name -> mezon.api.ClanDesc
-	373, // 42: mezon.api.UpdateClanProfileRequest.nick_name:type_name -> google.protobuf.StringValue
-	373, // 43: mezon.api.UpdateClanProfileRequest.avatar:type_name -> google.protobuf.StringValue
-	366, // 44: mezon.api.UpdateClanOrderRequest.clans_order:type_name -> mezon.api.UpdateClanOrderRequest.ClanOrder
+	375, // 42: mezon.api.UpdateClanProfileRequest.nick_name:type_name -> google.protobuf.StringValue
+	375, // 43: mezon.api.UpdateClanProfileRequest.avatar:type_name -> google.protobuf.StringValue
+	368, // 44: mezon.api.UpdateClanOrderRequest.clans_order:type_name -> mezon.api.UpdateClanOrderRequest.ClanOrder
 	93,  // 45: mezon.api.UpdateCategoryOrderRequest.categories:type_name -> mezon.api.CategoryOrderUpdate
 	92,  // 46: mezon.api.UpdateRoleOrderRequest.roles:type_name -> mezon.api.RoleOrderUpdate
 	89,  // 47: mezon.api.CategoryDescList.categorydesc:type_name -> mezon.api.CategoryDesc
@@ -29217,105 +29303,106 @@ var file_api_proto_depIdxs = []int32{
 	98,  // 49: mezon.api.ChannelDescription.last_seen_message:type_name -> mezon.api.ChannelMessageHeader
 	99,  // 50: mezon.api.ChannelDescList.channeldesc:type_name -> mezon.api.ChannelDescription
 	99,  // 51: mezon.api.ChannelDescListNoPool.channeldesc:type_name -> mezon.api.ChannelDescription
-	373, // 52: mezon.api.UpdateChannelDescRequest.channel_label:type_name -> google.protobuf.StringValue
-	373, // 53: mezon.api.UpdateChannelDescRequest.channel_avatar:type_name -> google.protobuf.StringValue
+	375, // 52: mezon.api.UpdateChannelDescRequest.channel_label:type_name -> google.protobuf.StringValue
+	375, // 53: mezon.api.UpdateChannelDescRequest.channel_avatar:type_name -> google.protobuf.StringValue
 	114, // 54: mezon.api.BannedUserList.banned_users:type_name -> mezon.api.BannedUser
-	145, // 55: mezon.api.Role.role_user_list:type_name -> mezon.api.RoleUserList
-	141, // 56: mezon.api.Role.permission_list:type_name -> mezon.api.PermissionList
-	296, // 57: mezon.api.EventManagement.meet_room:type_name -> mezon.api.GenerateMezonMeetResponse
-	124, // 58: mezon.api.PinMessagesList.pin_messages_list:type_name -> mezon.api.PinMessage
-	122, // 59: mezon.api.NotificationSettingList.notification_setting:type_name -> mezon.api.NotificationSetting
-	137, // 60: mezon.api.NotificationChannelCategorySettingList.notification_channel_category_settings_list:type_name -> mezon.api.NotificationChannelCategorySetting
-	119, // 61: mezon.api.RoleList.roles:type_name -> mezon.api.Role
-	120, // 62: mezon.api.EventList.events:type_name -> mezon.api.EventManagement
-	121, // 63: mezon.api.PermissionList.permissions:type_name -> mezon.api.Permission
-	367, // 64: mezon.api.RoleUserList.role_users:type_name -> mezon.api.RoleUserList.RoleUser
-	296, // 65: mezon.api.CreateEventRequest.meet_room:type_name -> mezon.api.GenerateMezonMeetResponse
-	373, // 66: mezon.api.UpdateRoleRequest.title:type_name -> google.protobuf.StringValue
-	373, // 67: mezon.api.UpdateRoleRequest.color:type_name -> google.protobuf.StringValue
-	373, // 68: mezon.api.UpdateRoleRequest.role_icon:type_name -> google.protobuf.StringValue
-	373, // 69: mezon.api.UpdateRoleRequest.description:type_name -> google.protobuf.StringValue
-	155, // 70: mezon.api.UpdateRoleChannelRequest.permission_update:type_name -> mezon.api.PermissionUpdate
-	160, // 71: mezon.api.MultipartUploadAttachmentFinishRequest.parts:type_name -> mezon.api.MultipartUploadAttachmentPart
-	164, // 72: mezon.api.SearchMessageRequest.filters:type_name -> mezon.api.FilterParam
-	163, // 73: mezon.api.SearchMessageRequest.sorts:type_name -> mezon.api.SortParam
-	165, // 74: mezon.api.SearchMessageResponse.messages:type_name -> mezon.api.SearchMessageDocument
-	368, // 75: mezon.api.RegistrationEmailRequest.vars:type_name -> mezon.api.RegistrationEmailRequest.VarsEntry
-	168, // 76: mezon.api.EmojiListedResponse.emoji_list:type_name -> mezon.api.ClanEmoji
-	171, // 77: mezon.api.StickerListedResponse.stickers:type_name -> mezon.api.ClanSticker
-	178, // 78: mezon.api.WebhookListResponse.webhooks:type_name -> mezon.api.Webhook
-	195, // 79: mezon.api.AppList.apps:type_name -> mezon.api.App
-	373, // 80: mezon.api.UpdateAppRequest.appname:type_name -> google.protobuf.StringValue
-	373, // 81: mezon.api.UpdateAppRequest.metadata:type_name -> google.protobuf.StringValue
-	373, // 82: mezon.api.UpdateAppRequest.applogo:type_name -> google.protobuf.StringValue
-	373, // 83: mezon.api.UpdateAppRequest.token:type_name -> google.protobuf.StringValue
-	205, // 84: mezon.api.SystemMessagesList.system_messages_list:type_name -> mezon.api.SystemMessage
-	213, // 85: mezon.api.StreamingChannelUserList.streaming_channel_users:type_name -> mezon.api.StreamingChannelUser
-	220, // 86: mezon.api.ListChannelAppsResponse.channel_apps:type_name -> mezon.api.ChannelAppResponse
-	67,  // 87: mezon.api.AllUserClans.users:type_name -> mezon.api.User
-	139, // 88: mezon.api.RoleListEventResponse.roles:type_name -> mezon.api.RoleList
-	141, // 89: mezon.api.UserPermissionInChannelListResponse.permissions:type_name -> mezon.api.PermissionList
-	226, // 90: mezon.api.PermissionRoleChannelListEventResponse.permission_role_channel:type_name -> mezon.api.PermissionRoleChannel
-	98,  // 91: mezon.api.ChannelSettingItem.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
-	230, // 92: mezon.api.ChannelSettingListResponse.channel_setting_list:type_name -> mezon.api.ChannelSettingItem
-	237, // 93: mezon.api.ChannelCanvasListResponse.channel_canvases:type_name -> mezon.api.ChannelCanvasItem
-	246, // 94: mezon.api.ListUserActivity.activities:type_name -> mezon.api.UserActivity
-	252, // 95: mezon.api.PushPubKeyRequest.PK:type_name -> mezon.api.PubKey
-	369, // 96: mezon.api.GetPubKeysResponse.pub_keys:type_name -> mezon.api.GetPubKeysResponse.UserPubKey
-	258, // 97: mezon.api.ListAuditLog.logs:type_name -> mezon.api.AuditLog
-	266, // 98: mezon.api.ListOnboardingResponse.list_onboarding:type_name -> mezon.api.OnboardingItem
-	267, // 99: mezon.api.OnboardingItem.answers:type_name -> mezon.api.OnboardingAnswer
-	267, // 100: mezon.api.OnboardingContent.answers:type_name -> mezon.api.OnboardingAnswer
-	268, // 101: mezon.api.CreateOnboardingRequest.contents:type_name -> mezon.api.OnboardingContent
-	267, // 102: mezon.api.UpdateOnboardingRequest.answers:type_name -> mezon.api.OnboardingAnswer
-	272, // 103: mezon.api.ListClanWebhookResponse.list_clan_webhooks:type_name -> mezon.api.ClanWebhook
-	23,  // 104: mezon.api.ClanWebhookHandlerBody.attachments:type_name -> mezon.api.MessageAttachment
-	279, // 105: mezon.api.ClanWebhookHandlerRequest.body:type_name -> mezon.api.ClanWebhookHandlerBody
-	283, // 106: mezon.api.ListOnboardingStepResponse.list_onboarding_step:type_name -> mezon.api.OnboardingSteps
-	98,  // 107: mezon.api.SdTopic.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
-	287, // 108: mezon.api.SdTopicList.topics:type_name -> mezon.api.SdTopic
-	298, // 109: mezon.api.MezonOauthClientList.list_mezon_oauth_client:type_name -> mezon.api.MezonOauthClient
-	20,  // 110: mezon.api.Message2InboxRequest.mentions:type_name -> mezon.api.MessageMention
-	23,  // 111: mezon.api.Message2InboxRequest.attachments:type_name -> mezon.api.MessageAttachment
-	22,  // 112: mezon.api.Message2InboxRequest.reactions:type_name -> mezon.api.MessageReaction
-	24,  // 113: mezon.api.Message2InboxRequest.references:type_name -> mezon.api.MessageRef
-	370, // 114: mezon.api.AccountEmail.vars:type_name -> mezon.api.AccountEmail.VarsEntry
-	371, // 115: mezon.api.AccountMezon.vars:type_name -> mezon.api.AccountMezon.VarsEntry
-	308, // 116: mezon.api.QuickMenuAccessList.list_menus:type_name -> mezon.api.QuickMenuAccess
-	312, // 117: mezon.api.ForSaleItemList.for_sale_items:type_name -> mezon.api.ForSaleItem
-	320, // 118: mezon.api.LogedDeviceList.devices:type_name -> mezon.api.LogedDevice
-	20,  // 119: mezon.api.MessageMentionList.mentions:type_name -> mezon.api.MessageMention
-	23,  // 120: mezon.api.MessageAttachmentList.attachments:type_name -> mezon.api.MessageAttachment
-	24,  // 121: mezon.api.MessageRefList.refs:type_name -> mezon.api.MessageRef
-	22,  // 122: mezon.api.MessageReactionList.reactions:type_name -> mezon.api.MessageReaction
-	99,  // 123: mezon.api.ListChannelBadgeCountResponse.channeldesc:type_name -> mezon.api.ChannelDescription
-	328, // 124: mezon.api.ListClanBadgeCountResponse.list_badge:type_name -> mezon.api.ClanBadgeCount
-	330, // 125: mezon.api.ListClanDiscover.clan_discover:type_name -> mezon.api.ClanDiscover
-	5,   // 126: mezon.api.ParticipantInfo.state:type_name -> mezon.api.ParticipantInfo.State
-	6,   // 127: mezon.api.ParticipantInfo.kind:type_name -> mezon.api.ParticipantInfo.Kind
-	336, // 128: mezon.api.ListChannelTimelineAttachment.attachments:type_name -> mezon.api.ChannelTimelineAttachment
-	338, // 129: mezon.api.ListChannelTimelineResponse.events:type_name -> mezon.api.ChannelTimeline
-	336, // 130: mezon.api.CreateChannelTimelineRequest.attachments:type_name -> mezon.api.ChannelTimelineAttachment
-	338, // 131: mezon.api.CreateChannelTimelineResponse.event:type_name -> mezon.api.ChannelTimeline
-	336, // 132: mezon.api.UpdateChannelTimelineRequest.attachments:type_name -> mezon.api.ChannelTimelineAttachment
-	338, // 133: mezon.api.UpdateChannelTimelineResponse.event:type_name -> mezon.api.ChannelTimeline
-	338, // 134: mezon.api.ChannelTimelineDetailResponse.event:type_name -> mezon.api.ChannelTimeline
-	372, // 135: mezon.api.NotificationBatchRequest.notifications:type_name -> mezon.api.NotificationBatchRequest.NotificationsEntry
-	3,   // 136: mezon.api.CreatePollRequest.type:type_name -> mezon.api.PollType
-	356, // 137: mezon.api.CreatePollResponse.answers:type_name -> mezon.api.PollAnswer
-	3,   // 138: mezon.api.CreatePollResponse.type:type_name -> mezon.api.PollType
-	356, // 139: mezon.api.GetPollResponse.answers:type_name -> mezon.api.PollAnswer
-	3,   // 140: mezon.api.GetPollResponse.type:type_name -> mezon.api.PollType
-	357, // 141: mezon.api.GetPollResponse.voter_details:type_name -> mezon.api.PollVoterDetail
-	67,  // 142: mezon.api.ListUserOnlineResponse.users:type_name -> mezon.api.User
-	67,  // 143: mezon.api.ClanUserList.ClanUser.user:type_name -> mezon.api.User
-	252, // 144: mezon.api.GetPubKeysResponse.UserPubKey.PK:type_name -> mezon.api.PubKey
-	58,  // 145: mezon.api.NotificationBatchRequest.NotificationsEntry.value:type_name -> mezon.api.NotificationList
-	146, // [146:146] is the sub-list for method output_type
-	146, // [146:146] is the sub-list for method input_type
-	146, // [146:146] is the sub-list for extension type_name
-	146, // [146:146] is the sub-list for extension extendee
-	0,   // [0:146] is the sub-list for field type_name
+	99,  // 55: mezon.api.ListArchivedChannelDescsResponse.channeldesc:type_name -> mezon.api.ChannelDescription
+	147, // 56: mezon.api.Role.role_user_list:type_name -> mezon.api.RoleUserList
+	143, // 57: mezon.api.Role.permission_list:type_name -> mezon.api.PermissionList
+	298, // 58: mezon.api.EventManagement.meet_room:type_name -> mezon.api.GenerateMezonMeetResponse
+	126, // 59: mezon.api.PinMessagesList.pin_messages_list:type_name -> mezon.api.PinMessage
+	124, // 60: mezon.api.NotificationSettingList.notification_setting:type_name -> mezon.api.NotificationSetting
+	139, // 61: mezon.api.NotificationChannelCategorySettingList.notification_channel_category_settings_list:type_name -> mezon.api.NotificationChannelCategorySetting
+	121, // 62: mezon.api.RoleList.roles:type_name -> mezon.api.Role
+	122, // 63: mezon.api.EventList.events:type_name -> mezon.api.EventManagement
+	123, // 64: mezon.api.PermissionList.permissions:type_name -> mezon.api.Permission
+	369, // 65: mezon.api.RoleUserList.role_users:type_name -> mezon.api.RoleUserList.RoleUser
+	298, // 66: mezon.api.CreateEventRequest.meet_room:type_name -> mezon.api.GenerateMezonMeetResponse
+	375, // 67: mezon.api.UpdateRoleRequest.title:type_name -> google.protobuf.StringValue
+	375, // 68: mezon.api.UpdateRoleRequest.color:type_name -> google.protobuf.StringValue
+	375, // 69: mezon.api.UpdateRoleRequest.role_icon:type_name -> google.protobuf.StringValue
+	375, // 70: mezon.api.UpdateRoleRequest.description:type_name -> google.protobuf.StringValue
+	157, // 71: mezon.api.UpdateRoleChannelRequest.permission_update:type_name -> mezon.api.PermissionUpdate
+	162, // 72: mezon.api.MultipartUploadAttachmentFinishRequest.parts:type_name -> mezon.api.MultipartUploadAttachmentPart
+	166, // 73: mezon.api.SearchMessageRequest.filters:type_name -> mezon.api.FilterParam
+	165, // 74: mezon.api.SearchMessageRequest.sorts:type_name -> mezon.api.SortParam
+	167, // 75: mezon.api.SearchMessageResponse.messages:type_name -> mezon.api.SearchMessageDocument
+	370, // 76: mezon.api.RegistrationEmailRequest.vars:type_name -> mezon.api.RegistrationEmailRequest.VarsEntry
+	170, // 77: mezon.api.EmojiListedResponse.emoji_list:type_name -> mezon.api.ClanEmoji
+	173, // 78: mezon.api.StickerListedResponse.stickers:type_name -> mezon.api.ClanSticker
+	180, // 79: mezon.api.WebhookListResponse.webhooks:type_name -> mezon.api.Webhook
+	197, // 80: mezon.api.AppList.apps:type_name -> mezon.api.App
+	375, // 81: mezon.api.UpdateAppRequest.appname:type_name -> google.protobuf.StringValue
+	375, // 82: mezon.api.UpdateAppRequest.metadata:type_name -> google.protobuf.StringValue
+	375, // 83: mezon.api.UpdateAppRequest.applogo:type_name -> google.protobuf.StringValue
+	375, // 84: mezon.api.UpdateAppRequest.token:type_name -> google.protobuf.StringValue
+	207, // 85: mezon.api.SystemMessagesList.system_messages_list:type_name -> mezon.api.SystemMessage
+	215, // 86: mezon.api.StreamingChannelUserList.streaming_channel_users:type_name -> mezon.api.StreamingChannelUser
+	222, // 87: mezon.api.ListChannelAppsResponse.channel_apps:type_name -> mezon.api.ChannelAppResponse
+	67,  // 88: mezon.api.AllUserClans.users:type_name -> mezon.api.User
+	141, // 89: mezon.api.RoleListEventResponse.roles:type_name -> mezon.api.RoleList
+	143, // 90: mezon.api.UserPermissionInChannelListResponse.permissions:type_name -> mezon.api.PermissionList
+	228, // 91: mezon.api.PermissionRoleChannelListEventResponse.permission_role_channel:type_name -> mezon.api.PermissionRoleChannel
+	98,  // 92: mezon.api.ChannelSettingItem.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
+	232, // 93: mezon.api.ChannelSettingListResponse.channel_setting_list:type_name -> mezon.api.ChannelSettingItem
+	239, // 94: mezon.api.ChannelCanvasListResponse.channel_canvases:type_name -> mezon.api.ChannelCanvasItem
+	248, // 95: mezon.api.ListUserActivity.activities:type_name -> mezon.api.UserActivity
+	254, // 96: mezon.api.PushPubKeyRequest.PK:type_name -> mezon.api.PubKey
+	371, // 97: mezon.api.GetPubKeysResponse.pub_keys:type_name -> mezon.api.GetPubKeysResponse.UserPubKey
+	260, // 98: mezon.api.ListAuditLog.logs:type_name -> mezon.api.AuditLog
+	268, // 99: mezon.api.ListOnboardingResponse.list_onboarding:type_name -> mezon.api.OnboardingItem
+	269, // 100: mezon.api.OnboardingItem.answers:type_name -> mezon.api.OnboardingAnswer
+	269, // 101: mezon.api.OnboardingContent.answers:type_name -> mezon.api.OnboardingAnswer
+	270, // 102: mezon.api.CreateOnboardingRequest.contents:type_name -> mezon.api.OnboardingContent
+	269, // 103: mezon.api.UpdateOnboardingRequest.answers:type_name -> mezon.api.OnboardingAnswer
+	274, // 104: mezon.api.ListClanWebhookResponse.list_clan_webhooks:type_name -> mezon.api.ClanWebhook
+	23,  // 105: mezon.api.ClanWebhookHandlerBody.attachments:type_name -> mezon.api.MessageAttachment
+	281, // 106: mezon.api.ClanWebhookHandlerRequest.body:type_name -> mezon.api.ClanWebhookHandlerBody
+	285, // 107: mezon.api.ListOnboardingStepResponse.list_onboarding_step:type_name -> mezon.api.OnboardingSteps
+	98,  // 108: mezon.api.SdTopic.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
+	289, // 109: mezon.api.SdTopicList.topics:type_name -> mezon.api.SdTopic
+	300, // 110: mezon.api.MezonOauthClientList.list_mezon_oauth_client:type_name -> mezon.api.MezonOauthClient
+	20,  // 111: mezon.api.Message2InboxRequest.mentions:type_name -> mezon.api.MessageMention
+	23,  // 112: mezon.api.Message2InboxRequest.attachments:type_name -> mezon.api.MessageAttachment
+	22,  // 113: mezon.api.Message2InboxRequest.reactions:type_name -> mezon.api.MessageReaction
+	24,  // 114: mezon.api.Message2InboxRequest.references:type_name -> mezon.api.MessageRef
+	372, // 115: mezon.api.AccountEmail.vars:type_name -> mezon.api.AccountEmail.VarsEntry
+	373, // 116: mezon.api.AccountMezon.vars:type_name -> mezon.api.AccountMezon.VarsEntry
+	310, // 117: mezon.api.QuickMenuAccessList.list_menus:type_name -> mezon.api.QuickMenuAccess
+	314, // 118: mezon.api.ForSaleItemList.for_sale_items:type_name -> mezon.api.ForSaleItem
+	322, // 119: mezon.api.LogedDeviceList.devices:type_name -> mezon.api.LogedDevice
+	20,  // 120: mezon.api.MessageMentionList.mentions:type_name -> mezon.api.MessageMention
+	23,  // 121: mezon.api.MessageAttachmentList.attachments:type_name -> mezon.api.MessageAttachment
+	24,  // 122: mezon.api.MessageRefList.refs:type_name -> mezon.api.MessageRef
+	22,  // 123: mezon.api.MessageReactionList.reactions:type_name -> mezon.api.MessageReaction
+	99,  // 124: mezon.api.ListChannelBadgeCountResponse.channeldesc:type_name -> mezon.api.ChannelDescription
+	330, // 125: mezon.api.ListClanBadgeCountResponse.list_badge:type_name -> mezon.api.ClanBadgeCount
+	332, // 126: mezon.api.ListClanDiscover.clan_discover:type_name -> mezon.api.ClanDiscover
+	5,   // 127: mezon.api.ParticipantInfo.state:type_name -> mezon.api.ParticipantInfo.State
+	6,   // 128: mezon.api.ParticipantInfo.kind:type_name -> mezon.api.ParticipantInfo.Kind
+	338, // 129: mezon.api.ListChannelTimelineAttachment.attachments:type_name -> mezon.api.ChannelTimelineAttachment
+	340, // 130: mezon.api.ListChannelTimelineResponse.events:type_name -> mezon.api.ChannelTimeline
+	338, // 131: mezon.api.CreateChannelTimelineRequest.attachments:type_name -> mezon.api.ChannelTimelineAttachment
+	340, // 132: mezon.api.CreateChannelTimelineResponse.event:type_name -> mezon.api.ChannelTimeline
+	338, // 133: mezon.api.UpdateChannelTimelineRequest.attachments:type_name -> mezon.api.ChannelTimelineAttachment
+	340, // 134: mezon.api.UpdateChannelTimelineResponse.event:type_name -> mezon.api.ChannelTimeline
+	340, // 135: mezon.api.ChannelTimelineDetailResponse.event:type_name -> mezon.api.ChannelTimeline
+	374, // 136: mezon.api.NotificationBatchRequest.notifications:type_name -> mezon.api.NotificationBatchRequest.NotificationsEntry
+	3,   // 137: mezon.api.CreatePollRequest.type:type_name -> mezon.api.PollType
+	358, // 138: mezon.api.CreatePollResponse.answers:type_name -> mezon.api.PollAnswer
+	3,   // 139: mezon.api.CreatePollResponse.type:type_name -> mezon.api.PollType
+	358, // 140: mezon.api.GetPollResponse.answers:type_name -> mezon.api.PollAnswer
+	3,   // 141: mezon.api.GetPollResponse.type:type_name -> mezon.api.PollType
+	359, // 142: mezon.api.GetPollResponse.voter_details:type_name -> mezon.api.PollVoterDetail
+	67,  // 143: mezon.api.ListUserOnlineResponse.users:type_name -> mezon.api.User
+	67,  // 144: mezon.api.ClanUserList.ClanUser.user:type_name -> mezon.api.User
+	254, // 145: mezon.api.GetPubKeysResponse.UserPubKey.PK:type_name -> mezon.api.PubKey
+	58,  // 146: mezon.api.NotificationBatchRequest.NotificationsEntry.value:type_name -> mezon.api.NotificationList
+	147, // [147:147] is the sub-list for method output_type
+	147, // [147:147] is the sub-list for method input_type
+	147, // [147:147] is the sub-list for extension type_name
+	147, // [147:147] is the sub-list for extension extendee
+	0,   // [0:147] is the sub-list for field type_name
 }
 
 func init() { file_api_proto_init() }
@@ -29329,7 +29416,7 @@ func file_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_proto_rawDesc), len(file_api_proto_rawDesc)),
 			NumEnums:      8,
-			NumMessages:   365,
+			NumMessages:   367,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
