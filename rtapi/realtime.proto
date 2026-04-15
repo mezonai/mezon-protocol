@@ -214,7 +214,7 @@ message Envelope {
     // Config Allow Anonymous
     AllowAnonymousEvent allow_anonymous_event = 91;
     // Message sending to another server for update localcache
-    UpdateLocalCacheEvent update_localcache_event = 92;
+    ApiRequestEvent api_request_event = 92;
     // Clan Created Event
     ClanCreatedEvent clan_created_event = 93;
     // Voice Agent Event
@@ -224,9 +224,9 @@ message Envelope {
   }
 }
 
-message UpdateLocalCacheEvent {
-  repeated int64 params1 = 1;
-  repeated int64 params2 = 2;
+message ApiRequestEvent {
+  string full_url = 1;
+  bytes body = 2;
 }
 
 message FollowEvent {

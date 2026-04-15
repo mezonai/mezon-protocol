@@ -2029,15 +2029,15 @@ func (m *Envelope_AllowAnonymousEvent) MarshalToSizedBufferVT(dAtA []byte) (int,
 	}
 	return len(dAtA) - i, nil
 }
-func (m *Envelope_UpdateLocalcacheEvent) MarshalToVT(dAtA []byte) (int, error) {
+func (m *Envelope_ApiRequestEvent) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *Envelope_UpdateLocalcacheEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *Envelope_ApiRequestEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	i := len(dAtA)
-	if m.UpdateLocalcacheEvent != nil {
-		size, err := m.UpdateLocalcacheEvent.MarshalToSizedBufferVT(dAtA[:i])
+	if m.ApiRequestEvent != nil {
+		size, err := m.ApiRequestEvent.MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -2113,7 +2113,7 @@ func (m *Envelope_ListChannelUsersBannedEvent) MarshalToSizedBufferVT(dAtA []byt
 	}
 	return len(dAtA) - i, nil
 }
-func (m *UpdateLocalCacheEvent) MarshalVT() (dAtA []byte, err error) {
+func (m *ApiRequestEvent) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -2126,12 +2126,12 @@ func (m *UpdateLocalCacheEvent) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *UpdateLocalCacheEvent) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ApiRequestEvent) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *UpdateLocalCacheEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ApiRequestEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -2143,45 +2143,17 @@ func (m *UpdateLocalCacheEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error)
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.Params2) > 0 {
-		var pksize2 int
-		for _, num := range m.Params2 {
-			pksize2 += protohelpers.SizeOfVarint(uint64(num))
-		}
-		i -= pksize2
-		j1 := i
-		for _, num1 := range m.Params2 {
-			num := uint64(num1)
-			for num >= 1<<7 {
-				dAtA[j1] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j1++
-			}
-			dAtA[j1] = uint8(num)
-			j1++
-		}
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(pksize2))
+	if len(m.Body) > 0 {
+		i -= len(m.Body)
+		copy(dAtA[i:], m.Body)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Body)))
 		i--
 		dAtA[i] = 0x12
 	}
-	if len(m.Params1) > 0 {
-		var pksize4 int
-		for _, num := range m.Params1 {
-			pksize4 += protohelpers.SizeOfVarint(uint64(num))
-		}
-		i -= pksize4
-		j3 := i
-		for _, num1 := range m.Params1 {
-			num := uint64(num1)
-			for num >= 1<<7 {
-				dAtA[j3] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j3++
-			}
-			dAtA[j3] = uint8(num)
-			j3++
-		}
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(pksize4))
+	if len(m.FullUrl) > 0 {
+		i -= len(m.FullUrl)
+		copy(dAtA[i:], m.FullUrl)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.FullUrl)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -10430,14 +10402,14 @@ func (m *Envelope_AllowAnonymousEvent) SizeVT() (n int) {
 	}
 	return n
 }
-func (m *Envelope_UpdateLocalcacheEvent) SizeVT() (n int) {
+func (m *Envelope_ApiRequestEvent) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.UpdateLocalcacheEvent != nil {
-		l = m.UpdateLocalcacheEvent.SizeVT()
+	if m.ApiRequestEvent != nil {
+		l = m.ApiRequestEvent.SizeVT()
 		n += 2 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	return n
@@ -10478,25 +10450,19 @@ func (m *Envelope_ListChannelUsersBannedEvent) SizeVT() (n int) {
 	}
 	return n
 }
-func (m *UpdateLocalCacheEvent) SizeVT() (n int) {
+func (m *ApiRequestEvent) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if len(m.Params1) > 0 {
-		l = 0
-		for _, e := range m.Params1 {
-			l += protohelpers.SizeOfVarint(uint64(e))
-		}
-		n += 1 + protohelpers.SizeOfVarint(uint64(l)) + l
+	l = len(m.FullUrl)
+	if l > 0 {
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
-	if len(m.Params2) > 0 {
-		l = 0
-		for _, e := range m.Params2 {
-			l += protohelpers.SizeOfVarint(uint64(e))
-		}
-		n += 1 + protohelpers.SizeOfVarint(uint64(l)) + l
+	l = len(m.Body)
+	if l > 0 {
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -17332,7 +17298,7 @@ func (m *Envelope) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 92:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UpdateLocalcacheEvent", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ApiRequestEvent", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -17359,16 +17325,16 @@ func (m *Envelope) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Message.(*Envelope_UpdateLocalcacheEvent); ok {
-				if err := oneof.UpdateLocalcacheEvent.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			if oneof, ok := m.Message.(*Envelope_ApiRequestEvent); ok {
+				if err := oneof.ApiRequestEvent.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &UpdateLocalCacheEvent{}
+				v := &ApiRequestEvent{}
 				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Message = &Envelope_UpdateLocalcacheEvent{UpdateLocalcacheEvent: v}
+				m.Message = &Envelope_ApiRequestEvent{ApiRequestEvent: v}
 			}
 			iNdEx = postIndex
 		case 93:
@@ -17516,7 +17482,7 @@ func (m *Envelope) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *UpdateLocalCacheEvent) UnmarshalVT(dAtA []byte) error {
+func (m *ApiRequestEvent) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -17539,164 +17505,78 @@ func (m *UpdateLocalCacheEvent) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: UpdateLocalCacheEvent: wiretype end group for non-group")
+			return fmt.Errorf("proto: ApiRequestEvent: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: UpdateLocalCacheEvent: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ApiRequestEvent: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
-			if wireType == 0 {
-				var v int64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protohelpers.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					v |= int64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FullUrl", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
 				}
-				m.Params1 = append(m.Params1, v)
-			} else if wireType == 2 {
-				var packedLen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protohelpers.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					packedLen |= int(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				if packedLen < 0 {
-					return protohelpers.ErrInvalidLength
-				}
-				postIndex := iNdEx + packedLen
-				if postIndex < 0 {
-					return protohelpers.ErrInvalidLength
-				}
-				if postIndex > l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				var elementCount int
-				var count int
-				for _, integer := range dAtA[iNdEx:postIndex] {
-					if integer < 128 {
-						count++
-					}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
 				}
-				elementCount = count
-				if elementCount != 0 && len(m.Params1) == 0 {
-					m.Params1 = make([]int64, 0, elementCount)
-				}
-				for iNdEx < postIndex {
-					var v int64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return protohelpers.ErrIntOverflow
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						v |= int64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					m.Params1 = append(m.Params1, v)
-				}
-			} else {
-				return fmt.Errorf("proto: wrong wireType = %d for field Params1", wireType)
 			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FullUrl = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		case 2:
-			if wireType == 0 {
-				var v int64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protohelpers.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					v |= int64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Body", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
 				}
-				m.Params2 = append(m.Params2, v)
-			} else if wireType == 2 {
-				var packedLen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protohelpers.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					packedLen |= int(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				if packedLen < 0 {
-					return protohelpers.ErrInvalidLength
-				}
-				postIndex := iNdEx + packedLen
-				if postIndex < 0 {
-					return protohelpers.ErrInvalidLength
-				}
-				if postIndex > l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				var elementCount int
-				var count int
-				for _, integer := range dAtA[iNdEx:postIndex] {
-					if integer < 128 {
-						count++
-					}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
 				}
-				elementCount = count
-				if elementCount != 0 && len(m.Params2) == 0 {
-					m.Params2 = make([]int64, 0, elementCount)
-				}
-				for iNdEx < postIndex {
-					var v int64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return protohelpers.ErrIntOverflow
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						v |= int64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					m.Params2 = append(m.Params2, v)
-				}
-			} else {
-				return fmt.Errorf("proto: wrong wireType = %d for field Params2", wireType)
 			}
+			if byteLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Body = append(m.Body[:0], dAtA[iNdEx:postIndex]...)
+			if m.Body == nil {
+				m.Body = []byte{}
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
