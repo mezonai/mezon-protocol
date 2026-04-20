@@ -2150,12 +2150,10 @@ func (m *ApiRequestEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x12
 	}
-	if len(m.FullUrl) > 0 {
-		i -= len(m.FullUrl)
-		copy(dAtA[i:], m.FullUrl)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.FullUrl)))
+	if m.Api != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Api))
 		i--
-		dAtA[i] = 0xa
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -10454,9 +10452,8 @@ func (m *ApiRequestEvent) SizeVT() (n int) {
 	}
 	var l int
 	_ = l
-	l = len(m.FullUrl)
-	if l > 0 {
-		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+	if m.Api != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.Api))
 	}
 	l = len(m.Body)
 	if l > 0 {
@@ -17509,10 +17506,10 @@ func (m *ApiRequestEvent) UnmarshalVT(dAtA []byte) error {
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FullUrl", wireType)
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Api", wireType)
 			}
-			var stringLen uint64
+			m.Api = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protohelpers.ErrIntOverflow
@@ -17522,24 +17519,11 @@ func (m *ApiRequestEvent) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				m.Api |= int32(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.FullUrl = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Body", wireType)

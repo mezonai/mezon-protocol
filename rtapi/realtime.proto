@@ -225,7 +225,7 @@ message Envelope {
 }
 
 message ApiRequestEvent {
-  string full_url = 1;
+  int32 api = 1;
   bytes body = 2;
 }
 
