@@ -1504,7 +1504,7 @@ message ListArchivedChannelDescsRequest {
 
 message ListArchivedChannelDescsResponse {
   // A list of channel.
-  repeated ChannelDescription channeldesc = 1;
+  repeated ChannelSettingItem channeldesc = 1;
 }
 
 // Role record

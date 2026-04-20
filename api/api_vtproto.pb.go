@@ -52319,7 +52319,7 @@ func (m *ListArchivedChannelDescsResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Channeldesc = append(m.Channeldesc, &ChannelDescription{})
+			m.Channeldesc = append(m.Channeldesc, &ChannelSettingItem{})
 			if err := m.Channeldesc[len(m.Channeldesc)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
