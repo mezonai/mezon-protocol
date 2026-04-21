@@ -2113,15 +2113,15 @@ func (m *Envelope_ListChannelUsersBannedEvent) MarshalToSizedBufferVT(dAtA []byt
 	}
 	return len(dAtA) - i, nil
 }
-func (m *Envelope_RefreshSession) MarshalToVT(dAtA []byte) (int, error) {
+func (m *Envelope_RefreshSessionEvent) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *Envelope_RefreshSession) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *Envelope_RefreshSessionEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	i := len(dAtA)
-	if m.RefreshSession != nil {
-		if vtmsg, ok := interface{}(m.RefreshSession).(interface {
+	if m.RefreshSessionEvent != nil {
+		if vtmsg, ok := interface{}(m.RefreshSessionEvent).(interface {
 			MarshalToSizedBufferVT([]byte) (int, error)
 		}); ok {
 			size, err := vtmsg.MarshalToSizedBufferVT(dAtA[:i])
@@ -2131,7 +2131,7 @@ func (m *Envelope_RefreshSession) MarshalToSizedBufferVT(dAtA []byte) (int, erro
 			i -= size
 			i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
 		} else {
-			encoded, err := proto.Marshal(m.RefreshSession)
+			encoded, err := proto.Marshal(m.RefreshSessionEvent)
 			if err != nil {
 				return 0, err
 			}
@@ -10486,19 +10486,19 @@ func (m *Envelope_ListChannelUsersBannedEvent) SizeVT() (n int) {
 	}
 	return n
 }
-func (m *Envelope_RefreshSession) SizeVT() (n int) {
+func (m *Envelope_RefreshSessionEvent) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.RefreshSession != nil {
-		if size, ok := interface{}(m.RefreshSession).(interface {
+	if m.RefreshSessionEvent != nil {
+		if size, ok := interface{}(m.RefreshSessionEvent).(interface {
 			SizeVT() int
 		}); ok {
 			l = size.SizeVT()
 		} else {
-			l = proto.Size(m.RefreshSession)
+			l = proto.Size(m.RefreshSessionEvent)
 		}
 		n += 2 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
@@ -17518,7 +17518,7 @@ func (m *Envelope) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 96:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field RefreshSession", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field RefreshSessionEvent", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -17545,15 +17545,15 @@ func (m *Envelope) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Message.(*Envelope_RefreshSession); ok {
-				if unmarshal, ok := interface{}(oneof.RefreshSession).(interface {
+			if oneof, ok := m.Message.(*Envelope_RefreshSessionEvent); ok {
+				if unmarshal, ok := interface{}(oneof.RefreshSessionEvent).(interface {
 					UnmarshalVT([]byte) error
 				}); ok {
 					if err := unmarshal.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 						return err
 					}
 				} else {
-					if err := proto.Unmarshal(dAtA[iNdEx:postIndex], oneof.RefreshSession); err != nil {
+					if err := proto.Unmarshal(dAtA[iNdEx:postIndex], oneof.RefreshSessionEvent); err != nil {
 						return err
 					}
 				}
@@ -17570,7 +17570,7 @@ func (m *Envelope) UnmarshalVT(dAtA []byte) error {
 						return err
 					}
 				}
-				m.Message = &Envelope_RefreshSession{RefreshSession: v}
+				m.Message = &Envelope_RefreshSessionEvent{RefreshSessionEvent: v}
 			}
 			iNdEx = postIndex
 		default:
