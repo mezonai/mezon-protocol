@@ -221,6 +221,8 @@ message Envelope {
     AIAgentEnabledEvent aiagent_enabled_event = 94;
     // Ban Channel User Event
     ListChannelUsersBannedEvent list_channel_users_banned_event = 95;
+    // Refresh session event
+    api.Session refresh_session = 96;
   }
 }
 
