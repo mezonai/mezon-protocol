@@ -782,6 +782,8 @@ message Session {
   string id_token = 7;
   // ws_url
   string ws_url = 8;
+  // session id
+  string session_id = 9;
 }
 
 // Update username
