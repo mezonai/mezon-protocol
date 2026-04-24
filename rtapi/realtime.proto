@@ -32,7 +32,7 @@ option csharp_namespace = "Mezon.Protobuf";
 
 // An envelope for a realtime message.
 message Envelope {
-  string cid = 1;
+  int32 cid = 1;
   oneof message {
     // A response from a channel join operation.
     Channel channel = 2;
