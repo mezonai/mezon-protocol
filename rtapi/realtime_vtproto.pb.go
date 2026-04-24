@@ -61,12 +61,10 @@ func (m *Envelope) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		}
 		i -= size
 	}
-	if len(m.Cid) > 0 {
-		i -= len(m.Cid)
-		copy(dAtA[i:], m.Cid)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Cid)))
+	if m.Cid != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Cid))
 		i--
-		dAtA[i] = 0xa
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -9299,9 +9297,8 @@ func (m *Envelope) SizeVT() (n int) {
 	}
 	var l int
 	_ = l
-	l = len(m.Cid)
-	if l > 0 {
-		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+	if m.Cid != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.Cid))
 	}
 	if vtmsg, ok := m.Message.(interface{ SizeVT() int }); ok {
 		n += vtmsg.SizeVT()
@@ -13503,10 +13500,10 @@ func (m *Envelope) UnmarshalVT(dAtA []byte) error {
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 2 {
+			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Cid", wireType)
 			}
-			var stringLen uint64
+			m.Cid = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protohelpers.ErrIntOverflow
@@ -13516,24 +13513,11 @@ func (m *Envelope) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				m.Cid |= int32(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Cid = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Channel", wireType)
