@@ -223,6 +223,8 @@ message Envelope {
     ListChannelUsersBannedEvent list_channel_users_banned_event = 95;
     // Refresh session event
     api.Session refresh_session_event = 96;
+    // Channel archive / unarchive event
+    ChannelArchiveEvent channel_archive_event = 97;
   }
 }
 
@@ -982,7 +984,51 @@ message ChannelUpdatedEvent {
   int32 age_restricted = 15;
   //
   int32 active = 16;
-   // count message unread
+  // count message unread
+  int32 count_mess_unread = 17;
+  // The users to add.
+  repeated int64 user_ids = 18;
+  // This is the role that needs to be added to the channel
+  repeated int64 role_ids = 19;
+  //
+  string channel_avatar = 20;
+}
+
+// Emitted when a channel/thread is archived or activated from archive.
+message ChannelArchiveEvent {
+  // clan id
+  int64 clan_id = 1;
+  // category
+  int64 category_id = 2;
+  // creator
+  int64 creator_id = 3;
+  // parent id
+  int64 parent_id = 4;
+  // channel id
+  int64 channel_id = 5;
+  // channel label
+  string channel_label = 6;
+  // channel type
+  int32 channel_type = 7;
+  // status
+  int32 status = 8;
+  // meeting code
+  string meeting_code = 9;
+  // error
+  bool is_error = 10;
+  // channel private
+  bool channel_private = 11;
+  // app url
+  int64 app_id = 12;
+  // e2ee
+  int32 e2ee = 13;
+  // topic
+  string topic = 14;
+  //
+  int32 age_restricted = 15;
+  // 0 = archived, 1 = active
+  int32 active = 16;
+  // count message unread
   int32 count_mess_unread = 17;
   // The users to add.
   repeated int64 user_ids = 18;
