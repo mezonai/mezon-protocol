@@ -457,6 +457,8 @@ message EphemeralMessageSend {
 message QuickMenuDataEvent {
   string menu_name = 1;
   ChannelMessageSend message = 2;
+  int64 sender_id = 3;
+  int64 message_sender_id = 4;
 }
 
 message VoiceReactionSend {

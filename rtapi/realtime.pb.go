@@ -3327,11 +3327,13 @@ func (x *EphemeralMessageSend) GetReceiverIds() []int64 {
 }
 
 type QuickMenuDataEvent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	MenuName      string                 `protobuf:"bytes,1,opt,name=menu_name,json=menuName,proto3" json:"menu_name,omitempty"`
-	Message       *ChannelMessageSend    `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	MenuName        string                 `protobuf:"bytes,1,opt,name=menu_name,json=menuName,proto3" json:"menu_name,omitempty"`
+	Message         *ChannelMessageSend    `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	SenderId        int64                  `protobuf:"varint,3,opt,name=sender_id,json=senderId,proto3" json:"sender_id,omitempty"`
+	MessageSenderId int64                  `protobuf:"varint,4,opt,name=message_sender_id,json=messageSenderId,proto3" json:"message_sender_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *QuickMenuDataEvent) Reset() {
@@ -3376,6 +3378,20 @@ func (x *QuickMenuDataEvent) GetMessage() *ChannelMessageSend {
 		return x.Message
 	}
 	return nil
+}
+
+func (x *QuickMenuDataEvent) GetSenderId() int64 {
+	if x != nil {
+		return x.SenderId
+	}
+	return 0
+}
+
+func (x *QuickMenuDataEvent) GetMessageSenderId() int64 {
+	if x != nil {
+		return x.MessageSenderId
+	}
+	return 0
 }
 
 type VoiceReactionSend struct {
@@ -10160,10 +10176,12 @@ const file_realtime_proto_rawDesc = "" +
 	"\rcategory_name\x18\t \x01(\tR\fcategoryName\"w\n" +
 	"\x14EphemeralMessageSend\x12<\n" +
 	"\amessage\x18\x01 \x01(\v2\".mezon.realtime.ChannelMessageSendR\amessage\x12!\n" +
-	"\freceiver_ids\x18\x02 \x03(\x03R\vreceiverIds\"o\n" +
+	"\freceiver_ids\x18\x02 \x03(\x03R\vreceiverIds\"\xb8\x01\n" +
 	"\x12QuickMenuDataEvent\x12\x1b\n" +
 	"\tmenu_name\x18\x01 \x01(\tR\bmenuName\x12<\n" +
-	"\amessage\x18\x02 \x01(\v2\".mezon.realtime.ChannelMessageSendR\amessage\"\x86\x01\n" +
+	"\amessage\x18\x02 \x01(\v2\".mezon.realtime.ChannelMessageSendR\amessage\x12\x1b\n" +
+	"\tsender_id\x18\x03 \x01(\x03R\bsenderId\x12*\n" +
+	"\x11message_sender_id\x18\x04 \x01(\x03R\x0fmessageSenderId\"\x86\x01\n" +
 	"\x11VoiceReactionSend\x12\x16\n" +
 	"\x06emojis\x18\x01 \x03(\tR\x06emojis\x12\x1d\n" +
 	"\n" +
