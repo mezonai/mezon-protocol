@@ -19,16 +19,14 @@ syntax = "proto3";
 
 package mezon.realtime;
 
-import "google/protobuf/wrappers.proto";
 import "api/api.proto";
+import "google/protobuf/wrappers.proto";
 
+option csharp_namespace = "Mezon.Protobuf";
 option go_package = "github.com/mezonai/mezon-protocol/v2/rtapi";
-
 option java_multiple_files = true;
 option java_outer_classname = "MezonRealtime";
 option java_package = "com.mezon.mezon.rtapi";
-
-option csharp_namespace = "Mezon.Protobuf";
 
 // An envelope for a realtime message.
 message Envelope {
@@ -225,7 +223,16 @@ message Envelope {
     api.Session refresh_session_event = 96;
     // Channel archive / unarchive event
     ChannelArchiveEvent channel_archive_event = 97;
+    // Topic in message event
+    TopicInMessageEvent topic_in_message_event = 98;
   }
+}
+
+message TopicInMessageEvent {
+  int64 topic_id = 1;
+  int64 message_id = 2;
+  int32 rpl = 3;
+  int64 lsnt = 4;
 }
 
 message ApiRequestEvent {
@@ -234,8 +241,7 @@ message ApiRequestEvent {
   bytes body = 3;
 }
 
-message FollowEvent {
-}
+message FollowEvent {}
 
 message BannedUserEvent {
   repeated int64 user_ids = 1;
@@ -271,15 +277,15 @@ message ChannelCanvas {
 
 message IncomingCallPush {
   int64 receiver_id = 1;
-	string json_data = 3;
+  string json_data = 3;
   int64 channel_id = 4;
   int64 caller_id = 5;
 }
 
 message WebrtcSignalingFwd {
   int64 receiver_id = 1;
-	int32 data_type = 2;
-	string json_data = 3;
+  int32 data_type = 2;
+  string json_data = 3;
   int64 channel_id = 4;
   int64 caller_id = 5;
 }
@@ -364,7 +370,7 @@ message ChannelDescription {
 }
 
 message ClanEmoji {
-  int64 id  = 1;
+  int64 id = 1;
   // src url
   string src = 2;
   // shortname
@@ -797,7 +803,6 @@ message VoiceEndedEvent {
   string voice_channel_id = 3;
 }
 
-
 // Streaming Joined event
 message StreamingLeavedEvent {
   // id
@@ -877,7 +882,7 @@ message ChannelCreatedEvent {
 
 message CategoryEvent {
   // Category creator
-  int64 creator_id  = 1;
+  int64 creator_id = 1;
   // the Clan that category belong to
   int64 clan_id = 2;
   // Category name
@@ -1181,7 +1186,7 @@ message ClanUpdatedEvent {
   // banner
   string banner = 4;
   // status
-  int32 status =5;
+  int32 status = 5;
   // is onboarding
   bool is_onboarding = 6;
   // welcome channel id
@@ -1190,11 +1195,11 @@ message ClanUpdatedEvent {
   string onboarding_banner = 8;
   // community banner
   string community_banner = 9;
-	// is community
+  // is community
   bool is_community = 10;
-	// about
+  // about
   string about = 11;
-	// description
+  // description
   string description = 12;
   // prevent anonymous
   bool prevent_anonymous = 13;
@@ -1231,8 +1236,8 @@ message UserProfileUpdatedEvent {
 }
 
 message ConfirmLinkMezonOTPData {
-	int32 type = 1;
-	string value = 2;
+  int32 type = 1;
+  string value = 2;
 }
 
 // A event when user is added to channel
@@ -1452,16 +1457,16 @@ message AllowAnonymousEvent {
 }
 
 message FcmDataPayload {
-	int32 command_type = 1;
-	int64 receiver_id = 2;
-	string title = 3;
-	bytes body = 4;
-	repeated int64 user_role_ids = 5;
-	repeated int64 user_sent_ids = 6;
-	int32 priority = 7;
-	api.ChannelMessage message = 8;
-	bool is_e2ee = 9;
-	bool is_dm = 10;
+  int32 command_type = 1;
+  int64 receiver_id = 2;
+  string title = 3;
+  bytes body = 4;
+  repeated int64 user_role_ids = 5;
+  repeated int64 user_sent_ids = 6;
+  int32 priority = 7;
+  api.ChannelMessage message = 8;
+  bool is_e2ee = 9;
+  bool is_dm = 10;
   bool mention_here = 11;
   repeated api.MessageMention mentions = 12;
   repeated api.MessageRef references = 13;
@@ -1470,20 +1475,20 @@ message FcmDataPayload {
 
 message AIAgentEnabledEvent {
   int64 clan_id = 1;
-	int64 channel_id = 2;
-	string room_name = 3;
+  int64 channel_id = 2;
+  string room_name = 3;
   bool enabled = 4;
 }
 
 message GotifyMessage {
   uint32 id = 1;
-	int64 channel_id = 2;
-	string message = 3;
-	string title = 4;
-	string image = 5;
-	int32 priority = 6;
-	repeated string users = 7;
-	map<string, string> extras = 8;
-	uint32 app_id = 9;
-	int64 sender_id = 10;
+  int64 channel_id = 2;
+  string message = 3;
+  string title = 4;
+  string image = 5;
+  int32 priority = 6;
+  repeated string users = 7;
+  map<string, string> extras = 8;
+  uint32 app_id = 9;
+  int64 sender_id = 10;
 }
