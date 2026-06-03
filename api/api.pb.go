@@ -12014,7 +12014,9 @@ type UploadAttachmentRequest struct {
 	// width
 	Width int32 `protobuf:"varint,4,opt,name=width,proto3" json:"width,omitempty"`
 	// Height
-	Height        int32 `protobuf:"varint,5,opt,name=height,proto3" json:"height,omitempty"`
+	Height int32 `protobuf:"varint,5,opt,name=height,proto3" json:"height,omitempty"`
+	// part count
+	PartCount     int32 `protobuf:"varint,6,opt,name=part_count,json=partCount,proto3" json:"part_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -12080,6 +12082,13 @@ func (x *UploadAttachmentRequest) GetWidth() int32 {
 func (x *UploadAttachmentRequest) GetHeight() int32 {
 	if x != nil {
 		return x.Height
+	}
+	return 0
+}
+
+func (x *UploadAttachmentRequest) GetPartCount() int32 {
+	if x != nil {
+		return x.PartCount
 	}
 	return 0
 }
@@ -27653,13 +27662,15 @@ const file_api_proto_rawDesc = "" +
 	"\x10PermissionUpdate\x12#\n" +
 	"\rpermission_id\x18\x01 \x01(\x03R\fpermissionId\x12\x12\n" +
 	"\x04slug\x18\x02 \x01(\tR\x04slug\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\x05R\x04type\"\x93\x01\n" +
+	"\x04type\x18\x03 \x01(\x05R\x04type\"\xb2\x01\n" +
 	"\x17UploadAttachmentRequest\x12\x1a\n" +
 	"\bfilename\x18\x01 \x01(\tR\bfilename\x12\x1a\n" +
 	"\bfiletype\x18\x02 \x01(\tR\bfiletype\x12\x12\n" +
 	"\x04size\x18\x03 \x01(\x05R\x04size\x12\x14\n" +
 	"\x05width\x18\x04 \x01(\x05R\x05width\x12\x16\n" +
-	"\x06height\x18\x05 \x01(\x05R\x06height\"c\n" +
+	"\x06height\x18\x05 \x01(\x05R\x06height\x12\x1d\n" +
+	"\n" +
+	"part_count\x18\x06 \x01(\x05R\tpartCount\"c\n" +
 	"\x19ListMessageMentionRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12\x18\n" +
 	"\aforward\x18\x02 \x01(\bR\aforward\x12\x16\n" +
