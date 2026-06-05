@@ -542,6 +542,8 @@ message ChannelMessageUpdate {
   int64 topic_id = 10;
   // update message topic
   bool is_update_msg_topic = 11;
+  // original message create time (seconds)
+  uint32 create_time_seconds = 12;
 }
 
 // Remove a message previously sent to a realtime channel.

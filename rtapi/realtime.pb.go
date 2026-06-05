@@ -3794,8 +3794,10 @@ type ChannelMessageUpdate struct {
 	TopicId int64 `protobuf:"varint,10,opt,name=topic_id,json=topicId,proto3" json:"topic_id,omitempty"`
 	// update message topic
 	IsUpdateMsgTopic bool `protobuf:"varint,11,opt,name=is_update_msg_topic,json=isUpdateMsgTopic,proto3" json:"is_update_msg_topic,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// original message create time (seconds)
+	CreateTimeSeconds uint32 `protobuf:"varint,12,opt,name=create_time_seconds,json=createTimeSeconds,proto3" json:"create_time_seconds,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ChannelMessageUpdate) Reset() {
@@ -3903,6 +3905,13 @@ func (x *ChannelMessageUpdate) GetIsUpdateMsgTopic() bool {
 		return x.IsUpdateMsgTopic
 	}
 	return false
+}
+
+func (x *ChannelMessageUpdate) GetCreateTimeSeconds() uint32 {
+	if x != nil {
+		return x.CreateTimeSeconds
+	}
+	return 0
 }
 
 // Remove a message previously sent to a realtime channel.
@@ -10297,7 +10306,7 @@ const file_realtime_proto_rawDesc = "" +
 	"\tis_public\x18\v \x01(\bR\bisPublic\x12\x12\n" +
 	"\x04code\x18\f \x01(\x05R\x04code\x12\x19\n" +
 	"\btopic_id\x18\r \x01(\x03R\atopicId\x12\x0e\n" +
-	"\x02id\x18\x0e \x01(\x03R\x02id\"\x9c\x03\n" +
+	"\x02id\x18\x0e \x01(\x03R\x02id\"\xcc\x03\n" +
 	"\x14ChannelMessageUpdate\x12\x17\n" +
 	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\x12\x1d\n" +
 	"\n" +
@@ -10312,7 +10321,8 @@ const file_realtime_proto_rawDesc = "" +
 	"\fhide_editted\x18\t \x01(\bR\vhideEditted\x12\x19\n" +
 	"\btopic_id\x18\n" +
 	" \x01(\x03R\atopicId\x12-\n" +
-	"\x13is_update_msg_topic\x18\v \x01(\bR\x10isUpdateMsgTopic\"\x9c\x02\n" +
+	"\x13is_update_msg_topic\x18\v \x01(\bR\x10isUpdateMsgTopic\x12.\n" +
+	"\x13create_time_seconds\x18\f \x01(\rR\x11createTimeSeconds\"\x9c\x02\n" +
 	"\x14ChannelMessageRemove\x12\x17\n" +
 	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\x12\x1d\n" +
 	"\n" +

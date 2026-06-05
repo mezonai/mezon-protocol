@@ -3929,6 +3929,11 @@ func (m *ChannelMessageUpdate) MarshalToSizedBufferVT(dAtA []byte) (int, error) 
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.CreateTimeSeconds != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.CreateTimeSeconds))
+		i--
+		dAtA[i] = 0x60
+	}
 	if m.IsUpdateMsgTopic {
 		i--
 		if m.IsUpdateMsgTopic {
@@ -11580,6 +11585,9 @@ func (m *ChannelMessageUpdate) SizeVT() (n int) {
 	}
 	if m.IsUpdateMsgTopic {
 		n += 2
+	}
+	if m.CreateTimeSeconds != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.CreateTimeSeconds))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -22835,6 +22843,25 @@ func (m *ChannelMessageUpdate) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 			m.IsUpdateMsgTopic = bool(v != 0)
+		case 12:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreateTimeSeconds", wireType)
+			}
+			m.CreateTimeSeconds = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.CreateTimeSeconds |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
