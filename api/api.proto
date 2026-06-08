@@ -284,6 +284,8 @@ message MessageAttachment {
   string thumbnail = 7;
   // duration for video
   int32 duration = 8;
+  // presign finish
+  bool presign_finish = 9;
 }
 
 // Message reference
@@ -1946,6 +1948,8 @@ message UploadAttachmentRequest {
   int32 height = 5;
   // part count
   int32 part_count = 6;
+  // presign finish
+  bool presign_finsish = 7;
 }
 
 message ListMessageMentionRequest {

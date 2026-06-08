@@ -1888,7 +1888,9 @@ type MessageAttachment struct {
 	// thumbnail
 	Thumbnail string `protobuf:"bytes,7,opt,name=thumbnail,proto3" json:"thumbnail,omitempty"`
 	// duration for video
-	Duration      int32 `protobuf:"varint,8,opt,name=duration,proto3" json:"duration,omitempty"`
+	Duration int32 `protobuf:"varint,8,opt,name=duration,proto3" json:"duration,omitempty"`
+	// presign finish
+	PresignFinish bool `protobuf:"varint,9,opt,name=presign_finish,json=presignFinish,proto3" json:"presign_finish,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1977,6 +1979,13 @@ func (x *MessageAttachment) GetDuration() int32 {
 		return x.Duration
 	}
 	return 0
+}
+
+func (x *MessageAttachment) GetPresignFinish() bool {
+	if x != nil {
+		return x.PresignFinish
+	}
+	return false
 }
 
 // Message reference
@@ -12104,9 +12113,11 @@ type UploadAttachmentRequest struct {
 	// Height
 	Height int32 `protobuf:"varint,5,opt,name=height,proto3" json:"height,omitempty"`
 	// part count
-	PartCount     int32 `protobuf:"varint,6,opt,name=part_count,json=partCount,proto3" json:"part_count,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	PartCount int32 `protobuf:"varint,6,opt,name=part_count,json=partCount,proto3" json:"part_count,omitempty"`
+	// presign finish
+	PresignFinsish bool `protobuf:"varint,7,opt,name=presign_finsish,json=presignFinsish,proto3" json:"presign_finsish,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *UploadAttachmentRequest) Reset() {
@@ -12179,6 +12190,13 @@ func (x *UploadAttachmentRequest) GetPartCount() int32 {
 		return x.PartCount
 	}
 	return 0
+}
+
+func (x *UploadAttachmentRequest) GetPresignFinsish() bool {
+	if x != nil {
+		return x.PresignFinsish
+	}
+	return false
 }
 
 type ListMessageMentionRequest struct {
@@ -26857,7 +26875,7 @@ const file_api_proto_rawDesc = "" +
 	"\x11message_sender_id\x18\r \x01(\x03R\x0fmessageSenderId\x12\x1b\n" +
 	"\tis_public\x18\x0e \x01(\bR\bisPublic\x12\x19\n" +
 	"\btopic_id\x18\x0f \x01(\x03R\atopicId\x12&\n" +
-	"\x0femoji_recent_id\x18\x10 \x01(\x03R\remojiRecentId\"\xd9\x01\n" +
+	"\x0femoji_recent_id\x18\x10 \x01(\x03R\remojiRecentId\"\x80\x02\n" +
 	"\x11MessageAttachment\x12\x1a\n" +
 	"\bfilename\x18\x01 \x01(\tR\bfilename\x12\x12\n" +
 	"\x04size\x18\x02 \x01(\x05R\x04size\x12\x10\n" +
@@ -26866,7 +26884,8 @@ const file_api_proto_rawDesc = "" +
 	"\x05width\x18\x05 \x01(\x05R\x05width\x12\x16\n" +
 	"\x06height\x18\x06 \x01(\x05R\x06height\x12\x1c\n" +
 	"\tthumbnail\x18\a \x01(\tR\tthumbnail\x12\x1a\n" +
-	"\bduration\x18\b \x01(\x05R\bduration\"\xbd\x03\n" +
+	"\bduration\x18\b \x01(\x05R\bduration\x12%\n" +
+	"\x0epresign_finish\x18\t \x01(\bR\rpresignFinish\"\xbd\x03\n" +
 	"\n" +
 	"MessageRef\x12\x1d\n" +
 	"\n" +
@@ -27762,7 +27781,7 @@ const file_api_proto_rawDesc = "" +
 	"\x1cUploadBatchAttachmentRequest\x12E\n" +
 	"\fupload_files\x18\x01 \x03(\v2\".mezon.api.UploadAttachmentRequestR\vuploadFiles\"[\n" +
 	"\x15UploadAttachmentBatch\x12B\n" +
-	"\x0euploaded_files\x18\x01 \x03(\v2\x1b.mezon.api.UploadAttachmentR\ruploadedFiles\"\xb2\x01\n" +
+	"\x0euploaded_files\x18\x01 \x03(\v2\x1b.mezon.api.UploadAttachmentR\ruploadedFiles\"\xdb\x01\n" +
 	"\x17UploadAttachmentRequest\x12\x1a\n" +
 	"\bfilename\x18\x01 \x01(\tR\bfilename\x12\x1a\n" +
 	"\bfiletype\x18\x02 \x01(\tR\bfiletype\x12\x12\n" +
@@ -27770,7 +27789,8 @@ const file_api_proto_rawDesc = "" +
 	"\x05width\x18\x04 \x01(\x05R\x05width\x12\x16\n" +
 	"\x06height\x18\x05 \x01(\x05R\x06height\x12\x1d\n" +
 	"\n" +
-	"part_count\x18\x06 \x01(\x05R\tpartCount\"c\n" +
+	"part_count\x18\x06 \x01(\x05R\tpartCount\x12'\n" +
+	"\x0fpresign_finsish\x18\a \x01(\bR\x0epresignFinsish\"c\n" +
 	"\x19ListMessageMentionRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12\x18\n" +
 	"\aforward\x18\x02 \x01(\bR\aforward\x12\x16\n" +

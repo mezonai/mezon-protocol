@@ -1272,6 +1272,16 @@ func (m *MessageAttachment) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.PresignFinish {
+		i--
+		if m.PresignFinish {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x48
+	}
 	if m.Duration != 0 {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Duration))
 		i--
@@ -10356,6 +10366,16 @@ func (m *UploadAttachmentRequest) MarshalToSizedBufferVT(dAtA []byte) (int, erro
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.PresignFinsish {
+		i--
+		if m.PresignFinsish {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x38
 	}
 	if m.PartCount != 0 {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.PartCount))
@@ -23333,6 +23353,9 @@ func (m *MessageAttachment) SizeVT() (n int) {
 	if m.Duration != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.Duration))
 	}
+	if m.PresignFinish {
+		n += 2
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -26999,6 +27022,9 @@ func (m *UploadAttachmentRequest) SizeVT() (n int) {
 	}
 	if m.PartCount != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.PartCount))
+	}
+	if m.PresignFinsish {
+		n += 2
 	}
 	n += len(m.unknownFields)
 	return n
@@ -35889,6 +35915,26 @@ func (m *MessageAttachment) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
+		case 9:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PresignFinish", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.PresignFinish = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
@@ -59610,6 +59656,26 @@ func (m *UploadAttachmentRequest) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PresignFinsish", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.PresignFinsish = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
