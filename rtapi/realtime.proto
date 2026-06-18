@@ -232,6 +232,7 @@ message TopicInMessageEvent {
   int64 message_id = 1;
   int32 rpl = 2;
   int64 lsnt = 3;
+  string tp_id = 4;
 }
 
 message ApiRequestEvent {

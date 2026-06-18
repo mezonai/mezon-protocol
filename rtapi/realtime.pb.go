@@ -1825,6 +1825,7 @@ type TopicInMessageEvent struct {
 	MessageId     int64                  `protobuf:"varint,1,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
 	Rpl           int32                  `protobuf:"varint,2,opt,name=rpl,proto3" json:"rpl,omitempty"`
 	Lsnt          int64                  `protobuf:"varint,3,opt,name=lsnt,proto3" json:"lsnt,omitempty"`
+	TpId          string                 `protobuf:"bytes,4,opt,name=tp_id,json=tpId,proto3" json:"tp_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1878,6 +1879,13 @@ func (x *TopicInMessageEvent) GetLsnt() int64 {
 		return x.Lsnt
 	}
 	return 0
+}
+
+func (x *TopicInMessageEvent) GetTpId() string {
+	if x != nil {
+		return x.TpId
+	}
+	return ""
 }
 
 type ApiRequestEvent struct {
@@ -10133,12 +10141,13 @@ const file_realtime_proto_rawDesc = "" +
 	"\x15refresh_session_event\x18` \x01(\v2\x12.mezon.api.SessionH\x00R\x13refreshSessionEvent\x12Y\n" +
 	"\x15channel_archive_event\x18a \x01(\v2#.mezon.realtime.ChannelArchiveEventH\x00R\x13channelArchiveEvent\x12Z\n" +
 	"\x16topic_in_message_event\x18b \x01(\v2#.mezon.realtime.TopicInMessageEventH\x00R\x13topicInMessageEventB\t\n" +
-	"\amessage\"Z\n" +
+	"\amessage\"o\n" +
 	"\x13TopicInMessageEvent\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x01 \x01(\x03R\tmessageId\x12\x10\n" +
 	"\x03rpl\x18\x02 \x01(\x05R\x03rpl\x12\x12\n" +
-	"\x04lsnt\x18\x03 \x01(\x03R\x04lsnt\"]\n" +
+	"\x04lsnt\x18\x03 \x01(\x03R\x04lsnt\x12\x13\n" +
+	"\x05tp_id\x18\x04 \x01(\tR\x04tpId\"]\n" +
 	"\x0fApiRequestEvent\x12\x1b\n" +
 	"\tapi_index\x18\x01 \x01(\x05R\bapiIndex\x12\x19\n" +
 	"\bapi_name\x18\x02 \x01(\tR\aapiName\x12\x12\n" +
