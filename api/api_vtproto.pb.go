@@ -2193,6 +2193,15 @@ func (m *VoiceChannelUser) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.ShareScreenIds) > 0 {
+		for iNdEx := len(m.ShareScreenIds) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.ShareScreenIds[iNdEx])
+			copy(dAtA[i:], m.ShareScreenIds[iNdEx])
+			i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.ShareScreenIds[iNdEx])))
+			i--
+			dAtA[i] = 0x22
+		}
+	}
 	if len(m.RoomName) > 0 {
 		i -= len(m.RoomName)
 		copy(dAtA[i:], m.RoomName)
@@ -23745,6 +23754,12 @@ func (m *VoiceChannelUser) SizeVT() (n int) {
 	if l > 0 {
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
+	if len(m.ShareScreenIds) > 0 {
+		for _, s := range m.ShareScreenIds {
+			l = len(s)
+			n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+		}
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -38347,6 +38362,38 @@ func (m *VoiceChannelUser) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.RoomName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ShareScreenIds", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ShareScreenIds = append(m.ShareScreenIds, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

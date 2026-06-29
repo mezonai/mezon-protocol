@@ -2849,9 +2849,11 @@ type VoiceChannelUser struct {
 	// channel id
 	ChannelId int64 `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// room name
-	RoomName      string `protobuf:"bytes,3,opt,name=room_name,json=roomName,proto3" json:"room_name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	RoomName string `protobuf:"bytes,3,opt,name=room_name,json=roomName,proto3" json:"room_name,omitempty"`
+	// share screen user
+	ShareScreenIds []string `protobuf:"bytes,4,rep,name=share_screen_ids,json=shareScreenIds,proto3" json:"share_screen_ids,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *VoiceChannelUser) Reset() {
@@ -2903,6 +2905,13 @@ func (x *VoiceChannelUser) GetRoomName() string {
 		return x.RoomName
 	}
 	return ""
+}
+
+func (x *VoiceChannelUser) GetShareScreenIds() []string {
+	if x != nil {
+		return x.ShareScreenIds
+	}
+	return nil
 }
 
 // A list of users belonging to a channel, along with their role.
@@ -27060,12 +27069,13 @@ const file_api_proto_rawDesc = "" +
 	"\badded_by\x18\b \x01(\x03R\aaddedBy\x12\x1b\n" +
 	"\tis_banned\x18\t \x01(\bR\bisBanned\x12(\n" +
 	"\x10expired_ban_time\x18\n" +
-	" \x01(\x05R\x0eexpiredBanTime\"i\n" +
+	" \x01(\x05R\x0eexpiredBanTime\"\x93\x01\n" +
 	"\x10VoiceChannelUser\x12\x19\n" +
 	"\buser_ids\x18\x01 \x03(\tR\auserIds\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\x03R\tchannelId\x12\x1b\n" +
-	"\troom_name\x18\x03 \x01(\tR\broomName\"c\n" +
+	"\troom_name\x18\x03 \x01(\tR\broomName\x12(\n" +
+	"\x10share_screen_ids\x18\x04 \x03(\tR\x0eshareScreenIds\"c\n" +
 	"\x14VoiceChannelUserList\x12K\n" +
 	"\x13voice_channel_users\x18\x01 \x03(\v2\x1b.mezon.api.VoiceChannelUserR\x11voiceChannelUsers\"\xa2\x02\n" +
 	"\x11ChannelAttachment\x12\x0e\n" +

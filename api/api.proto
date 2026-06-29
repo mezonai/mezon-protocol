@@ -460,6 +460,8 @@ message VoiceChannelUser {
   int64 channel_id = 2;
   // room name
   string room_name = 3;
+  // share screen user
+  repeated string share_screen_ids = 4;
 }
 
 // A list of users belonging to a channel, along with their role.
