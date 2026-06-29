@@ -3549,6 +3549,17 @@ message UpdateAIAgentRequest {
   string room_name = 2;
 }
 
+enum TrackType {
+  AUDIO = 0;
+  VIDEO = 1;
+  DATA = 2;
+}
+
+message TrackInfo {
+  string sid = 1;
+  TrackType type = 2;
+}
+
 message ParticipantInfo {
   enum State {
     // websocket' connected, but not offered yet
@@ -3588,6 +3599,7 @@ message ParticipantInfo {
   string sid = 1;
   string identity = 2;
   State state = 3;
+  repeated TrackInfo tracks = 4;
   bool is_publisher = 13;
   Kind kind = 14;
 }
