@@ -4707,7 +4707,9 @@ type Session struct {
 	// ws_url
 	WsUrl string `protobuf:"bytes,8,opt,name=ws_url,json=wsUrl,proto3" json:"ws_url,omitempty"`
 	// session id
-	SessionId     string `protobuf:"bytes,9,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	SessionId string `protobuf:"bytes,9,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	// abriged url
+	TcpUrl        string `protobuf:"bytes,10,opt,name=tcp_url,json=tcpUrl,proto3" json:"tcp_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4801,6 +4803,13 @@ func (x *Session) GetWsUrl() string {
 func (x *Session) GetSessionId() string {
 	if x != nil {
 		return x.SessionId
+	}
+	return ""
+}
+
+func (x *Session) GetTcpUrl() string {
+	if x != nil {
+		return x.TcpUrl
 	}
 	return ""
 }
@@ -27217,7 +27226,7 @@ const file_api_proto_rawDesc = "" +
 	"\x03Rpc\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x18\n" +
 	"\apayload\x18\x02 \x01(\tR\apayload\x12\x19\n" +
-	"\bhttp_key\x18\x03 \x01(\tR\ahttpKey\"\x82\x02\n" +
+	"\bhttp_key\x18\x03 \x01(\tR\ahttpKey\"\x9b\x02\n" +
 	"\aSession\x12\x18\n" +
 	"\acreated\x18\x01 \x01(\bR\acreated\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12#\n" +
@@ -27229,7 +27238,9 @@ const file_api_proto_rawDesc = "" +
 	"\bid_token\x18\a \x01(\tR\aidToken\x12\x15\n" +
 	"\x06ws_url\x18\b \x01(\tR\x05wsUrl\x12\x1d\n" +
 	"\n" +
-	"session_id\x18\t \x01(\tR\tsessionId\"V\n" +
+	"session_id\x18\t \x01(\tR\tsessionId\x12\x17\n" +
+	"\atcp_url\x18\n" +
+	" \x01(\tR\x06tcpUrl\"V\n" +
 	"\x15UpdateUsernameRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12!\n" +
 	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\"\xf4\x04\n" +

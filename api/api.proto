@@ -784,6 +784,8 @@ message Session {
   string ws_url = 8;
   // session id
   string session_id = 9;
+  // abriged url
+  string tcp_url = 10;
 }
 
 // Update username
