@@ -110,7 +110,7 @@ func (x Error_Code) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Error_Code.Descriptor instead.
 func (Error_Code) EnumDescriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{29, 0}
+	return file_realtime_proto_rawDescGZIP(), []int{30, 0}
 }
 
 // An envelope for a realtime message.
@@ -216,6 +216,7 @@ type Envelope struct {
 	//	*Envelope_RefreshSessionEvent
 	//	*Envelope_ChannelArchiveEvent
 	//	*Envelope_TopicInMessageEvent
+	//	*Envelope_ScreenShareEvent
 	Message       isEnvelope_Message `protobuf_oneof:"message"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1138,6 +1139,15 @@ func (x *Envelope) GetTopicInMessageEvent() *TopicInMessageEvent {
 	return nil
 }
 
+func (x *Envelope) GetScreenShareEvent() *ScreenShareEvent {
+	if x != nil {
+		if x, ok := x.Message.(*Envelope_ScreenShareEvent); ok {
+			return x.ScreenShareEvent
+		}
+	}
+	return nil
+}
+
 type isEnvelope_Message interface {
 	isEnvelope_Message()
 }
@@ -1626,6 +1636,11 @@ type Envelope_TopicInMessageEvent struct {
 	TopicInMessageEvent *TopicInMessageEvent `protobuf:"bytes,98,opt,name=topic_in_message_event,json=topicInMessageEvent,proto3,oneof"`
 }
 
+type Envelope_ScreenShareEvent struct {
+	// share screen event
+	ScreenShareEvent *ScreenShareEvent `protobuf:"bytes,99,opt,name=screen_share_event,json=screenShareEvent,proto3,oneof"`
+}
+
 func (*Envelope_Channel) isEnvelope_Message() {}
 
 func (*Envelope_ClanJoin) isEnvelope_Message() {}
@@ -1820,6 +1835,76 @@ func (*Envelope_ChannelArchiveEvent) isEnvelope_Message() {}
 
 func (*Envelope_TopicInMessageEvent) isEnvelope_Message() {}
 
+func (*Envelope_ScreenShareEvent) isEnvelope_Message() {}
+
+type ScreenShareEvent struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	ClanId         int64                  `protobuf:"varint,1,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
+	VoiceChannelId int64                  `protobuf:"varint,2,opt,name=voice_channel_id,json=voiceChannelId,proto3" json:"voice_channel_id,omitempty"`
+	UserId         int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	IsSharing      bool                   `protobuf:"varint,4,opt,name=is_sharing,json=isSharing,proto3" json:"is_sharing,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ScreenShareEvent) Reset() {
+	*x = ScreenShareEvent{}
+	mi := &file_realtime_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ScreenShareEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ScreenShareEvent) ProtoMessage() {}
+
+func (x *ScreenShareEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_realtime_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ScreenShareEvent.ProtoReflect.Descriptor instead.
+func (*ScreenShareEvent) Descriptor() ([]byte, []int) {
+	return file_realtime_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ScreenShareEvent) GetClanId() int64 {
+	if x != nil {
+		return x.ClanId
+	}
+	return 0
+}
+
+func (x *ScreenShareEvent) GetVoiceChannelId() int64 {
+	if x != nil {
+		return x.VoiceChannelId
+	}
+	return 0
+}
+
+func (x *ScreenShareEvent) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ScreenShareEvent) GetIsSharing() bool {
+	if x != nil {
+		return x.IsSharing
+	}
+	return false
+}
+
 type TopicInMessageEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MessageId     int64                  `protobuf:"varint,1,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
@@ -1832,7 +1917,7 @@ type TopicInMessageEvent struct {
 
 func (x *TopicInMessageEvent) Reset() {
 	*x = TopicInMessageEvent{}
-	mi := &file_realtime_proto_msgTypes[1]
+	mi := &file_realtime_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1844,7 +1929,7 @@ func (x *TopicInMessageEvent) String() string {
 func (*TopicInMessageEvent) ProtoMessage() {}
 
 func (x *TopicInMessageEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[1]
+	mi := &file_realtime_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1857,7 +1942,7 @@ func (x *TopicInMessageEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TopicInMessageEvent.ProtoReflect.Descriptor instead.
 func (*TopicInMessageEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{1}
+	return file_realtime_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *TopicInMessageEvent) GetMessageId() int64 {
@@ -1899,7 +1984,7 @@ type ApiRequestEvent struct {
 
 func (x *ApiRequestEvent) Reset() {
 	*x = ApiRequestEvent{}
-	mi := &file_realtime_proto_msgTypes[2]
+	mi := &file_realtime_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1911,7 +1996,7 @@ func (x *ApiRequestEvent) String() string {
 func (*ApiRequestEvent) ProtoMessage() {}
 
 func (x *ApiRequestEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[2]
+	mi := &file_realtime_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1924,7 +2009,7 @@ func (x *ApiRequestEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApiRequestEvent.ProtoReflect.Descriptor instead.
 func (*ApiRequestEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{2}
+	return file_realtime_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ApiRequestEvent) GetApiIndex() int32 {
@@ -1956,7 +2041,7 @@ type FollowEvent struct {
 
 func (x *FollowEvent) Reset() {
 	*x = FollowEvent{}
-	mi := &file_realtime_proto_msgTypes[3]
+	mi := &file_realtime_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1968,7 +2053,7 @@ func (x *FollowEvent) String() string {
 func (*FollowEvent) ProtoMessage() {}
 
 func (x *FollowEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[3]
+	mi := &file_realtime_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1981,7 +2066,7 @@ func (x *FollowEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FollowEvent.ProtoReflect.Descriptor instead.
 func (*FollowEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{3}
+	return file_realtime_proto_rawDescGZIP(), []int{4}
 }
 
 type BannedUserEvent struct {
@@ -1998,7 +2083,7 @@ type BannedUserEvent struct {
 
 func (x *BannedUserEvent) Reset() {
 	*x = BannedUserEvent{}
-	mi := &file_realtime_proto_msgTypes[4]
+	mi := &file_realtime_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2010,7 +2095,7 @@ func (x *BannedUserEvent) String() string {
 func (*BannedUserEvent) ProtoMessage() {}
 
 func (x *BannedUserEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[4]
+	mi := &file_realtime_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2023,7 +2108,7 @@ func (x *BannedUserEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BannedUserEvent.ProtoReflect.Descriptor instead.
 func (*BannedUserEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{4}
+	return file_realtime_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *BannedUserEvent) GetUserIds() []int64 {
@@ -2077,7 +2162,7 @@ type ListChannelUsersBannedEvent struct {
 
 func (x *ListChannelUsersBannedEvent) Reset() {
 	*x = ListChannelUsersBannedEvent{}
-	mi := &file_realtime_proto_msgTypes[5]
+	mi := &file_realtime_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2089,7 +2174,7 @@ func (x *ListChannelUsersBannedEvent) String() string {
 func (*ListChannelUsersBannedEvent) ProtoMessage() {}
 
 func (x *ListChannelUsersBannedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[5]
+	mi := &file_realtime_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2102,7 +2187,7 @@ func (x *ListChannelUsersBannedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListChannelUsersBannedEvent.ProtoReflect.Descriptor instead.
 func (*ListChannelUsersBannedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{5}
+	return file_realtime_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ListChannelUsersBannedEvent) GetBannedUserIds() []int64 {
@@ -2136,7 +2221,7 @@ type ChannelCanvas struct {
 
 func (x *ChannelCanvas) Reset() {
 	*x = ChannelCanvas{}
-	mi := &file_realtime_proto_msgTypes[6]
+	mi := &file_realtime_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2148,7 +2233,7 @@ func (x *ChannelCanvas) String() string {
 func (*ChannelCanvas) ProtoMessage() {}
 
 func (x *ChannelCanvas) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[6]
+	mi := &file_realtime_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2161,7 +2246,7 @@ func (x *ChannelCanvas) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelCanvas.ProtoReflect.Descriptor instead.
 func (*ChannelCanvas) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{6}
+	return file_realtime_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ChannelCanvas) GetId() int64 {
@@ -2232,7 +2317,7 @@ type IncomingCallPush struct {
 
 func (x *IncomingCallPush) Reset() {
 	*x = IncomingCallPush{}
-	mi := &file_realtime_proto_msgTypes[7]
+	mi := &file_realtime_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2244,7 +2329,7 @@ func (x *IncomingCallPush) String() string {
 func (*IncomingCallPush) ProtoMessage() {}
 
 func (x *IncomingCallPush) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[7]
+	mi := &file_realtime_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2257,7 +2342,7 @@ func (x *IncomingCallPush) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IncomingCallPush.ProtoReflect.Descriptor instead.
 func (*IncomingCallPush) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{7}
+	return file_realtime_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *IncomingCallPush) GetReceiverId() int64 {
@@ -2301,7 +2386,7 @@ type WebrtcSignalingFwd struct {
 
 func (x *WebrtcSignalingFwd) Reset() {
 	*x = WebrtcSignalingFwd{}
-	mi := &file_realtime_proto_msgTypes[8]
+	mi := &file_realtime_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2313,7 +2398,7 @@ func (x *WebrtcSignalingFwd) String() string {
 func (*WebrtcSignalingFwd) ProtoMessage() {}
 
 func (x *WebrtcSignalingFwd) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[8]
+	mi := &file_realtime_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2326,7 +2411,7 @@ func (x *WebrtcSignalingFwd) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WebrtcSignalingFwd.ProtoReflect.Descriptor instead.
 func (*WebrtcSignalingFwd) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{8}
+	return file_realtime_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *WebrtcSignalingFwd) GetReceiverId() int64 {
@@ -2377,7 +2462,7 @@ type SFUSignalingFwd struct {
 
 func (x *SFUSignalingFwd) Reset() {
 	*x = SFUSignalingFwd{}
-	mi := &file_realtime_proto_msgTypes[9]
+	mi := &file_realtime_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2389,7 +2474,7 @@ func (x *SFUSignalingFwd) String() string {
 func (*SFUSignalingFwd) ProtoMessage() {}
 
 func (x *SFUSignalingFwd) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[9]
+	mi := &file_realtime_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2402,7 +2487,7 @@ func (x *SFUSignalingFwd) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SFUSignalingFwd.ProtoReflect.Descriptor instead.
 func (*SFUSignalingFwd) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{9}
+	return file_realtime_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SFUSignalingFwd) GetClanId() int64 {
@@ -2454,7 +2539,7 @@ type AddClanUserEvent struct {
 
 func (x *AddClanUserEvent) Reset() {
 	*x = AddClanUserEvent{}
-	mi := &file_realtime_proto_msgTypes[10]
+	mi := &file_realtime_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2466,7 +2551,7 @@ func (x *AddClanUserEvent) String() string {
 func (*AddClanUserEvent) ProtoMessage() {}
 
 func (x *AddClanUserEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[10]
+	mi := &file_realtime_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2479,7 +2564,7 @@ func (x *AddClanUserEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClanUserEvent.ProtoReflect.Descriptor instead.
 func (*AddClanUserEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{10}
+	return file_realtime_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *AddClanUserEvent) GetClanId() int64 {
@@ -2520,7 +2605,7 @@ type RoleAssignedEvent struct {
 
 func (x *RoleAssignedEvent) Reset() {
 	*x = RoleAssignedEvent{}
-	mi := &file_realtime_proto_msgTypes[11]
+	mi := &file_realtime_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2532,7 +2617,7 @@ func (x *RoleAssignedEvent) String() string {
 func (*RoleAssignedEvent) ProtoMessage() {}
 
 func (x *RoleAssignedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[11]
+	mi := &file_realtime_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2545,7 +2630,7 @@ func (x *RoleAssignedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleAssignedEvent.ProtoReflect.Descriptor instead.
 func (*RoleAssignedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{11}
+	return file_realtime_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *RoleAssignedEvent) GetClanId() string {
@@ -2589,7 +2674,7 @@ type PermissionRoleChannel struct {
 
 func (x *PermissionRoleChannel) Reset() {
 	*x = PermissionRoleChannel{}
-	mi := &file_realtime_proto_msgTypes[12]
+	mi := &file_realtime_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2601,7 +2686,7 @@ func (x *PermissionRoleChannel) String() string {
 func (*PermissionRoleChannel) ProtoMessage() {}
 
 func (x *PermissionRoleChannel) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[12]
+	mi := &file_realtime_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2614,7 +2699,7 @@ func (x *PermissionRoleChannel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PermissionRoleChannel.ProtoReflect.Descriptor instead.
 func (*PermissionRoleChannel) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{12}
+	return file_realtime_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *PermissionRoleChannel) GetPermissionId() int64 {
@@ -2652,7 +2737,7 @@ type HashtagDm struct {
 
 func (x *HashtagDm) Reset() {
 	*x = HashtagDm{}
-	mi := &file_realtime_proto_msgTypes[13]
+	mi := &file_realtime_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2664,7 +2749,7 @@ func (x *HashtagDm) String() string {
 func (*HashtagDm) ProtoMessage() {}
 
 func (x *HashtagDm) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[13]
+	mi := &file_realtime_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2677,7 +2762,7 @@ func (x *HashtagDm) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HashtagDm.ProtoReflect.Descriptor instead.
 func (*HashtagDm) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{13}
+	return file_realtime_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *HashtagDm) GetChannelId() int64 {
@@ -2760,7 +2845,7 @@ type ChannelDescription struct {
 
 func (x *ChannelDescription) Reset() {
 	*x = ChannelDescription{}
-	mi := &file_realtime_proto_msgTypes[14]
+	mi := &file_realtime_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2772,7 +2857,7 @@ func (x *ChannelDescription) String() string {
 func (*ChannelDescription) ProtoMessage() {}
 
 func (x *ChannelDescription) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[14]
+	mi := &file_realtime_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2785,7 +2870,7 @@ func (x *ChannelDescription) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelDescription.ProtoReflect.Descriptor instead.
 func (*ChannelDescription) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{14}
+	return file_realtime_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ChannelDescription) GetClanId() int64 {
@@ -2874,7 +2959,7 @@ type ClanEmoji struct {
 
 func (x *ClanEmoji) Reset() {
 	*x = ClanEmoji{}
-	mi := &file_realtime_proto_msgTypes[15]
+	mi := &file_realtime_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2886,7 +2971,7 @@ func (x *ClanEmoji) String() string {
 func (*ClanEmoji) ProtoMessage() {}
 
 func (x *ClanEmoji) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[15]
+	mi := &file_realtime_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2899,7 +2984,7 @@ func (x *ClanEmoji) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanEmoji.ProtoReflect.Descriptor instead.
 func (*ClanEmoji) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{15}
+	return file_realtime_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ClanEmoji) GetId() int64 {
@@ -2979,7 +3064,7 @@ type Channel struct {
 
 func (x *Channel) Reset() {
 	*x = Channel{}
-	mi := &file_realtime_proto_msgTypes[16]
+	mi := &file_realtime_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2991,7 +3076,7 @@ func (x *Channel) String() string {
 func (*Channel) ProtoMessage() {}
 
 func (x *Channel) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[16]
+	mi := &file_realtime_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3004,7 +3089,7 @@ func (x *Channel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Channel.ProtoReflect.Descriptor instead.
 func (*Channel) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{16}
+	return file_realtime_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *Channel) GetId() int64 {
@@ -3060,7 +3145,7 @@ type ClanJoin struct {
 
 func (x *ClanJoin) Reset() {
 	*x = ClanJoin{}
-	mi := &file_realtime_proto_msgTypes[17]
+	mi := &file_realtime_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3072,7 +3157,7 @@ func (x *ClanJoin) String() string {
 func (*ClanJoin) ProtoMessage() {}
 
 func (x *ClanJoin) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[17]
+	mi := &file_realtime_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3085,7 +3170,7 @@ func (x *ClanJoin) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanJoin.ProtoReflect.Descriptor instead.
 func (*ClanJoin) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{17}
+	return file_realtime_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ClanJoin) GetClanId() int64 {
@@ -3112,7 +3197,7 @@ type ChannelJoin struct {
 
 func (x *ChannelJoin) Reset() {
 	*x = ChannelJoin{}
-	mi := &file_realtime_proto_msgTypes[18]
+	mi := &file_realtime_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3124,7 +3209,7 @@ func (x *ChannelJoin) String() string {
 func (*ChannelJoin) ProtoMessage() {}
 
 func (x *ChannelJoin) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[18]
+	mi := &file_realtime_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3137,7 +3222,7 @@ func (x *ChannelJoin) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelJoin.ProtoReflect.Descriptor instead.
 func (*ChannelJoin) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{18}
+	return file_realtime_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ChannelJoin) GetClanId() int64 {
@@ -3185,7 +3270,7 @@ type ChannelLeave struct {
 
 func (x *ChannelLeave) Reset() {
 	*x = ChannelLeave{}
-	mi := &file_realtime_proto_msgTypes[19]
+	mi := &file_realtime_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3197,7 +3282,7 @@ func (x *ChannelLeave) String() string {
 func (*ChannelLeave) ProtoMessage() {}
 
 func (x *ChannelLeave) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[19]
+	mi := &file_realtime_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3210,7 +3295,7 @@ func (x *ChannelLeave) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelLeave.ProtoReflect.Descriptor instead.
 func (*ChannelLeave) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{19}
+	return file_realtime_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ChannelLeave) GetClanId() int64 {
@@ -3268,7 +3353,7 @@ type ChannelMessageAck struct {
 
 func (x *ChannelMessageAck) Reset() {
 	*x = ChannelMessageAck{}
-	mi := &file_realtime_proto_msgTypes[20]
+	mi := &file_realtime_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3280,7 +3365,7 @@ func (x *ChannelMessageAck) String() string {
 func (*ChannelMessageAck) ProtoMessage() {}
 
 func (x *ChannelMessageAck) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[20]
+	mi := &file_realtime_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3293,7 +3378,7 @@ func (x *ChannelMessageAck) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelMessageAck.ProtoReflect.Descriptor instead.
 func (*ChannelMessageAck) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{20}
+	return file_realtime_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ChannelMessageAck) GetChannelId() int64 {
@@ -3369,7 +3454,7 @@ type EphemeralMessageSend struct {
 
 func (x *EphemeralMessageSend) Reset() {
 	*x = EphemeralMessageSend{}
-	mi := &file_realtime_proto_msgTypes[21]
+	mi := &file_realtime_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3381,7 +3466,7 @@ func (x *EphemeralMessageSend) String() string {
 func (*EphemeralMessageSend) ProtoMessage() {}
 
 func (x *EphemeralMessageSend) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[21]
+	mi := &file_realtime_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3394,7 +3479,7 @@ func (x *EphemeralMessageSend) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EphemeralMessageSend.ProtoReflect.Descriptor instead.
 func (*EphemeralMessageSend) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{21}
+	return file_realtime_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *EphemeralMessageSend) GetMessage() *ChannelMessageSend {
@@ -3423,7 +3508,7 @@ type QuickMenuDataEvent struct {
 
 func (x *QuickMenuDataEvent) Reset() {
 	*x = QuickMenuDataEvent{}
-	mi := &file_realtime_proto_msgTypes[22]
+	mi := &file_realtime_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3435,7 +3520,7 @@ func (x *QuickMenuDataEvent) String() string {
 func (*QuickMenuDataEvent) ProtoMessage() {}
 
 func (x *QuickMenuDataEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[22]
+	mi := &file_realtime_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3448,7 +3533,7 @@ func (x *QuickMenuDataEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuickMenuDataEvent.ProtoReflect.Descriptor instead.
 func (*QuickMenuDataEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{22}
+	return file_realtime_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *QuickMenuDataEvent) GetMenuName() string {
@@ -3495,7 +3580,7 @@ type VoiceReactionSend struct {
 
 func (x *VoiceReactionSend) Reset() {
 	*x = VoiceReactionSend{}
-	mi := &file_realtime_proto_msgTypes[23]
+	mi := &file_realtime_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3507,7 +3592,7 @@ func (x *VoiceReactionSend) String() string {
 func (*VoiceReactionSend) ProtoMessage() {}
 
 func (x *VoiceReactionSend) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[23]
+	mi := &file_realtime_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3520,7 +3605,7 @@ func (x *VoiceReactionSend) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VoiceReactionSend.ProtoReflect.Descriptor instead.
 func (*VoiceReactionSend) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{23}
+	return file_realtime_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *VoiceReactionSend) GetEmojis() []string {
@@ -3565,7 +3650,7 @@ type MarkAsRead struct {
 
 func (x *MarkAsRead) Reset() {
 	*x = MarkAsRead{}
-	mi := &file_realtime_proto_msgTypes[24]
+	mi := &file_realtime_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3577,7 +3662,7 @@ func (x *MarkAsRead) String() string {
 func (*MarkAsRead) ProtoMessage() {}
 
 func (x *MarkAsRead) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[24]
+	mi := &file_realtime_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3590,7 +3675,7 @@ func (x *MarkAsRead) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MarkAsRead.ProtoReflect.Descriptor instead.
 func (*MarkAsRead) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{24}
+	return file_realtime_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *MarkAsRead) GetChannelId() int64 {
@@ -3651,7 +3736,7 @@ type ChannelMessageSend struct {
 
 func (x *ChannelMessageSend) Reset() {
 	*x = ChannelMessageSend{}
-	mi := &file_realtime_proto_msgTypes[25]
+	mi := &file_realtime_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3663,7 +3748,7 @@ func (x *ChannelMessageSend) String() string {
 func (*ChannelMessageSend) ProtoMessage() {}
 
 func (x *ChannelMessageSend) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[25]
+	mi := &file_realtime_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3676,7 +3761,7 @@ func (x *ChannelMessageSend) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelMessageSend.ProtoReflect.Descriptor instead.
 func (*ChannelMessageSend) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{25}
+	return file_realtime_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ChannelMessageSend) GetClanId() int64 {
@@ -3810,7 +3895,7 @@ type ChannelMessageUpdate struct {
 
 func (x *ChannelMessageUpdate) Reset() {
 	*x = ChannelMessageUpdate{}
-	mi := &file_realtime_proto_msgTypes[26]
+	mi := &file_realtime_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3822,7 +3907,7 @@ func (x *ChannelMessageUpdate) String() string {
 func (*ChannelMessageUpdate) ProtoMessage() {}
 
 func (x *ChannelMessageUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[26]
+	mi := &file_realtime_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3835,7 +3920,7 @@ func (x *ChannelMessageUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelMessageUpdate.ProtoReflect.Descriptor instead.
 func (*ChannelMessageUpdate) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{26}
+	return file_realtime_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ChannelMessageUpdate) GetClanId() int64 {
@@ -3948,7 +4033,7 @@ type ChannelMessageRemove struct {
 
 func (x *ChannelMessageRemove) Reset() {
 	*x = ChannelMessageRemove{}
-	mi := &file_realtime_proto_msgTypes[27]
+	mi := &file_realtime_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3960,7 +4045,7 @@ func (x *ChannelMessageRemove) String() string {
 func (*ChannelMessageRemove) ProtoMessage() {}
 
 func (x *ChannelMessageRemove) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[27]
+	mi := &file_realtime_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3973,7 +4058,7 @@ func (x *ChannelMessageRemove) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelMessageRemove.ProtoReflect.Descriptor instead.
 func (*ChannelMessageRemove) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{27}
+	return file_realtime_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ChannelMessageRemove) GetClanId() int64 {
@@ -4060,7 +4145,7 @@ type ChannelPresenceEvent struct {
 
 func (x *ChannelPresenceEvent) Reset() {
 	*x = ChannelPresenceEvent{}
-	mi := &file_realtime_proto_msgTypes[28]
+	mi := &file_realtime_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4072,7 +4157,7 @@ func (x *ChannelPresenceEvent) String() string {
 func (*ChannelPresenceEvent) ProtoMessage() {}
 
 func (x *ChannelPresenceEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[28]
+	mi := &file_realtime_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4085,7 +4170,7 @@ func (x *ChannelPresenceEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelPresenceEvent.ProtoReflect.Descriptor instead.
 func (*ChannelPresenceEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{28}
+	return file_realtime_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ChannelPresenceEvent) GetChannelId() int64 {
@@ -4145,7 +4230,7 @@ type Error struct {
 
 func (x *Error) Reset() {
 	*x = Error{}
-	mi := &file_realtime_proto_msgTypes[29]
+	mi := &file_realtime_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4157,7 +4242,7 @@ func (x *Error) String() string {
 func (*Error) ProtoMessage() {}
 
 func (x *Error) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[29]
+	mi := &file_realtime_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4170,7 +4255,7 @@ func (x *Error) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Error.ProtoReflect.Descriptor instead.
 func (*Error) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{29}
+	return file_realtime_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *Error) GetCode() int32 {
@@ -4205,7 +4290,7 @@ type Notifications struct {
 
 func (x *Notifications) Reset() {
 	*x = Notifications{}
-	mi := &file_realtime_proto_msgTypes[30]
+	mi := &file_realtime_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4217,7 +4302,7 @@ func (x *Notifications) String() string {
 func (*Notifications) ProtoMessage() {}
 
 func (x *Notifications) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[30]
+	mi := &file_realtime_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4230,7 +4315,7 @@ func (x *Notifications) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Notifications.ProtoReflect.Descriptor instead.
 func (*Notifications) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{30}
+	return file_realtime_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *Notifications) GetNotifications() []*api.Notification {
@@ -4256,7 +4341,7 @@ type AddFriend struct {
 
 func (x *AddFriend) Reset() {
 	*x = AddFriend{}
-	mi := &file_realtime_proto_msgTypes[31]
+	mi := &file_realtime_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4268,7 +4353,7 @@ func (x *AddFriend) String() string {
 func (*AddFriend) ProtoMessage() {}
 
 func (x *AddFriend) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[31]
+	mi := &file_realtime_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4281,7 +4366,7 @@ func (x *AddFriend) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddFriend.ProtoReflect.Descriptor instead.
 func (*AddFriend) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{31}
+	return file_realtime_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *AddFriend) GetUserId() int64 {
@@ -4321,7 +4406,7 @@ type RemoveFriend struct {
 
 func (x *RemoveFriend) Reset() {
 	*x = RemoveFriend{}
-	mi := &file_realtime_proto_msgTypes[32]
+	mi := &file_realtime_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4333,7 +4418,7 @@ func (x *RemoveFriend) String() string {
 func (*RemoveFriend) ProtoMessage() {}
 
 func (x *RemoveFriend) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[32]
+	mi := &file_realtime_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4346,7 +4431,7 @@ func (x *RemoveFriend) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveFriend.ProtoReflect.Descriptor instead.
 func (*RemoveFriend) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{32}
+	return file_realtime_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *RemoveFriend) GetUserId() int64 {
@@ -4365,7 +4450,7 @@ type BlockFriend struct {
 
 func (x *BlockFriend) Reset() {
 	*x = BlockFriend{}
-	mi := &file_realtime_proto_msgTypes[33]
+	mi := &file_realtime_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4377,7 +4462,7 @@ func (x *BlockFriend) String() string {
 func (*BlockFriend) ProtoMessage() {}
 
 func (x *BlockFriend) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[33]
+	mi := &file_realtime_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4390,7 +4475,7 @@ func (x *BlockFriend) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlockFriend.ProtoReflect.Descriptor instead.
 func (*BlockFriend) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{33}
+	return file_realtime_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *BlockFriend) GetUserId() int64 {
@@ -4414,7 +4499,7 @@ type UnblockFriend struct {
 
 func (x *UnblockFriend) Reset() {
 	*x = UnblockFriend{}
-	mi := &file_realtime_proto_msgTypes[34]
+	mi := &file_realtime_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4426,7 +4511,7 @@ func (x *UnblockFriend) String() string {
 func (*UnblockFriend) ProtoMessage() {}
 
 func (x *UnblockFriend) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[34]
+	mi := &file_realtime_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4439,7 +4524,7 @@ func (x *UnblockFriend) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnblockFriend.ProtoReflect.Descriptor instead.
 func (*UnblockFriend) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{34}
+	return file_realtime_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *UnblockFriend) GetUserId() int64 {
@@ -4493,7 +4578,7 @@ type Ping struct {
 
 func (x *Ping) Reset() {
 	*x = Ping{}
-	mi := &file_realtime_proto_msgTypes[35]
+	mi := &file_realtime_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4505,7 +4590,7 @@ func (x *Ping) String() string {
 func (*Ping) ProtoMessage() {}
 
 func (x *Ping) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[35]
+	mi := &file_realtime_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4518,7 +4603,7 @@ func (x *Ping) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Ping.ProtoReflect.Descriptor instead.
 func (*Ping) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{35}
+	return file_realtime_proto_rawDescGZIP(), []int{36}
 }
 
 // Application-level heartbeat and connection check response.
@@ -4530,7 +4615,7 @@ type Pong struct {
 
 func (x *Pong) Reset() {
 	*x = Pong{}
-	mi := &file_realtime_proto_msgTypes[36]
+	mi := &file_realtime_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4542,7 +4627,7 @@ func (x *Pong) String() string {
 func (*Pong) ProtoMessage() {}
 
 func (x *Pong) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[36]
+	mi := &file_realtime_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4555,7 +4640,7 @@ func (x *Pong) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Pong.ProtoReflect.Descriptor instead.
 func (*Pong) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{36}
+	return file_realtime_proto_rawDescGZIP(), []int{37}
 }
 
 // A snapshot of statuses for some set of users.
@@ -4569,7 +4654,7 @@ type Status struct {
 
 func (x *Status) Reset() {
 	*x = Status{}
-	mi := &file_realtime_proto_msgTypes[37]
+	mi := &file_realtime_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4581,7 +4666,7 @@ func (x *Status) String() string {
 func (*Status) ProtoMessage() {}
 
 func (x *Status) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[37]
+	mi := &file_realtime_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4594,7 +4679,7 @@ func (x *Status) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Status.ProtoReflect.Descriptor instead.
 func (*Status) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{37}
+	return file_realtime_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *Status) GetPresences() []*UserPresence {
@@ -4617,7 +4702,7 @@ type StatusFollow struct {
 
 func (x *StatusFollow) Reset() {
 	*x = StatusFollow{}
-	mi := &file_realtime_proto_msgTypes[38]
+	mi := &file_realtime_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4629,7 +4714,7 @@ func (x *StatusFollow) String() string {
 func (*StatusFollow) ProtoMessage() {}
 
 func (x *StatusFollow) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[38]
+	mi := &file_realtime_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4642,7 +4727,7 @@ func (x *StatusFollow) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatusFollow.ProtoReflect.Descriptor instead.
 func (*StatusFollow) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{38}
+	return file_realtime_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *StatusFollow) GetUserIds() []int64 {
@@ -4672,7 +4757,7 @@ type StatusPresenceEvent struct {
 
 func (x *StatusPresenceEvent) Reset() {
 	*x = StatusPresenceEvent{}
-	mi := &file_realtime_proto_msgTypes[39]
+	mi := &file_realtime_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4684,7 +4769,7 @@ func (x *StatusPresenceEvent) String() string {
 func (*StatusPresenceEvent) ProtoMessage() {}
 
 func (x *StatusPresenceEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[39]
+	mi := &file_realtime_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4697,7 +4782,7 @@ func (x *StatusPresenceEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatusPresenceEvent.ProtoReflect.Descriptor instead.
 func (*StatusPresenceEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{39}
+	return file_realtime_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *StatusPresenceEvent) GetJoins() []*UserPresence {
@@ -4751,7 +4836,7 @@ type LastPinMessageEvent struct {
 
 func (x *LastPinMessageEvent) Reset() {
 	*x = LastPinMessageEvent{}
-	mi := &file_realtime_proto_msgTypes[40]
+	mi := &file_realtime_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4763,7 +4848,7 @@ func (x *LastPinMessageEvent) String() string {
 func (*LastPinMessageEvent) ProtoMessage() {}
 
 func (x *LastPinMessageEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[40]
+	mi := &file_realtime_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4776,7 +4861,7 @@ func (x *LastPinMessageEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LastPinMessageEvent.ProtoReflect.Descriptor instead.
 func (*LastPinMessageEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{40}
+	return file_realtime_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *LastPinMessageEvent) GetClanId() int64 {
@@ -4897,7 +4982,7 @@ type LastSeenMessageEvent struct {
 
 func (x *LastSeenMessageEvent) Reset() {
 	*x = LastSeenMessageEvent{}
-	mi := &file_realtime_proto_msgTypes[41]
+	mi := &file_realtime_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4909,7 +4994,7 @@ func (x *LastSeenMessageEvent) String() string {
 func (*LastSeenMessageEvent) ProtoMessage() {}
 
 func (x *LastSeenMessageEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[41]
+	mi := &file_realtime_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4922,7 +5007,7 @@ func (x *LastSeenMessageEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LastSeenMessageEvent.ProtoReflect.Descriptor instead.
 func (*LastSeenMessageEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{41}
+	return file_realtime_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *LastSeenMessageEvent) GetClanId() int64 {
@@ -4992,7 +5077,7 @@ type MessageTypingEvent struct {
 
 func (x *MessageTypingEvent) Reset() {
 	*x = MessageTypingEvent{}
-	mi := &file_realtime_proto_msgTypes[42]
+	mi := &file_realtime_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5004,7 +5089,7 @@ func (x *MessageTypingEvent) String() string {
 func (*MessageTypingEvent) ProtoMessage() {}
 
 func (x *MessageTypingEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[42]
+	mi := &file_realtime_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5017,7 +5102,7 @@ func (x *MessageTypingEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessageTypingEvent.ProtoReflect.Descriptor instead.
 func (*MessageTypingEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{42}
+	return file_realtime_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *MessageTypingEvent) GetClanId() int64 {
@@ -5093,7 +5178,7 @@ type VoiceLeavedEvent struct {
 
 func (x *VoiceLeavedEvent) Reset() {
 	*x = VoiceLeavedEvent{}
-	mi := &file_realtime_proto_msgTypes[43]
+	mi := &file_realtime_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5105,7 +5190,7 @@ func (x *VoiceLeavedEvent) String() string {
 func (*VoiceLeavedEvent) ProtoMessage() {}
 
 func (x *VoiceLeavedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[43]
+	mi := &file_realtime_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5118,7 +5203,7 @@ func (x *VoiceLeavedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VoiceLeavedEvent.ProtoReflect.Descriptor instead.
 func (*VoiceLeavedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{43}
+	return file_realtime_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *VoiceLeavedEvent) GetId() string {
@@ -5174,7 +5259,7 @@ type VoiceJoinedEvent struct {
 
 func (x *VoiceJoinedEvent) Reset() {
 	*x = VoiceJoinedEvent{}
-	mi := &file_realtime_proto_msgTypes[44]
+	mi := &file_realtime_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5186,7 +5271,7 @@ func (x *VoiceJoinedEvent) String() string {
 func (*VoiceJoinedEvent) ProtoMessage() {}
 
 func (x *VoiceJoinedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[44]
+	mi := &file_realtime_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5199,7 +5284,7 @@ func (x *VoiceJoinedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VoiceJoinedEvent.ProtoReflect.Descriptor instead.
 func (*VoiceJoinedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{44}
+	return file_realtime_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *VoiceJoinedEvent) GetClanId() int64 {
@@ -5273,7 +5358,7 @@ type VoiceStartedEvent struct {
 
 func (x *VoiceStartedEvent) Reset() {
 	*x = VoiceStartedEvent{}
-	mi := &file_realtime_proto_msgTypes[45]
+	mi := &file_realtime_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5285,7 +5370,7 @@ func (x *VoiceStartedEvent) String() string {
 func (*VoiceStartedEvent) ProtoMessage() {}
 
 func (x *VoiceStartedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[45]
+	mi := &file_realtime_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5298,7 +5383,7 @@ func (x *VoiceStartedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VoiceStartedEvent.ProtoReflect.Descriptor instead.
 func (*VoiceStartedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{45}
+	return file_realtime_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *VoiceStartedEvent) GetId() string {
@@ -5337,7 +5422,7 @@ type VoiceEndedEvent struct {
 
 func (x *VoiceEndedEvent) Reset() {
 	*x = VoiceEndedEvent{}
-	mi := &file_realtime_proto_msgTypes[46]
+	mi := &file_realtime_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5349,7 +5434,7 @@ func (x *VoiceEndedEvent) String() string {
 func (*VoiceEndedEvent) ProtoMessage() {}
 
 func (x *VoiceEndedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[46]
+	mi := &file_realtime_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5362,7 +5447,7 @@ func (x *VoiceEndedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VoiceEndedEvent.ProtoReflect.Descriptor instead.
 func (*VoiceEndedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{46}
+	return file_realtime_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *VoiceEndedEvent) GetId() int64 {
@@ -5403,7 +5488,7 @@ type StreamingLeavedEvent struct {
 
 func (x *StreamingLeavedEvent) Reset() {
 	*x = StreamingLeavedEvent{}
-	mi := &file_realtime_proto_msgTypes[47]
+	mi := &file_realtime_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5415,7 +5500,7 @@ func (x *StreamingLeavedEvent) String() string {
 func (*StreamingLeavedEvent) ProtoMessage() {}
 
 func (x *StreamingLeavedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[47]
+	mi := &file_realtime_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5428,7 +5513,7 @@ func (x *StreamingLeavedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamingLeavedEvent.ProtoReflect.Descriptor instead.
 func (*StreamingLeavedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{47}
+	return file_realtime_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *StreamingLeavedEvent) GetId() int64 {
@@ -5482,7 +5567,7 @@ type StreamingJoinedEvent struct {
 
 func (x *StreamingJoinedEvent) Reset() {
 	*x = StreamingJoinedEvent{}
-	mi := &file_realtime_proto_msgTypes[48]
+	mi := &file_realtime_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5494,7 +5579,7 @@ func (x *StreamingJoinedEvent) String() string {
 func (*StreamingJoinedEvent) ProtoMessage() {}
 
 func (x *StreamingJoinedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[48]
+	mi := &file_realtime_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5507,7 +5592,7 @@ func (x *StreamingJoinedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamingJoinedEvent.ProtoReflect.Descriptor instead.
 func (*StreamingJoinedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{48}
+	return file_realtime_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *StreamingJoinedEvent) GetClanId() int64 {
@@ -5576,7 +5661,7 @@ type StreamingStartedEvent struct {
 
 func (x *StreamingStartedEvent) Reset() {
 	*x = StreamingStartedEvent{}
-	mi := &file_realtime_proto_msgTypes[49]
+	mi := &file_realtime_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5588,7 +5673,7 @@ func (x *StreamingStartedEvent) String() string {
 func (*StreamingStartedEvent) ProtoMessage() {}
 
 func (x *StreamingStartedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[49]
+	mi := &file_realtime_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5601,7 +5686,7 @@ func (x *StreamingStartedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamingStartedEvent.ProtoReflect.Descriptor instead.
 func (*StreamingStartedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{49}
+	return file_realtime_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *StreamingStartedEvent) GetClanId() int64 {
@@ -5645,7 +5730,7 @@ type StreamingEndedEvent struct {
 
 func (x *StreamingEndedEvent) Reset() {
 	*x = StreamingEndedEvent{}
-	mi := &file_realtime_proto_msgTypes[50]
+	mi := &file_realtime_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5657,7 +5742,7 @@ func (x *StreamingEndedEvent) String() string {
 func (*StreamingEndedEvent) ProtoMessage() {}
 
 func (x *StreamingEndedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[50]
+	mi := &file_realtime_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5670,7 +5755,7 @@ func (x *StreamingEndedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamingEndedEvent.ProtoReflect.Descriptor instead.
 func (*StreamingEndedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{50}
+	return file_realtime_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *StreamingEndedEvent) GetClanId() int64 {
@@ -5719,7 +5804,7 @@ type ChannelCreatedEvent struct {
 
 func (x *ChannelCreatedEvent) Reset() {
 	*x = ChannelCreatedEvent{}
-	mi := &file_realtime_proto_msgTypes[51]
+	mi := &file_realtime_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5731,7 +5816,7 @@ func (x *ChannelCreatedEvent) String() string {
 func (*ChannelCreatedEvent) ProtoMessage() {}
 
 func (x *ChannelCreatedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[51]
+	mi := &file_realtime_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5744,7 +5829,7 @@ func (x *ChannelCreatedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelCreatedEvent.ProtoReflect.Descriptor instead.
 func (*ChannelCreatedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{51}
+	return file_realtime_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *ChannelCreatedEvent) GetClanId() int64 {
@@ -5847,7 +5932,7 @@ type CategoryEvent struct {
 
 func (x *CategoryEvent) Reset() {
 	*x = CategoryEvent{}
-	mi := &file_realtime_proto_msgTypes[52]
+	mi := &file_realtime_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5859,7 +5944,7 @@ func (x *CategoryEvent) String() string {
 func (*CategoryEvent) ProtoMessage() {}
 
 func (x *CategoryEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[52]
+	mi := &file_realtime_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5872,7 +5957,7 @@ func (x *CategoryEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CategoryEvent.ProtoReflect.Descriptor instead.
 func (*CategoryEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{52}
+	return file_realtime_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *CategoryEvent) GetCreatorId() int64 {
@@ -5925,7 +6010,7 @@ type RoleEvent struct {
 
 func (x *RoleEvent) Reset() {
 	*x = RoleEvent{}
-	mi := &file_realtime_proto_msgTypes[53]
+	mi := &file_realtime_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5937,7 +6022,7 @@ func (x *RoleEvent) String() string {
 func (*RoleEvent) ProtoMessage() {}
 
 func (x *RoleEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[53]
+	mi := &file_realtime_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5950,7 +6035,7 @@ func (x *RoleEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleEvent.ProtoReflect.Descriptor instead.
 func (*RoleEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{53}
+	return file_realtime_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *RoleEvent) GetRole() *api.Role {
@@ -6020,7 +6105,7 @@ type ChannelDeletedEvent struct {
 
 func (x *ChannelDeletedEvent) Reset() {
 	*x = ChannelDeletedEvent{}
-	mi := &file_realtime_proto_msgTypes[54]
+	mi := &file_realtime_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6032,7 +6117,7 @@ func (x *ChannelDeletedEvent) String() string {
 func (*ChannelDeletedEvent) ProtoMessage() {}
 
 func (x *ChannelDeletedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[54]
+	mi := &file_realtime_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6045,7 +6130,7 @@ func (x *ChannelDeletedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelDeletedEvent.ProtoReflect.Descriptor instead.
 func (*ChannelDeletedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{54}
+	return file_realtime_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *ChannelDeletedEvent) GetClanId() int64 {
@@ -6095,7 +6180,7 @@ type ClanDeletedEvent struct {
 
 func (x *ClanDeletedEvent) Reset() {
 	*x = ClanDeletedEvent{}
-	mi := &file_realtime_proto_msgTypes[55]
+	mi := &file_realtime_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6107,7 +6192,7 @@ func (x *ClanDeletedEvent) String() string {
 func (*ClanDeletedEvent) ProtoMessage() {}
 
 func (x *ClanDeletedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[55]
+	mi := &file_realtime_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6120,7 +6205,7 @@ func (x *ClanDeletedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanDeletedEvent.ProtoReflect.Descriptor instead.
 func (*ClanDeletedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{55}
+	return file_realtime_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *ClanDeletedEvent) GetClanId() int64 {
@@ -6161,7 +6246,7 @@ type StickerCreateEvent struct {
 
 func (x *StickerCreateEvent) Reset() {
 	*x = StickerCreateEvent{}
-	mi := &file_realtime_proto_msgTypes[56]
+	mi := &file_realtime_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6173,7 +6258,7 @@ func (x *StickerCreateEvent) String() string {
 func (*StickerCreateEvent) ProtoMessage() {}
 
 func (x *StickerCreateEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[56]
+	mi := &file_realtime_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6186,7 +6271,7 @@ func (x *StickerCreateEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StickerCreateEvent.ProtoReflect.Descriptor instead.
 func (*StickerCreateEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{56}
+	return file_realtime_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *StickerCreateEvent) GetClanId() int64 {
@@ -6259,7 +6344,7 @@ type StickerUpdateEvent struct {
 
 func (x *StickerUpdateEvent) Reset() {
 	*x = StickerUpdateEvent{}
-	mi := &file_realtime_proto_msgTypes[57]
+	mi := &file_realtime_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6271,7 +6356,7 @@ func (x *StickerUpdateEvent) String() string {
 func (*StickerUpdateEvent) ProtoMessage() {}
 
 func (x *StickerUpdateEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[57]
+	mi := &file_realtime_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6284,7 +6369,7 @@ func (x *StickerUpdateEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StickerUpdateEvent.ProtoReflect.Descriptor instead.
 func (*StickerUpdateEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{57}
+	return file_realtime_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *StickerUpdateEvent) GetShortname() string {
@@ -6320,7 +6405,7 @@ type StickerDeleteEvent struct {
 
 func (x *StickerDeleteEvent) Reset() {
 	*x = StickerDeleteEvent{}
-	mi := &file_realtime_proto_msgTypes[58]
+	mi := &file_realtime_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6332,7 +6417,7 @@ func (x *StickerDeleteEvent) String() string {
 func (*StickerDeleteEvent) ProtoMessage() {}
 
 func (x *StickerDeleteEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[58]
+	mi := &file_realtime_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6345,7 +6430,7 @@ func (x *StickerDeleteEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StickerDeleteEvent.ProtoReflect.Descriptor instead.
 func (*StickerDeleteEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{58}
+	return file_realtime_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *StickerDeleteEvent) GetStickerId() int64 {
@@ -6407,7 +6492,7 @@ type ChannelUpdatedEvent struct {
 
 func (x *ChannelUpdatedEvent) Reset() {
 	*x = ChannelUpdatedEvent{}
-	mi := &file_realtime_proto_msgTypes[59]
+	mi := &file_realtime_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6419,7 +6504,7 @@ func (x *ChannelUpdatedEvent) String() string {
 func (*ChannelUpdatedEvent) ProtoMessage() {}
 
 func (x *ChannelUpdatedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[59]
+	mi := &file_realtime_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6432,7 +6517,7 @@ func (x *ChannelUpdatedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelUpdatedEvent.ProtoReflect.Descriptor instead.
 func (*ChannelUpdatedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{59}
+	return file_realtime_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *ChannelUpdatedEvent) GetClanId() int64 {
@@ -6622,7 +6707,7 @@ type ChannelArchiveEvent struct {
 
 func (x *ChannelArchiveEvent) Reset() {
 	*x = ChannelArchiveEvent{}
-	mi := &file_realtime_proto_msgTypes[60]
+	mi := &file_realtime_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6634,7 +6719,7 @@ func (x *ChannelArchiveEvent) String() string {
 func (*ChannelArchiveEvent) ProtoMessage() {}
 
 func (x *ChannelArchiveEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[60]
+	mi := &file_realtime_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6647,7 +6732,7 @@ func (x *ChannelArchiveEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelArchiveEvent.ProtoReflect.Descriptor instead.
 func (*ChannelArchiveEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{60}
+	return file_realtime_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *ChannelArchiveEvent) GetClanId() int64 {
@@ -6801,7 +6886,7 @@ type StatusUnfollow struct {
 
 func (x *StatusUnfollow) Reset() {
 	*x = StatusUnfollow{}
-	mi := &file_realtime_proto_msgTypes[61]
+	mi := &file_realtime_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6813,7 +6898,7 @@ func (x *StatusUnfollow) String() string {
 func (*StatusUnfollow) ProtoMessage() {}
 
 func (x *StatusUnfollow) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[61]
+	mi := &file_realtime_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6826,7 +6911,7 @@ func (x *StatusUnfollow) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatusUnfollow.ProtoReflect.Descriptor instead.
 func (*StatusUnfollow) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{61}
+	return file_realtime_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *StatusUnfollow) GetUserIds() []int64 {
@@ -6847,7 +6932,7 @@ type StatusUpdate struct {
 
 func (x *StatusUpdate) Reset() {
 	*x = StatusUpdate{}
-	mi := &file_realtime_proto_msgTypes[62]
+	mi := &file_realtime_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6859,7 +6944,7 @@ func (x *StatusUpdate) String() string {
 func (*StatusUpdate) ProtoMessage() {}
 
 func (x *StatusUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[62]
+	mi := &file_realtime_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6872,7 +6957,7 @@ func (x *StatusUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatusUpdate.ProtoReflect.Descriptor instead.
 func (*StatusUpdate) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{62}
+	return file_realtime_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *StatusUpdate) GetStatus() *wrapperspb.StringValue {
@@ -6899,7 +6984,7 @@ type Stream struct {
 
 func (x *Stream) Reset() {
 	*x = Stream{}
-	mi := &file_realtime_proto_msgTypes[63]
+	mi := &file_realtime_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6911,7 +6996,7 @@ func (x *Stream) String() string {
 func (*Stream) ProtoMessage() {}
 
 func (x *Stream) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[63]
+	mi := &file_realtime_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6924,7 +7009,7 @@ func (x *Stream) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Stream.ProtoReflect.Descriptor instead.
 func (*Stream) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{63}
+	return file_realtime_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *Stream) GetMode() int32 {
@@ -6972,7 +7057,7 @@ type StreamData struct {
 
 func (x *StreamData) Reset() {
 	*x = StreamData{}
-	mi := &file_realtime_proto_msgTypes[64]
+	mi := &file_realtime_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6984,7 +7069,7 @@ func (x *StreamData) String() string {
 func (*StreamData) ProtoMessage() {}
 
 func (x *StreamData) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[64]
+	mi := &file_realtime_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6997,7 +7082,7 @@ func (x *StreamData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamData.ProtoReflect.Descriptor instead.
 func (*StreamData) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{64}
+	return file_realtime_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *StreamData) GetStream() *Stream {
@@ -7043,7 +7128,7 @@ type StreamPresenceEvent struct {
 
 func (x *StreamPresenceEvent) Reset() {
 	*x = StreamPresenceEvent{}
-	mi := &file_realtime_proto_msgTypes[65]
+	mi := &file_realtime_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7055,7 +7140,7 @@ func (x *StreamPresenceEvent) String() string {
 func (*StreamPresenceEvent) ProtoMessage() {}
 
 func (x *StreamPresenceEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[65]
+	mi := &file_realtime_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7068,7 +7153,7 @@ func (x *StreamPresenceEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamPresenceEvent.ProtoReflect.Descriptor instead.
 func (*StreamPresenceEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{65}
+	return file_realtime_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *StreamPresenceEvent) GetStream() *Stream {
@@ -7112,7 +7197,7 @@ type UserPresence struct {
 
 func (x *UserPresence) Reset() {
 	*x = UserPresence{}
-	mi := &file_realtime_proto_msgTypes[66]
+	mi := &file_realtime_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7124,7 +7209,7 @@ func (x *UserPresence) String() string {
 func (*UserPresence) ProtoMessage() {}
 
 func (x *UserPresence) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[66]
+	mi := &file_realtime_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7137,7 +7222,7 @@ func (x *UserPresence) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserPresence.ProtoReflect.Descriptor instead.
 func (*UserPresence) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{66}
+	return file_realtime_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *UserPresence) GetUserId() int64 {
@@ -7203,7 +7288,7 @@ type CustomStatusEvent struct {
 
 func (x *CustomStatusEvent) Reset() {
 	*x = CustomStatusEvent{}
-	mi := &file_realtime_proto_msgTypes[67]
+	mi := &file_realtime_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7215,7 +7300,7 @@ func (x *CustomStatusEvent) String() string {
 func (*CustomStatusEvent) ProtoMessage() {}
 
 func (x *CustomStatusEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[67]
+	mi := &file_realtime_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7228,7 +7313,7 @@ func (x *CustomStatusEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomStatusEvent.ProtoReflect.Descriptor instead.
 func (*CustomStatusEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{67}
+	return file_realtime_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *CustomStatusEvent) GetClanId() int64 {
@@ -7293,7 +7378,7 @@ type UserChannelAdded struct {
 
 func (x *UserChannelAdded) Reset() {
 	*x = UserChannelAdded{}
-	mi := &file_realtime_proto_msgTypes[68]
+	mi := &file_realtime_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7305,7 +7390,7 @@ func (x *UserChannelAdded) String() string {
 func (*UserChannelAdded) ProtoMessage() {}
 
 func (x *UserChannelAdded) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[68]
+	mi := &file_realtime_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7318,7 +7403,7 @@ func (x *UserChannelAdded) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserChannelAdded.ProtoReflect.Descriptor instead.
 func (*UserChannelAdded) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{68}
+	return file_realtime_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *UserChannelAdded) GetChannelDesc() *api.ChannelDescription {
@@ -7387,7 +7472,7 @@ type UserChannelRemoved struct {
 
 func (x *UserChannelRemoved) Reset() {
 	*x = UserChannelRemoved{}
-	mi := &file_realtime_proto_msgTypes[69]
+	mi := &file_realtime_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7399,7 +7484,7 @@ func (x *UserChannelRemoved) String() string {
 func (*UserChannelRemoved) ProtoMessage() {}
 
 func (x *UserChannelRemoved) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[69]
+	mi := &file_realtime_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7412,7 +7497,7 @@ func (x *UserChannelRemoved) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserChannelRemoved.ProtoReflect.Descriptor instead.
 func (*UserChannelRemoved) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{69}
+	return file_realtime_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *UserChannelRemoved) GetChannelId() int64 {
@@ -7462,7 +7547,7 @@ type UserClanRemoved struct {
 
 func (x *UserClanRemoved) Reset() {
 	*x = UserClanRemoved{}
-	mi := &file_realtime_proto_msgTypes[70]
+	mi := &file_realtime_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7474,7 +7559,7 @@ func (x *UserClanRemoved) String() string {
 func (*UserClanRemoved) ProtoMessage() {}
 
 func (x *UserClanRemoved) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[70]
+	mi := &file_realtime_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7487,7 +7572,7 @@ func (x *UserClanRemoved) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserClanRemoved.ProtoReflect.Descriptor instead.
 func (*UserClanRemoved) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{70}
+	return file_realtime_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *UserClanRemoved) GetClanId() int64 {
@@ -7522,7 +7607,7 @@ type ClanCreatedEvent struct {
 
 func (x *ClanCreatedEvent) Reset() {
 	*x = ClanCreatedEvent{}
-	mi := &file_realtime_proto_msgTypes[71]
+	mi := &file_realtime_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7534,7 +7619,7 @@ func (x *ClanCreatedEvent) String() string {
 func (*ClanCreatedEvent) ProtoMessage() {}
 
 func (x *ClanCreatedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[71]
+	mi := &file_realtime_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7547,7 +7632,7 @@ func (x *ClanCreatedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanCreatedEvent.ProtoReflect.Descriptor instead.
 func (*ClanCreatedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{71}
+	return file_realtime_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *ClanCreatedEvent) GetClanId() int64 {
@@ -7620,7 +7705,7 @@ type ClanUpdatedEvent struct {
 
 func (x *ClanUpdatedEvent) Reset() {
 	*x = ClanUpdatedEvent{}
-	mi := &file_realtime_proto_msgTypes[72]
+	mi := &file_realtime_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7632,7 +7717,7 @@ func (x *ClanUpdatedEvent) String() string {
 func (*ClanUpdatedEvent) ProtoMessage() {}
 
 func (x *ClanUpdatedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[72]
+	mi := &file_realtime_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7645,7 +7730,7 @@ func (x *ClanUpdatedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanUpdatedEvent.ProtoReflect.Descriptor instead.
 func (*ClanUpdatedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{72}
+	return file_realtime_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *ClanUpdatedEvent) GetClanId() int64 {
@@ -7756,7 +7841,7 @@ type ClanProfileUpdatedEvent struct {
 
 func (x *ClanProfileUpdatedEvent) Reset() {
 	*x = ClanProfileUpdatedEvent{}
-	mi := &file_realtime_proto_msgTypes[73]
+	mi := &file_realtime_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7768,7 +7853,7 @@ func (x *ClanProfileUpdatedEvent) String() string {
 func (*ClanProfileUpdatedEvent) ProtoMessage() {}
 
 func (x *ClanProfileUpdatedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[73]
+	mi := &file_realtime_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7781,7 +7866,7 @@ func (x *ClanProfileUpdatedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClanProfileUpdatedEvent.ProtoReflect.Descriptor instead.
 func (*ClanProfileUpdatedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{73}
+	return file_realtime_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *ClanProfileUpdatedEvent) GetUserId() int64 {
@@ -7835,7 +7920,7 @@ type UserProfileUpdatedEvent struct {
 
 func (x *UserProfileUpdatedEvent) Reset() {
 	*x = UserProfileUpdatedEvent{}
-	mi := &file_realtime_proto_msgTypes[74]
+	mi := &file_realtime_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7847,7 +7932,7 @@ func (x *UserProfileUpdatedEvent) String() string {
 func (*UserProfileUpdatedEvent) ProtoMessage() {}
 
 func (x *UserProfileUpdatedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[74]
+	mi := &file_realtime_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7860,7 +7945,7 @@ func (x *UserProfileUpdatedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserProfileUpdatedEvent.ProtoReflect.Descriptor instead.
 func (*UserProfileUpdatedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{74}
+	return file_realtime_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *UserProfileUpdatedEvent) GetUserId() int64 {
@@ -7922,7 +8007,7 @@ type ConfirmLinkMezonOTPData struct {
 
 func (x *ConfirmLinkMezonOTPData) Reset() {
 	*x = ConfirmLinkMezonOTPData{}
-	mi := &file_realtime_proto_msgTypes[75]
+	mi := &file_realtime_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7934,7 +8019,7 @@ func (x *ConfirmLinkMezonOTPData) String() string {
 func (*ConfirmLinkMezonOTPData) ProtoMessage() {}
 
 func (x *ConfirmLinkMezonOTPData) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[75]
+	mi := &file_realtime_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7947,7 +8032,7 @@ func (x *ConfirmLinkMezonOTPData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfirmLinkMezonOTPData.ProtoReflect.Descriptor instead.
 func (*ConfirmLinkMezonOTPData) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{75}
+	return file_realtime_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *ConfirmLinkMezonOTPData) GetType() int32 {
@@ -8001,7 +8086,7 @@ type UserProfileRedis struct {
 
 func (x *UserProfileRedis) Reset() {
 	*x = UserProfileRedis{}
-	mi := &file_realtime_proto_msgTypes[76]
+	mi := &file_realtime_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8013,7 +8098,7 @@ func (x *UserProfileRedis) String() string {
 func (*UserProfileRedis) ProtoMessage() {}
 
 func (x *UserProfileRedis) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[76]
+	mi := &file_realtime_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8026,7 +8111,7 @@ func (x *UserProfileRedis) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserProfileRedis.ProtoReflect.Descriptor instead.
 func (*UserProfileRedis) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{76}
+	return file_realtime_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *UserProfileRedis) GetUserId() int64 {
@@ -8141,7 +8226,7 @@ type FCMTokens struct {
 
 func (x *FCMTokens) Reset() {
 	*x = FCMTokens{}
-	mi := &file_realtime_proto_msgTypes[77]
+	mi := &file_realtime_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8153,7 +8238,7 @@ func (x *FCMTokens) String() string {
 func (*FCMTokens) ProtoMessage() {}
 
 func (x *FCMTokens) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[77]
+	mi := &file_realtime_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8166,7 +8251,7 @@ func (x *FCMTokens) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FCMTokens.ProtoReflect.Descriptor instead.
 func (*FCMTokens) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{77}
+	return file_realtime_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *FCMTokens) GetDeviceId() string {
@@ -8208,7 +8293,7 @@ type CheckNameExistedEvent struct {
 
 func (x *CheckNameExistedEvent) Reset() {
 	*x = CheckNameExistedEvent{}
-	mi := &file_realtime_proto_msgTypes[78]
+	mi := &file_realtime_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8220,7 +8305,7 @@ func (x *CheckNameExistedEvent) String() string {
 func (*CheckNameExistedEvent) ProtoMessage() {}
 
 func (x *CheckNameExistedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[78]
+	mi := &file_realtime_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8233,7 +8318,7 @@ func (x *CheckNameExistedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckNameExistedEvent.ProtoReflect.Descriptor instead.
 func (*CheckNameExistedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{78}
+	return file_realtime_proto_rawDescGZIP(), []int{79}
 }
 
 func (x *CheckNameExistedEvent) GetName() string {
@@ -8287,7 +8372,7 @@ type NotificationChannelCategorySetting struct {
 
 func (x *NotificationChannelCategorySetting) Reset() {
 	*x = NotificationChannelCategorySetting{}
-	mi := &file_realtime_proto_msgTypes[79]
+	mi := &file_realtime_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8299,7 +8384,7 @@ func (x *NotificationChannelCategorySetting) String() string {
 func (*NotificationChannelCategorySetting) ProtoMessage() {}
 
 func (x *NotificationChannelCategorySetting) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[79]
+	mi := &file_realtime_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8312,7 +8397,7 @@ func (x *NotificationChannelCategorySetting) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use NotificationChannelCategorySetting.ProtoReflect.Descriptor instead.
 func (*NotificationChannelCategorySetting) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{79}
+	return file_realtime_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *NotificationChannelCategorySetting) GetId() int64 {
@@ -8368,7 +8453,7 @@ type EventEmoji struct {
 
 func (x *EventEmoji) Reset() {
 	*x = EventEmoji{}
-	mi := &file_realtime_proto_msgTypes[80]
+	mi := &file_realtime_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8380,7 +8465,7 @@ func (x *EventEmoji) String() string {
 func (*EventEmoji) ProtoMessage() {}
 
 func (x *EventEmoji) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[80]
+	mi := &file_realtime_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8393,7 +8478,7 @@ func (x *EventEmoji) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventEmoji.ProtoReflect.Descriptor instead.
 func (*EventEmoji) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{80}
+	return file_realtime_proto_rawDescGZIP(), []int{81}
 }
 
 func (x *EventEmoji) GetId() int64 {
@@ -8479,7 +8564,7 @@ type PermissionSetEvent struct {
 
 func (x *PermissionSetEvent) Reset() {
 	*x = PermissionSetEvent{}
-	mi := &file_realtime_proto_msgTypes[81]
+	mi := &file_realtime_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8491,7 +8576,7 @@ func (x *PermissionSetEvent) String() string {
 func (*PermissionSetEvent) ProtoMessage() {}
 
 func (x *PermissionSetEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[81]
+	mi := &file_realtime_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8504,7 +8589,7 @@ func (x *PermissionSetEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PermissionSetEvent.ProtoReflect.Descriptor instead.
 func (*PermissionSetEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{81}
+	return file_realtime_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *PermissionSetEvent) GetCaller() string {
@@ -8555,7 +8640,7 @@ type PermissionChangedEvent struct {
 
 func (x *PermissionChangedEvent) Reset() {
 	*x = PermissionChangedEvent{}
-	mi := &file_realtime_proto_msgTypes[82]
+	mi := &file_realtime_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8567,7 +8652,7 @@ func (x *PermissionChangedEvent) String() string {
 func (*PermissionChangedEvent) ProtoMessage() {}
 
 func (x *PermissionChangedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[82]
+	mi := &file_realtime_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8580,7 +8665,7 @@ func (x *PermissionChangedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PermissionChangedEvent.ProtoReflect.Descriptor instead.
 func (*PermissionChangedEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{82}
+	return file_realtime_proto_rawDescGZIP(), []int{83}
 }
 
 func (x *PermissionChangedEvent) GetUserId() int64 {
@@ -8632,7 +8717,7 @@ type MessageButtonClicked struct {
 
 func (x *MessageButtonClicked) Reset() {
 	*x = MessageButtonClicked{}
-	mi := &file_realtime_proto_msgTypes[83]
+	mi := &file_realtime_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8644,7 +8729,7 @@ func (x *MessageButtonClicked) String() string {
 func (*MessageButtonClicked) ProtoMessage() {}
 
 func (x *MessageButtonClicked) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[83]
+	mi := &file_realtime_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8657,7 +8742,7 @@ func (x *MessageButtonClicked) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessageButtonClicked.ProtoReflect.Descriptor instead.
 func (*MessageButtonClicked) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{83}
+	return file_realtime_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *MessageButtonClicked) GetMessageId() int64 {
@@ -8716,7 +8801,7 @@ type UnmuteEvent struct {
 
 func (x *UnmuteEvent) Reset() {
 	*x = UnmuteEvent{}
-	mi := &file_realtime_proto_msgTypes[84]
+	mi := &file_realtime_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8728,7 +8813,7 @@ func (x *UnmuteEvent) String() string {
 func (*UnmuteEvent) ProtoMessage() {}
 
 func (x *UnmuteEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[84]
+	mi := &file_realtime_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8741,7 +8826,7 @@ func (x *UnmuteEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnmuteEvent.ProtoReflect.Descriptor instead.
 func (*UnmuteEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{84}
+	return file_realtime_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *UnmuteEvent) GetChannelId() int64 {
@@ -8774,7 +8859,7 @@ type ListActivity struct {
 
 func (x *ListActivity) Reset() {
 	*x = ListActivity{}
-	mi := &file_realtime_proto_msgTypes[85]
+	mi := &file_realtime_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8786,7 +8871,7 @@ func (x *ListActivity) String() string {
 func (*ListActivity) ProtoMessage() {}
 
 func (x *ListActivity) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[85]
+	mi := &file_realtime_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8799,7 +8884,7 @@ func (x *ListActivity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListActivity.ProtoReflect.Descriptor instead.
 func (*ListActivity) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{85}
+	return file_realtime_proto_rawDescGZIP(), []int{86}
 }
 
 func (x *ListActivity) GetActs() []*api.UserActivity {
@@ -8823,7 +8908,7 @@ type DropdownBoxSelected struct {
 
 func (x *DropdownBoxSelected) Reset() {
 	*x = DropdownBoxSelected{}
-	mi := &file_realtime_proto_msgTypes[86]
+	mi := &file_realtime_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8835,7 +8920,7 @@ func (x *DropdownBoxSelected) String() string {
 func (*DropdownBoxSelected) ProtoMessage() {}
 
 func (x *DropdownBoxSelected) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[86]
+	mi := &file_realtime_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8848,7 +8933,7 @@ func (x *DropdownBoxSelected) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DropdownBoxSelected.ProtoReflect.Descriptor instead.
 func (*DropdownBoxSelected) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{86}
+	return file_realtime_proto_rawDescGZIP(), []int{87}
 }
 
 func (x *DropdownBoxSelected) GetMessageId() int64 {
@@ -8908,7 +8993,7 @@ type SdTopicEvent struct {
 
 func (x *SdTopicEvent) Reset() {
 	*x = SdTopicEvent{}
-	mi := &file_realtime_proto_msgTypes[87]
+	mi := &file_realtime_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8920,7 +9005,7 @@ func (x *SdTopicEvent) String() string {
 func (*SdTopicEvent) ProtoMessage() {}
 
 func (x *SdTopicEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[87]
+	mi := &file_realtime_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8933,7 +9018,7 @@ func (x *SdTopicEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SdTopicEvent.ProtoReflect.Descriptor instead.
 func (*SdTopicEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{87}
+	return file_realtime_proto_rawDescGZIP(), []int{88}
 }
 
 func (x *SdTopicEvent) GetId() int64 {
@@ -8998,7 +9083,7 @@ type ChannelAppEvent struct {
 
 func (x *ChannelAppEvent) Reset() {
 	*x = ChannelAppEvent{}
-	mi := &file_realtime_proto_msgTypes[88]
+	mi := &file_realtime_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9010,7 +9095,7 @@ func (x *ChannelAppEvent) String() string {
 func (*ChannelAppEvent) ProtoMessage() {}
 
 func (x *ChannelAppEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[88]
+	mi := &file_realtime_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9023,7 +9108,7 @@ func (x *ChannelAppEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelAppEvent.ProtoReflect.Descriptor instead.
 func (*ChannelAppEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{88}
+	return file_realtime_proto_rawDescGZIP(), []int{89}
 }
 
 func (x *ChannelAppEvent) GetUserId() int64 {
@@ -9071,7 +9156,7 @@ type UserStatusEvent struct {
 
 func (x *UserStatusEvent) Reset() {
 	*x = UserStatusEvent{}
-	mi := &file_realtime_proto_msgTypes[89]
+	mi := &file_realtime_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9083,7 +9168,7 @@ func (x *UserStatusEvent) String() string {
 func (*UserStatusEvent) ProtoMessage() {}
 
 func (x *UserStatusEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[89]
+	mi := &file_realtime_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9096,7 +9181,7 @@ func (x *UserStatusEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserStatusEvent.ProtoReflect.Descriptor instead.
 func (*UserStatusEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{89}
+	return file_realtime_proto_rawDescGZIP(), []int{90}
 }
 
 func (x *UserStatusEvent) GetUserId() int64 {
@@ -9124,7 +9209,7 @@ type JoinChannelAppData struct {
 
 func (x *JoinChannelAppData) Reset() {
 	*x = JoinChannelAppData{}
-	mi := &file_realtime_proto_msgTypes[90]
+	mi := &file_realtime_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9136,7 +9221,7 @@ func (x *JoinChannelAppData) String() string {
 func (*JoinChannelAppData) ProtoMessage() {}
 
 func (x *JoinChannelAppData) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[90]
+	mi := &file_realtime_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9149,7 +9234,7 @@ func (x *JoinChannelAppData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinChannelAppData.ProtoReflect.Descriptor instead.
 func (*JoinChannelAppData) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{90}
+	return file_realtime_proto_rawDescGZIP(), []int{91}
 }
 
 func (x *JoinChannelAppData) GetUserId() int64 {
@@ -9185,7 +9270,7 @@ type UnpinMessageEvent struct {
 
 func (x *UnpinMessageEvent) Reset() {
 	*x = UnpinMessageEvent{}
-	mi := &file_realtime_proto_msgTypes[91]
+	mi := &file_realtime_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9197,7 +9282,7 @@ func (x *UnpinMessageEvent) String() string {
 func (*UnpinMessageEvent) ProtoMessage() {}
 
 func (x *UnpinMessageEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[91]
+	mi := &file_realtime_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9210,7 +9295,7 @@ func (x *UnpinMessageEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnpinMessageEvent.ProtoReflect.Descriptor instead.
 func (*UnpinMessageEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{91}
+	return file_realtime_proto_rawDescGZIP(), []int{92}
 }
 
 func (x *UnpinMessageEvent) GetId() int64 {
@@ -9259,7 +9344,7 @@ type HandleParticipantMeetStateEvent struct {
 
 func (x *HandleParticipantMeetStateEvent) Reset() {
 	*x = HandleParticipantMeetStateEvent{}
-	mi := &file_realtime_proto_msgTypes[92]
+	mi := &file_realtime_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9271,7 +9356,7 @@ func (x *HandleParticipantMeetStateEvent) String() string {
 func (*HandleParticipantMeetStateEvent) ProtoMessage() {}
 
 func (x *HandleParticipantMeetStateEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[92]
+	mi := &file_realtime_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9284,7 +9369,7 @@ func (x *HandleParticipantMeetStateEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HandleParticipantMeetStateEvent.ProtoReflect.Descriptor instead.
 func (*HandleParticipantMeetStateEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{92}
+	return file_realtime_proto_rawDescGZIP(), []int{93}
 }
 
 func (x *HandleParticipantMeetStateEvent) GetClanId() int64 {
@@ -9332,7 +9417,7 @@ type DeleteAccountEvent struct {
 
 func (x *DeleteAccountEvent) Reset() {
 	*x = DeleteAccountEvent{}
-	mi := &file_realtime_proto_msgTypes[93]
+	mi := &file_realtime_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9344,7 +9429,7 @@ func (x *DeleteAccountEvent) String() string {
 func (*DeleteAccountEvent) ProtoMessage() {}
 
 func (x *DeleteAccountEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[93]
+	mi := &file_realtime_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9357,7 +9442,7 @@ func (x *DeleteAccountEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAccountEvent.ProtoReflect.Descriptor instead.
 func (*DeleteAccountEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{93}
+	return file_realtime_proto_rawDescGZIP(), []int{94}
 }
 
 func (x *DeleteAccountEvent) GetUserId() int64 {
@@ -9382,7 +9467,7 @@ type ListDataSocket struct {
 
 func (x *ListDataSocket) Reset() {
 	*x = ListDataSocket{}
-	mi := &file_realtime_proto_msgTypes[94]
+	mi := &file_realtime_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9394,7 +9479,7 @@ func (x *ListDataSocket) String() string {
 func (*ListDataSocket) ProtoMessage() {}
 
 func (x *ListDataSocket) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[94]
+	mi := &file_realtime_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9407,7 +9492,7 @@ func (x *ListDataSocket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDataSocket.ProtoReflect.Descriptor instead.
 func (*ListDataSocket) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{94}
+	return file_realtime_proto_rawDescGZIP(), []int{95}
 }
 
 func (x *ListDataSocket) GetApiName() string {
@@ -9472,7 +9557,7 @@ type MeetParticipantEvent struct {
 
 func (x *MeetParticipantEvent) Reset() {
 	*x = MeetParticipantEvent{}
-	mi := &file_realtime_proto_msgTypes[95]
+	mi := &file_realtime_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9484,7 +9569,7 @@ func (x *MeetParticipantEvent) String() string {
 func (*MeetParticipantEvent) ProtoMessage() {}
 
 func (x *MeetParticipantEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[95]
+	mi := &file_realtime_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9497,7 +9582,7 @@ func (x *MeetParticipantEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MeetParticipantEvent.ProtoReflect.Descriptor instead.
 func (*MeetParticipantEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{95}
+	return file_realtime_proto_rawDescGZIP(), []int{96}
 }
 
 func (x *MeetParticipantEvent) GetUsername() string {
@@ -9546,7 +9631,7 @@ type TransferOwnershipEvent struct {
 
 func (x *TransferOwnershipEvent) Reset() {
 	*x = TransferOwnershipEvent{}
-	mi := &file_realtime_proto_msgTypes[96]
+	mi := &file_realtime_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9558,7 +9643,7 @@ func (x *TransferOwnershipEvent) String() string {
 func (*TransferOwnershipEvent) ProtoMessage() {}
 
 func (x *TransferOwnershipEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[96]
+	mi := &file_realtime_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9571,7 +9656,7 @@ func (x *TransferOwnershipEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferOwnershipEvent.ProtoReflect.Descriptor instead.
 func (*TransferOwnershipEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{96}
+	return file_realtime_proto_rawDescGZIP(), []int{97}
 }
 
 func (x *TransferOwnershipEvent) GetClanId() int64 {
@@ -9605,7 +9690,7 @@ type ActiveArchivedThread struct {
 
 func (x *ActiveArchivedThread) Reset() {
 	*x = ActiveArchivedThread{}
-	mi := &file_realtime_proto_msgTypes[97]
+	mi := &file_realtime_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9617,7 +9702,7 @@ func (x *ActiveArchivedThread) String() string {
 func (*ActiveArchivedThread) ProtoMessage() {}
 
 func (x *ActiveArchivedThread) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[97]
+	mi := &file_realtime_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9630,7 +9715,7 @@ func (x *ActiveArchivedThread) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActiveArchivedThread.ProtoReflect.Descriptor instead.
 func (*ActiveArchivedThread) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{97}
+	return file_realtime_proto_rawDescGZIP(), []int{98}
 }
 
 func (x *ActiveArchivedThread) GetClanId() int64 {
@@ -9657,7 +9742,7 @@ type AllowAnonymousEvent struct {
 
 func (x *AllowAnonymousEvent) Reset() {
 	*x = AllowAnonymousEvent{}
-	mi := &file_realtime_proto_msgTypes[98]
+	mi := &file_realtime_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9669,7 +9754,7 @@ func (x *AllowAnonymousEvent) String() string {
 func (*AllowAnonymousEvent) ProtoMessage() {}
 
 func (x *AllowAnonymousEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[98]
+	mi := &file_realtime_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9682,7 +9767,7 @@ func (x *AllowAnonymousEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AllowAnonymousEvent.ProtoReflect.Descriptor instead.
 func (*AllowAnonymousEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{98}
+	return file_realtime_proto_rawDescGZIP(), []int{99}
 }
 
 func (x *AllowAnonymousEvent) GetClanId() int64 {
@@ -9721,7 +9806,7 @@ type FcmDataPayload struct {
 
 func (x *FcmDataPayload) Reset() {
 	*x = FcmDataPayload{}
-	mi := &file_realtime_proto_msgTypes[99]
+	mi := &file_realtime_proto_msgTypes[100]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9733,7 +9818,7 @@ func (x *FcmDataPayload) String() string {
 func (*FcmDataPayload) ProtoMessage() {}
 
 func (x *FcmDataPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[99]
+	mi := &file_realtime_proto_msgTypes[100]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9746,7 +9831,7 @@ func (x *FcmDataPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FcmDataPayload.ProtoReflect.Descriptor instead.
 func (*FcmDataPayload) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{99}
+	return file_realtime_proto_rawDescGZIP(), []int{100}
 }
 
 func (x *FcmDataPayload) GetCommandType() int32 {
@@ -9859,7 +9944,7 @@ type AIAgentEnabledEvent struct {
 
 func (x *AIAgentEnabledEvent) Reset() {
 	*x = AIAgentEnabledEvent{}
-	mi := &file_realtime_proto_msgTypes[100]
+	mi := &file_realtime_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9871,7 +9956,7 @@ func (x *AIAgentEnabledEvent) String() string {
 func (*AIAgentEnabledEvent) ProtoMessage() {}
 
 func (x *AIAgentEnabledEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[100]
+	mi := &file_realtime_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9884,7 +9969,7 @@ func (x *AIAgentEnabledEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIAgentEnabledEvent.ProtoReflect.Descriptor instead.
 func (*AIAgentEnabledEvent) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{100}
+	return file_realtime_proto_rawDescGZIP(), []int{101}
 }
 
 func (x *AIAgentEnabledEvent) GetClanId() int64 {
@@ -9933,7 +10018,7 @@ type GotifyMessage struct {
 
 func (x *GotifyMessage) Reset() {
 	*x = GotifyMessage{}
-	mi := &file_realtime_proto_msgTypes[101]
+	mi := &file_realtime_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9945,7 +10030,7 @@ func (x *GotifyMessage) String() string {
 func (*GotifyMessage) ProtoMessage() {}
 
 func (x *GotifyMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_realtime_proto_msgTypes[101]
+	mi := &file_realtime_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9958,7 +10043,7 @@ func (x *GotifyMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GotifyMessage.ProtoReflect.Descriptor instead.
 func (*GotifyMessage) Descriptor() ([]byte, []int) {
-	return file_realtime_proto_rawDescGZIP(), []int{101}
+	return file_realtime_proto_rawDescGZIP(), []int{102}
 }
 
 func (x *GotifyMessage) GetId() uint32 {
@@ -10035,7 +10120,7 @@ var File_realtime_proto protoreflect.FileDescriptor
 
 const file_realtime_proto_rawDesc = "" +
 	"\n" +
-	"\x0erealtime.proto\x12\x0emezon.realtime\x1a\rapi/api.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xd8=\n" +
+	"\x0erealtime.proto\x12\x0emezon.realtime\x1a\rapi/api.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xaa>\n" +
 	"\bEnvelope\x12\x10\n" +
 	"\x03cid\x18\x01 \x01(\x05R\x03cid\x123\n" +
 	"\achannel\x18\x02 \x01(\v2\x17.mezon.realtime.ChannelH\x00R\achannel\x127\n" +
@@ -10140,8 +10225,15 @@ const file_realtime_proto_rawDesc = "" +
 	"\x1flist_channel_users_banned_event\x18_ \x01(\v2+.mezon.realtime.ListChannelUsersBannedEventH\x00R\x1blistChannelUsersBannedEvent\x12H\n" +
 	"\x15refresh_session_event\x18` \x01(\v2\x12.mezon.api.SessionH\x00R\x13refreshSessionEvent\x12Y\n" +
 	"\x15channel_archive_event\x18a \x01(\v2#.mezon.realtime.ChannelArchiveEventH\x00R\x13channelArchiveEvent\x12Z\n" +
-	"\x16topic_in_message_event\x18b \x01(\v2#.mezon.realtime.TopicInMessageEventH\x00R\x13topicInMessageEventB\t\n" +
-	"\amessage\"o\n" +
+	"\x16topic_in_message_event\x18b \x01(\v2#.mezon.realtime.TopicInMessageEventH\x00R\x13topicInMessageEvent\x12P\n" +
+	"\x12screen_share_event\x18c \x01(\v2 .mezon.realtime.ScreenShareEventH\x00R\x10screenShareEventB\t\n" +
+	"\amessage\"\x8d\x01\n" +
+	"\x10ScreenShareEvent\x12\x17\n" +
+	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\x12(\n" +
+	"\x10voice_channel_id\x18\x02 \x01(\x03R\x0evoiceChannelId\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x1d\n" +
+	"\n" +
+	"is_sharing\x18\x04 \x01(\bR\tisSharing\"o\n" +
 	"\x13TopicInMessageEvent\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x01 \x01(\x03R\tmessageId\x12\x10\n" +
@@ -10905,294 +10997,296 @@ func file_realtime_proto_rawDescGZIP() []byte {
 }
 
 var file_realtime_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_realtime_proto_msgTypes = make([]protoimpl.MessageInfo, 104)
+var file_realtime_proto_msgTypes = make([]protoimpl.MessageInfo, 105)
 var file_realtime_proto_goTypes = []any{
 	(Error_Code)(0),                            // 0: mezon.realtime.Error.Code
 	(*Envelope)(nil),                           // 1: mezon.realtime.Envelope
-	(*TopicInMessageEvent)(nil),                // 2: mezon.realtime.TopicInMessageEvent
-	(*ApiRequestEvent)(nil),                    // 3: mezon.realtime.ApiRequestEvent
-	(*FollowEvent)(nil),                        // 4: mezon.realtime.FollowEvent
-	(*BannedUserEvent)(nil),                    // 5: mezon.realtime.BannedUserEvent
-	(*ListChannelUsersBannedEvent)(nil),        // 6: mezon.realtime.ListChannelUsersBannedEvent
-	(*ChannelCanvas)(nil),                      // 7: mezon.realtime.ChannelCanvas
-	(*IncomingCallPush)(nil),                   // 8: mezon.realtime.IncomingCallPush
-	(*WebrtcSignalingFwd)(nil),                 // 9: mezon.realtime.WebrtcSignalingFwd
-	(*SFUSignalingFwd)(nil),                    // 10: mezon.realtime.SFUSignalingFwd
-	(*AddClanUserEvent)(nil),                   // 11: mezon.realtime.AddClanUserEvent
-	(*RoleAssignedEvent)(nil),                  // 12: mezon.realtime.RoleAssignedEvent
-	(*PermissionRoleChannel)(nil),              // 13: mezon.realtime.PermissionRoleChannel
-	(*HashtagDm)(nil),                          // 14: mezon.realtime.HashtagDm
-	(*ChannelDescription)(nil),                 // 15: mezon.realtime.ChannelDescription
-	(*ClanEmoji)(nil),                          // 16: mezon.realtime.ClanEmoji
-	(*Channel)(nil),                            // 17: mezon.realtime.Channel
-	(*ClanJoin)(nil),                           // 18: mezon.realtime.ClanJoin
-	(*ChannelJoin)(nil),                        // 19: mezon.realtime.ChannelJoin
-	(*ChannelLeave)(nil),                       // 20: mezon.realtime.ChannelLeave
-	(*ChannelMessageAck)(nil),                  // 21: mezon.realtime.ChannelMessageAck
-	(*EphemeralMessageSend)(nil),               // 22: mezon.realtime.EphemeralMessageSend
-	(*QuickMenuDataEvent)(nil),                 // 23: mezon.realtime.QuickMenuDataEvent
-	(*VoiceReactionSend)(nil),                  // 24: mezon.realtime.VoiceReactionSend
-	(*MarkAsRead)(nil),                         // 25: mezon.realtime.MarkAsRead
-	(*ChannelMessageSend)(nil),                 // 26: mezon.realtime.ChannelMessageSend
-	(*ChannelMessageUpdate)(nil),               // 27: mezon.realtime.ChannelMessageUpdate
-	(*ChannelMessageRemove)(nil),               // 28: mezon.realtime.ChannelMessageRemove
-	(*ChannelPresenceEvent)(nil),               // 29: mezon.realtime.ChannelPresenceEvent
-	(*Error)(nil),                              // 30: mezon.realtime.Error
-	(*Notifications)(nil),                      // 31: mezon.realtime.Notifications
-	(*AddFriend)(nil),                          // 32: mezon.realtime.AddFriend
-	(*RemoveFriend)(nil),                       // 33: mezon.realtime.RemoveFriend
-	(*BlockFriend)(nil),                        // 34: mezon.realtime.BlockFriend
-	(*UnblockFriend)(nil),                      // 35: mezon.realtime.UnblockFriend
-	(*Ping)(nil),                               // 36: mezon.realtime.Ping
-	(*Pong)(nil),                               // 37: mezon.realtime.Pong
-	(*Status)(nil),                             // 38: mezon.realtime.Status
-	(*StatusFollow)(nil),                       // 39: mezon.realtime.StatusFollow
-	(*StatusPresenceEvent)(nil),                // 40: mezon.realtime.StatusPresenceEvent
-	(*LastPinMessageEvent)(nil),                // 41: mezon.realtime.LastPinMessageEvent
-	(*LastSeenMessageEvent)(nil),               // 42: mezon.realtime.LastSeenMessageEvent
-	(*MessageTypingEvent)(nil),                 // 43: mezon.realtime.MessageTypingEvent
-	(*VoiceLeavedEvent)(nil),                   // 44: mezon.realtime.VoiceLeavedEvent
-	(*VoiceJoinedEvent)(nil),                   // 45: mezon.realtime.VoiceJoinedEvent
-	(*VoiceStartedEvent)(nil),                  // 46: mezon.realtime.VoiceStartedEvent
-	(*VoiceEndedEvent)(nil),                    // 47: mezon.realtime.VoiceEndedEvent
-	(*StreamingLeavedEvent)(nil),               // 48: mezon.realtime.StreamingLeavedEvent
-	(*StreamingJoinedEvent)(nil),               // 49: mezon.realtime.StreamingJoinedEvent
-	(*StreamingStartedEvent)(nil),              // 50: mezon.realtime.StreamingStartedEvent
-	(*StreamingEndedEvent)(nil),                // 51: mezon.realtime.StreamingEndedEvent
-	(*ChannelCreatedEvent)(nil),                // 52: mezon.realtime.ChannelCreatedEvent
-	(*CategoryEvent)(nil),                      // 53: mezon.realtime.CategoryEvent
-	(*RoleEvent)(nil),                          // 54: mezon.realtime.RoleEvent
-	(*ChannelDeletedEvent)(nil),                // 55: mezon.realtime.ChannelDeletedEvent
-	(*ClanDeletedEvent)(nil),                   // 56: mezon.realtime.ClanDeletedEvent
-	(*StickerCreateEvent)(nil),                 // 57: mezon.realtime.StickerCreateEvent
-	(*StickerUpdateEvent)(nil),                 // 58: mezon.realtime.StickerUpdateEvent
-	(*StickerDeleteEvent)(nil),                 // 59: mezon.realtime.StickerDeleteEvent
-	(*ChannelUpdatedEvent)(nil),                // 60: mezon.realtime.ChannelUpdatedEvent
-	(*ChannelArchiveEvent)(nil),                // 61: mezon.realtime.ChannelArchiveEvent
-	(*StatusUnfollow)(nil),                     // 62: mezon.realtime.StatusUnfollow
-	(*StatusUpdate)(nil),                       // 63: mezon.realtime.StatusUpdate
-	(*Stream)(nil),                             // 64: mezon.realtime.Stream
-	(*StreamData)(nil),                         // 65: mezon.realtime.StreamData
-	(*StreamPresenceEvent)(nil),                // 66: mezon.realtime.StreamPresenceEvent
-	(*UserPresence)(nil),                       // 67: mezon.realtime.UserPresence
-	(*CustomStatusEvent)(nil),                  // 68: mezon.realtime.CustomStatusEvent
-	(*UserChannelAdded)(nil),                   // 69: mezon.realtime.UserChannelAdded
-	(*UserChannelRemoved)(nil),                 // 70: mezon.realtime.UserChannelRemoved
-	(*UserClanRemoved)(nil),                    // 71: mezon.realtime.UserClanRemoved
-	(*ClanCreatedEvent)(nil),                   // 72: mezon.realtime.ClanCreatedEvent
-	(*ClanUpdatedEvent)(nil),                   // 73: mezon.realtime.ClanUpdatedEvent
-	(*ClanProfileUpdatedEvent)(nil),            // 74: mezon.realtime.ClanProfileUpdatedEvent
-	(*UserProfileUpdatedEvent)(nil),            // 75: mezon.realtime.UserProfileUpdatedEvent
-	(*ConfirmLinkMezonOTPData)(nil),            // 76: mezon.realtime.ConfirmLinkMezonOTPData
-	(*UserProfileRedis)(nil),                   // 77: mezon.realtime.UserProfileRedis
-	(*FCMTokens)(nil),                          // 78: mezon.realtime.FCMTokens
-	(*CheckNameExistedEvent)(nil),              // 79: mezon.realtime.CheckNameExistedEvent
-	(*NotificationChannelCategorySetting)(nil), // 80: mezon.realtime.NotificationChannelCategorySetting
-	(*EventEmoji)(nil),                         // 81: mezon.realtime.EventEmoji
-	(*PermissionSetEvent)(nil),                 // 82: mezon.realtime.PermissionSetEvent
-	(*PermissionChangedEvent)(nil),             // 83: mezon.realtime.PermissionChangedEvent
-	(*MessageButtonClicked)(nil),               // 84: mezon.realtime.MessageButtonClicked
-	(*UnmuteEvent)(nil),                        // 85: mezon.realtime.UnmuteEvent
-	(*ListActivity)(nil),                       // 86: mezon.realtime.ListActivity
-	(*DropdownBoxSelected)(nil),                // 87: mezon.realtime.DropdownBoxSelected
-	(*SdTopicEvent)(nil),                       // 88: mezon.realtime.SdTopicEvent
-	(*ChannelAppEvent)(nil),                    // 89: mezon.realtime.ChannelAppEvent
-	(*UserStatusEvent)(nil),                    // 90: mezon.realtime.UserStatusEvent
-	(*JoinChannelAppData)(nil),                 // 91: mezon.realtime.JoinChannelAppData
-	(*UnpinMessageEvent)(nil),                  // 92: mezon.realtime.UnpinMessageEvent
-	(*HandleParticipantMeetStateEvent)(nil),    // 93: mezon.realtime.HandleParticipantMeetStateEvent
-	(*DeleteAccountEvent)(nil),                 // 94: mezon.realtime.DeleteAccountEvent
-	(*ListDataSocket)(nil),                     // 95: mezon.realtime.ListDataSocket
-	(*MeetParticipantEvent)(nil),               // 96: mezon.realtime.MeetParticipantEvent
-	(*TransferOwnershipEvent)(nil),             // 97: mezon.realtime.TransferOwnershipEvent
-	(*ActiveArchivedThread)(nil),               // 98: mezon.realtime.ActiveArchivedThread
-	(*AllowAnonymousEvent)(nil),                // 99: mezon.realtime.AllowAnonymousEvent
-	(*FcmDataPayload)(nil),                     // 100: mezon.realtime.FcmDataPayload
-	(*AIAgentEnabledEvent)(nil),                // 101: mezon.realtime.AIAgentEnabledEvent
-	(*GotifyMessage)(nil),                      // 102: mezon.realtime.GotifyMessage
-	nil,                                        // 103: mezon.realtime.Error.ContextEntry
-	nil,                                        // 104: mezon.realtime.GotifyMessage.ExtrasEntry
-	(*api.ChannelMessage)(nil),                 // 105: mezon.api.ChannelMessage
-	(*api.Rpc)(nil),                            // 106: mezon.api.Rpc
-	(*api.MessageReaction)(nil),                // 107: mezon.api.MessageReaction
-	(*api.CreateEventRequest)(nil),             // 108: mezon.api.CreateEventRequest
-	(*api.GiveCoffeeEvent)(nil),                // 109: mezon.api.GiveCoffeeEvent
-	(*api.TokenSentEvent)(nil),                 // 110: mezon.api.TokenSentEvent
-	(*api.Webhook)(nil),                        // 111: mezon.api.Webhook
-	(*api.NotificationUserChannel)(nil),        // 112: mezon.api.NotificationUserChannel
-	(*api.Session)(nil),                        // 113: mezon.api.Session
-	(*wrapperspb.Int32Value)(nil),              // 114: google.protobuf.Int32Value
-	(*api.ChannelMessageHeader)(nil),           // 115: mezon.api.ChannelMessageHeader
-	(*wrapperspb.BoolValue)(nil),               // 116: google.protobuf.BoolValue
-	(*api.MessageMention)(nil),                 // 117: mezon.api.MessageMention
-	(*api.MessageAttachment)(nil),              // 118: mezon.api.MessageAttachment
-	(*api.MessageRef)(nil),                     // 119: mezon.api.MessageRef
-	(*api.Notification)(nil),                   // 120: mezon.api.Notification
-	(*api.Role)(nil),                           // 121: mezon.api.Role
-	(*wrapperspb.StringValue)(nil),             // 122: google.protobuf.StringValue
-	(*api.ChannelDescription)(nil),             // 123: mezon.api.ChannelDescription
-	(*api.PermissionUpdate)(nil),               // 124: mezon.api.PermissionUpdate
-	(*api.UserActivity)(nil),                   // 125: mezon.api.UserActivity
-	(*api.ListChannelBadgeCountRequest)(nil),   // 126: mezon.api.ListChannelBadgeCountRequest
-	(*api.ListChannelBadgeCountResponse)(nil),  // 127: mezon.api.ListChannelBadgeCountResponse
-	(*api.ListClanBadgeCountResponse)(nil),     // 128: mezon.api.ListClanBadgeCountResponse
-	(*api.LogedDeviceList)(nil),                // 129: mezon.api.LogedDeviceList
-	(*api.ListUserOnlineRequest)(nil),          // 130: mezon.api.ListUserOnlineRequest
-	(*api.ListUserOnlineResponse)(nil),         // 131: mezon.api.ListUserOnlineResponse
+	(*ScreenShareEvent)(nil),                   // 2: mezon.realtime.ScreenShareEvent
+	(*TopicInMessageEvent)(nil),                // 3: mezon.realtime.TopicInMessageEvent
+	(*ApiRequestEvent)(nil),                    // 4: mezon.realtime.ApiRequestEvent
+	(*FollowEvent)(nil),                        // 5: mezon.realtime.FollowEvent
+	(*BannedUserEvent)(nil),                    // 6: mezon.realtime.BannedUserEvent
+	(*ListChannelUsersBannedEvent)(nil),        // 7: mezon.realtime.ListChannelUsersBannedEvent
+	(*ChannelCanvas)(nil),                      // 8: mezon.realtime.ChannelCanvas
+	(*IncomingCallPush)(nil),                   // 9: mezon.realtime.IncomingCallPush
+	(*WebrtcSignalingFwd)(nil),                 // 10: mezon.realtime.WebrtcSignalingFwd
+	(*SFUSignalingFwd)(nil),                    // 11: mezon.realtime.SFUSignalingFwd
+	(*AddClanUserEvent)(nil),                   // 12: mezon.realtime.AddClanUserEvent
+	(*RoleAssignedEvent)(nil),                  // 13: mezon.realtime.RoleAssignedEvent
+	(*PermissionRoleChannel)(nil),              // 14: mezon.realtime.PermissionRoleChannel
+	(*HashtagDm)(nil),                          // 15: mezon.realtime.HashtagDm
+	(*ChannelDescription)(nil),                 // 16: mezon.realtime.ChannelDescription
+	(*ClanEmoji)(nil),                          // 17: mezon.realtime.ClanEmoji
+	(*Channel)(nil),                            // 18: mezon.realtime.Channel
+	(*ClanJoin)(nil),                           // 19: mezon.realtime.ClanJoin
+	(*ChannelJoin)(nil),                        // 20: mezon.realtime.ChannelJoin
+	(*ChannelLeave)(nil),                       // 21: mezon.realtime.ChannelLeave
+	(*ChannelMessageAck)(nil),                  // 22: mezon.realtime.ChannelMessageAck
+	(*EphemeralMessageSend)(nil),               // 23: mezon.realtime.EphemeralMessageSend
+	(*QuickMenuDataEvent)(nil),                 // 24: mezon.realtime.QuickMenuDataEvent
+	(*VoiceReactionSend)(nil),                  // 25: mezon.realtime.VoiceReactionSend
+	(*MarkAsRead)(nil),                         // 26: mezon.realtime.MarkAsRead
+	(*ChannelMessageSend)(nil),                 // 27: mezon.realtime.ChannelMessageSend
+	(*ChannelMessageUpdate)(nil),               // 28: mezon.realtime.ChannelMessageUpdate
+	(*ChannelMessageRemove)(nil),               // 29: mezon.realtime.ChannelMessageRemove
+	(*ChannelPresenceEvent)(nil),               // 30: mezon.realtime.ChannelPresenceEvent
+	(*Error)(nil),                              // 31: mezon.realtime.Error
+	(*Notifications)(nil),                      // 32: mezon.realtime.Notifications
+	(*AddFriend)(nil),                          // 33: mezon.realtime.AddFriend
+	(*RemoveFriend)(nil),                       // 34: mezon.realtime.RemoveFriend
+	(*BlockFriend)(nil),                        // 35: mezon.realtime.BlockFriend
+	(*UnblockFriend)(nil),                      // 36: mezon.realtime.UnblockFriend
+	(*Ping)(nil),                               // 37: mezon.realtime.Ping
+	(*Pong)(nil),                               // 38: mezon.realtime.Pong
+	(*Status)(nil),                             // 39: mezon.realtime.Status
+	(*StatusFollow)(nil),                       // 40: mezon.realtime.StatusFollow
+	(*StatusPresenceEvent)(nil),                // 41: mezon.realtime.StatusPresenceEvent
+	(*LastPinMessageEvent)(nil),                // 42: mezon.realtime.LastPinMessageEvent
+	(*LastSeenMessageEvent)(nil),               // 43: mezon.realtime.LastSeenMessageEvent
+	(*MessageTypingEvent)(nil),                 // 44: mezon.realtime.MessageTypingEvent
+	(*VoiceLeavedEvent)(nil),                   // 45: mezon.realtime.VoiceLeavedEvent
+	(*VoiceJoinedEvent)(nil),                   // 46: mezon.realtime.VoiceJoinedEvent
+	(*VoiceStartedEvent)(nil),                  // 47: mezon.realtime.VoiceStartedEvent
+	(*VoiceEndedEvent)(nil),                    // 48: mezon.realtime.VoiceEndedEvent
+	(*StreamingLeavedEvent)(nil),               // 49: mezon.realtime.StreamingLeavedEvent
+	(*StreamingJoinedEvent)(nil),               // 50: mezon.realtime.StreamingJoinedEvent
+	(*StreamingStartedEvent)(nil),              // 51: mezon.realtime.StreamingStartedEvent
+	(*StreamingEndedEvent)(nil),                // 52: mezon.realtime.StreamingEndedEvent
+	(*ChannelCreatedEvent)(nil),                // 53: mezon.realtime.ChannelCreatedEvent
+	(*CategoryEvent)(nil),                      // 54: mezon.realtime.CategoryEvent
+	(*RoleEvent)(nil),                          // 55: mezon.realtime.RoleEvent
+	(*ChannelDeletedEvent)(nil),                // 56: mezon.realtime.ChannelDeletedEvent
+	(*ClanDeletedEvent)(nil),                   // 57: mezon.realtime.ClanDeletedEvent
+	(*StickerCreateEvent)(nil),                 // 58: mezon.realtime.StickerCreateEvent
+	(*StickerUpdateEvent)(nil),                 // 59: mezon.realtime.StickerUpdateEvent
+	(*StickerDeleteEvent)(nil),                 // 60: mezon.realtime.StickerDeleteEvent
+	(*ChannelUpdatedEvent)(nil),                // 61: mezon.realtime.ChannelUpdatedEvent
+	(*ChannelArchiveEvent)(nil),                // 62: mezon.realtime.ChannelArchiveEvent
+	(*StatusUnfollow)(nil),                     // 63: mezon.realtime.StatusUnfollow
+	(*StatusUpdate)(nil),                       // 64: mezon.realtime.StatusUpdate
+	(*Stream)(nil),                             // 65: mezon.realtime.Stream
+	(*StreamData)(nil),                         // 66: mezon.realtime.StreamData
+	(*StreamPresenceEvent)(nil),                // 67: mezon.realtime.StreamPresenceEvent
+	(*UserPresence)(nil),                       // 68: mezon.realtime.UserPresence
+	(*CustomStatusEvent)(nil),                  // 69: mezon.realtime.CustomStatusEvent
+	(*UserChannelAdded)(nil),                   // 70: mezon.realtime.UserChannelAdded
+	(*UserChannelRemoved)(nil),                 // 71: mezon.realtime.UserChannelRemoved
+	(*UserClanRemoved)(nil),                    // 72: mezon.realtime.UserClanRemoved
+	(*ClanCreatedEvent)(nil),                   // 73: mezon.realtime.ClanCreatedEvent
+	(*ClanUpdatedEvent)(nil),                   // 74: mezon.realtime.ClanUpdatedEvent
+	(*ClanProfileUpdatedEvent)(nil),            // 75: mezon.realtime.ClanProfileUpdatedEvent
+	(*UserProfileUpdatedEvent)(nil),            // 76: mezon.realtime.UserProfileUpdatedEvent
+	(*ConfirmLinkMezonOTPData)(nil),            // 77: mezon.realtime.ConfirmLinkMezonOTPData
+	(*UserProfileRedis)(nil),                   // 78: mezon.realtime.UserProfileRedis
+	(*FCMTokens)(nil),                          // 79: mezon.realtime.FCMTokens
+	(*CheckNameExistedEvent)(nil),              // 80: mezon.realtime.CheckNameExistedEvent
+	(*NotificationChannelCategorySetting)(nil), // 81: mezon.realtime.NotificationChannelCategorySetting
+	(*EventEmoji)(nil),                         // 82: mezon.realtime.EventEmoji
+	(*PermissionSetEvent)(nil),                 // 83: mezon.realtime.PermissionSetEvent
+	(*PermissionChangedEvent)(nil),             // 84: mezon.realtime.PermissionChangedEvent
+	(*MessageButtonClicked)(nil),               // 85: mezon.realtime.MessageButtonClicked
+	(*UnmuteEvent)(nil),                        // 86: mezon.realtime.UnmuteEvent
+	(*ListActivity)(nil),                       // 87: mezon.realtime.ListActivity
+	(*DropdownBoxSelected)(nil),                // 88: mezon.realtime.DropdownBoxSelected
+	(*SdTopicEvent)(nil),                       // 89: mezon.realtime.SdTopicEvent
+	(*ChannelAppEvent)(nil),                    // 90: mezon.realtime.ChannelAppEvent
+	(*UserStatusEvent)(nil),                    // 91: mezon.realtime.UserStatusEvent
+	(*JoinChannelAppData)(nil),                 // 92: mezon.realtime.JoinChannelAppData
+	(*UnpinMessageEvent)(nil),                  // 93: mezon.realtime.UnpinMessageEvent
+	(*HandleParticipantMeetStateEvent)(nil),    // 94: mezon.realtime.HandleParticipantMeetStateEvent
+	(*DeleteAccountEvent)(nil),                 // 95: mezon.realtime.DeleteAccountEvent
+	(*ListDataSocket)(nil),                     // 96: mezon.realtime.ListDataSocket
+	(*MeetParticipantEvent)(nil),               // 97: mezon.realtime.MeetParticipantEvent
+	(*TransferOwnershipEvent)(nil),             // 98: mezon.realtime.TransferOwnershipEvent
+	(*ActiveArchivedThread)(nil),               // 99: mezon.realtime.ActiveArchivedThread
+	(*AllowAnonymousEvent)(nil),                // 100: mezon.realtime.AllowAnonymousEvent
+	(*FcmDataPayload)(nil),                     // 101: mezon.realtime.FcmDataPayload
+	(*AIAgentEnabledEvent)(nil),                // 102: mezon.realtime.AIAgentEnabledEvent
+	(*GotifyMessage)(nil),                      // 103: mezon.realtime.GotifyMessage
+	nil,                                        // 104: mezon.realtime.Error.ContextEntry
+	nil,                                        // 105: mezon.realtime.GotifyMessage.ExtrasEntry
+	(*api.ChannelMessage)(nil),                 // 106: mezon.api.ChannelMessage
+	(*api.Rpc)(nil),                            // 107: mezon.api.Rpc
+	(*api.MessageReaction)(nil),                // 108: mezon.api.MessageReaction
+	(*api.CreateEventRequest)(nil),             // 109: mezon.api.CreateEventRequest
+	(*api.GiveCoffeeEvent)(nil),                // 110: mezon.api.GiveCoffeeEvent
+	(*api.TokenSentEvent)(nil),                 // 111: mezon.api.TokenSentEvent
+	(*api.Webhook)(nil),                        // 112: mezon.api.Webhook
+	(*api.NotificationUserChannel)(nil),        // 113: mezon.api.NotificationUserChannel
+	(*api.Session)(nil),                        // 114: mezon.api.Session
+	(*wrapperspb.Int32Value)(nil),              // 115: google.protobuf.Int32Value
+	(*api.ChannelMessageHeader)(nil),           // 116: mezon.api.ChannelMessageHeader
+	(*wrapperspb.BoolValue)(nil),               // 117: google.protobuf.BoolValue
+	(*api.MessageMention)(nil),                 // 118: mezon.api.MessageMention
+	(*api.MessageAttachment)(nil),              // 119: mezon.api.MessageAttachment
+	(*api.MessageRef)(nil),                     // 120: mezon.api.MessageRef
+	(*api.Notification)(nil),                   // 121: mezon.api.Notification
+	(*api.Role)(nil),                           // 122: mezon.api.Role
+	(*wrapperspb.StringValue)(nil),             // 123: google.protobuf.StringValue
+	(*api.ChannelDescription)(nil),             // 124: mezon.api.ChannelDescription
+	(*api.PermissionUpdate)(nil),               // 125: mezon.api.PermissionUpdate
+	(*api.UserActivity)(nil),                   // 126: mezon.api.UserActivity
+	(*api.ListChannelBadgeCountRequest)(nil),   // 127: mezon.api.ListChannelBadgeCountRequest
+	(*api.ListChannelBadgeCountResponse)(nil),  // 128: mezon.api.ListChannelBadgeCountResponse
+	(*api.ListClanBadgeCountResponse)(nil),     // 129: mezon.api.ListClanBadgeCountResponse
+	(*api.LogedDeviceList)(nil),                // 130: mezon.api.LogedDeviceList
+	(*api.ListUserOnlineRequest)(nil),          // 131: mezon.api.ListUserOnlineRequest
+	(*api.ListUserOnlineResponse)(nil),         // 132: mezon.api.ListUserOnlineResponse
 }
 var file_realtime_proto_depIdxs = []int32{
-	17,  // 0: mezon.realtime.Envelope.channel:type_name -> mezon.realtime.Channel
-	18,  // 1: mezon.realtime.Envelope.clan_join:type_name -> mezon.realtime.ClanJoin
-	19,  // 2: mezon.realtime.Envelope.channel_join:type_name -> mezon.realtime.ChannelJoin
-	20,  // 3: mezon.realtime.Envelope.channel_leave:type_name -> mezon.realtime.ChannelLeave
-	105, // 4: mezon.realtime.Envelope.channel_message:type_name -> mezon.api.ChannelMessage
-	21,  // 5: mezon.realtime.Envelope.channel_message_ack:type_name -> mezon.realtime.ChannelMessageAck
-	26,  // 6: mezon.realtime.Envelope.channel_message_send:type_name -> mezon.realtime.ChannelMessageSend
-	27,  // 7: mezon.realtime.Envelope.channel_message_update:type_name -> mezon.realtime.ChannelMessageUpdate
-	28,  // 8: mezon.realtime.Envelope.channel_message_remove:type_name -> mezon.realtime.ChannelMessageRemove
-	29,  // 9: mezon.realtime.Envelope.channel_presence_event:type_name -> mezon.realtime.ChannelPresenceEvent
-	30,  // 10: mezon.realtime.Envelope.error:type_name -> mezon.realtime.Error
-	31,  // 11: mezon.realtime.Envelope.notifications:type_name -> mezon.realtime.Notifications
-	106, // 12: mezon.realtime.Envelope.rpc:type_name -> mezon.api.Rpc
-	38,  // 13: mezon.realtime.Envelope.status:type_name -> mezon.realtime.Status
-	39,  // 14: mezon.realtime.Envelope.status_follow:type_name -> mezon.realtime.StatusFollow
-	40,  // 15: mezon.realtime.Envelope.status_presence_event:type_name -> mezon.realtime.StatusPresenceEvent
-	62,  // 16: mezon.realtime.Envelope.status_unfollow:type_name -> mezon.realtime.StatusUnfollow
-	63,  // 17: mezon.realtime.Envelope.status_update:type_name -> mezon.realtime.StatusUpdate
-	65,  // 18: mezon.realtime.Envelope.stream_data:type_name -> mezon.realtime.StreamData
-	66,  // 19: mezon.realtime.Envelope.stream_presence_event:type_name -> mezon.realtime.StreamPresenceEvent
-	36,  // 20: mezon.realtime.Envelope.ping:type_name -> mezon.realtime.Ping
-	37,  // 21: mezon.realtime.Envelope.pong:type_name -> mezon.realtime.Pong
-	43,  // 22: mezon.realtime.Envelope.message_typing_event:type_name -> mezon.realtime.MessageTypingEvent
-	42,  // 23: mezon.realtime.Envelope.last_seen_message_event:type_name -> mezon.realtime.LastSeenMessageEvent
-	107, // 24: mezon.realtime.Envelope.message_reaction_event:type_name -> mezon.api.MessageReaction
-	45,  // 25: mezon.realtime.Envelope.voice_joined_event:type_name -> mezon.realtime.VoiceJoinedEvent
-	44,  // 26: mezon.realtime.Envelope.voice_leaved_event:type_name -> mezon.realtime.VoiceLeavedEvent
-	46,  // 27: mezon.realtime.Envelope.voice_started_event:type_name -> mezon.realtime.VoiceStartedEvent
-	47,  // 28: mezon.realtime.Envelope.voice_ended_event:type_name -> mezon.realtime.VoiceEndedEvent
-	52,  // 29: mezon.realtime.Envelope.channel_created_event:type_name -> mezon.realtime.ChannelCreatedEvent
-	55,  // 30: mezon.realtime.Envelope.channel_deleted_event:type_name -> mezon.realtime.ChannelDeletedEvent
-	60,  // 31: mezon.realtime.Envelope.channel_updated_event:type_name -> mezon.realtime.ChannelUpdatedEvent
-	41,  // 32: mezon.realtime.Envelope.last_pin_message_event:type_name -> mezon.realtime.LastPinMessageEvent
-	68,  // 33: mezon.realtime.Envelope.custom_status_event:type_name -> mezon.realtime.CustomStatusEvent
-	69,  // 34: mezon.realtime.Envelope.user_channel_added_event:type_name -> mezon.realtime.UserChannelAdded
-	70,  // 35: mezon.realtime.Envelope.user_channel_removed_event:type_name -> mezon.realtime.UserChannelRemoved
-	71,  // 36: mezon.realtime.Envelope.user_clan_removed_event:type_name -> mezon.realtime.UserClanRemoved
-	73,  // 37: mezon.realtime.Envelope.clan_updated_event:type_name -> mezon.realtime.ClanUpdatedEvent
-	74,  // 38: mezon.realtime.Envelope.clan_profile_updated_event:type_name -> mezon.realtime.ClanProfileUpdatedEvent
-	79,  // 39: mezon.realtime.Envelope.check_name_existed_event:type_name -> mezon.realtime.CheckNameExistedEvent
-	75,  // 40: mezon.realtime.Envelope.user_profile_updated_event:type_name -> mezon.realtime.UserProfileUpdatedEvent
-	11,  // 41: mezon.realtime.Envelope.add_clan_user_event:type_name -> mezon.realtime.AddClanUserEvent
-	108, // 42: mezon.realtime.Envelope.clan_event_created:type_name -> mezon.api.CreateEventRequest
-	12,  // 43: mezon.realtime.Envelope.role_assign_event:type_name -> mezon.realtime.RoleAssignedEvent
-	56,  // 44: mezon.realtime.Envelope.clan_deleted_event:type_name -> mezon.realtime.ClanDeletedEvent
-	109, // 45: mezon.realtime.Envelope.give_coffee_event:type_name -> mezon.api.GiveCoffeeEvent
-	57,  // 46: mezon.realtime.Envelope.sticker_create_event:type_name -> mezon.realtime.StickerCreateEvent
-	58,  // 47: mezon.realtime.Envelope.sticker_update_event:type_name -> mezon.realtime.StickerUpdateEvent
-	59,  // 48: mezon.realtime.Envelope.sticker_delete_event:type_name -> mezon.realtime.StickerDeleteEvent
-	54,  // 49: mezon.realtime.Envelope.role_event:type_name -> mezon.realtime.RoleEvent
-	81,  // 50: mezon.realtime.Envelope.event_emoji:type_name -> mezon.realtime.EventEmoji
-	49,  // 51: mezon.realtime.Envelope.streaming_joined_event:type_name -> mezon.realtime.StreamingJoinedEvent
-	48,  // 52: mezon.realtime.Envelope.streaming_leaved_event:type_name -> mezon.realtime.StreamingLeavedEvent
-	50,  // 53: mezon.realtime.Envelope.streaming_started_event:type_name -> mezon.realtime.StreamingStartedEvent
-	51,  // 54: mezon.realtime.Envelope.streaming_ended_event:type_name -> mezon.realtime.StreamingEndedEvent
-	82,  // 55: mezon.realtime.Envelope.permission_set_event:type_name -> mezon.realtime.PermissionSetEvent
-	83,  // 56: mezon.realtime.Envelope.permission_changed_event:type_name -> mezon.realtime.PermissionChangedEvent
-	110, // 57: mezon.realtime.Envelope.token_sent_event:type_name -> mezon.api.TokenSentEvent
-	84,  // 58: mezon.realtime.Envelope.message_button_clicked:type_name -> mezon.realtime.MessageButtonClicked
-	85,  // 59: mezon.realtime.Envelope.unmute_event:type_name -> mezon.realtime.UnmuteEvent
-	9,   // 60: mezon.realtime.Envelope.webrtc_signaling_fwd:type_name -> mezon.realtime.WebrtcSignalingFwd
-	86,  // 61: mezon.realtime.Envelope.list_activity:type_name -> mezon.realtime.ListActivity
-	87,  // 62: mezon.realtime.Envelope.dropdown_box_selected:type_name -> mezon.realtime.DropdownBoxSelected
-	8,   // 63: mezon.realtime.Envelope.incoming_call_push:type_name -> mezon.realtime.IncomingCallPush
-	88,  // 64: mezon.realtime.Envelope.sd_topic_event:type_name -> mezon.realtime.SdTopicEvent
-	4,   // 65: mezon.realtime.Envelope.follow_event:type_name -> mezon.realtime.FollowEvent
-	89,  // 66: mezon.realtime.Envelope.channel_app_event:type_name -> mezon.realtime.ChannelAppEvent
-	90,  // 67: mezon.realtime.Envelope.user_status_event:type_name -> mezon.realtime.UserStatusEvent
-	33,  // 68: mezon.realtime.Envelope.remove_friend:type_name -> mezon.realtime.RemoveFriend
-	111, // 69: mezon.realtime.Envelope.webhook_event:type_name -> mezon.api.Webhook
-	112, // 70: mezon.realtime.Envelope.noti_user_channel:type_name -> mezon.api.NotificationUserChannel
-	91,  // 71: mezon.realtime.Envelope.join_channel_app_data:type_name -> mezon.realtime.JoinChannelAppData
-	7,   // 72: mezon.realtime.Envelope.canvas_event:type_name -> mezon.realtime.ChannelCanvas
-	92,  // 73: mezon.realtime.Envelope.unpin_message_event:type_name -> mezon.realtime.UnpinMessageEvent
-	53,  // 74: mezon.realtime.Envelope.category_event:type_name -> mezon.realtime.CategoryEvent
-	93,  // 75: mezon.realtime.Envelope.handle_participant_meet_state_event:type_name -> mezon.realtime.HandleParticipantMeetStateEvent
-	94,  // 76: mezon.realtime.Envelope.delete_account_event:type_name -> mezon.realtime.DeleteAccountEvent
-	22,  // 77: mezon.realtime.Envelope.ephemeral_message_send:type_name -> mezon.realtime.EphemeralMessageSend
-	34,  // 78: mezon.realtime.Envelope.block_friend:type_name -> mezon.realtime.BlockFriend
-	24,  // 79: mezon.realtime.Envelope.voice_reaction_send:type_name -> mezon.realtime.VoiceReactionSend
-	25,  // 80: mezon.realtime.Envelope.mark_as_read:type_name -> mezon.realtime.MarkAsRead
-	95,  // 81: mezon.realtime.Envelope.list_data_socket:type_name -> mezon.realtime.ListDataSocket
-	23,  // 82: mezon.realtime.Envelope.quick_menu_event:type_name -> mezon.realtime.QuickMenuDataEvent
-	35,  // 83: mezon.realtime.Envelope.un_block_friend:type_name -> mezon.realtime.UnblockFriend
-	96,  // 84: mezon.realtime.Envelope.meet_participant_event:type_name -> mezon.realtime.MeetParticipantEvent
-	97,  // 85: mezon.realtime.Envelope.transfer_ownership_event:type_name -> mezon.realtime.TransferOwnershipEvent
-	32,  // 86: mezon.realtime.Envelope.add_friend:type_name -> mezon.realtime.AddFriend
-	5,   // 87: mezon.realtime.Envelope.ban_user_event:type_name -> mezon.realtime.BannedUserEvent
-	98,  // 88: mezon.realtime.Envelope.active_archived_thread:type_name -> mezon.realtime.ActiveArchivedThread
-	99,  // 89: mezon.realtime.Envelope.allow_anonymous_event:type_name -> mezon.realtime.AllowAnonymousEvent
-	3,   // 90: mezon.realtime.Envelope.api_request_event:type_name -> mezon.realtime.ApiRequestEvent
-	72,  // 91: mezon.realtime.Envelope.clan_created_event:type_name -> mezon.realtime.ClanCreatedEvent
-	101, // 92: mezon.realtime.Envelope.aiagent_enabled_event:type_name -> mezon.realtime.AIAgentEnabledEvent
-	6,   // 93: mezon.realtime.Envelope.list_channel_users_banned_event:type_name -> mezon.realtime.ListChannelUsersBannedEvent
-	113, // 94: mezon.realtime.Envelope.refresh_session_event:type_name -> mezon.api.Session
-	61,  // 95: mezon.realtime.Envelope.channel_archive_event:type_name -> mezon.realtime.ChannelArchiveEvent
-	2,   // 96: mezon.realtime.Envelope.topic_in_message_event:type_name -> mezon.realtime.TopicInMessageEvent
-	77,  // 97: mezon.realtime.AddClanUserEvent.user:type_name -> mezon.realtime.UserProfileRedis
-	114, // 98: mezon.realtime.ChannelDescription.type:type_name -> google.protobuf.Int32Value
-	115, // 99: mezon.realtime.ChannelDescription.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
-	67,  // 100: mezon.realtime.Channel.presences:type_name -> mezon.realtime.UserPresence
-	67,  // 101: mezon.realtime.Channel.self:type_name -> mezon.realtime.UserPresence
-	116, // 102: mezon.realtime.ChannelMessageAck.persistent:type_name -> google.protobuf.BoolValue
-	26,  // 103: mezon.realtime.EphemeralMessageSend.message:type_name -> mezon.realtime.ChannelMessageSend
-	26,  // 104: mezon.realtime.QuickMenuDataEvent.message:type_name -> mezon.realtime.ChannelMessageSend
-	117, // 105: mezon.realtime.ChannelMessageSend.mentions:type_name -> mezon.api.MessageMention
-	118, // 106: mezon.realtime.ChannelMessageSend.attachments:type_name -> mezon.api.MessageAttachment
-	119, // 107: mezon.realtime.ChannelMessageSend.references:type_name -> mezon.api.MessageRef
-	117, // 108: mezon.realtime.ChannelMessageUpdate.mentions:type_name -> mezon.api.MessageMention
-	118, // 109: mezon.realtime.ChannelMessageUpdate.attachments:type_name -> mezon.api.MessageAttachment
-	67,  // 110: mezon.realtime.ChannelPresenceEvent.joins:type_name -> mezon.realtime.UserPresence
-	67,  // 111: mezon.realtime.ChannelPresenceEvent.leaves:type_name -> mezon.realtime.UserPresence
-	103, // 112: mezon.realtime.Error.context:type_name -> mezon.realtime.Error.ContextEntry
-	120, // 113: mezon.realtime.Notifications.notifications:type_name -> mezon.api.Notification
-	67,  // 114: mezon.realtime.Status.presences:type_name -> mezon.realtime.UserPresence
-	67,  // 115: mezon.realtime.StatusPresenceEvent.joins:type_name -> mezon.realtime.UserPresence
-	67,  // 116: mezon.realtime.StatusPresenceEvent.leaves:type_name -> mezon.realtime.UserPresence
-	121, // 117: mezon.realtime.RoleEvent.role:type_name -> mezon.api.Role
-	122, // 118: mezon.realtime.StatusUpdate.status:type_name -> google.protobuf.StringValue
-	64,  // 119: mezon.realtime.StreamData.stream:type_name -> mezon.realtime.Stream
-	67,  // 120: mezon.realtime.StreamData.sender:type_name -> mezon.realtime.UserPresence
-	64,  // 121: mezon.realtime.StreamPresenceEvent.stream:type_name -> mezon.realtime.Stream
-	67,  // 122: mezon.realtime.StreamPresenceEvent.joins:type_name -> mezon.realtime.UserPresence
-	67,  // 123: mezon.realtime.StreamPresenceEvent.leaves:type_name -> mezon.realtime.UserPresence
-	122, // 124: mezon.realtime.UserPresence.status:type_name -> google.protobuf.StringValue
-	123, // 125: mezon.realtime.UserChannelAdded.channel_desc:type_name -> mezon.api.ChannelDescription
-	77,  // 126: mezon.realtime.UserChannelAdded.users:type_name -> mezon.realtime.UserProfileRedis
-	77,  // 127: mezon.realtime.UserChannelAdded.caller:type_name -> mezon.realtime.UserProfileRedis
-	78,  // 128: mezon.realtime.UserProfileRedis.fcm_tokens:type_name -> mezon.realtime.FCMTokens
-	124, // 129: mezon.realtime.PermissionSetEvent.permission_updates:type_name -> mezon.api.PermissionUpdate
-	124, // 130: mezon.realtime.PermissionChangedEvent.add_permissions:type_name -> mezon.api.PermissionUpdate
-	124, // 131: mezon.realtime.PermissionChangedEvent.remove_permissions:type_name -> mezon.api.PermissionUpdate
-	124, // 132: mezon.realtime.PermissionChangedEvent.default_permissions:type_name -> mezon.api.PermissionUpdate
-	125, // 133: mezon.realtime.ListActivity.acts:type_name -> mezon.api.UserActivity
-	115, // 134: mezon.realtime.SdTopicEvent.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
-	105, // 135: mezon.realtime.SdTopicEvent.message:type_name -> mezon.api.ChannelMessage
-	126, // 136: mezon.realtime.ListDataSocket.list_channel_badge_count_req:type_name -> mezon.api.ListChannelBadgeCountRequest
-	127, // 137: mezon.realtime.ListDataSocket.channel_badge_count:type_name -> mezon.api.ListChannelBadgeCountResponse
-	128, // 138: mezon.realtime.ListDataSocket.clan_badge_count:type_name -> mezon.api.ListClanBadgeCountResponse
-	129, // 139: mezon.realtime.ListDataSocket.list_loged_device:type_name -> mezon.api.LogedDeviceList
-	130, // 140: mezon.realtime.ListDataSocket.list_user_online_req:type_name -> mezon.api.ListUserOnlineRequest
-	131, // 141: mezon.realtime.ListDataSocket.user_online_list:type_name -> mezon.api.ListUserOnlineResponse
-	105, // 142: mezon.realtime.FcmDataPayload.message:type_name -> mezon.api.ChannelMessage
-	117, // 143: mezon.realtime.FcmDataPayload.mentions:type_name -> mezon.api.MessageMention
-	119, // 144: mezon.realtime.FcmDataPayload.references:type_name -> mezon.api.MessageRef
-	118, // 145: mezon.realtime.FcmDataPayload.attachments:type_name -> mezon.api.MessageAttachment
-	104, // 146: mezon.realtime.GotifyMessage.extras:type_name -> mezon.realtime.GotifyMessage.ExtrasEntry
-	147, // [147:147] is the sub-list for method output_type
-	147, // [147:147] is the sub-list for method input_type
-	147, // [147:147] is the sub-list for extension type_name
-	147, // [147:147] is the sub-list for extension extendee
-	0,   // [0:147] is the sub-list for field type_name
+	18,  // 0: mezon.realtime.Envelope.channel:type_name -> mezon.realtime.Channel
+	19,  // 1: mezon.realtime.Envelope.clan_join:type_name -> mezon.realtime.ClanJoin
+	20,  // 2: mezon.realtime.Envelope.channel_join:type_name -> mezon.realtime.ChannelJoin
+	21,  // 3: mezon.realtime.Envelope.channel_leave:type_name -> mezon.realtime.ChannelLeave
+	106, // 4: mezon.realtime.Envelope.channel_message:type_name -> mezon.api.ChannelMessage
+	22,  // 5: mezon.realtime.Envelope.channel_message_ack:type_name -> mezon.realtime.ChannelMessageAck
+	27,  // 6: mezon.realtime.Envelope.channel_message_send:type_name -> mezon.realtime.ChannelMessageSend
+	28,  // 7: mezon.realtime.Envelope.channel_message_update:type_name -> mezon.realtime.ChannelMessageUpdate
+	29,  // 8: mezon.realtime.Envelope.channel_message_remove:type_name -> mezon.realtime.ChannelMessageRemove
+	30,  // 9: mezon.realtime.Envelope.channel_presence_event:type_name -> mezon.realtime.ChannelPresenceEvent
+	31,  // 10: mezon.realtime.Envelope.error:type_name -> mezon.realtime.Error
+	32,  // 11: mezon.realtime.Envelope.notifications:type_name -> mezon.realtime.Notifications
+	107, // 12: mezon.realtime.Envelope.rpc:type_name -> mezon.api.Rpc
+	39,  // 13: mezon.realtime.Envelope.status:type_name -> mezon.realtime.Status
+	40,  // 14: mezon.realtime.Envelope.status_follow:type_name -> mezon.realtime.StatusFollow
+	41,  // 15: mezon.realtime.Envelope.status_presence_event:type_name -> mezon.realtime.StatusPresenceEvent
+	63,  // 16: mezon.realtime.Envelope.status_unfollow:type_name -> mezon.realtime.StatusUnfollow
+	64,  // 17: mezon.realtime.Envelope.status_update:type_name -> mezon.realtime.StatusUpdate
+	66,  // 18: mezon.realtime.Envelope.stream_data:type_name -> mezon.realtime.StreamData
+	67,  // 19: mezon.realtime.Envelope.stream_presence_event:type_name -> mezon.realtime.StreamPresenceEvent
+	37,  // 20: mezon.realtime.Envelope.ping:type_name -> mezon.realtime.Ping
+	38,  // 21: mezon.realtime.Envelope.pong:type_name -> mezon.realtime.Pong
+	44,  // 22: mezon.realtime.Envelope.message_typing_event:type_name -> mezon.realtime.MessageTypingEvent
+	43,  // 23: mezon.realtime.Envelope.last_seen_message_event:type_name -> mezon.realtime.LastSeenMessageEvent
+	108, // 24: mezon.realtime.Envelope.message_reaction_event:type_name -> mezon.api.MessageReaction
+	46,  // 25: mezon.realtime.Envelope.voice_joined_event:type_name -> mezon.realtime.VoiceJoinedEvent
+	45,  // 26: mezon.realtime.Envelope.voice_leaved_event:type_name -> mezon.realtime.VoiceLeavedEvent
+	47,  // 27: mezon.realtime.Envelope.voice_started_event:type_name -> mezon.realtime.VoiceStartedEvent
+	48,  // 28: mezon.realtime.Envelope.voice_ended_event:type_name -> mezon.realtime.VoiceEndedEvent
+	53,  // 29: mezon.realtime.Envelope.channel_created_event:type_name -> mezon.realtime.ChannelCreatedEvent
+	56,  // 30: mezon.realtime.Envelope.channel_deleted_event:type_name -> mezon.realtime.ChannelDeletedEvent
+	61,  // 31: mezon.realtime.Envelope.channel_updated_event:type_name -> mezon.realtime.ChannelUpdatedEvent
+	42,  // 32: mezon.realtime.Envelope.last_pin_message_event:type_name -> mezon.realtime.LastPinMessageEvent
+	69,  // 33: mezon.realtime.Envelope.custom_status_event:type_name -> mezon.realtime.CustomStatusEvent
+	70,  // 34: mezon.realtime.Envelope.user_channel_added_event:type_name -> mezon.realtime.UserChannelAdded
+	71,  // 35: mezon.realtime.Envelope.user_channel_removed_event:type_name -> mezon.realtime.UserChannelRemoved
+	72,  // 36: mezon.realtime.Envelope.user_clan_removed_event:type_name -> mezon.realtime.UserClanRemoved
+	74,  // 37: mezon.realtime.Envelope.clan_updated_event:type_name -> mezon.realtime.ClanUpdatedEvent
+	75,  // 38: mezon.realtime.Envelope.clan_profile_updated_event:type_name -> mezon.realtime.ClanProfileUpdatedEvent
+	80,  // 39: mezon.realtime.Envelope.check_name_existed_event:type_name -> mezon.realtime.CheckNameExistedEvent
+	76,  // 40: mezon.realtime.Envelope.user_profile_updated_event:type_name -> mezon.realtime.UserProfileUpdatedEvent
+	12,  // 41: mezon.realtime.Envelope.add_clan_user_event:type_name -> mezon.realtime.AddClanUserEvent
+	109, // 42: mezon.realtime.Envelope.clan_event_created:type_name -> mezon.api.CreateEventRequest
+	13,  // 43: mezon.realtime.Envelope.role_assign_event:type_name -> mezon.realtime.RoleAssignedEvent
+	57,  // 44: mezon.realtime.Envelope.clan_deleted_event:type_name -> mezon.realtime.ClanDeletedEvent
+	110, // 45: mezon.realtime.Envelope.give_coffee_event:type_name -> mezon.api.GiveCoffeeEvent
+	58,  // 46: mezon.realtime.Envelope.sticker_create_event:type_name -> mezon.realtime.StickerCreateEvent
+	59,  // 47: mezon.realtime.Envelope.sticker_update_event:type_name -> mezon.realtime.StickerUpdateEvent
+	60,  // 48: mezon.realtime.Envelope.sticker_delete_event:type_name -> mezon.realtime.StickerDeleteEvent
+	55,  // 49: mezon.realtime.Envelope.role_event:type_name -> mezon.realtime.RoleEvent
+	82,  // 50: mezon.realtime.Envelope.event_emoji:type_name -> mezon.realtime.EventEmoji
+	50,  // 51: mezon.realtime.Envelope.streaming_joined_event:type_name -> mezon.realtime.StreamingJoinedEvent
+	49,  // 52: mezon.realtime.Envelope.streaming_leaved_event:type_name -> mezon.realtime.StreamingLeavedEvent
+	51,  // 53: mezon.realtime.Envelope.streaming_started_event:type_name -> mezon.realtime.StreamingStartedEvent
+	52,  // 54: mezon.realtime.Envelope.streaming_ended_event:type_name -> mezon.realtime.StreamingEndedEvent
+	83,  // 55: mezon.realtime.Envelope.permission_set_event:type_name -> mezon.realtime.PermissionSetEvent
+	84,  // 56: mezon.realtime.Envelope.permission_changed_event:type_name -> mezon.realtime.PermissionChangedEvent
+	111, // 57: mezon.realtime.Envelope.token_sent_event:type_name -> mezon.api.TokenSentEvent
+	85,  // 58: mezon.realtime.Envelope.message_button_clicked:type_name -> mezon.realtime.MessageButtonClicked
+	86,  // 59: mezon.realtime.Envelope.unmute_event:type_name -> mezon.realtime.UnmuteEvent
+	10,  // 60: mezon.realtime.Envelope.webrtc_signaling_fwd:type_name -> mezon.realtime.WebrtcSignalingFwd
+	87,  // 61: mezon.realtime.Envelope.list_activity:type_name -> mezon.realtime.ListActivity
+	88,  // 62: mezon.realtime.Envelope.dropdown_box_selected:type_name -> mezon.realtime.DropdownBoxSelected
+	9,   // 63: mezon.realtime.Envelope.incoming_call_push:type_name -> mezon.realtime.IncomingCallPush
+	89,  // 64: mezon.realtime.Envelope.sd_topic_event:type_name -> mezon.realtime.SdTopicEvent
+	5,   // 65: mezon.realtime.Envelope.follow_event:type_name -> mezon.realtime.FollowEvent
+	90,  // 66: mezon.realtime.Envelope.channel_app_event:type_name -> mezon.realtime.ChannelAppEvent
+	91,  // 67: mezon.realtime.Envelope.user_status_event:type_name -> mezon.realtime.UserStatusEvent
+	34,  // 68: mezon.realtime.Envelope.remove_friend:type_name -> mezon.realtime.RemoveFriend
+	112, // 69: mezon.realtime.Envelope.webhook_event:type_name -> mezon.api.Webhook
+	113, // 70: mezon.realtime.Envelope.noti_user_channel:type_name -> mezon.api.NotificationUserChannel
+	92,  // 71: mezon.realtime.Envelope.join_channel_app_data:type_name -> mezon.realtime.JoinChannelAppData
+	8,   // 72: mezon.realtime.Envelope.canvas_event:type_name -> mezon.realtime.ChannelCanvas
+	93,  // 73: mezon.realtime.Envelope.unpin_message_event:type_name -> mezon.realtime.UnpinMessageEvent
+	54,  // 74: mezon.realtime.Envelope.category_event:type_name -> mezon.realtime.CategoryEvent
+	94,  // 75: mezon.realtime.Envelope.handle_participant_meet_state_event:type_name -> mezon.realtime.HandleParticipantMeetStateEvent
+	95,  // 76: mezon.realtime.Envelope.delete_account_event:type_name -> mezon.realtime.DeleteAccountEvent
+	23,  // 77: mezon.realtime.Envelope.ephemeral_message_send:type_name -> mezon.realtime.EphemeralMessageSend
+	35,  // 78: mezon.realtime.Envelope.block_friend:type_name -> mezon.realtime.BlockFriend
+	25,  // 79: mezon.realtime.Envelope.voice_reaction_send:type_name -> mezon.realtime.VoiceReactionSend
+	26,  // 80: mezon.realtime.Envelope.mark_as_read:type_name -> mezon.realtime.MarkAsRead
+	96,  // 81: mezon.realtime.Envelope.list_data_socket:type_name -> mezon.realtime.ListDataSocket
+	24,  // 82: mezon.realtime.Envelope.quick_menu_event:type_name -> mezon.realtime.QuickMenuDataEvent
+	36,  // 83: mezon.realtime.Envelope.un_block_friend:type_name -> mezon.realtime.UnblockFriend
+	97,  // 84: mezon.realtime.Envelope.meet_participant_event:type_name -> mezon.realtime.MeetParticipantEvent
+	98,  // 85: mezon.realtime.Envelope.transfer_ownership_event:type_name -> mezon.realtime.TransferOwnershipEvent
+	33,  // 86: mezon.realtime.Envelope.add_friend:type_name -> mezon.realtime.AddFriend
+	6,   // 87: mezon.realtime.Envelope.ban_user_event:type_name -> mezon.realtime.BannedUserEvent
+	99,  // 88: mezon.realtime.Envelope.active_archived_thread:type_name -> mezon.realtime.ActiveArchivedThread
+	100, // 89: mezon.realtime.Envelope.allow_anonymous_event:type_name -> mezon.realtime.AllowAnonymousEvent
+	4,   // 90: mezon.realtime.Envelope.api_request_event:type_name -> mezon.realtime.ApiRequestEvent
+	73,  // 91: mezon.realtime.Envelope.clan_created_event:type_name -> mezon.realtime.ClanCreatedEvent
+	102, // 92: mezon.realtime.Envelope.aiagent_enabled_event:type_name -> mezon.realtime.AIAgentEnabledEvent
+	7,   // 93: mezon.realtime.Envelope.list_channel_users_banned_event:type_name -> mezon.realtime.ListChannelUsersBannedEvent
+	114, // 94: mezon.realtime.Envelope.refresh_session_event:type_name -> mezon.api.Session
+	62,  // 95: mezon.realtime.Envelope.channel_archive_event:type_name -> mezon.realtime.ChannelArchiveEvent
+	3,   // 96: mezon.realtime.Envelope.topic_in_message_event:type_name -> mezon.realtime.TopicInMessageEvent
+	2,   // 97: mezon.realtime.Envelope.screen_share_event:type_name -> mezon.realtime.ScreenShareEvent
+	78,  // 98: mezon.realtime.AddClanUserEvent.user:type_name -> mezon.realtime.UserProfileRedis
+	115, // 99: mezon.realtime.ChannelDescription.type:type_name -> google.protobuf.Int32Value
+	116, // 100: mezon.realtime.ChannelDescription.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
+	68,  // 101: mezon.realtime.Channel.presences:type_name -> mezon.realtime.UserPresence
+	68,  // 102: mezon.realtime.Channel.self:type_name -> mezon.realtime.UserPresence
+	117, // 103: mezon.realtime.ChannelMessageAck.persistent:type_name -> google.protobuf.BoolValue
+	27,  // 104: mezon.realtime.EphemeralMessageSend.message:type_name -> mezon.realtime.ChannelMessageSend
+	27,  // 105: mezon.realtime.QuickMenuDataEvent.message:type_name -> mezon.realtime.ChannelMessageSend
+	118, // 106: mezon.realtime.ChannelMessageSend.mentions:type_name -> mezon.api.MessageMention
+	119, // 107: mezon.realtime.ChannelMessageSend.attachments:type_name -> mezon.api.MessageAttachment
+	120, // 108: mezon.realtime.ChannelMessageSend.references:type_name -> mezon.api.MessageRef
+	118, // 109: mezon.realtime.ChannelMessageUpdate.mentions:type_name -> mezon.api.MessageMention
+	119, // 110: mezon.realtime.ChannelMessageUpdate.attachments:type_name -> mezon.api.MessageAttachment
+	68,  // 111: mezon.realtime.ChannelPresenceEvent.joins:type_name -> mezon.realtime.UserPresence
+	68,  // 112: mezon.realtime.ChannelPresenceEvent.leaves:type_name -> mezon.realtime.UserPresence
+	104, // 113: mezon.realtime.Error.context:type_name -> mezon.realtime.Error.ContextEntry
+	121, // 114: mezon.realtime.Notifications.notifications:type_name -> mezon.api.Notification
+	68,  // 115: mezon.realtime.Status.presences:type_name -> mezon.realtime.UserPresence
+	68,  // 116: mezon.realtime.StatusPresenceEvent.joins:type_name -> mezon.realtime.UserPresence
+	68,  // 117: mezon.realtime.StatusPresenceEvent.leaves:type_name -> mezon.realtime.UserPresence
+	122, // 118: mezon.realtime.RoleEvent.role:type_name -> mezon.api.Role
+	123, // 119: mezon.realtime.StatusUpdate.status:type_name -> google.protobuf.StringValue
+	65,  // 120: mezon.realtime.StreamData.stream:type_name -> mezon.realtime.Stream
+	68,  // 121: mezon.realtime.StreamData.sender:type_name -> mezon.realtime.UserPresence
+	65,  // 122: mezon.realtime.StreamPresenceEvent.stream:type_name -> mezon.realtime.Stream
+	68,  // 123: mezon.realtime.StreamPresenceEvent.joins:type_name -> mezon.realtime.UserPresence
+	68,  // 124: mezon.realtime.StreamPresenceEvent.leaves:type_name -> mezon.realtime.UserPresence
+	123, // 125: mezon.realtime.UserPresence.status:type_name -> google.protobuf.StringValue
+	124, // 126: mezon.realtime.UserChannelAdded.channel_desc:type_name -> mezon.api.ChannelDescription
+	78,  // 127: mezon.realtime.UserChannelAdded.users:type_name -> mezon.realtime.UserProfileRedis
+	78,  // 128: mezon.realtime.UserChannelAdded.caller:type_name -> mezon.realtime.UserProfileRedis
+	79,  // 129: mezon.realtime.UserProfileRedis.fcm_tokens:type_name -> mezon.realtime.FCMTokens
+	125, // 130: mezon.realtime.PermissionSetEvent.permission_updates:type_name -> mezon.api.PermissionUpdate
+	125, // 131: mezon.realtime.PermissionChangedEvent.add_permissions:type_name -> mezon.api.PermissionUpdate
+	125, // 132: mezon.realtime.PermissionChangedEvent.remove_permissions:type_name -> mezon.api.PermissionUpdate
+	125, // 133: mezon.realtime.PermissionChangedEvent.default_permissions:type_name -> mezon.api.PermissionUpdate
+	126, // 134: mezon.realtime.ListActivity.acts:type_name -> mezon.api.UserActivity
+	116, // 135: mezon.realtime.SdTopicEvent.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
+	106, // 136: mezon.realtime.SdTopicEvent.message:type_name -> mezon.api.ChannelMessage
+	127, // 137: mezon.realtime.ListDataSocket.list_channel_badge_count_req:type_name -> mezon.api.ListChannelBadgeCountRequest
+	128, // 138: mezon.realtime.ListDataSocket.channel_badge_count:type_name -> mezon.api.ListChannelBadgeCountResponse
+	129, // 139: mezon.realtime.ListDataSocket.clan_badge_count:type_name -> mezon.api.ListClanBadgeCountResponse
+	130, // 140: mezon.realtime.ListDataSocket.list_loged_device:type_name -> mezon.api.LogedDeviceList
+	131, // 141: mezon.realtime.ListDataSocket.list_user_online_req:type_name -> mezon.api.ListUserOnlineRequest
+	132, // 142: mezon.realtime.ListDataSocket.user_online_list:type_name -> mezon.api.ListUserOnlineResponse
+	106, // 143: mezon.realtime.FcmDataPayload.message:type_name -> mezon.api.ChannelMessage
+	118, // 144: mezon.realtime.FcmDataPayload.mentions:type_name -> mezon.api.MessageMention
+	120, // 145: mezon.realtime.FcmDataPayload.references:type_name -> mezon.api.MessageRef
+	119, // 146: mezon.realtime.FcmDataPayload.attachments:type_name -> mezon.api.MessageAttachment
+	105, // 147: mezon.realtime.GotifyMessage.extras:type_name -> mezon.realtime.GotifyMessage.ExtrasEntry
+	148, // [148:148] is the sub-list for method output_type
+	148, // [148:148] is the sub-list for method input_type
+	148, // [148:148] is the sub-list for extension type_name
+	148, // [148:148] is the sub-list for extension extendee
+	0,   // [0:148] is the sub-list for field type_name
 }
 
 func init() { file_realtime_proto_init() }
@@ -11298,6 +11392,7 @@ func file_realtime_proto_init() {
 		(*Envelope_RefreshSessionEvent)(nil),
 		(*Envelope_ChannelArchiveEvent)(nil),
 		(*Envelope_TopicInMessageEvent)(nil),
+		(*Envelope_ScreenShareEvent)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -11305,7 +11400,7 @@ func file_realtime_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_realtime_proto_rawDesc), len(file_realtime_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   104,
+			NumMessages:   105,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

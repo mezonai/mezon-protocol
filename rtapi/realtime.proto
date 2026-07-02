@@ -225,7 +225,16 @@ message Envelope {
     ChannelArchiveEvent channel_archive_event = 97;
     // Topic in message event
     TopicInMessageEvent topic_in_message_event = 98;
+    // share screen event
+    ScreenShareEvent screen_share_event = 99;
   }
+}
+
+message ScreenShareEvent {
+  int64 clan_id = 1;
+  int64 voice_channel_id = 2;
+  int64 user_id = 3;
+  bool is_sharing = 4;
 }
 
 message TopicInMessageEvent {
