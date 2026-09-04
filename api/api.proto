@@ -3244,9 +3244,10 @@ message GenerateMeetTokenRequest {
 }
 
 message MeetParticipantRequest {
-  int64 user_id = 1;
-  int64 channel_id = 2;
-  int64 clan_id = 3;
+    string username = 1;
+    string room_name = 2;
+    int64 channel_id = 3;
+    int64 clan_id = 4;
 }
 
 message GenerateMeetTokenResponse {

@@ -9655,7 +9655,7 @@ func (x *ListDataSocket) GetUserOnlineList() *api.ListUserOnlineResponse {
 
 type MeetParticipantEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
 	RoomName      string                 `protobuf:"bytes,2,opt,name=room_name,json=roomName,proto3" json:"room_name,omitempty"`
 	ChannelId     int64                  `protobuf:"varint,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	ClanId        int64                  `protobuf:"varint,4,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
@@ -9694,11 +9694,11 @@ func (*MeetParticipantEvent) Descriptor() ([]byte, []int) {
 	return file_realtime_proto_rawDescGZIP(), []int{97}
 }
 
-func (x *MeetParticipantEvent) GetUserId() int64 {
+func (x *MeetParticipantEvent) GetUsername() string {
 	if x != nil {
-		return x.UserId
+		return x.Username
 	}
-	return 0
+	return ""
 }
 
 func (x *MeetParticipantEvent) GetRoomName() string {
@@ -11040,9 +11040,9 @@ const file_realtime_proto_rawDesc = "" +
 	"\x10clan_badge_count\x18\x04 \x01(\v2%.mezon.api.ListClanBadgeCountResponseR\x0eclanBadgeCount\x12F\n" +
 	"\x11list_loged_device\x18\x05 \x01(\v2\x1a.mezon.api.LogedDeviceListR\x0flistLogedDevice\x12Q\n" +
 	"\x14list_user_online_req\x18\x06 \x01(\v2 .mezon.api.ListUserOnlineRequestR\x11listUserOnlineReq\x12K\n" +
-	"\x10user_online_list\x18\a \x01(\v2!.mezon.api.ListUserOnlineResponseR\x0euserOnlineList\"\x9c\x01\n" +
-	"\x14MeetParticipantEvent\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
+	"\x10user_online_list\x18\a \x01(\v2!.mezon.api.ListUserOnlineResponseR\x0euserOnlineList\"\x9f\x01\n" +
+	"\x14MeetParticipantEvent\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\x12\x1b\n" +
 	"\troom_name\x18\x02 \x01(\tR\broomName\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x03 \x01(\x03R\tchannelId\x12\x17\n" +
