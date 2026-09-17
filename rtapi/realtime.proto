@@ -229,12 +229,6 @@ message Envelope {
     ScreenShareEvent screen_share_event = 99;
     // VoiceInteractiveEvent
     VoiceInteractiveEvent voice_interactive_event = 100;
-    // Metric Message Event
-    MetricMessageEvent metric_message_event = 101;
-    // Memo created event
-    MemoCreatedEvent memo_created_event = 102;
-    // Memo deleted event
-    MemoDeletedEvent memo_deleted_event = 103;
   }
 }
 
@@ -1524,21 +1518,4 @@ message GotifyMessage {
   map<string, string> extras = 8;
   uint32 app_id = 9;
   int64 sender_id = 10;
-}
-
-message MetricMessageEvent {
-  string request_id = 1;
-  int32 sessions_active = 2;
-  int32 sessions_peak = 3;
-  int64 sessions_created_total = 4;
-  int64 sessions_closed_total = 5;
-}
-
-message MemoCreatedEvent {
-  api.Memo memo = 1;
-}
-
-message MemoDeletedEvent {
-  int64 creator_id = 1;
-  int64 memo_id = 2;
 }
