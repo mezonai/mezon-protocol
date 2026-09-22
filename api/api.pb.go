@@ -2852,8 +2852,10 @@ type VoiceChannelUser struct {
 	RoomName string `protobuf:"bytes,3,opt,name=room_name,json=roomName,proto3" json:"room_name,omitempty"`
 	// share screen user
 	ShareScreenIds []string `protobuf:"bytes,4,rep,name=share_screen_ids,json=shareScreenIds,proto3" json:"share_screen_ids,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// peer id
+	PeerIds       []int32 `protobuf:"varint,5,rep,packed,name=peer_ids,json=peerIds,proto3" json:"peer_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *VoiceChannelUser) Reset() {
@@ -2910,6 +2912,13 @@ func (x *VoiceChannelUser) GetRoomName() string {
 func (x *VoiceChannelUser) GetShareScreenIds() []string {
 	if x != nil {
 		return x.ShareScreenIds
+	}
+	return nil
+}
+
+func (x *VoiceChannelUser) GetPeerIds() []int32 {
+	if x != nil {
+		return x.PeerIds
 	}
 	return nil
 }
@@ -27240,13 +27249,14 @@ const file_api_proto_rawDesc = "" +
 	"\badded_by\x18\b \x01(\x03R\aaddedBy\x12\x1b\n" +
 	"\tis_banned\x18\t \x01(\bR\bisBanned\x12(\n" +
 	"\x10expired_ban_time\x18\n" +
-	" \x01(\x05R\x0eexpiredBanTime\"\x93\x01\n" +
+	" \x01(\x05R\x0eexpiredBanTime\"\xae\x01\n" +
 	"\x10VoiceChannelUser\x12\x19\n" +
 	"\buser_ids\x18\x01 \x03(\tR\auserIds\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\x03R\tchannelId\x12\x1b\n" +
 	"\troom_name\x18\x03 \x01(\tR\broomName\x12(\n" +
-	"\x10share_screen_ids\x18\x04 \x03(\tR\x0eshareScreenIds\"c\n" +
+	"\x10share_screen_ids\x18\x04 \x03(\tR\x0eshareScreenIds\x12\x19\n" +
+	"\bpeer_ids\x18\x05 \x03(\x05R\apeerIds\"c\n" +
 	"\x14VoiceChannelUserList\x12K\n" +
 	"\x13voice_channel_users\x18\x01 \x03(\v2\x1b.mezon.api.VoiceChannelUserR\x11voiceChannelUsers\"\xa2\x02\n" +
 	"\x11ChannelAttachment\x12\x0e\n" +

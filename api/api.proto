@@ -462,6 +462,8 @@ message VoiceChannelUser {
   string room_name = 3;
   // share screen user
   repeated string share_screen_ids = 4;
+  // peer id
+  repeated int32 peer_ids = 5;
 }
 
 // A list of users belonging to a channel, along with their role.
