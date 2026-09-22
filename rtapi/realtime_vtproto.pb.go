@@ -7450,6 +7450,20 @@ func (m *ClanUpdatedEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.ShortUrl) > 0 {
+		i -= len(m.ShortUrl)
+		copy(dAtA[i:], m.ShortUrl)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.ShortUrl)))
+		i--
+		dAtA[i] = 0x7a
+	}
+	if len(m.Hashtags) > 0 {
+		i -= len(m.Hashtags)
+		copy(dAtA[i:], m.Hashtags)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Hashtags)))
+		i--
+		dAtA[i] = 0x72
+	}
 	if m.PreventAnonymous {
 		i--
 		if m.PreventAnonymous {
@@ -13208,6 +13222,14 @@ func (m *ClanUpdatedEvent) SizeVT() (n int) {
 	}
 	if m.PreventAnonymous {
 		n += 2
+	}
+	l = len(m.Hashtags)
+	if l > 0 {
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
+	l = len(m.ShortUrl)
+	if l > 0 {
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -32547,6 +32569,70 @@ func (m *ClanUpdatedEvent) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 			m.PreventAnonymous = bool(v != 0)
+		case 14:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Hashtags", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Hashtags = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 15:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ShortUrl", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ShortUrl = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])

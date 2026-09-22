@@ -4615,6 +4615,15 @@ func (m *ClanDesc) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.Hashtags) > 0 {
+		i -= len(m.Hashtags)
+		copy(dAtA[i:], m.Hashtags)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Hashtags)))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0x9a
+	}
 	if m.HasUnreadMessage {
 		i--
 		if m.HasUnreadMessage {
@@ -4833,6 +4842,16 @@ func (m *UpdateClanDescRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error)
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.Hashtags != nil {
+		size, err := (*wrapperspb.StringValue)(m.Hashtags).MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x7a
 	}
 	if m.PreventAnonymous {
 		i--
@@ -20807,6 +20826,13 @@ func (m *ClanDiscover) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.Hashtags) > 0 {
+		i -= len(m.Hashtags)
+		copy(dAtA[i:], m.Hashtags)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Hashtags)))
+		i--
+		dAtA[i] = 0x6a
+	}
 	if m.CreateTimeSeconds != 0 {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.CreateTimeSeconds))
 		i--
@@ -24937,6 +24963,10 @@ func (m *ClanDesc) SizeVT() (n int) {
 	if m.HasUnreadMessage {
 		n += 3
 	}
+	l = len(m.Hashtags)
+	if l > 0 {
+		n += 2 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -25020,6 +25050,10 @@ func (m *UpdateClanDescRequest) SizeVT() (n int) {
 	}
 	if m.PreventAnonymous {
 		n += 2
+	}
+	if m.Hashtags != nil {
+		l = (*wrapperspb.StringValue)(m.Hashtags).SizeVT()
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -31463,6 +31497,10 @@ func (m *ClanDiscover) SizeVT() (n int) {
 	}
 	if m.CreateTimeSeconds != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.CreateTimeSeconds))
+	}
+	l = len(m.Hashtags)
+	if l > 0 {
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -45413,6 +45451,38 @@ func (m *ClanDesc) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 			m.HasUnreadMessage = bool(v != 0)
+		case 19:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Hashtags", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Hashtags = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
@@ -46044,6 +46114,42 @@ func (m *UpdateClanDescRequest) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 			m.PreventAnonymous = bool(v != 0)
+		case 15:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Hashtags", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Hashtags == nil {
+				m.Hashtags = &wrapperspb1.StringValue{}
+			}
+			if err := (*wrapperspb.StringValue)(m.Hashtags).UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
@@ -86886,6 +86992,38 @@ func (m *ClanDiscover) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
+		case 13:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Hashtags", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Hashtags = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
