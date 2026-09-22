@@ -21639,10 +21639,9 @@ func (x *GenerateMeetTokenRequest) GetMetadata() string {
 
 type MeetParticipantRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
-	RoomName      string                 `protobuf:"bytes,2,opt,name=room_name,json=roomName,proto3" json:"room_name,omitempty"`
-	ChannelId     int64                  `protobuf:"varint,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	ClanId        int64                  `protobuf:"varint,4,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ChannelId     int64                  `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	ClanId        int64                  `protobuf:"varint,3,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -21677,18 +21676,11 @@ func (*MeetParticipantRequest) Descriptor() ([]byte, []int) {
 	return file_api_proto_rawDescGZIP(), []int{290}
 }
 
-func (x *MeetParticipantRequest) GetUsername() string {
+func (x *MeetParticipantRequest) GetUserId() int64 {
 	if x != nil {
-		return x.Username
+		return x.UserId
 	}
-	return ""
-}
-
-func (x *MeetParticipantRequest) GetRoomName() string {
-	if x != nil {
-		return x.RoomName
-	}
-	return ""
+	return 0
 }
 
 func (x *MeetParticipantRequest) GetChannelId() int64 {
@@ -28836,13 +28828,12 @@ const file_api_proto_rawDesc = "" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\x03R\tchannelId\x12\x17\n" +
 	"\aclan_id\x18\x03 \x01(\x03R\x06clanId\x12\x1a\n" +
-	"\bmetadata\x18\x04 \x01(\tR\bmetadata\"\x89\x01\n" +
-	"\x16MeetParticipantRequest\x12\x1a\n" +
-	"\busername\x18\x01 \x01(\tR\busername\x12\x1b\n" +
-	"\troom_name\x18\x02 \x01(\tR\broomName\x12\x1d\n" +
+	"\bmetadata\x18\x04 \x01(\tR\bmetadata\"i\n" +
+	"\x16MeetParticipantRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x03 \x01(\x03R\tchannelId\x12\x17\n" +
-	"\aclan_id\x18\x04 \x01(\x03R\x06clanId\"1\n" +
+	"channel_id\x18\x02 \x01(\x03R\tchannelId\x12\x17\n" +
+	"\aclan_id\x18\x03 \x01(\x03R\x06clanId\"1\n" +
 	"\x19GenerateMeetTokenResponse\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"\xb0\x01\n" +
 	"\x19GenerateMezonMeetResponse\x12\x17\n" +
