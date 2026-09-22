@@ -18336,22 +18336,18 @@ func (m *GenerateMeetTokenRequest) MarshalToSizedBufferVT(dAtA []byte) (int, err
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.Metadata) > 0 {
-		i -= len(m.Metadata)
-		copy(dAtA[i:], m.Metadata)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Metadata)))
+	if m.ClanId != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ClanId))
 		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.RoomName) > 0 {
-		i -= len(m.RoomName)
-		copy(dAtA[i:], m.RoomName)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.RoomName)))
-		i--
-		dAtA[i] = 0x12
+		dAtA[i] = 0x18
 	}
 	if m.ChannelId != 0 {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ChannelId))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.UserId != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.UserId))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -30449,16 +30445,14 @@ func (m *GenerateMeetTokenRequest) SizeVT() (n int) {
 	}
 	var l int
 	_ = l
+	if m.UserId != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.UserId))
+	}
 	if m.ChannelId != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.ChannelId))
 	}
-	l = len(m.RoomName)
-	if l > 0 {
-		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
-	}
-	l = len(m.Metadata)
-	if l > 0 {
-		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+	if m.ClanId != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.ClanId))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -80098,6 +80092,25 @@ func (m *GenerateMeetTokenRequest) UnmarshalVT(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UserId", wireType)
+			}
+			m.UserId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.UserId |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ChannelId", wireType)
 			}
 			m.ChannelId = 0
@@ -80115,43 +80128,11 @@ func (m *GenerateMeetTokenRequest) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field RoomName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.RoomName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
 		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Metadata", wireType)
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClanId", wireType)
 			}
-			var stringLen uint64
+			m.ClanId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protohelpers.ErrIntOverflow
@@ -80161,24 +80142,11 @@ func (m *GenerateMeetTokenRequest) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				m.ClanId |= int64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Metadata = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
