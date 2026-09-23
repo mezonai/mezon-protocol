@@ -5280,7 +5280,9 @@ type VoiceLeavedEvent struct {
 	// voice channel name
 	VoiceChannelId int64 `protobuf:"varint,3,opt,name=voice_channel_id,json=voiceChannelId,proto3" json:"voice_channel_id,omitempty"`
 	// voice user_id
-	VoiceUserId   int64 `protobuf:"varint,4,opt,name=voice_user_id,json=voiceUserId,proto3" json:"voice_user_id,omitempty"`
+	VoiceUserId int64 `protobuf:"varint,4,opt,name=voice_user_id,json=voiceUserId,proto3" json:"voice_user_id,omitempty"`
+	// peer id
+	PeerId        int32 `protobuf:"varint,5,opt,name=peer_id,json=peerId,proto3" json:"peer_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5343,6 +5345,13 @@ func (x *VoiceLeavedEvent) GetVoiceUserId() int64 {
 	return 0
 }
 
+func (x *VoiceLeavedEvent) GetPeerId() int32 {
+	if x != nil {
+		return x.PeerId
+	}
+	return 0
+}
+
 // Voice Joined event
 type VoiceJoinedEvent struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -5362,8 +5371,10 @@ type VoiceJoinedEvent struct {
 	VoiceChannelId int64 `protobuf:"varint,7,opt,name=voice_channel_id,json=voiceChannelId,proto3" json:"voice_channel_id,omitempty"`
 	// last screenshot
 	LastScreenshot string `protobuf:"bytes,8,opt,name=last_screenshot,json=lastScreenshot,proto3" json:"last_screenshot,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// peer id
+	PeerId        int32 `protobuf:"varint,9,opt,name=peer_id,json=peerId,proto3" json:"peer_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *VoiceJoinedEvent) Reset() {
@@ -5450,6 +5461,13 @@ func (x *VoiceJoinedEvent) GetLastScreenshot() string {
 		return x.LastScreenshot
 	}
 	return ""
+}
+
+func (x *VoiceJoinedEvent) GetPeerId() int32 {
+	if x != nil {
+		return x.PeerId
+	}
+	return 0
 }
 
 // Voice start event
@@ -10658,12 +10676,13 @@ const file_realtime_proto_rawDesc = "" +
 	"\tis_public\x18\x05 \x01(\bR\bisPublic\x12'\n" +
 	"\x0fsender_username\x18\x06 \x01(\tR\x0esenderUsername\x12.\n" +
 	"\x13sender_display_name\x18\a \x01(\tR\x11senderDisplayName\x12\x19\n" +
-	"\btopic_id\x18\b \x01(\x03R\atopicId\"\x89\x01\n" +
+	"\btopic_id\x18\b \x01(\x03R\atopicId\"\xa2\x01\n" +
 	"\x10VoiceLeavedEvent\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\aclan_id\x18\x02 \x01(\x03R\x06clanId\x12(\n" +
 	"\x10voice_channel_id\x18\x03 \x01(\x03R\x0evoiceChannelId\x12\"\n" +
-	"\rvoice_user_id\x18\x04 \x01(\x03R\vvoiceUserId\"\x96\x02\n" +
+	"\rvoice_user_id\x18\x04 \x01(\x03R\vvoiceUserId\x12\x17\n" +
+	"\apeer_id\x18\x05 \x01(\x05R\x06peerId\"\xaf\x02\n" +
 	"\x10VoiceJoinedEvent\x12\x17\n" +
 	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\x12\x1b\n" +
 	"\tclan_name\x18\x02 \x01(\tR\bclanName\x12\x0e\n" +
@@ -10672,7 +10691,8 @@ const file_realtime_proto_rawDesc = "" +
 	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12.\n" +
 	"\x13voice_channel_label\x18\x06 \x01(\tR\x11voiceChannelLabel\x12(\n" +
 	"\x10voice_channel_id\x18\a \x01(\x03R\x0evoiceChannelId\x12'\n" +
-	"\x0flast_screenshot\x18\b \x01(\tR\x0elastScreenshot\"f\n" +
+	"\x0flast_screenshot\x18\b \x01(\tR\x0elastScreenshot\x12\x17\n" +
+	"\apeer_id\x18\t \x01(\x05R\x06peerId\"f\n" +
 	"\x11VoiceStartedEvent\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\aclan_id\x18\x02 \x01(\x03R\x06clanId\x12(\n" +
