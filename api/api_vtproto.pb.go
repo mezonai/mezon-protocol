@@ -18362,20 +18362,15 @@ func (m *GenerateMeetTokenRequest) MarshalToSizedBufferVT(dAtA []byte) (int, err
 		copy(dAtA[i:], m.Metadata)
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Metadata)))
 		i--
-		dAtA[i] = 0x22
+		dAtA[i] = 0x1a
 	}
 	if m.ClanId != 0 {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ClanId))
 		i--
-		dAtA[i] = 0x18
+		dAtA[i] = 0x10
 	}
 	if m.ChannelId != 0 {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ChannelId))
-		i--
-		dAtA[i] = 0x10
-	}
-	if m.UserId != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.UserId))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -30471,9 +30466,6 @@ func (m *GenerateMeetTokenRequest) SizeVT() (n int) {
 	}
 	var l int
 	_ = l
-	if m.UserId != 0 {
-		n += 1 + protohelpers.SizeOfVarint(uint64(m.UserId))
-	}
 	if m.ChannelId != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.ChannelId))
 	}
@@ -80193,25 +80185,6 @@ func (m *GenerateMeetTokenRequest) UnmarshalVT(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UserId", wireType)
-			}
-			m.UserId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.UserId |= int64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ChannelId", wireType)
 			}
 			m.ChannelId = 0
@@ -80229,7 +80202,7 @@ func (m *GenerateMeetTokenRequest) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
-		case 3:
+		case 2:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ClanId", wireType)
 			}
@@ -80248,7 +80221,7 @@ func (m *GenerateMeetTokenRequest) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
-		case 4:
+		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Metadata", wireType)
 			}

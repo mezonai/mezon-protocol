@@ -3245,10 +3245,9 @@ message DeleteSdTopicRequest {
 }
 
 message GenerateMeetTokenRequest {
-    int64 user_id = 1;
-    int64 channel_id = 2;
-    int64 clan_id = 3;
-    string metadata = 4;
+    int64 channel_id = 1;
+    int64 clan_id = 2;
+    string metadata = 3;
 }
 
 message MeetParticipantRequest {
