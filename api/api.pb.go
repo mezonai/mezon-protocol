@@ -21580,10 +21580,9 @@ func (x *DeleteSdTopicRequest) GetClanId() int64 {
 
 type GenerateMeetTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	ChannelId     int64                  `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	ClanId        int64                  `protobuf:"varint,3,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
-	Metadata      string                 `protobuf:"bytes,4,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	ChannelId     int64                  `protobuf:"varint,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	ClanId        int64                  `protobuf:"varint,2,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
+	Metadata      string                 `protobuf:"bytes,3,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -21616,13 +21615,6 @@ func (x *GenerateMeetTokenRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GenerateMeetTokenRequest.ProtoReflect.Descriptor instead.
 func (*GenerateMeetTokenRequest) Descriptor() ([]byte, []int) {
 	return file_api_proto_rawDescGZIP(), []int{289}
-}
-
-func (x *GenerateMeetTokenRequest) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
 }
 
 func (x *GenerateMeetTokenRequest) GetChannelId() int64 {
@@ -28832,13 +28824,12 @@ const file_api_proto_rawDesc = "" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\x03R\tchannelId\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\x03R\x02id\x12\x17\n" +
-	"\aclan_id\x18\x03 \x01(\x03R\x06clanId\"\x87\x01\n" +
-	"\x18GenerateMeetTokenRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1d\n" +
+	"\aclan_id\x18\x03 \x01(\x03R\x06clanId\"n\n" +
+	"\x18GenerateMeetTokenRequest\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x02 \x01(\x03R\tchannelId\x12\x17\n" +
-	"\aclan_id\x18\x03 \x01(\x03R\x06clanId\x12\x1a\n" +
-	"\bmetadata\x18\x04 \x01(\tR\bmetadata\"i\n" +
+	"channel_id\x18\x01 \x01(\x03R\tchannelId\x12\x17\n" +
+	"\aclan_id\x18\x02 \x01(\x03R\x06clanId\x12\x1a\n" +
+	"\bmetadata\x18\x03 \x01(\tR\bmetadata\"i\n" +
 	"\x16MeetParticipantRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1d\n" +
 	"\n" +
