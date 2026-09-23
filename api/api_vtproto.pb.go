@@ -18364,10 +18364,12 @@ func (m *GenerateMeetTokenRequest) MarshalToSizedBufferVT(dAtA []byte) (int, err
 		i--
 		dAtA[i] = 0x1a
 	}
-	if m.ClanId != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ClanId))
+	if len(m.RoomName) > 0 {
+		i -= len(m.RoomName)
+		copy(dAtA[i:], m.RoomName)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.RoomName)))
 		i--
-		dAtA[i] = 0x10
+		dAtA[i] = 0x12
 	}
 	if m.ChannelId != 0 {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ChannelId))
@@ -30469,8 +30471,9 @@ func (m *GenerateMeetTokenRequest) SizeVT() (n int) {
 	if m.ChannelId != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.ChannelId))
 	}
-	if m.ClanId != 0 {
-		n += 1 + protohelpers.SizeOfVarint(uint64(m.ClanId))
+	l = len(m.RoomName)
+	if l > 0 {
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	l = len(m.Metadata)
 	if l > 0 {
@@ -80203,10 +80206,10 @@ func (m *GenerateMeetTokenRequest) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ClanId", wireType)
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RoomName", wireType)
 			}
-			m.ClanId = 0
+			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protohelpers.ErrIntOverflow
@@ -80216,11 +80219,24 @@ func (m *GenerateMeetTokenRequest) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ClanId |= int64(b&0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.RoomName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Metadata", wireType)
