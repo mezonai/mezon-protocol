@@ -3825,4 +3825,23 @@ message SearchCtrlKResponse {
   repeated ChannelDescription channels = 2;
 }
 
+message SearchMentionUsersRequest {
+  int64 clan_id = 1;
+  int64 channel_id = 2;
+  string text = 3;
+}
+
+message MentionUser {
+  int64 id = 1;
+  string username = 2;
+  string display_name = 3;
+  string avatar_url = 4;
+  string clan_nick = 5;
+  string clan_avatar = 6;
+}
+
+message SearchMentionUsersResponse {
+  repeated MentionUser users = 1;
+}
+
 message NoParams {}
