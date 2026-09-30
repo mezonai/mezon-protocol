@@ -3258,6 +3258,7 @@ message MeetParticipantRequest {
 
 message GenerateMeetTokenResponse {
   string token = 1;
+  string url = 2;
 }
 
 message GenerateMezonMeetResponse {

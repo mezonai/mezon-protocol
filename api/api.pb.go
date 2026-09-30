@@ -21701,6 +21701,7 @@ func (x *MeetParticipantRequest) GetClanId() int64 {
 type GenerateMeetTokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -21738,6 +21739,13 @@ func (*GenerateMeetTokenResponse) Descriptor() ([]byte, []int) {
 func (x *GenerateMeetTokenResponse) GetToken() string {
 	if x != nil {
 		return x.Token
+	}
+	return ""
+}
+
+func (x *GenerateMeetTokenResponse) GetUrl() string {
+	if x != nil {
+		return x.Url
 	}
 	return ""
 }
@@ -28834,9 +28842,10 @@ const file_api_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\x03R\tchannelId\x12\x17\n" +
-	"\aclan_id\x18\x03 \x01(\x03R\x06clanId\"1\n" +
+	"\aclan_id\x18\x03 \x01(\x03R\x06clanId\"C\n" +
 	"\x19GenerateMeetTokenResponse\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"\xb0\x01\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\x12\x10\n" +
+	"\x03url\x18\x02 \x01(\tR\x03url\"\xb0\x01\n" +
 	"\x19GenerateMezonMeetResponse\x12\x17\n" +
 	"\ameet_id\x18\x01 \x01(\x03R\x06meetId\x12\x1b\n" +
 	"\troom_name\x18\x02 \x01(\tR\broomName\x12#\n" +
