@@ -3846,4 +3846,12 @@ message SearchMentionUsersResponse {
   repeated MentionUser users = 1;
 }
 
+message GenerateCDNSignatureRequest {
+    int64 channel_id = 1;
+}
+
+message GenerateCDNSignatureResponse {
+    string signature = 1;
+}
+
 message NoParams {}
