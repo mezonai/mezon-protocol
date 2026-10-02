@@ -10413,6 +10413,11 @@ func (m *UploadAttachmentRequest) MarshalToSizedBufferVT(dAtA []byte) (int, erro
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.ChannelId != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ChannelId))
+		i--
+		dAtA[i] = 0x38
+	}
 	if m.PartCount != 0 {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.PartCount))
 		i--
@@ -27436,6 +27441,9 @@ func (m *UploadAttachmentRequest) SizeVT() (n int) {
 	}
 	if m.PartCount != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.PartCount))
+	}
+	if m.ChannelId != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.ChannelId))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -60398,6 +60406,25 @@ func (m *UploadAttachmentRequest) UnmarshalVT(dAtA []byte) error {
 				b := dAtA[iNdEx]
 				iNdEx++
 				m.PartCount |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ChannelId", wireType)
+			}
+			m.ChannelId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ChannelId |= int64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
