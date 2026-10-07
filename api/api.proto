@@ -1987,6 +1987,8 @@ message MultipartUploadAttachment {
   repeated string urls = 2;
   // the upload id
   string upload_id = 3;
+  // CDN type
+  int32 type_cdn = 4;
 }
 
 message MultipartUploadAttachmentPart {
