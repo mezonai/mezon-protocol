@@ -12200,7 +12200,9 @@ type UploadAttachmentRequest struct {
 	// part count
 	PartCount int32 `protobuf:"varint,6,opt,name=part_count,json=partCount,proto3" json:"part_count,omitempty"`
 	// channel id
-	ChannelId     int64 `protobuf:"varint,7,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	ChannelId int64 `protobuf:"varint,7,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// need to transcode
+	TranscodeHls  bool `protobuf:"varint,8,opt,name=transcode_hls,json=transcodeHls,proto3" json:"transcode_hls,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -12282,6 +12284,13 @@ func (x *UploadAttachmentRequest) GetChannelId() int64 {
 		return x.ChannelId
 	}
 	return 0
+}
+
+func (x *UploadAttachmentRequest) GetTranscodeHls() bool {
+	if x != nil {
+		return x.TranscodeHls
+	}
+	return false
 }
 
 type ListMessageMentionRequest struct {
@@ -28351,7 +28360,7 @@ const file_api_proto_rawDesc = "" +
 	"\x1cUploadBatchAttachmentRequest\x12E\n" +
 	"\fupload_files\x18\x01 \x03(\v2\".mezon.api.UploadAttachmentRequestR\vuploadFiles\"[\n" +
 	"\x15UploadAttachmentBatch\x12B\n" +
-	"\x0euploaded_files\x18\x01 \x03(\v2\x1b.mezon.api.UploadAttachmentR\ruploadedFiles\"\xd1\x01\n" +
+	"\x0euploaded_files\x18\x01 \x03(\v2\x1b.mezon.api.UploadAttachmentR\ruploadedFiles\"\xf6\x01\n" +
 	"\x17UploadAttachmentRequest\x12\x1a\n" +
 	"\bfilename\x18\x01 \x01(\tR\bfilename\x12\x1a\n" +
 	"\bfiletype\x18\x02 \x01(\tR\bfiletype\x12\x12\n" +
@@ -28361,7 +28370,8 @@ const file_api_proto_rawDesc = "" +
 	"\n" +
 	"part_count\x18\x06 \x01(\x05R\tpartCount\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\a \x01(\x03R\tchannelId\"c\n" +
+	"channel_id\x18\a \x01(\x03R\tchannelId\x12#\n" +
+	"\rtranscode_hls\x18\b \x01(\bR\ftranscodeHls\"c\n" +
 	"\x19ListMessageMentionRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12\x18\n" +
 	"\aforward\x18\x02 \x01(\bR\aforward\x12\x16\n" +

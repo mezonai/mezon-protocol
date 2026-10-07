@@ -10413,6 +10413,16 @@ func (m *UploadAttachmentRequest) MarshalToSizedBufferVT(dAtA []byte) (int, erro
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.TranscodeHls {
+		i--
+		if m.TranscodeHls {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x40
+	}
 	if m.ChannelId != 0 {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ChannelId))
 		i--
@@ -27522,6 +27532,9 @@ func (m *UploadAttachmentRequest) SizeVT() (n int) {
 	}
 	if m.ChannelId != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.ChannelId))
+	}
+	if m.TranscodeHls {
+		n += 2
 	}
 	n += len(m.unknownFields)
 	return n
@@ -60534,6 +60547,26 @@ func (m *UploadAttachmentRequest) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
+		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TranscodeHls", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.TranscodeHls = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
