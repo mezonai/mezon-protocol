@@ -10550,6 +10550,11 @@ func (m *UploadAttachment) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.TypeCdn != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.TypeCdn))
+		i--
+		dAtA[i] = 0x18
+	}
 	if len(m.Url) > 0 {
 		i -= len(m.Url)
 		copy(dAtA[i:], m.Url)
@@ -27573,6 +27578,9 @@ func (m *UploadAttachment) SizeVT() (n int) {
 	l = len(m.Url)
 	if l > 0 {
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
+	if m.TypeCdn != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.TypeCdn))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -60804,6 +60812,25 @@ func (m *UploadAttachment) UnmarshalVT(dAtA []byte) error {
 			}
 			m.Url = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TypeCdn", wireType)
+			}
+			m.TypeCdn = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.TypeCdn |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
