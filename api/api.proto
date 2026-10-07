@@ -1958,6 +1958,8 @@ message UploadAttachmentRequest {
   int32 part_count = 6;
   // channel id
   int64 channel_id = 7;
+  // need to transcode
+  bool transcode_hls = 8;
 }
 
 message ListMessageMentionRequest {
