@@ -12361,7 +12361,9 @@ type UploadAttachment struct {
 	// The name of file that need to upload
 	Filename string `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename,omitempty"`
 	// The url
-	Url           string `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	Url string `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	// CDN type
+	TypeCdn       int32 `protobuf:"varint,3,opt,name=type_cdn,json=typeCdn,proto3" json:"type_cdn,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -12408,6 +12410,13 @@ func (x *UploadAttachment) GetUrl() string {
 		return x.Url
 	}
 	return ""
+}
+
+func (x *UploadAttachment) GetTypeCdn() int32 {
+	if x != nil {
+		return x.TypeCdn
+	}
+	return 0
 }
 
 type MultipartUploadAttachment struct {
@@ -28375,10 +28384,11 @@ const file_api_proto_rawDesc = "" +
 	"\x19ListMessageMentionRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12\x18\n" +
 	"\aforward\x18\x02 \x01(\bR\aforward\x12\x16\n" +
-	"\x06cursor\x18\x03 \x01(\tR\x06cursor\"@\n" +
+	"\x06cursor\x18\x03 \x01(\tR\x06cursor\"[\n" +
 	"\x10UploadAttachment\x12\x1a\n" +
 	"\bfilename\x18\x01 \x01(\tR\bfilename\x12\x10\n" +
-	"\x03url\x18\x02 \x01(\tR\x03url\"h\n" +
+	"\x03url\x18\x02 \x01(\tR\x03url\x12\x19\n" +
+	"\btype_cdn\x18\x03 \x01(\x05R\atypeCdn\"h\n" +
 	"\x19MultipartUploadAttachment\x12\x1a\n" +
 	"\bfilename\x18\x01 \x01(\tR\bfilename\x12\x12\n" +
 	"\x04urls\x18\x02 \x03(\tR\x04urls\x12\x1b\n" +

@@ -1976,6 +1976,8 @@ message UploadAttachment {
   string filename = 1;
   // The url
   string url = 2;
+  // CDN type
+  int32 type_cdn = 3;
 }
 
 message MultipartUploadAttachment {
