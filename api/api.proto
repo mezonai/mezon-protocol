@@ -3556,6 +3556,7 @@ message GenerateMeetTokenExternalResponse {
   string token = 1;
   int64 guest_user_id = 2;
   string guest_access_token = 3;
+  string url = 4;
 }
 
 message KafkaActionMsg {

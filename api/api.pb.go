@@ -24410,6 +24410,7 @@ type GenerateMeetTokenExternalResponse struct {
 	Token            string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	GuestUserId      int64                  `protobuf:"varint,2,opt,name=guest_user_id,json=guestUserId,proto3" json:"guest_user_id,omitempty"`
 	GuestAccessToken string                 `protobuf:"bytes,3,opt,name=guest_access_token,json=guestAccessToken,proto3" json:"guest_access_token,omitempty"`
+	Url              string                 `protobuf:"bytes,4,opt,name=url,proto3" json:"url,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -24461,6 +24462,13 @@ func (x *GenerateMeetTokenExternalResponse) GetGuestUserId() int64 {
 func (x *GenerateMeetTokenExternalResponse) GetGuestAccessToken() string {
 	if x != nil {
 		return x.GuestAccessToken
+	}
+	return ""
+}
+
+func (x *GenerateMeetTokenExternalResponse) GetUrl() string {
+	if x != nil {
+		return x.Url
 	}
 	return ""
 }
@@ -29409,11 +29417,12 @@ const file_api_proto_rawDesc = "" +
 	"\vpage_number\x18\x02 \x01(\x05R\n" +
 	"pageNumber\x12\x1d\n" +
 	"\n" +
-	"page_count\x18\x03 \x01(\x05R\tpageCount\"\x8b\x01\n" +
+	"page_count\x18\x03 \x01(\x05R\tpageCount\"\x9d\x01\n" +
 	"!GenerateMeetTokenExternalResponse\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x12\"\n" +
 	"\rguest_user_id\x18\x02 \x01(\x03R\vguestUserId\x12,\n" +
-	"\x12guest_access_token\x18\x03 \x01(\tR\x10guestAccessToken\"\xae\x01\n" +
+	"\x12guest_access_token\x18\x03 \x01(\tR\x10guestAccessToken\x12\x10\n" +
+	"\x03url\x18\x04 \x01(\tR\x03url\"\xae\x01\n" +
 	"\x0eKafkaActionMsg\x12\x17\n" +
 	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\x12\x1d\n" +
 	"\n" +
