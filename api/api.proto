@@ -3887,3 +3887,18 @@ message LinkCDNFileRequest {
 }
 
 message NoParams {}
+
+message ListTopicBadgeCountRequest {
+  int64 clan_id = 1;
+}
+
+message TopicBadgeCount {
+  int64 topic_id = 1;
+  int64 channel_id = 2;
+  int32 badge = 3;
+  bool has_unread = 4;
+}
+
+message ListTopicBadgeCountResponse {
+  repeated TopicBadgeCount topics = 1;
+}
