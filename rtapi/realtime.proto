@@ -231,7 +231,11 @@ message Envelope {
     VoiceInteractiveEvent voice_interactive_event = 100;
     // Aggregated audience count of a streaming channel
     StreamingViewerCountEvent streaming_viewer_count_event = 101;
+    // Start or stop watching a streaming channel as audience
+    StreamingWatch streaming_watch = 104;
   }
+  // MemoCreatedEvent and MemoDeletedEvent until v2.0.68
+  reserved 102, 103;
 }
 
 message VoiceInteractiveEvent {
@@ -893,6 +897,14 @@ message StreamingViewerCountEvent {
   int64 channel_id = 2;
   // number of distinct users watching as audience
   int32 viewer_count = 3;
+}
+
+// Sent by a client when it starts or stops watching a streaming channel as audience.
+message StreamingWatch {
+  // streaming channel id
+  int64 channel_id = 1;
+  // true when the client starts watching, false when it stops
+  bool watching = 2;
 }
 
 message ChannelCreatedEvent {
