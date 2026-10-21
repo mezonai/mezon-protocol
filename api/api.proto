@@ -3890,3 +3890,30 @@ message LinkCDNFileRequest {
 }
 
 message NoParams {}
+
+enum EveryoneChannelExcludeType {
+  EVERYONE_CHANNEL_EXCLUDE_TYPE_UNSPECIFIED = 0;
+  EVERYONE_CHANNEL_EXCLUDE_TYPE_USER = 1;
+  EVERYONE_CHANNEL_EXCLUDE_TYPE_ROLE = 2;
+}
+
+message SetOverrideEveryoneChannelRequest {
+  int64 clan_id = 1;
+  int64 channel_id = 2;
+  bool override = 3;
+  EveryoneChannelExcludeType exclude_type = 4;
+  repeated int64 exclude_ids = 5;
+}
+
+message GetOverrideEveryoneChannelRequest {
+  int64 clan_id = 1;
+  int64 channel_id = 2;
+}
+
+message GetOverrideEveryoneChannelResponse {
+  int64 clan_id = 1;
+  int64 channel_id = 2;
+  bool override = 3;
+  repeated int64 user_ids = 4;
+  repeated int64 role_ids = 5;
+}
