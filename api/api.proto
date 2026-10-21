@@ -3918,10 +3918,17 @@ message GetOverrideEveryoneChannelResponse {
   repeated int64 role_ids = 5;
 }
 
+message SfuBreakoutParticipant {
+    int64 channel_id = 1;
+    repeated int64 user_ids = 2;
+}
+
 message SfuBreakoutRoomRequest {
     int64 parent_channel_id = 1;
     int32 room_count = 2;
     int32 break_rule_type = 3;
+    // only assign for manually rule
+    repeated SfuBreakoutParticipant list_participants = 4;
 }
 
 message SfuBreakoutRoomResponse {

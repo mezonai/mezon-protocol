@@ -233,9 +233,14 @@ message Envelope {
     StreamingViewerCountEvent streaming_viewer_count_event = 101;
     // Start or stop watching a streaming channel as audience
     StreamingWatch streaming_watch = 104;
+    // SFU breakout room
+    SfuBreakoutRoomEvent sfu_breakout_room_event = 105;
   }
-  // MemoCreatedEvent and MemoDeletedEvent until v2.0.68
-  reserved 102, 103;
+}
+
+message SfuBreakoutRoomEvent {
+    int64 channel_id = 1;
+    string token = 2;
 }
 
 message VoiceInteractiveEvent {
