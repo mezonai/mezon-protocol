@@ -241,6 +241,7 @@ message Envelope {
 message SfuBreakoutRoomEvent {
     int64 channel_id = 1;
     string token = 2;
+    repeated int64 self_select_ids = 3;
 }
 
 message VoiceInteractiveEvent {

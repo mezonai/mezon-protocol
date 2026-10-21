@@ -1909,6 +1909,7 @@ type SfuBreakoutRoomEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ChannelId     int64                  `protobuf:"varint,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	Token         string                 `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
+	SelfSelectIds []int64                `protobuf:"varint,3,rep,packed,name=self_select_ids,json=selfSelectIds,proto3" json:"self_select_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1955,6 +1956,13 @@ func (x *SfuBreakoutRoomEvent) GetToken() string {
 		return x.Token
 	}
 	return ""
+}
+
+func (x *SfuBreakoutRoomEvent) GetSelfSelectIds() []int64 {
+	if x != nil {
+		return x.SelfSelectIds
+	}
+	return nil
 }
 
 type VoiceInteractiveEvent struct {
@@ -10775,11 +10783,12 @@ const file_realtime_proto_rawDesc = "" +
 	"\x1cstreaming_viewer_count_event\x18e \x01(\v2).mezon.realtime.StreamingViewerCountEventH\x00R\x19streamingViewerCountEvent\x12I\n" +
 	"\x0fstreaming_watch\x18h \x01(\v2\x1e.mezon.realtime.StreamingWatchH\x00R\x0estreamingWatch\x12]\n" +
 	"\x17sfu_breakout_room_event\x18i \x01(\v2$.mezon.realtime.SfuBreakoutRoomEventH\x00R\x14sfuBreakoutRoomEventB\t\n" +
-	"\amessage\"K\n" +
+	"\amessage\"s\n" +
 	"\x14SfuBreakoutRoomEvent\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\x03R\tchannelId\x12\x14\n" +
-	"\x05token\x18\x02 \x01(\tR\x05token\"\xcf\x01\n" +
+	"\x05token\x18\x02 \x01(\tR\x05token\x12&\n" +
+	"\x0fself_select_ids\x18\x03 \x03(\x03R\rselfSelectIds\"\xcf\x01\n" +
 	"\x15VoiceInteractiveEvent\x12\x17\n" +
 	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\x12(\n" +
 	"\x10voice_channel_id\x18\x02 \x01(\x03R\x0evoiceChannelId\x12\x1b\n" +
