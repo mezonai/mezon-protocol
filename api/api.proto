@@ -3917,3 +3917,20 @@ message GetOverrideEveryoneChannelResponse {
   repeated int64 user_ids = 4;
   repeated int64 role_ids = 5;
 }
+
+message SfuBreakoutRoomRequest {
+    int64 parent_channel_id = 1;
+    int32 room_count = 2;
+    int32 break_rule_type = 3;
+}
+
+message SfuBreakoutRoomResponse {
+    int64 breakout_id = 1;
+    int32 room_count = 2;
+    int32 break_rule_type = 3;
+    repeated int64 list_child_rooms = 4;
+}
+
+message SfuBreakoutMergeRequest {
+    int64 target_id = 1;
+}
