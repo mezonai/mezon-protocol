@@ -229,12 +229,14 @@ message Envelope {
     ScreenShareEvent screen_share_event = 99;
     // VoiceInteractiveEvent
     VoiceInteractiveEvent voice_interactive_event = 100;
-    // Aggregated audience count of a streaming channel
-    StreamingViewerCountEvent streaming_viewer_count_event = 101;
+    // Metric Message Event
+    MetricMessageEvent metric_message_event = 101;
     // Start or stop watching a streaming channel as audience
     StreamingWatch streaming_watch = 104;
     // SFU breakout room
     SfuBreakoutRoomEvent sfu_breakout_room_event = 105;
+    // Aggregated audience count of a streaming channel
+    StreamingViewerCountEvent streaming_viewer_count_event = 106;
   }
 }
 
@@ -1582,4 +1584,12 @@ message BreakoutSession {
 	int32 break_rule_type = 5;
 	repeated int64 list_child_rooms = 6;
 	int64 creator_id = 7;
+}
+
+message MetricMessageEvent {
+  string request_id = 1;
+  int32 sessions_active = 2;
+  int32 sessions_peak = 3;
+  int64 sessions_created_total = 4;
+  int64 sessions_closed_total = 5;
 }

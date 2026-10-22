@@ -2228,15 +2228,15 @@ func (m *Envelope_VoiceInteractiveEvent) MarshalToSizedBufferVT(dAtA []byte) (in
 	}
 	return len(dAtA) - i, nil
 }
-func (m *Envelope_StreamingViewerCountEvent) MarshalToVT(dAtA []byte) (int, error) {
+func (m *Envelope_MetricMessageEvent) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *Envelope_StreamingViewerCountEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *Envelope_MetricMessageEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	i := len(dAtA)
-	if m.StreamingViewerCountEvent != nil {
-		size, err := m.StreamingViewerCountEvent.MarshalToSizedBufferVT(dAtA[:i])
+	if m.MetricMessageEvent != nil {
+		size, err := m.MetricMessageEvent.MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -2288,6 +2288,27 @@ func (m *Envelope_SfuBreakoutRoomEvent) MarshalToSizedBufferVT(dAtA []byte) (int
 		dAtA[i] = 0x6
 		i--
 		dAtA[i] = 0xca
+	}
+	return len(dAtA) - i, nil
+}
+func (m *Envelope_StreamingViewerCountEvent) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *Envelope_StreamingViewerCountEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.StreamingViewerCountEvent != nil {
+		size, err := m.StreamingViewerCountEvent.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x6
+		i--
+		dAtA[i] = 0xd2
 	}
 	return len(dAtA) - i, nil
 }
@@ -10256,6 +10277,66 @@ func (m *BreakoutSession) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *MetricMessageEvent) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MetricMessageEvent) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *MetricMessageEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.SessionsClosedTotal != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.SessionsClosedTotal))
+		i--
+		dAtA[i] = 0x28
+	}
+	if m.SessionsCreatedTotal != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.SessionsCreatedTotal))
+		i--
+		dAtA[i] = 0x20
+	}
+	if m.SessionsPeak != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.SessionsPeak))
+		i--
+		dAtA[i] = 0x18
+	}
+	if m.SessionsActive != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.SessionsActive))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.RequestId) > 0 {
+		i -= len(m.RequestId)
+		copy(dAtA[i:], m.RequestId)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.RequestId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *Envelope) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -11514,14 +11595,14 @@ func (m *Envelope_VoiceInteractiveEvent) SizeVT() (n int) {
 	}
 	return n
 }
-func (m *Envelope_StreamingViewerCountEvent) SizeVT() (n int) {
+func (m *Envelope_MetricMessageEvent) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.StreamingViewerCountEvent != nil {
-		l = m.StreamingViewerCountEvent.SizeVT()
+	if m.MetricMessageEvent != nil {
+		l = m.MetricMessageEvent.SizeVT()
 		n += 2 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	return n
@@ -11546,6 +11627,18 @@ func (m *Envelope_SfuBreakoutRoomEvent) SizeVT() (n int) {
 	_ = l
 	if m.SfuBreakoutRoomEvent != nil {
 		l = m.SfuBreakoutRoomEvent.SizeVT()
+		n += 2 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
+	return n
+}
+func (m *Envelope_StreamingViewerCountEvent) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.StreamingViewerCountEvent != nil {
+		l = m.StreamingViewerCountEvent.SizeVT()
 		n += 2 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	return n
@@ -14852,6 +14945,32 @@ func (m *BreakoutSession) SizeVT() (n int) {
 	}
 	if m.CreatorId != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.CreatorId))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *MetricMessageEvent) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.RequestId)
+	if l > 0 {
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
+	if m.SessionsActive != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.SessionsActive))
+	}
+	if m.SessionsPeak != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.SessionsPeak))
+	}
+	if m.SessionsCreatedTotal != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.SessionsCreatedTotal))
+	}
+	if m.SessionsClosedTotal != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.SessionsClosedTotal))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -19110,7 +19229,7 @@ func (m *Envelope) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 101:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StreamingViewerCountEvent", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MetricMessageEvent", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -19137,16 +19256,16 @@ func (m *Envelope) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Message.(*Envelope_StreamingViewerCountEvent); ok {
-				if err := oneof.StreamingViewerCountEvent.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			if oneof, ok := m.Message.(*Envelope_MetricMessageEvent); ok {
+				if err := oneof.MetricMessageEvent.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &StreamingViewerCountEvent{}
+				v := &MetricMessageEvent{}
 				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Message = &Envelope_StreamingViewerCountEvent{StreamingViewerCountEvent: v}
+				m.Message = &Envelope_MetricMessageEvent{MetricMessageEvent: v}
 			}
 			iNdEx = postIndex
 		case 104:
@@ -19229,6 +19348,47 @@ func (m *Envelope) UnmarshalVT(dAtA []byte) error {
 					return err
 				}
 				m.Message = &Envelope_SfuBreakoutRoomEvent{SfuBreakoutRoomEvent: v}
+			}
+			iNdEx = postIndex
+		case 106:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StreamingViewerCountEvent", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Message.(*Envelope_StreamingViewerCountEvent); ok {
+				if err := oneof.StreamingViewerCountEvent.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &StreamingViewerCountEvent{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Message = &Envelope_StreamingViewerCountEvent{StreamingViewerCountEvent: v}
 			}
 			iNdEx = postIndex
 		default:
@@ -40132,6 +40292,165 @@ func (m *BreakoutSession) UnmarshalVT(dAtA []byte) error {
 				b := dAtA[iNdEx]
 				iNdEx++
 				m.CreatorId |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MetricMessageEvent) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protohelpers.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MetricMessageEvent: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MetricMessageEvent: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RequestId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.RequestId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SessionsActive", wireType)
+			}
+			m.SessionsActive = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.SessionsActive |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SessionsPeak", wireType)
+			}
+			m.SessionsPeak = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.SessionsPeak |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SessionsCreatedTotal", wireType)
+			}
+			m.SessionsCreatedTotal = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.SessionsCreatedTotal |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SessionsClosedTotal", wireType)
+			}
+			m.SessionsClosedTotal = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.SessionsClosedTotal |= int64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
