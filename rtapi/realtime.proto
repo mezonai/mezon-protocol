@@ -1573,3 +1573,13 @@ message GotifyMessage {
   uint32 app_id = 9;
   int64 sender_id = 10;
 }
+
+message BreakoutSession {
+	int64 breakout_id = 1;
+	int64 parent_channel_id = 2;
+	int64 clan_id = 3;
+	int32 room_count = 4;
+	int32 break_rule_type = 5;
+	repeated int64 list_child_rooms = 6;
+	int64 creator_id = 7;
+}
