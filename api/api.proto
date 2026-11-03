@@ -3941,3 +3941,11 @@ message SfuBreakoutRoomResponse {
 message SfuBreakoutMergeRequest {
     int64 target_id = 1;
 }
+
+message DMSetting {
+  bool only_friends_dm = 1;
+}
+
+message UpdateDMSettingRequest {
+  bool only_friends_dm = 1;
+}
