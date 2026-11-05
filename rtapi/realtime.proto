@@ -1299,6 +1299,8 @@ message UserProfileUpdatedEvent {
   int64 clan_id = 6;
   // the encrypt_private_key
   string encrypt_private_key = 7;
+  // profile banner url
+  string banner = 8;
 }
 
 message ConfirmLinkMezonOTPData {
