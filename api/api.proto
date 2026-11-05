@@ -47,6 +47,8 @@ message Account {
   string encrypt_private_key = 8;
   // password is setted
   bool password_setted = 9;
+  // Profile banner url
+  string banner = 10;
 }
 
 // Obtain a new authentication token using a refresh token.
@@ -820,6 +822,8 @@ message UpdateAccountRequest {
   string encrypt_private_key = 10;
   // The email of the user's account.
   google.protobuf.StringValue email = 11;
+  // Profile banner url
+  google.protobuf.StringValue banner = 12;
 }
 
 // Update fields in a given group.
@@ -887,6 +891,8 @@ message User {
   repeated string list_nick_names = 19;
   // online, offline, invisible, idle, do not disturb
   string status = 20;
+  // Profile banner url
+  string banner = 21;
 }
 
 // A collection of zero or more users.
