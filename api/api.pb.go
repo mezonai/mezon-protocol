@@ -5791,7 +5791,9 @@ type ClanDesc struct {
 	// comma-separated clan hashtags
 	Hashtags string `protobuf:"bytes,19,opt,name=hashtags,proto3" json:"hashtags,omitempty"`
 	// Pro plan
-	ProPlan       bool `protobuf:"varint,20,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
+	ProPlan bool `protobuf:"varint,20,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
+	// Total members in clan
+	TotalMembers  int32 `protobuf:"varint,21,opt,name=total_members,json=totalMembers,proto3" json:"total_members,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5964,6 +5966,13 @@ func (x *ClanDesc) GetProPlan() bool {
 		return x.ProPlan
 	}
 	return false
+}
+
+func (x *ClanDesc) GetTotalMembers() int32 {
+	if x != nil {
+		return x.TotalMembers
+	}
+	return 0
 }
 
 // Clan information
@@ -28690,7 +28699,7 @@ const file_api_proto_rawDesc = "" +
 	"\n" +
 	"avatar_url\x18\x05 \x01(\tR\tavatarUrl\"1\n" +
 	"\x16ClanDescProfileRequest\x12\x17\n" +
-	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\"\x98\x05\n" +
+	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\"\xbd\x05\n" +
 	"\bClanDesc\x12\x1d\n" +
 	"\n" +
 	"creator_id\x18\x01 \x01(\x03R\tcreatorId\x12\x1b\n" +
@@ -28715,7 +28724,8 @@ const file_api_proto_rawDesc = "" +
 	"\x11prevent_anonymous\x18\x11 \x01(\bR\x10preventAnonymous\x12,\n" +
 	"\x12has_unread_message\x18\x12 \x01(\bR\x10hasUnreadMessage\x12\x1a\n" +
 	"\bhashtags\x18\x13 \x01(\tR\bhashtags\x12\x19\n" +
-	"\bpro_plan\x18\x14 \x01(\bR\aproPlan\"`\n" +
+	"\bpro_plan\x18\x14 \x01(\bR\aproPlan\x12#\n" +
+	"\rtotal_members\x18\x15 \x01(\x05R\ftotalMembers\"`\n" +
 	"\x15CreateClanDescRequest\x12\x1b\n" +
 	"\tclan_name\x18\x01 \x01(\tR\bclanName\x12\x12\n" +
 	"\x04logo\x18\x02 \x01(\tR\x04logo\x12\x16\n" +
