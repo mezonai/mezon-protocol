@@ -8035,6 +8035,29 @@ func (m *EventManagement) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.CoHost) > 0 {
+		var pksize2 int
+		for _, num := range m.CoHost {
+			pksize2 += protohelpers.SizeOfVarint(uint64(num))
+		}
+		i -= pksize2
+		j1 := i
+		for _, num1 := range m.CoHost {
+			num := uint64(num1)
+			for num >= 1<<7 {
+				dAtA[j1] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j1++
+			}
+			dAtA[j1] = uint8(num)
+			j1++
+		}
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(pksize2))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xaa
+	}
 	if m.MeetRoom != nil {
 		size, err := m.MeetRoom.MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
@@ -8091,23 +8114,23 @@ func (m *EventManagement) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		dAtA[i] = 0x70
 	}
 	if len(m.UserIds) > 0 {
-		var pksize2 int
+		var pksize4 int
 		for _, num := range m.UserIds {
-			pksize2 += protohelpers.SizeOfVarint(uint64(num))
+			pksize4 += protohelpers.SizeOfVarint(uint64(num))
 		}
-		i -= pksize2
-		j1 := i
+		i -= pksize4
+		j3 := i
 		for _, num1 := range m.UserIds {
 			num := uint64(num1)
 			for num >= 1<<7 {
-				dAtA[j1] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA[j3] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
-				j1++
+				j3++
 			}
-			dAtA[j1] = uint8(num)
-			j1++
+			dAtA[j3] = uint8(num)
+			j3++
 		}
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(pksize2))
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(pksize4))
 		i--
 		dAtA[i] = 0x6a
 	}
@@ -9740,6 +9763,29 @@ func (m *CreateEventRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.CoHost) > 0 {
+		var pksize2 int
+		for _, num := range m.CoHost {
+			pksize2 += protohelpers.SizeOfVarint(uint64(num))
+		}
+		i -= pksize2
+		j1 := i
+		for _, num1 := range m.CoHost {
+			num := uint64(num1)
+			for num >= 1<<7 {
+				dAtA[j1] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j1++
+			}
+			dAtA[j1] = uint8(num)
+			j1++
+		}
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(pksize2))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0x92
+	}
 	if m.MeetRoom != nil {
 		size, err := m.MeetRoom.MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
@@ -9879,6 +9925,27 @@ func (m *UpdateEventRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.CoHost) > 0 {
+		var pksize2 int
+		for _, num := range m.CoHost {
+			pksize2 += protohelpers.SizeOfVarint(uint64(num))
+		}
+		i -= pksize2
+		j1 := i
+		for _, num1 := range m.CoHost {
+			num := uint64(num1)
+			for num >= 1<<7 {
+				dAtA[j1] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j1++
+			}
+			dAtA[j1] = uint8(num)
+			j1++
+		}
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(pksize2))
+		i--
+		dAtA[i] = 0x72
 	}
 	if m.RepeatType != 0 {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.RepeatType))
@@ -27406,6 +27473,13 @@ func (m *EventManagement) SizeVT() (n int) {
 		l = m.MeetRoom.SizeVT()
 		n += 2 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
+	if len(m.CoHost) > 0 {
+		l = 0
+		for _, e := range m.CoHost {
+			l += protohelpers.SizeOfVarint(uint64(e))
+		}
+		n += 2 + protohelpers.SizeOfVarint(uint64(l)) + l
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -28078,6 +28152,13 @@ func (m *CreateEventRequest) SizeVT() (n int) {
 		l = m.MeetRoom.SizeVT()
 		n += 2 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
+	if len(m.CoHost) > 0 {
+		l = 0
+		for _, e := range m.CoHost {
+			l += protohelpers.SizeOfVarint(uint64(e))
+		}
+		n += 2 + protohelpers.SizeOfVarint(uint64(l)) + l
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -28130,6 +28211,13 @@ func (m *UpdateEventRequest) SizeVT() (n int) {
 	}
 	if m.RepeatType != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.RepeatType))
+	}
+	if len(m.CoHost) > 0 {
+		l = 0
+		for _, e := range m.CoHost {
+			l += protohelpers.SizeOfVarint(uint64(e))
+		}
+		n += 1 + protohelpers.SizeOfVarint(uint64(l)) + l
 	}
 	n += len(m.unknownFields)
 	return n
@@ -55846,6 +55934,82 @@ func (m *EventManagement) UnmarshalVT(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		case 21:
+			if wireType == 0 {
+				var v int64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protohelpers.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					v |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.CoHost = append(m.CoHost, v)
+			} else if wireType == 2 {
+				var packedLen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protohelpers.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					packedLen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if packedLen < 0 {
+					return protohelpers.ErrInvalidLength
+				}
+				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return protohelpers.ErrInvalidLength
+				}
+				if postIndex > l {
+					return io.ErrUnexpectedEOF
+				}
+				var elementCount int
+				var count int
+				for _, integer := range dAtA[iNdEx:postIndex] {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
+				if elementCount != 0 && len(m.CoHost) == 0 {
+					m.CoHost = make([]int64, 0, elementCount)
+				}
+				for iNdEx < postIndex {
+					var v int64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protohelpers.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= int64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					m.CoHost = append(m.CoHost, v)
+				}
+			} else {
+				return fmt.Errorf("proto: wrong wireType = %d for field CoHost", wireType)
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
@@ -59942,6 +60106,82 @@ func (m *CreateEventRequest) UnmarshalVT(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		case 18:
+			if wireType == 0 {
+				var v int64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protohelpers.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					v |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.CoHost = append(m.CoHost, v)
+			} else if wireType == 2 {
+				var packedLen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protohelpers.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					packedLen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if packedLen < 0 {
+					return protohelpers.ErrInvalidLength
+				}
+				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return protohelpers.ErrInvalidLength
+				}
+				if postIndex > l {
+					return io.ErrUnexpectedEOF
+				}
+				var elementCount int
+				var count int
+				for _, integer := range dAtA[iNdEx:postIndex] {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
+				if elementCount != 0 && len(m.CoHost) == 0 {
+					m.CoHost = make([]int64, 0, elementCount)
+				}
+				for iNdEx < postIndex {
+					var v int64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protohelpers.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= int64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					m.CoHost = append(m.CoHost, v)
+				}
+			} else {
+				return fmt.Errorf("proto: wrong wireType = %d for field CoHost", wireType)
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
@@ -60291,6 +60531,82 @@ func (m *UpdateEventRequest) UnmarshalVT(dAtA []byte) error {
 				if b < 0x80 {
 					break
 				}
+			}
+		case 14:
+			if wireType == 0 {
+				var v int64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protohelpers.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					v |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.CoHost = append(m.CoHost, v)
+			} else if wireType == 2 {
+				var packedLen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protohelpers.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					packedLen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if packedLen < 0 {
+					return protohelpers.ErrInvalidLength
+				}
+				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return protohelpers.ErrInvalidLength
+				}
+				if postIndex > l {
+					return io.ErrUnexpectedEOF
+				}
+				var elementCount int
+				var count int
+				for _, integer := range dAtA[iNdEx:postIndex] {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
+				if elementCount != 0 && len(m.CoHost) == 0 {
+					m.CoHost = make([]int64, 0, elementCount)
+				}
+				for iNdEx < postIndex {
+					var v int64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protohelpers.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= int64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					m.CoHost = append(m.CoHost, v)
+				}
+			} else {
+				return fmt.Errorf("proto: wrong wireType = %d for field CoHost", wireType)
 			}
 		default:
 			iNdEx = preIndex
