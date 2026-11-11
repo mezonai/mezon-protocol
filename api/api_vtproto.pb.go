@@ -50,6 +50,16 @@ func (m *Account) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.ProPlan {
+		i--
+		if m.ProPlan {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x58
+	}
 	if len(m.Banner) > 0 {
 		i -= len(m.Banner)
 		copy(dAtA[i:], m.Banner)
@@ -3971,6 +3981,16 @@ func (m *UpdateAccountRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) 
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.ProPlan != nil {
+		size, err := (*wrapperspb.BoolValue)(m.ProPlan).MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x6a
+	}
 	if m.Banner != nil {
 		size, err := (*wrapperspb.StringValue)(m.Banner).MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
@@ -4253,6 +4273,18 @@ func (m *User) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.ProPlan {
+		i--
+		if m.ProPlan {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xb0
 	}
 	if len(m.Banner) > 0 {
 		i -= len(m.Banner)
@@ -4662,6 +4694,18 @@ func (m *ClanDesc) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.ProPlan {
+		i--
+		if m.ProPlan {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xa0
+	}
 	if len(m.Hashtags) > 0 {
 		i -= len(m.Hashtags)
 		copy(dAtA[i:], m.Hashtags)
@@ -4889,6 +4933,18 @@ func (m *UpdateClanDescRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error)
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.ProPlan != nil {
+		size, err := (*wrapperspb.BoolValue)(m.ProPlan).MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0x82
 	}
 	if m.Hashtags != nil {
 		size, err := (*wrapperspb.StringValue)(m.Hashtags).MarshalToSizedBufferVT(dAtA[:i])
@@ -24088,6 +24144,9 @@ func (m *Account) SizeVT() (n int) {
 	if l > 0 {
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
+	if m.ProPlan {
+		n += 2
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -25705,6 +25764,10 @@ func (m *UpdateAccountRequest) SizeVT() (n int) {
 		l = (*wrapperspb.StringValue)(m.Banner).SizeVT()
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
+	if m.ProPlan != nil {
+		l = (*wrapperspb.BoolValue)(m.ProPlan).SizeVT()
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -25844,6 +25907,9 @@ func (m *User) SizeVT() (n int) {
 	l = len(m.Banner)
 	if l > 0 {
 		n += 2 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
+	if m.ProPlan {
+		n += 3
 	}
 	n += len(m.unknownFields)
 	return n
@@ -26011,6 +26077,9 @@ func (m *ClanDesc) SizeVT() (n int) {
 	if l > 0 {
 		n += 2 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
+	if m.ProPlan {
+		n += 3
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -26098,6 +26167,10 @@ func (m *UpdateClanDescRequest) SizeVT() (n int) {
 	if m.Hashtags != nil {
 		l = (*wrapperspb.StringValue)(m.Hashtags).SizeVT()
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
+	if m.ProPlan != nil {
+		l = (*wrapperspb.BoolValue)(m.ProPlan).SizeVT()
+		n += 2 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -34084,6 +34157,26 @@ func (m *Account) UnmarshalVT(dAtA []byte) error {
 			}
 			m.Banner = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 11:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProPlan", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.ProPlan = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
@@ -44990,6 +45083,42 @@ func (m *UpdateAccountRequest) UnmarshalVT(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		case 13:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProPlan", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.ProPlan == nil {
+				m.ProPlan = &wrapperspb1.BoolValue{}
+			}
+			if err := (*wrapperspb.BoolValue)(m.ProPlan).UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
@@ -45966,6 +46095,26 @@ func (m *User) UnmarshalVT(dAtA []byte) error {
 			}
 			m.Banner = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 22:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProPlan", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.ProPlan = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
@@ -47069,6 +47218,26 @@ func (m *ClanDesc) UnmarshalVT(dAtA []byte) error {
 			}
 			m.Hashtags = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 20:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProPlan", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.ProPlan = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
@@ -47733,6 +47902,42 @@ func (m *UpdateClanDescRequest) UnmarshalVT(dAtA []byte) error {
 				m.Hashtags = &wrapperspb1.StringValue{}
 			}
 			if err := (*wrapperspb.StringValue)(m.Hashtags).UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 16:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProPlan", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.ProPlan == nil {
+				m.ProPlan = &wrapperspb1.BoolValue{}
+			}
+			if err := (*wrapperspb.BoolValue)(m.ProPlan).UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

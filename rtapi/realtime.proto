@@ -1269,6 +1269,8 @@ message ClanUpdatedEvent {
   string hashtags = 14;
   // community vanity short url (clan_discover)
   string short_url = 15;
+  // Pro plan
+  bool pro_plan = 16;
 }
 
 // clan profile updated event
@@ -1301,6 +1303,8 @@ message UserProfileUpdatedEvent {
   string encrypt_private_key = 7;
   // profile banner url
   string banner = 8;
+  // Pro plan
+  bool pro_plan = 9;
 }
 
 message ConfirmLinkMezonOTPData {

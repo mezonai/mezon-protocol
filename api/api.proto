@@ -49,6 +49,8 @@ message Account {
   bool password_setted = 9;
   // Profile banner url
   string banner = 10;
+  // Pro plan
+  bool pro_plan = 11;
 }
 
 // Obtain a new authentication token using a refresh token.
@@ -824,6 +826,8 @@ message UpdateAccountRequest {
   google.protobuf.StringValue email = 11;
   // Profile banner url
   google.protobuf.StringValue banner = 12;
+  // Pro plan
+  google.protobuf.BoolValue pro_plan = 13;
 }
 
 // Update fields in a given group.
@@ -893,6 +897,8 @@ message User {
   string status = 20;
   // Profile banner url
   string banner = 21;
+  // Pro plan
+  bool pro_plan = 22;
 }
 
 // A collection of zero or more users.
@@ -999,6 +1005,8 @@ message ClanDesc {
   bool has_unread_message = 18;
   // comma-separated clan hashtags
   string hashtags = 19;
+  // Pro plan
+  bool pro_plan = 20;
 }
 
 // Clan information
@@ -1042,6 +1050,8 @@ message UpdateClanDescRequest {
   bool prevent_anonymous = 14;
   // comma-separated clan hashtags
   google.protobuf.StringValue hashtags = 15;
+  // Pro plan
+  google.protobuf.BoolValue pro_plan = 16;
 }
 
 // Delete a clan the user has access to.
