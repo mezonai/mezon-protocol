@@ -9567,7 +9567,7 @@ type EventManagement struct {
 	RepeatType        int32                      `protobuf:"varint,18,opt,name=repeat_type,json=repeatType,proto3" json:"repeat_type,omitempty"`
 	IsPrivate         bool                       `protobuf:"varint,19,opt,name=is_private,json=isPrivate,proto3" json:"is_private,omitempty"`
 	MeetRoom          *GenerateMezonMeetResponse `protobuf:"bytes,20,opt,name=meet_room,json=meetRoom,proto3" json:"meet_room,omitempty"`
-	CoHost            []int64                    `protobuf:"varint,21,rep,packed,name=co_host,json=coHost,proto3" json:"co_host,omitempty"`
+	CoHost            int64                      `protobuf:"varint,21,opt,name=co_host,json=coHost,proto3" json:"co_host,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -9742,11 +9742,11 @@ func (x *EventManagement) GetMeetRoom() *GenerateMezonMeetResponse {
 	return nil
 }
 
-func (x *EventManagement) GetCoHost() []int64 {
+func (x *EventManagement) GetCoHost() int64 {
 	if x != nil {
 		return x.CoHost
 	}
-	return nil
+	return 0
 }
 
 // Permission record
@@ -11477,7 +11477,7 @@ type CreateEventRequest struct {
 	UserId           int64                      `protobuf:"varint,15,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	IsPrivate        bool                       `protobuf:"varint,16,opt,name=is_private,json=isPrivate,proto3" json:"is_private,omitempty"`
 	MeetRoom         *GenerateMezonMeetResponse `protobuf:"bytes,17,opt,name=meet_room,json=meetRoom,proto3" json:"meet_room,omitempty"`
-	CoHost           []int64                    `protobuf:"varint,18,rep,packed,name=co_host,json=coHost,proto3" json:"co_host,omitempty"`
+	CoHost           int64                      `protobuf:"varint,18,opt,name=co_host,json=coHost,proto3" json:"co_host,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -11631,11 +11631,11 @@ func (x *CreateEventRequest) GetMeetRoom() *GenerateMezonMeetResponse {
 	return nil
 }
 
-func (x *CreateEventRequest) GetCoHost() []int64 {
+func (x *CreateEventRequest) GetCoHost() int64 {
 	if x != nil {
 		return x.CoHost
 	}
-	return nil
+	return 0
 }
 
 // update a event within clan.
@@ -11654,7 +11654,7 @@ type UpdateEventRequest struct {
 	ChannelVoiceId   int64                  `protobuf:"varint,11,opt,name=channel_voice_id,json=channelVoiceId,proto3" json:"channel_voice_id,omitempty"`
 	ChannelIdOld     int64                  `protobuf:"varint,12,opt,name=channel_id_old,json=channelIdOld,proto3" json:"channel_id_old,omitempty"`
 	RepeatType       int32                  `protobuf:"varint,13,opt,name=repeat_type,json=repeatType,proto3" json:"repeat_type,omitempty"`
-	CoHost           []int64                `protobuf:"varint,14,rep,packed,name=co_host,json=coHost,proto3" json:"co_host,omitempty"`
+	CoHost           int64                  `protobuf:"varint,14,opt,name=co_host,json=coHost,proto3" json:"co_host,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -11780,11 +11780,11 @@ func (x *UpdateEventRequest) GetRepeatType() int32 {
 	return 0
 }
 
-func (x *UpdateEventRequest) GetCoHost() []int64 {
+func (x *UpdateEventRequest) GetCoHost() int64 {
 	if x != nil {
 		return x.CoHost
 	}
-	return nil
+	return 0
 }
 
 // Delete a role the user has access to.
@@ -29041,7 +29041,7 @@ const file_api_proto_rawDesc = "" +
 	"\n" +
 	"is_private\x18\x13 \x01(\bR\tisPrivate\x12A\n" +
 	"\tmeet_room\x18\x14 \x01(\v2$.mezon.api.GenerateMezonMeetResponseR\bmeetRoom\x12\x17\n" +
-	"\aco_host\x18\x15 \x03(\x03R\x06coHost\"\xac\x01\n" +
+	"\aco_host\x18\x15 \x01(\x03R\x06coHost\"\xac\x01\n" +
 	"\n" +
 	"Permission\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
@@ -29204,7 +29204,7 @@ const file_api_proto_rawDesc = "" +
 	"\n" +
 	"is_private\x18\x10 \x01(\bR\tisPrivate\x12A\n" +
 	"\tmeet_room\x18\x11 \x01(\v2$.mezon.api.GenerateMezonMeetResponseR\bmeetRoom\x12\x17\n" +
-	"\aco_host\x18\x12 \x03(\x03R\x06coHost\"\xce\x03\n" +
+	"\aco_host\x18\x12 \x01(\x03R\x06coHost\"\xce\x03\n" +
 	"\x12UpdateEventRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x12\n" +
 	"\x04logo\x18\x02 \x01(\tR\x04logo\x12 \n" +
@@ -29223,7 +29223,7 @@ const file_api_proto_rawDesc = "" +
 	"\x0echannel_id_old\x18\f \x01(\x03R\fchannelIdOld\x12\x1f\n" +
 	"\vrepeat_type\x18\r \x01(\x05R\n" +
 	"repeatType\x12\x17\n" +
-	"\aco_host\x18\x0e \x03(\x03R\x06coHost\"\x83\x01\n" +
+	"\aco_host\x18\x0e \x01(\x03R\x06coHost\"\x83\x01\n" +
 	"\x11DeleteRoleRequest\x12\x17\n" +
 	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12\x1d\n" +
 	"\n" +
