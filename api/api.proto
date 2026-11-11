@@ -1007,6 +1007,8 @@ message ClanDesc {
   string hashtags = 19;
   // Pro plan
   bool pro_plan = 20;
+  // Total members in clan
+  int32 total_members = 21;
 }
 
 // Clan information
