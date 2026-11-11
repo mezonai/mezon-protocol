@@ -1577,6 +1577,7 @@ message EventManagement {
   int32 repeat_type = 18;
   bool is_private = 19;
   GenerateMezonMeetResponse meet_room = 20;
+  repeated int64 co_host = 21;
 }
 
 // Permission record
@@ -1859,6 +1860,7 @@ message CreateEventRequest {
   int64 user_id = 15;
   bool is_private = 16;
   GenerateMezonMeetResponse meet_room = 17;
+  repeated int64 co_host = 18;
 }
 
 // update a event within clan.
@@ -1876,6 +1878,7 @@ message UpdateEventRequest {
   int64 channel_voice_id = 11;
   int64 channel_id_old = 12;
   int32 repeat_type = 13;
+  repeated int64 co_host = 14;
 }
 
 // Delete a role the user has access to.
