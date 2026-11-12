@@ -9574,7 +9574,7 @@ type EventManagement struct {
 	ChannelId         int64                      `protobuf:"varint,16,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	EventStatus       int32                      `protobuf:"varint,17,opt,name=event_status,json=eventStatus,proto3" json:"event_status,omitempty"`
 	RepeatType        int32                      `protobuf:"varint,18,opt,name=repeat_type,json=repeatType,proto3" json:"repeat_type,omitempty"`
-	IsPrivate         bool                       `protobuf:"varint,19,opt,name=is_private,json=isPrivate,proto3" json:"is_private,omitempty"`
+	IsExternal        bool                       `protobuf:"varint,19,opt,name=is_external,json=isExternal,proto3" json:"is_external,omitempty"`
 	MeetRoom          *GenerateMezonMeetResponse `protobuf:"bytes,20,opt,name=meet_room,json=meetRoom,proto3" json:"meet_room,omitempty"`
 	CoHost            int64                      `protobuf:"varint,21,opt,name=co_host,json=coHost,proto3" json:"co_host,omitempty"`
 	unknownFields     protoimpl.UnknownFields
@@ -9737,9 +9737,9 @@ func (x *EventManagement) GetRepeatType() int32 {
 	return 0
 }
 
-func (x *EventManagement) GetIsPrivate() bool {
+func (x *EventManagement) GetIsExternal() bool {
 	if x != nil {
-		return x.IsPrivate
+		return x.IsExternal
 	}
 	return false
 }
@@ -11484,7 +11484,7 @@ type CreateEventRequest struct {
 	RepeatType       int32                      `protobuf:"varint,13,opt,name=repeat_type,json=repeatType,proto3" json:"repeat_type,omitempty"`
 	CreatorId        int64                      `protobuf:"varint,14,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
 	UserId           int64                      `protobuf:"varint,15,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	IsPrivate        bool                       `protobuf:"varint,16,opt,name=is_private,json=isPrivate,proto3" json:"is_private,omitempty"`
+	IsExternal       bool                       `protobuf:"varint,16,opt,name=is_external,json=isExternal,proto3" json:"is_external,omitempty"`
 	MeetRoom         *GenerateMezonMeetResponse `protobuf:"bytes,17,opt,name=meet_room,json=meetRoom,proto3" json:"meet_room,omitempty"`
 	CoHost           int64                      `protobuf:"varint,18,opt,name=co_host,json=coHost,proto3" json:"co_host,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -11626,9 +11626,9 @@ func (x *CreateEventRequest) GetUserId() int64 {
 	return 0
 }
 
-func (x *CreateEventRequest) GetIsPrivate() bool {
+func (x *CreateEventRequest) GetIsExternal() bool {
 	if x != nil {
-		return x.IsPrivate
+		return x.IsExternal
 	}
 	return false
 }
@@ -29023,7 +29023,7 @@ const file_api_proto_rawDesc = "" +
 	"channelIds\x120\n" +
 	"\x14max_level_permission\x18\x10 \x01(\x05R\x12maxLevelPermission\x12\x1d\n" +
 	"\n" +
-	"order_role\x18\x11 \x01(\x05R\torderRole\"\xca\x05\n" +
+	"order_role\x18\x11 \x01(\x05R\torderRole\"\xcc\x05\n" +
 	"\x0fEventManagement\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
@@ -29047,9 +29047,9 @@ const file_api_proto_rawDesc = "" +
 	"channel_id\x18\x10 \x01(\x03R\tchannelId\x12!\n" +
 	"\fevent_status\x18\x11 \x01(\x05R\veventStatus\x12\x1f\n" +
 	"\vrepeat_type\x18\x12 \x01(\x05R\n" +
-	"repeatType\x12\x1d\n" +
-	"\n" +
-	"is_private\x18\x13 \x01(\bR\tisPrivate\x12A\n" +
+	"repeatType\x12\x1f\n" +
+	"\vis_external\x18\x13 \x01(\bR\n" +
+	"isExternal\x12A\n" +
 	"\tmeet_room\x18\x14 \x01(\v2$.mezon.api.GenerateMezonMeetResponseR\bmeetRoom\x12\x17\n" +
 	"\aco_host\x18\x15 \x01(\x03R\x06coHost\"\xac\x01\n" +
 	"\n" +
@@ -29190,7 +29190,7 @@ const file_api_proto_rawDesc = "" +
 	"\x15active_permission_ids\x18\n" +
 	" \x03(\x03R\x13activePermissionIds\x12\x1d\n" +
 	"\n" +
-	"order_role\x18\v \x01(\x05R\torderRole\"\xde\x04\n" +
+	"order_role\x18\v \x01(\x05R\torderRole\"\xe0\x04\n" +
 	"\x12CreateEventRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x12\n" +
 	"\x04logo\x18\x02 \x01(\tR\x04logo\x12 \n" +
@@ -29210,9 +29210,9 @@ const file_api_proto_rawDesc = "" +
 	"repeatType\x12\x1d\n" +
 	"\n" +
 	"creator_id\x18\x0e \x01(\x03R\tcreatorId\x12\x17\n" +
-	"\auser_id\x18\x0f \x01(\x03R\x06userId\x12\x1d\n" +
-	"\n" +
-	"is_private\x18\x10 \x01(\bR\tisPrivate\x12A\n" +
+	"\auser_id\x18\x0f \x01(\x03R\x06userId\x12\x1f\n" +
+	"\vis_external\x18\x10 \x01(\bR\n" +
+	"isExternal\x12A\n" +
 	"\tmeet_room\x18\x11 \x01(\v2$.mezon.api.GenerateMezonMeetResponseR\bmeetRoom\x12\x17\n" +
 	"\aco_host\x18\x12 \x01(\x03R\x06coHost\"\xce\x03\n" +
 	"\x12UpdateEventRequest\x12\x14\n" +
