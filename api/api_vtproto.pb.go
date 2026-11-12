@@ -8061,9 +8061,9 @@ func (m *EventManagement) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0xa2
 	}
-	if m.IsPrivate {
+	if m.IsExternal {
 		i--
-		if m.IsPrivate {
+		if m.IsExternal {
 			dAtA[i] = 1
 		} else {
 			dAtA[i] = 0
@@ -9773,9 +9773,9 @@ func (m *CreateEventRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x8a
 	}
-	if m.IsPrivate {
+	if m.IsExternal {
 		i--
-		if m.IsPrivate {
+		if m.IsExternal {
 			dAtA[i] = 1
 		} else {
 			dAtA[i] = 0
@@ -27428,7 +27428,7 @@ func (m *EventManagement) SizeVT() (n int) {
 	if m.RepeatType != 0 {
 		n += 2 + protohelpers.SizeOfVarint(uint64(m.RepeatType))
 	}
-	if m.IsPrivate {
+	if m.IsExternal {
 		n += 3
 	}
 	if m.MeetRoom != nil {
@@ -28103,7 +28103,7 @@ func (m *CreateEventRequest) SizeVT() (n int) {
 	if m.UserId != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.UserId))
 	}
-	if m.IsPrivate {
+	if m.IsExternal {
 		n += 3
 	}
 	if m.MeetRoom != nil {
@@ -55849,7 +55849,7 @@ func (m *EventManagement) UnmarshalVT(dAtA []byte) error {
 			}
 		case 19:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field IsPrivate", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field IsExternal", wireType)
 			}
 			var v int
 			for shift := uint(0); ; shift += 7 {
@@ -55866,7 +55866,7 @@ func (m *EventManagement) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
-			m.IsPrivate = bool(v != 0)
+			m.IsExternal = bool(v != 0)
 		case 20:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field MeetRoom", wireType)
@@ -59964,7 +59964,7 @@ func (m *CreateEventRequest) UnmarshalVT(dAtA []byte) error {
 			}
 		case 16:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field IsPrivate", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field IsExternal", wireType)
 			}
 			var v int
 			for shift := uint(0); ; shift += 7 {
@@ -59981,7 +59981,7 @@ func (m *CreateEventRequest) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
-			m.IsPrivate = bool(v != 0)
+			m.IsExternal = bool(v != 0)
 		case 17:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field MeetRoom", wireType)
