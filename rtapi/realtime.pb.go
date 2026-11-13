@@ -8093,9 +8093,8 @@ type ClanUpdatedEvent struct {
 	// comma-separated clan hashtags
 	Hashtags string `protobuf:"bytes,14,opt,name=hashtags,proto3" json:"hashtags,omitempty"`
 	// community vanity short url (clan_discover)
-	ShortUrl string `protobuf:"bytes,15,opt,name=short_url,json=shortUrl,proto3" json:"short_url,omitempty"`
-	// Pro plan
-	ProPlan       bool `protobuf:"varint,16,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
+	ShortUrl      string `protobuf:"bytes,15,opt,name=short_url,json=shortUrl,proto3" json:"short_url,omitempty"`
+	ProPlan       bool   `protobuf:"varint,16,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8333,9 +8332,8 @@ type UserProfileUpdatedEvent struct {
 	// the encrypt_private_key
 	EncryptPrivateKey string `protobuf:"bytes,7,opt,name=encrypt_private_key,json=encryptPrivateKey,proto3" json:"encrypt_private_key,omitempty"`
 	// profile banner url
-	Banner string `protobuf:"bytes,8,opt,name=banner,proto3" json:"banner,omitempty"`
-	// Pro plan
-	ProPlan       bool `protobuf:"varint,9,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
+	Banner        string `protobuf:"bytes,8,opt,name=banner,proto3" json:"banner,omitempty"`
+	ProPlan       bool   `protobuf:"varint,9,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
