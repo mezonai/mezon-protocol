@@ -827,6 +827,8 @@ message UpdateAccountRequest {
   google.protobuf.StringValue email = 11;
   // Profile banner url
   google.protobuf.StringValue banner = 12;
+  // Pro plan
+  google.protobuf.BoolValue pro_plan = 13;
 }
 
 // Update fields in a given group.
@@ -1049,6 +1051,8 @@ message UpdateClanDescRequest {
   bool prevent_anonymous = 14;
   // comma-separated clan hashtags
   google.protobuf.StringValue hashtags = 15;
+  // Pro plan
+  google.protobuf.BoolValue pro_plan = 16;
 }
 
 // Delete a clan the user has access to.
