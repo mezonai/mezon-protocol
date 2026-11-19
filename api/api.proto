@@ -74,6 +74,10 @@ message AddFriendsResponse {
   repeated int64 ids = 1;
   // The account username of a user.
   repeated string usernames = 2;
+  // Display name of each user, aligned with ids.
+  repeated string display_names = 3;
+  // Avatar URL of each user, aligned with ids.
+  repeated string avatars = 4;
 }
 
 // Add users to a group.
