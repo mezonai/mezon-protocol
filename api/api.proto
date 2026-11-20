@@ -3283,6 +3283,7 @@ message GenerateMeetTokenRequest {
   int64 channel_id = 1;
   string room_name = 2;
   string metadata = 3;
+  int32 current_endpoint_id = 4;
 }
 
 message MeetParticipantRequest {
