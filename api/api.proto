@@ -3974,3 +3974,10 @@ message DMSetting {
 message UpdateDMSettingRequest {
   bool only_friends_dm = 1;
 }
+
+// Success body is NoParams. Failures use status codes.
+message RedeemProPlanCouponRequest {
+  string code = 1;
+  // Zero for a user coupon. The clan to unlock for a clan coupon.
+  int64 clan_id = 2;
+}
