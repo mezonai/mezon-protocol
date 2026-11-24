@@ -2748,6 +2748,11 @@ func (m *ListChannelMessagesRequest) MarshalToSizedBufferVT(dAtA []byte) (int, e
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.LastSeenMessageId != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.LastSeenMessageId))
+		i--
+		dAtA[i] = 0x38
+	}
 	if m.TopicId != 0 {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.TopicId))
 		i--
@@ -25340,6 +25345,9 @@ func (m *ListChannelMessagesRequest) SizeVT() (n int) {
 	if m.TopicId != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.TopicId))
 	}
+	if m.LastSeenMessageId != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.LastSeenMessageId))
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -41785,6 +41793,25 @@ func (m *ListChannelMessagesRequest) UnmarshalVT(dAtA []byte) error {
 				b := dAtA[iNdEx]
 				iNdEx++
 				m.TopicId |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LastSeenMessageId", wireType)
+			}
+			m.LastSeenMessageId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.LastSeenMessageId |= int64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
