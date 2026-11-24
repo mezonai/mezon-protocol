@@ -3434,9 +3434,11 @@ type ListChannelMessagesRequest struct {
 	Limit int32 `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`
 	// True if listing should be older messages to newer, false if reverse.
 	Direction int32 `protobuf:"varint,5,opt,name=direction,proto3" json:"direction,omitempty"`
-	TopicId       int64 `protobuf:"varint,6,opt,name=topic_id,json=topicId,proto3" json:"topic_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	TopicId int64 `protobuf:"varint,6,opt,name=topic_id,json=topicId,proto3" json:"topic_id,omitempty"`
+	// The client's last seen message ID for this channel/topic.
+	LastSeenMessageId int64 `protobuf:"varint,7,opt,name=last_seen_message_id,json=lastSeenMessageId,proto3" json:"last_seen_message_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ListChannelMessagesRequest) Reset() {
@@ -3507,6 +3509,13 @@ func (x *ListChannelMessagesRequest) GetDirection() int32 {
 func (x *ListChannelMessagesRequest) GetTopicId() int64 {
 	if x != nil {
 		return x.TopicId
+	}
+	return 0
+}
+
+func (x *ListChannelMessagesRequest) GetLastSeenMessageId() int64 {
+	if x != nil {
+		return x.LastSeenMessageId
 	}
 	return 0
 }
@@ -28589,7 +28598,7 @@ const file_api_proto_rawDesc = "" +
 	"\x1cRegistFcmDeviceTokenResponse\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x12\x1b\n" +
 	"\tdevice_id\x18\x02 \x01(\tR\bdeviceId\x12\x1a\n" +
-	"\bplatform\x18\x03 \x01(\tR\bplatform\"\xc2\x01\n" +
+	"\bplatform\x18\x03 \x01(\tR\bplatform\"\xf3\x01\n" +
 	"\x1aListChannelMessagesRequest\x12\x17\n" +
 	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\x12\x1d\n" +
 	"\n" +
@@ -28598,7 +28607,8 @@ const file_api_proto_rawDesc = "" +
 	"message_id\x18\x03 \x01(\x03R\tmessageId\x12\x14\n" +
 	"\x05limit\x18\x04 \x01(\x05R\x05limit\x12\x1c\n" +
 	"\tdirection\x18\x05 \x01(\x05R\tdirection\x12\x19\n" +
-	"\btopic_id\x18\x06 \x01(\x03R\atopicId\"\x83\x01\n" +
+	"\btopic_id\x18\x06 \x01(\x03R\atopicId\x12/\n" +
+	"\x14last_seen_message_id\x18\a \x01(\x03R\x11lastSeenMessageId\"\x83\x01\n" +
 	"\x12ListFriendsRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12\x14\n" +
 	"\x05state\x18\x02 \x01(\x05R\x05state\x12\x16\n" +
