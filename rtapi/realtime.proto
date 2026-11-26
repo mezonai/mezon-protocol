@@ -1276,6 +1276,7 @@ message ClanUpdatedEvent {
   bool pro_plan = 16;
   // Join mode: 0 = join instantly with invite (default), 1 = request to join, owner approves
   int32 join_mode = 17;
+  int32 frame = 18;
 }
 
 // clan profile updated event
