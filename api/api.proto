@@ -1014,6 +1014,8 @@ message ClanDesc {
   bool pro_plan = 20;
   // Total members in clan
   int32 total_members = 21;
+  // Join mode: 0 = join instantly with invite (default), 1 = request to join, owner approves
+  int32 join_mode = 22;
 }
 
 // Clan information
@@ -1059,6 +1061,8 @@ message UpdateClanDescRequest {
   google.protobuf.StringValue hashtags = 15;
   // Pro plan
   google.protobuf.BoolValue pro_plan = 16;
+  // Join mode: 0 = join instantly with invite, 1 = request to join, owner approves
+  google.protobuf.Int32Value join_mode = 17;
 }
 
 // Delete a clan the user has access to.
@@ -1126,6 +1130,8 @@ message InviteUserRes {
   string banner = 9;
   string community_banner = 10;
   bool is_community = 11;
+  // True when clan join_mode requires owner approval and the request was added to join_pending.
+  bool join_pending = 12;
 }
 
 // Add link invite users to.
@@ -3982,4 +3988,45 @@ message RedeemProPlanCouponRequest {
   string code = 1;
   // Zero for a user coupon. The clan to unlock for a clan coupon.
   int64 clan_id = 2;
+}
+
+// Request to list pending clan join requests (clan owner only).
+message ListJoinPendingRequest {
+  int64 clan_id = 1;
+  int32 limit = 2;
+  string cursor = 3;
+}
+
+// A single pending clan join request.
+message JoinPendingItem {
+  int64 id = 1;
+  int64 clan_id = 2;
+  int64 user_id = 3;
+  string username = 4;
+  string display_name = 5;
+  string avatar_url = 6;
+  int64 channel_id = 7;
+  int64 invite_id = 8;
+  uint32 create_time_seconds = 9;
+}
+
+// Response containing pending clan join requests.
+message ListJoinPendingResponse {
+  repeated JoinPendingItem items = 1;
+  string cursor = 2;
+}
+
+// Request for clan owner to approve or reject a pending join request.
+message ReviewJoinPendingRequest {
+  int64 clan_id = 1;
+  int64 user_id = 2;
+  // True to approve (move from join_pending to user_clan), false to reject.
+  bool approve = 3;
+}
+
+// Response after reviewing a pending clan join request.
+message ReviewJoinPendingResponse {
+  int64 clan_id = 1;
+  int64 user_id = 2;
+  bool approved = 3;
 }

@@ -8119,8 +8119,10 @@ type ClanUpdatedEvent struct {
 	// comma-separated clan hashtags
 	Hashtags string `protobuf:"bytes,14,opt,name=hashtags,proto3" json:"hashtags,omitempty"`
 	// community vanity short url (clan_discover)
-	ShortUrl      string `protobuf:"bytes,15,opt,name=short_url,json=shortUrl,proto3" json:"short_url,omitempty"`
-	ProPlan       bool   `protobuf:"varint,16,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
+	ShortUrl string `protobuf:"bytes,15,opt,name=short_url,json=shortUrl,proto3" json:"short_url,omitempty"`
+	ProPlan  bool   `protobuf:"varint,16,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
+	// Join mode: 0 = join instantly with invite (default), 1 = request to join, owner approves
+	JoinMode      int32 `protobuf:"varint,17,opt,name=join_mode,json=joinMode,proto3" json:"join_mode,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8265,6 +8267,13 @@ func (x *ClanUpdatedEvent) GetProPlan() bool {
 		return x.ProPlan
 	}
 	return false
+}
+
+func (x *ClanUpdatedEvent) GetJoinMode() int32 {
+	if x != nil {
+		return x.JoinMode
+	}
+	return 0
 }
 
 // clan profile updated event
@@ -11655,7 +11664,7 @@ const file_realtime_proto_rawDesc = "" +
 	"\x04logo\x18\x03 \x01(\tR\x04logo\x12\x1d\n" +
 	"\n" +
 	"creator_id\x18\x04 \x01(\x03R\tcreatorId\x12,\n" +
-	"\x12welcome_channel_id\x18\x05 \x01(\x03R\x10welcomeChannelId\"\x93\x04\n" +
+	"\x12welcome_channel_id\x18\x05 \x01(\x03R\x10welcomeChannelId\"\xb0\x04\n" +
 	"\x10ClanUpdatedEvent\x12\x17\n" +
 	"\aclan_id\x18\x01 \x01(\x03R\x06clanId\x12\x1b\n" +
 	"\tclan_name\x18\x02 \x01(\tR\bclanName\x12\x12\n" +
@@ -11673,7 +11682,8 @@ const file_realtime_proto_rawDesc = "" +
 	"\x11prevent_anonymous\x18\r \x01(\bR\x10preventAnonymous\x12\x1a\n" +
 	"\bhashtags\x18\x0e \x01(\tR\bhashtags\x12\x1b\n" +
 	"\tshort_url\x18\x0f \x01(\tR\bshortUrl\x12\x19\n" +
-	"\bpro_plan\x18\x10 \x01(\bR\aproPlan\"\x89\x01\n" +
+	"\bpro_plan\x18\x10 \x01(\bR\aproPlan\x12\x1b\n" +
+	"\tjoin_mode\x18\x11 \x01(\x05R\bjoinMode\"\x89\x01\n" +
 	"\x17ClanProfileUpdatedEvent\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\tclan_nick\x18\x02 \x01(\tR\bclanNick\x12\x1f\n" +
