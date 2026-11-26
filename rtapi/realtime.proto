@@ -1274,6 +1274,8 @@ message ClanUpdatedEvent {
   // community vanity short url (clan_discover)
   string short_url = 15;
   bool pro_plan = 16;
+  // Join mode: 0 = join instantly with invite (default), 1 = request to join, owner approves
+  int32 join_mode = 17;
 }
 
 // clan profile updated event
