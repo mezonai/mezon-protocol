@@ -7752,6 +7752,13 @@ func (m *ClanUpdatedEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.Frame != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Frame))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0x90
+	}
 	if m.JoinMode != 0 {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.JoinMode))
 		i--
@@ -14060,6 +14067,9 @@ func (m *ClanUpdatedEvent) SizeVT() (n int) {
 	}
 	if m.JoinMode != 0 {
 		n += 2 + protohelpers.SizeOfVarint(uint64(m.JoinMode))
+	}
+	if m.Frame != 0 {
+		n += 2 + protohelpers.SizeOfVarint(uint64(m.Frame))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -34332,6 +34342,25 @@ func (m *ClanUpdatedEvent) UnmarshalVT(dAtA []byte) error {
 				b := dAtA[iNdEx]
 				iNdEx++
 				m.JoinMode |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 18:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Frame", wireType)
+			}
+			m.Frame = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Frame |= int32(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}

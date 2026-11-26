@@ -1016,6 +1016,7 @@ message ClanDesc {
   int32 total_members = 21;
   // Join mode: 0 = join instantly with invite (default), 1 = request to join, owner approves
   int32 join_mode = 22;
+  int32 frame = 23;
 }
 
 // Clan information
@@ -1063,6 +1064,7 @@ message UpdateClanDescRequest {
   google.protobuf.BoolValue pro_plan = 16;
   // Join mode: 0 = join instantly with invite, 1 = request to join, owner approves
   google.protobuf.Int32Value join_mode = 17;
+  google.protobuf.Int32Value frame = 18;
 }
 
 // Delete a clan the user has access to.
