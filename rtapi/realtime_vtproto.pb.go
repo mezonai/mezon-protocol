@@ -7752,6 +7752,13 @@ func (m *ClanUpdatedEvent) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.JoinMode != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.JoinMode))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0x88
+	}
 	if m.ProPlan {
 		i--
 		if m.ProPlan {
@@ -14050,6 +14057,9 @@ func (m *ClanUpdatedEvent) SizeVT() (n int) {
 	}
 	if m.ProPlan {
 		n += 3
+	}
+	if m.JoinMode != 0 {
+		n += 2 + protohelpers.SizeOfVarint(uint64(m.JoinMode))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -34307,6 +34317,25 @@ func (m *ClanUpdatedEvent) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 			m.ProPlan = bool(v != 0)
+		case 17:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field JoinMode", wireType)
+			}
+			m.JoinMode = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.JoinMode |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
