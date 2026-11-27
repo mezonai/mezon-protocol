@@ -8418,8 +8418,9 @@ type UserProfileUpdatedEvent struct {
 	// the encrypt_private_key
 	EncryptPrivateKey string `protobuf:"bytes,7,opt,name=encrypt_private_key,json=encryptPrivateKey,proto3" json:"encrypt_private_key,omitempty"`
 	// profile banner url
-	Banner        string                 `protobuf:"bytes,8,opt,name=banner,proto3" json:"banner,omitempty"`
-	ProPlan       bool                   `protobuf:"varint,9,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
+	Banner  string `protobuf:"bytes,8,opt,name=banner,proto3" json:"banner,omitempty"`
+	ProPlan bool   `protobuf:"varint,9,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
+	// Pro avatar frame, set only when it changed: -1 hidden, 0 automatic, n = frame n of the client catalog
 	Frame         *wrapperspb.Int32Value `protobuf:"bytes,10,opt,name=frame,proto3" json:"frame,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

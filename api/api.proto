@@ -835,6 +835,7 @@ message UpdateAccountRequest {
   google.protobuf.StringValue banner = 12;
   // Pro plan
   google.protobuf.BoolValue pro_plan = 13;
+  // Pro avatar frame: -1 hides it, 0 = automatic, n = frame n of the client catalog; unset keeps the stored value
   google.protobuf.Int32Value frame = 14;
 }
 
@@ -906,6 +907,7 @@ message User {
   // Profile banner url
   string banner = 21;
   bool pro_plan = 22;
+  // Pro avatar frame: -1 hidden, 0 automatic (derived from the user id), n = frame n of the client catalog
   int32 frame = 23;
 }
 

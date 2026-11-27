@@ -5006,7 +5006,8 @@ type UpdateAccountRequest struct {
 	// Profile banner url
 	Banner *wrapperspb.StringValue `protobuf:"bytes,12,opt,name=banner,proto3" json:"banner,omitempty"`
 	// Pro plan
-	ProPlan       *wrapperspb.BoolValue  `protobuf:"bytes,13,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
+	ProPlan *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
+	// Pro avatar frame: -1 hides it, 0 = automatic, n = frame n of the client catalog; unset keeps the stored value
 	Frame         *wrapperspb.Int32Value `protobuf:"bytes,14,opt,name=frame,proto3" json:"frame,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -5336,9 +5337,10 @@ type User struct {
 	// online, offline, invisible, idle, do not disturb
 	Status string `protobuf:"bytes,20,opt,name=status,proto3" json:"status,omitempty"`
 	// Profile banner url
-	Banner        string `protobuf:"bytes,21,opt,name=banner,proto3" json:"banner,omitempty"`
-	ProPlan       bool   `protobuf:"varint,22,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
-	Frame         int32  `protobuf:"varint,23,opt,name=frame,proto3" json:"frame,omitempty"`
+	Banner  string `protobuf:"bytes,21,opt,name=banner,proto3" json:"banner,omitempty"`
+	ProPlan bool   `protobuf:"varint,22,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
+	// Pro avatar frame: -1 hidden, 0 automatic (derived from the user id), n = frame n of the client catalog
+	Frame         int32 `protobuf:"varint,23,opt,name=frame,proto3" json:"frame,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
