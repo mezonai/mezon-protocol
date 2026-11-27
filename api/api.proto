@@ -3309,9 +3309,6 @@ message MeetParticipantRequest {
 message GenerateMeetTokenResponse {
   string token = 1;
   string url = 2;
-  // True when clan direct_voice_access is disabled and the room already has participants;
-  // caller must wait until an active participant admits them via VoiceJoinReviewedEvent.
-  bool waiting = 3;
 }
 
 message GenerateMezonMeetResponse {
@@ -4073,9 +4070,4 @@ message ReviewVoiceJoinResponse {
   int64 channel_id = 1;
   int64 user_id = 2;
   bool approved = 3;
-}
-
-// Request for a waiting user to cancel their own pending voice join request.
-message CancelVoiceJoinRequest {
-  int64 channel_id = 1;
 }
