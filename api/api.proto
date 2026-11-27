@@ -1017,6 +1017,8 @@ message ClanDesc {
   // Join mode: 0 = join instantly with invite (default), 1 = request to join, owner approves
   int32 join_mode = 22;
   int32 frame = 23;
+  // Direct voice access: true (default / unset) = join voice directly, false = wait for participant admission
+  google.protobuf.BoolValue direct_voice_access = 24;
 }
 
 // Clan information
@@ -1065,6 +1067,8 @@ message UpdateClanDescRequest {
   // Join mode: 0 = join instantly with invite, 1 = request to join, owner approves
   google.protobuf.Int32Value join_mode = 17;
   google.protobuf.Int32Value frame = 18;
+  // Direct voice access: true = join voice directly, false = wait for participant admission
+  google.protobuf.BoolValue direct_voice_access = 19;
 }
 
 // Delete a clan the user has access to.
@@ -4029,6 +4033,41 @@ message ReviewJoinPendingRequest {
 // Response after reviewing a pending clan join request.
 message ReviewJoinPendingResponse {
   int64 clan_id = 1;
+  int64 user_id = 2;
+  bool approved = 3;
+}
+
+// A user currently waiting to be admitted into a voice channel.
+message VoiceJoinWaitingUser {
+  int64 user_id = 1;
+  string username = 2;
+  string display_name = 3;
+  string avatar = 4;
+  int64 create_time_seconds = 5;
+}
+
+// Request to list users currently waiting to join a voice channel (active voice participants only).
+message ListVoiceJoinWaitingRequest {
+  int64 channel_id = 1;
+}
+
+// Response containing users currently waiting to join a voice channel.
+message ListVoiceJoinWaitingResponse {
+  int64 channel_id = 1;
+  repeated VoiceJoinWaitingUser users = 2;
+}
+
+// Request for an active voice participant to admit or reject a waiting user.
+message ReviewVoiceJoinRequest {
+  int64 channel_id = 1;
+  int64 user_id = 2;
+  // True to admit (issue SFU token and deliver via VoiceJoinReviewedEvent), false to reject.
+  bool approve = 3;
+}
+
+// Response after reviewing a pending voice join request.
+message ReviewVoiceJoinResponse {
+  int64 channel_id = 1;
   int64 user_id = 2;
   bool approved = 3;
 }
