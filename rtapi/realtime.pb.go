@@ -8418,8 +8418,9 @@ type UserProfileUpdatedEvent struct {
 	// the encrypt_private_key
 	EncryptPrivateKey string `protobuf:"bytes,7,opt,name=encrypt_private_key,json=encryptPrivateKey,proto3" json:"encrypt_private_key,omitempty"`
 	// profile banner url
-	Banner        string `protobuf:"bytes,8,opt,name=banner,proto3" json:"banner,omitempty"`
-	ProPlan       bool   `protobuf:"varint,9,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
+	Banner        string                 `protobuf:"bytes,8,opt,name=banner,proto3" json:"banner,omitempty"`
+	ProPlan       bool                   `protobuf:"varint,9,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
+	Frame         *wrapperspb.Int32Value `protobuf:"bytes,10,opt,name=frame,proto3" json:"frame,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8515,6 +8516,13 @@ func (x *UserProfileUpdatedEvent) GetProPlan() bool {
 		return x.ProPlan
 	}
 	return false
+}
+
+func (x *UserProfileUpdatedEvent) GetFrame() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Frame
+	}
+	return nil
 }
 
 type ConfirmLinkMezonOTPData struct {
@@ -11939,7 +11947,7 @@ const file_rtapi_realtime_proto_rawDesc = "" +
 	"\tclan_nick\x18\x02 \x01(\tR\bclanNick\x12\x1f\n" +
 	"\vclan_avatar\x18\x03 \x01(\tR\n" +
 	"clanAvatar\x12\x17\n" +
-	"\aclan_id\x18\x04 \x01(\x03R\x06clanId\"\xa3\x02\n" +
+	"\aclan_id\x18\x04 \x01(\x03R\x06clanId\"\xd6\x02\n" +
 	"\x17UserProfileUpdatedEvent\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12!\n" +
 	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12\x16\n" +
@@ -11950,7 +11958,9 @@ const file_rtapi_realtime_proto_rawDesc = "" +
 	"\aclan_id\x18\x06 \x01(\x03R\x06clanId\x12.\n" +
 	"\x13encrypt_private_key\x18\a \x01(\tR\x11encryptPrivateKey\x12\x16\n" +
 	"\x06banner\x18\b \x01(\tR\x06banner\x12\x19\n" +
-	"\bpro_plan\x18\t \x01(\bR\aproPlan\"C\n" +
+	"\bpro_plan\x18\t \x01(\bR\aproPlan\x121\n" +
+	"\x05frame\x18\n" +
+	" \x01(\v2\x1b.google.protobuf.Int32ValueR\x05frame\"C\n" +
 	"\x17ConfirmLinkMezonOTPData\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\x05R\x04type\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value\"\xca\x03\n" +
@@ -12512,30 +12522,31 @@ var file_rtapi_realtime_proto_depIdxs = []int32{
 	82,  // 135: mezon.realtime.UserChannelAdded.users:type_name -> mezon.realtime.UserProfileRedis
 	82,  // 136: mezon.realtime.UserChannelAdded.caller:type_name -> mezon.realtime.UserProfileRedis
 	128, // 137: mezon.realtime.ClanUpdatedEvent.direct_voice_access:type_name -> google.protobuf.BoolValue
-	83,  // 138: mezon.realtime.UserProfileRedis.fcm_tokens:type_name -> mezon.realtime.FCMTokens
-	136, // 139: mezon.realtime.PermissionSetEvent.permission_updates:type_name -> mezon.api.PermissionUpdate
-	136, // 140: mezon.realtime.PermissionChangedEvent.add_permissions:type_name -> mezon.api.PermissionUpdate
-	136, // 141: mezon.realtime.PermissionChangedEvent.remove_permissions:type_name -> mezon.api.PermissionUpdate
-	136, // 142: mezon.realtime.PermissionChangedEvent.default_permissions:type_name -> mezon.api.PermissionUpdate
-	137, // 143: mezon.realtime.ListActivity.acts:type_name -> mezon.api.UserActivity
-	127, // 144: mezon.realtime.SdTopicEvent.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
-	117, // 145: mezon.realtime.SdTopicEvent.message:type_name -> mezon.api.ChannelMessage
-	138, // 146: mezon.realtime.ListDataSocket.list_channel_badge_count_req:type_name -> mezon.api.ListChannelBadgeCountRequest
-	139, // 147: mezon.realtime.ListDataSocket.channel_badge_count:type_name -> mezon.api.ListChannelBadgeCountResponse
-	140, // 148: mezon.realtime.ListDataSocket.clan_badge_count:type_name -> mezon.api.ListClanBadgeCountResponse
-	141, // 149: mezon.realtime.ListDataSocket.list_loged_device:type_name -> mezon.api.LogedDeviceList
-	142, // 150: mezon.realtime.ListDataSocket.list_user_online_req:type_name -> mezon.api.ListUserOnlineRequest
-	143, // 151: mezon.realtime.ListDataSocket.user_online_list:type_name -> mezon.api.ListUserOnlineResponse
-	117, // 152: mezon.realtime.FcmDataPayload.message:type_name -> mezon.api.ChannelMessage
-	129, // 153: mezon.realtime.FcmDataPayload.mentions:type_name -> mezon.api.MessageMention
-	131, // 154: mezon.realtime.FcmDataPayload.references:type_name -> mezon.api.MessageRef
-	130, // 155: mezon.realtime.FcmDataPayload.attachments:type_name -> mezon.api.MessageAttachment
-	116, // 156: mezon.realtime.GotifyMessage.extras:type_name -> mezon.realtime.GotifyMessage.ExtrasEntry
-	157, // [157:157] is the sub-list for method output_type
-	157, // [157:157] is the sub-list for method input_type
-	157, // [157:157] is the sub-list for extension type_name
-	157, // [157:157] is the sub-list for extension extendee
-	0,   // [0:157] is the sub-list for field type_name
+	126, // 138: mezon.realtime.UserProfileUpdatedEvent.frame:type_name -> google.protobuf.Int32Value
+	83,  // 139: mezon.realtime.UserProfileRedis.fcm_tokens:type_name -> mezon.realtime.FCMTokens
+	136, // 140: mezon.realtime.PermissionSetEvent.permission_updates:type_name -> mezon.api.PermissionUpdate
+	136, // 141: mezon.realtime.PermissionChangedEvent.add_permissions:type_name -> mezon.api.PermissionUpdate
+	136, // 142: mezon.realtime.PermissionChangedEvent.remove_permissions:type_name -> mezon.api.PermissionUpdate
+	136, // 143: mezon.realtime.PermissionChangedEvent.default_permissions:type_name -> mezon.api.PermissionUpdate
+	137, // 144: mezon.realtime.ListActivity.acts:type_name -> mezon.api.UserActivity
+	127, // 145: mezon.realtime.SdTopicEvent.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
+	117, // 146: mezon.realtime.SdTopicEvent.message:type_name -> mezon.api.ChannelMessage
+	138, // 147: mezon.realtime.ListDataSocket.list_channel_badge_count_req:type_name -> mezon.api.ListChannelBadgeCountRequest
+	139, // 148: mezon.realtime.ListDataSocket.channel_badge_count:type_name -> mezon.api.ListChannelBadgeCountResponse
+	140, // 149: mezon.realtime.ListDataSocket.clan_badge_count:type_name -> mezon.api.ListClanBadgeCountResponse
+	141, // 150: mezon.realtime.ListDataSocket.list_loged_device:type_name -> mezon.api.LogedDeviceList
+	142, // 151: mezon.realtime.ListDataSocket.list_user_online_req:type_name -> mezon.api.ListUserOnlineRequest
+	143, // 152: mezon.realtime.ListDataSocket.user_online_list:type_name -> mezon.api.ListUserOnlineResponse
+	117, // 153: mezon.realtime.FcmDataPayload.message:type_name -> mezon.api.ChannelMessage
+	129, // 154: mezon.realtime.FcmDataPayload.mentions:type_name -> mezon.api.MessageMention
+	131, // 155: mezon.realtime.FcmDataPayload.references:type_name -> mezon.api.MessageRef
+	130, // 156: mezon.realtime.FcmDataPayload.attachments:type_name -> mezon.api.MessageAttachment
+	116, // 157: mezon.realtime.GotifyMessage.extras:type_name -> mezon.realtime.GotifyMessage.ExtrasEntry
+	158, // [158:158] is the sub-list for method output_type
+	158, // [158:158] is the sub-list for method input_type
+	158, // [158:158] is the sub-list for extension type_name
+	158, // [158:158] is the sub-list for extension extendee
+	0,   // [0:158] is the sub-list for field type_name
 }
 
 func init() { file_rtapi_realtime_proto_init() }

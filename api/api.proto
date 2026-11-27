@@ -835,6 +835,7 @@ message UpdateAccountRequest {
   google.protobuf.StringValue banner = 12;
   // Pro plan
   google.protobuf.BoolValue pro_plan = 13;
+  google.protobuf.Int32Value frame = 14;
 }
 
 // Update fields in a given group.
@@ -905,6 +906,7 @@ message User {
   // Profile banner url
   string banner = 21;
   bool pro_plan = 22;
+  int32 frame = 23;
 }
 
 // A collection of zero or more users.

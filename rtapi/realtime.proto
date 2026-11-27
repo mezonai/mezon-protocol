@@ -1316,6 +1316,7 @@ message UserProfileUpdatedEvent {
   // profile banner url
   string banner = 8;
   bool pro_plan = 9;
+  google.protobuf.Int32Value frame = 10;
 }
 
 message ConfirmLinkMezonOTPData {
