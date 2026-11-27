@@ -835,7 +835,7 @@ message UpdateAccountRequest {
   google.protobuf.StringValue banner = 12;
   // Pro plan
   google.protobuf.BoolValue pro_plan = 13;
-  // Pro avatar frame: -1 hides it, 0 = automatic, n = frame n of the client catalog; unset keeps the stored value
+  // Unused: the avatar frame is saved with UpdateUserDecoration
   google.protobuf.Int32Value frame = 14;
 }
 
@@ -907,7 +907,7 @@ message User {
   // Profile banner url
   string banner = 21;
   bool pro_plan = 22;
-  // Pro avatar frame: -1 hidden, 0 automatic (derived from the user id), n = frame n of the client catalog
+  // Unused (always 0): read the avatar frame with ListUserDecorations
   int32 frame = 23;
 }
 
@@ -4074,4 +4074,25 @@ message ReviewVoiceJoinResponse {
   int64 channel_id = 1;
   int64 user_id = 2;
   bool approved = 3;
+}
+
+// A user's avatar decoration. frame: -1 hidden, 0 automatic (derived from the user id), n = frame n of the client catalog.
+message UserDecoration {
+  int64 user_id = 1;
+  int32 frame = 2;
+}
+
+// Read the decorations of up to 500 users.
+message ListUserDecorationsRequest {
+  repeated int64 user_ids = 1;
+}
+
+// Decorations for the requested users, one entry per user (frame 0 when none is stored).
+message UserDecorationList {
+  repeated UserDecoration decorations = 1;
+}
+
+// Set the caller's avatar frame (-1..1000; a value above 0 needs Pro).
+message UpdateUserDecorationRequest {
+  int32 frame = 1;
 }
