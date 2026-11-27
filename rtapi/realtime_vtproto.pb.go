@@ -8030,6 +8030,16 @@ func (m *UserProfileUpdatedEvent) MarshalToSizedBufferVT(dAtA []byte) (int, erro
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.Frame != nil {
+		size, err := (*wrapperspb.Int32Value)(m.Frame).MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x52
+	}
 	if m.ProPlan {
 		i--
 		if m.ProPlan {
@@ -14374,6 +14384,10 @@ func (m *UserProfileUpdatedEvent) SizeVT() (n int) {
 	}
 	if m.ProPlan {
 		n += 2
+	}
+	if m.Frame != nil {
+		l = (*wrapperspb.Int32Value)(m.Frame).SizeVT()
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -35232,6 +35246,42 @@ func (m *UserProfileUpdatedEvent) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 			m.ProPlan = bool(v != 0)
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Frame", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Frame == nil {
+				m.Frame = &wrapperspb1.Int32Value{}
+			}
+			if err := (*wrapperspb.Int32Value)(m.Frame).UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
