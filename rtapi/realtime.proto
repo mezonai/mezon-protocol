@@ -1316,6 +1316,8 @@ message UserProfileUpdatedEvent {
   // profile banner url
   string banner = 8;
   bool pro_plan = 9;
+  // Pro avatar frame, set only when it changed: -1 hidden, 0 automatic, n = frame n of the client catalog
+  google.protobuf.Int32Value frame = 10;
 }
 
 message ConfirmLinkMezonOTPData {
