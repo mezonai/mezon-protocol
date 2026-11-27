@@ -239,6 +239,10 @@ message Envelope {
     StreamingViewerCountEvent streaming_viewer_count_event = 106;
     // Friend relationship changed by the current user from another session
     FriendStateUpdated friend_state_updated = 107;
+    // Sent to active voice participants when a user enters or leaves the voice waiting room
+    VoiceJoinWaitingEvent voice_join_waiting_event = 108;
+    // Sent to a waiting user (with SFU token/url on approval) and to active participants when a voice join request is resolved
+    VoiceJoinReviewedEvent voice_join_reviewed_event = 109;
   }
 }
 
@@ -1277,6 +1281,8 @@ message ClanUpdatedEvent {
   // Join mode: 0 = join instantly with invite (default), 1 = request to join, owner approves
   int32 join_mode = 17;
   int32 frame = 18;
+  // Direct voice access: true (default / unset) = join voice directly, false = wait for participant admission
+  google.protobuf.BoolValue direct_voice_access = 19;
 }
 
 // clan profile updated event
@@ -1618,4 +1624,28 @@ message FriendStateUpdated {
   string avatar = 4;
   // new api.Friend.State of the relationship from the acting user's side
   int32 state = 5;
+}
+
+// Action for VoiceJoinWaitingEvent: 0 = waiting (added/refreshed), 1 = cancelled/removed
+message VoiceJoinWaitingEvent {
+  int64 clan_id = 1;
+  int64 channel_id = 2;
+  int64 user_id = 3;
+  string username = 4;
+  string display_name = 5;
+  string avatar = 6;
+  int64 create_time_seconds = 7;
+  int32 action = 8;
+}
+
+// Sent to a waiting user (with token/url when approved) and to active voice participants (with empty token/url)
+// when a voice join waiting request is admitted or rejected.
+message VoiceJoinReviewedEvent {
+  int64 clan_id = 1;
+  int64 channel_id = 2;
+  int64 user_id = 3;
+  int64 reviewer_id = 4;
+  bool approved = 5;
+  string token = 6;
+  string url = 7;
 }
