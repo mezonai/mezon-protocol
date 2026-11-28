@@ -4082,12 +4082,13 @@ message UserDecoration {
   int32 frame = 2;
 }
 
-// Read the decorations of up to 500 users.
+// Read avatar decorations: up to 500 user_ids (clan_id 0), or the members of one clan (clan_id set, user_ids empty; the caller must be a member).
 message ListUserDecorationsRequest {
   repeated int64 user_ids = 1;
+  int64 clan_id = 2;
 }
 
-// Decorations for the requested users, one entry per user (frame 0 when none is stored).
+// user_ids mode: one entry per existing user (frame 0 when none is stored). clan_id mode: only members whose frame is not 0; a member left out has frame 0.
 message UserDecorationList {
   repeated UserDecoration decorations = 1;
 }

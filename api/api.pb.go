@@ -28686,10 +28686,11 @@ func (x *UserDecoration) GetFrame() int32 {
 	return 0
 }
 
-// Read the decorations of up to 500 users.
+// Read avatar decorations: up to 500 user_ids (clan_id 0), or the members of one clan (clan_id set, user_ids empty; the caller must be a member).
 type ListUserDecorationsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserIds       []int64                `protobuf:"varint,1,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
+	ClanId        int64                  `protobuf:"varint,2,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -28731,7 +28732,14 @@ func (x *ListUserDecorationsRequest) GetUserIds() []int64 {
 	return nil
 }
 
-// Decorations for the requested users, one entry per user (frame 0 when none is stored).
+func (x *ListUserDecorationsRequest) GetClanId() int64 {
+	if x != nil {
+		return x.ClanId
+	}
+	return 0
+}
+
+// user_ids mode: one entry per existing user (frame 0 when none is stored). clan_id mode: only members whose frame is not 0; a member left out has frame 0.
 type UserDecorationList struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Decorations   []*UserDecoration      `protobuf:"bytes,1,rep,name=decorations,proto3" json:"decorations,omitempty"`
@@ -31692,9 +31700,10 @@ const file_api_proto_rawDesc = "" +
 	"\bapproved\x18\x03 \x01(\bR\bapproved\"?\n" +
 	"\x0eUserDecoration\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x14\n" +
-	"\x05frame\x18\x02 \x01(\x05R\x05frame\"7\n" +
+	"\x05frame\x18\x02 \x01(\x05R\x05frame\"P\n" +
 	"\x1aListUserDecorationsRequest\x12\x19\n" +
-	"\buser_ids\x18\x01 \x03(\x03R\auserIds\"Q\n" +
+	"\buser_ids\x18\x01 \x03(\x03R\auserIds\x12\x17\n" +
+	"\aclan_id\x18\x02 \x01(\x03R\x06clanId\"Q\n" +
 	"\x12UserDecorationList\x12;\n" +
 	"\vdecorations\x18\x01 \x03(\v2\x19.mezon.api.UserDecorationR\vdecorations\"3\n" +
 	"\x1bUpdateUserDecorationRequest\x12\x14\n" +
