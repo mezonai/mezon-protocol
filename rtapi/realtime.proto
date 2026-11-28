@@ -243,6 +243,8 @@ message Envelope {
     VoiceJoinWaitingEvent voice_join_waiting_event = 108;
     // Sent to a waiting user (with SFU token/url on approval) and to active participants when a voice join request is resolved
     VoiceJoinReviewedEvent voice_join_reviewed_event = 109;
+    // A user's avatar decoration changed (sent to the user's clans and to their own notifications stream)
+    UserDecorationUpdatedEvent user_decoration_updated_event = 110;
   }
 }
 
@@ -1316,7 +1318,7 @@ message UserProfileUpdatedEvent {
   // profile banner url
   string banner = 8;
   bool pro_plan = 9;
-  // Pro avatar frame, set only when it changed: -1 hidden, 0 automatic, n = frame n of the client catalog
+  // Unused: frame changes are sent as UserDecorationUpdatedEvent
   google.protobuf.Int32Value frame = 10;
 }
 
@@ -1650,4 +1652,10 @@ message VoiceJoinReviewedEvent {
   bool approved = 5;
   string token = 6;
   string url = 7;
+}
+
+// A user's avatar decoration changed. frame: -1 hidden, 0 automatic, n = frame n of the client catalog.
+message UserDecorationUpdatedEvent {
+  int64 user_id = 1;
+  int32 frame = 2;
 }

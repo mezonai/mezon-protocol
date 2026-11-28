@@ -5007,7 +5007,7 @@ type UpdateAccountRequest struct {
 	Banner *wrapperspb.StringValue `protobuf:"bytes,12,opt,name=banner,proto3" json:"banner,omitempty"`
 	// Pro plan
 	ProPlan *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
-	// Pro avatar frame: -1 hides it, 0 = automatic, n = frame n of the client catalog; unset keeps the stored value
+	// Unused: the avatar frame is saved with UpdateUserDecoration
 	Frame         *wrapperspb.Int32Value `protobuf:"bytes,14,opt,name=frame,proto3" json:"frame,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -5339,7 +5339,7 @@ type User struct {
 	// Profile banner url
 	Banner  string `protobuf:"bytes,21,opt,name=banner,proto3" json:"banner,omitempty"`
 	ProPlan bool   `protobuf:"varint,22,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
-	// Pro avatar frame: -1 hidden, 0 automatic (derived from the user id), n = frame n of the client catalog
+	// Unused (always 0): read the avatar frame with ListUserDecorations
 	Frame         int32 `protobuf:"varint,23,opt,name=frame,proto3" json:"frame,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -28633,6 +28633,202 @@ func (x *ReviewVoiceJoinResponse) GetApproved() bool {
 	return false
 }
 
+// A user's avatar decoration. frame: -1 hidden, 0 automatic (derived from the user id), n = frame n of the client catalog.
+type UserDecoration struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Frame         int32                  `protobuf:"varint,2,opt,name=frame,proto3" json:"frame,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserDecoration) Reset() {
+	*x = UserDecoration{}
+	mi := &file_api_proto_msgTypes[389]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserDecoration) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserDecoration) ProtoMessage() {}
+
+func (x *UserDecoration) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_msgTypes[389]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserDecoration.ProtoReflect.Descriptor instead.
+func (*UserDecoration) Descriptor() ([]byte, []int) {
+	return file_api_proto_rawDescGZIP(), []int{389}
+}
+
+func (x *UserDecoration) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UserDecoration) GetFrame() int32 {
+	if x != nil {
+		return x.Frame
+	}
+	return 0
+}
+
+// Read avatar decorations: up to 500 user_ids (clan_id 0), or the members of one clan (clan_id set, user_ids empty; the caller must be a member).
+type ListUserDecorationsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserIds       []int64                `protobuf:"varint,1,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
+	ClanId        int64                  `protobuf:"varint,2,opt,name=clan_id,json=clanId,proto3" json:"clan_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUserDecorationsRequest) Reset() {
+	*x = ListUserDecorationsRequest{}
+	mi := &file_api_proto_msgTypes[390]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUserDecorationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUserDecorationsRequest) ProtoMessage() {}
+
+func (x *ListUserDecorationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_msgTypes[390]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUserDecorationsRequest.ProtoReflect.Descriptor instead.
+func (*ListUserDecorationsRequest) Descriptor() ([]byte, []int) {
+	return file_api_proto_rawDescGZIP(), []int{390}
+}
+
+func (x *ListUserDecorationsRequest) GetUserIds() []int64 {
+	if x != nil {
+		return x.UserIds
+	}
+	return nil
+}
+
+func (x *ListUserDecorationsRequest) GetClanId() int64 {
+	if x != nil {
+		return x.ClanId
+	}
+	return 0
+}
+
+// user_ids mode: one entry per existing user (frame 0 when none is stored). clan_id mode: only members whose frame is not 0; a member left out has frame 0.
+type UserDecorationList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Decorations   []*UserDecoration      `protobuf:"bytes,1,rep,name=decorations,proto3" json:"decorations,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserDecorationList) Reset() {
+	*x = UserDecorationList{}
+	mi := &file_api_proto_msgTypes[391]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserDecorationList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserDecorationList) ProtoMessage() {}
+
+func (x *UserDecorationList) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_msgTypes[391]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserDecorationList.ProtoReflect.Descriptor instead.
+func (*UserDecorationList) Descriptor() ([]byte, []int) {
+	return file_api_proto_rawDescGZIP(), []int{391}
+}
+
+func (x *UserDecorationList) GetDecorations() []*UserDecoration {
+	if x != nil {
+		return x.Decorations
+	}
+	return nil
+}
+
+// Set the caller's avatar frame (-1..1000; a value above 0 needs Pro).
+type UpdateUserDecorationRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Frame         int32                  `protobuf:"varint,1,opt,name=frame,proto3" json:"frame,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserDecorationRequest) Reset() {
+	*x = UpdateUserDecorationRequest{}
+	mi := &file_api_proto_msgTypes[392]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserDecorationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserDecorationRequest) ProtoMessage() {}
+
+func (x *UpdateUserDecorationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_msgTypes[392]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserDecorationRequest.ProtoReflect.Descriptor instead.
+func (*UpdateUserDecorationRequest) Descriptor() ([]byte, []int) {
+	return file_api_proto_rawDescGZIP(), []int{392}
+}
+
+func (x *UpdateUserDecorationRequest) GetFrame() int32 {
+	if x != nil {
+		return x.Frame
+	}
+	return 0
+}
+
 // A single user-role pair.
 type ChannelUserList_ChannelUser struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -28662,7 +28858,7 @@ type ChannelUserList_ChannelUser struct {
 
 func (x *ChannelUserList_ChannelUser) Reset() {
 	*x = ChannelUserList_ChannelUser{}
-	mi := &file_api_proto_msgTypes[392]
+	mi := &file_api_proto_msgTypes[396]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -28674,7 +28870,7 @@ func (x *ChannelUserList_ChannelUser) String() string {
 func (*ChannelUserList_ChannelUser) ProtoMessage() {}
 
 func (x *ChannelUserList_ChannelUser) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[392]
+	mi := &file_api_proto_msgTypes[396]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -28778,7 +28974,7 @@ type ClanUserList_ClanUser struct {
 
 func (x *ClanUserList_ClanUser) Reset() {
 	*x = ClanUserList_ClanUser{}
-	mi := &file_api_proto_msgTypes[393]
+	mi := &file_api_proto_msgTypes[397]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -28790,7 +28986,7 @@ func (x *ClanUserList_ClanUser) String() string {
 func (*ClanUserList_ClanUser) ProtoMessage() {}
 
 func (x *ClanUserList_ClanUser) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[393]
+	mi := &file_api_proto_msgTypes[397]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -28851,7 +29047,7 @@ type UpdateClanOrderRequest_ClanOrder struct {
 
 func (x *UpdateClanOrderRequest_ClanOrder) Reset() {
 	*x = UpdateClanOrderRequest_ClanOrder{}
-	mi := &file_api_proto_msgTypes[394]
+	mi := &file_api_proto_msgTypes[398]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -28863,7 +29059,7 @@ func (x *UpdateClanOrderRequest_ClanOrder) String() string {
 func (*UpdateClanOrderRequest_ClanOrder) ProtoMessage() {}
 
 func (x *UpdateClanOrderRequest_ClanOrder) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[394]
+	mi := &file_api_proto_msgTypes[398]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -28916,7 +29112,7 @@ type RoleUserList_RoleUser struct {
 
 func (x *RoleUserList_RoleUser) Reset() {
 	*x = RoleUserList_RoleUser{}
-	mi := &file_api_proto_msgTypes[395]
+	mi := &file_api_proto_msgTypes[399]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -28928,7 +29124,7 @@ func (x *RoleUserList_RoleUser) String() string {
 func (*RoleUserList_RoleUser) ProtoMessage() {}
 
 func (x *RoleUserList_RoleUser) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[395]
+	mi := &file_api_proto_msgTypes[399]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -29003,7 +29199,7 @@ type GetPubKeysResponse_UserPubKey struct {
 
 func (x *GetPubKeysResponse_UserPubKey) Reset() {
 	*x = GetPubKeysResponse_UserPubKey{}
-	mi := &file_api_proto_msgTypes[397]
+	mi := &file_api_proto_msgTypes[401]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -29015,7 +29211,7 @@ func (x *GetPubKeysResponse_UserPubKey) String() string {
 func (*GetPubKeysResponse_UserPubKey) ProtoMessage() {}
 
 func (x *GetPubKeysResponse_UserPubKey) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[397]
+	mi := &file_api_proto_msgTypes[401]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -31501,7 +31697,17 @@ const file_api_proto_rawDesc = "" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\x03R\tchannelId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\bapproved\x18\x03 \x01(\bR\bapproved*o\n" +
+	"\bapproved\x18\x03 \x01(\bR\bapproved\"?\n" +
+	"\x0eUserDecoration\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x14\n" +
+	"\x05frame\x18\x02 \x01(\x05R\x05frame\"P\n" +
+	"\x1aListUserDecorationsRequest\x12\x19\n" +
+	"\buser_ids\x18\x01 \x03(\x03R\auserIds\x12\x17\n" +
+	"\aclan_id\x18\x02 \x01(\x03R\x06clanId\"Q\n" +
+	"\x12UserDecorationList\x12;\n" +
+	"\vdecorations\x18\x01 \x03(\v2\x19.mezon.api.UserDecorationR\vdecorations\"3\n" +
+	"\x1bUpdateUserDecorationRequest\x12\x14\n" +
+	"\x05frame\x18\x01 \x01(\x05R\x05frame*o\n" +
 	"\rStoreProvider\x12\x13\n" +
 	"\x0fAPPLE_APP_STORE\x10\x00\x12\x15\n" +
 	"\x11GOOGLE_PLAY_STORE\x10\x01\x12\x16\n" +
@@ -31545,7 +31751,7 @@ func file_api_proto_rawDescGZIP() []byte {
 }
 
 var file_api_proto_enumTypes = make([]protoimpl.EnumInfo, 10)
-var file_api_proto_msgTypes = make([]protoimpl.MessageInfo, 401)
+var file_api_proto_msgTypes = make([]protoimpl.MessageInfo, 405)
 var file_api_proto_goTypes = []any{
 	(StoreProvider)(0),                             // 0: mezon.api.StoreProvider
 	(StoreEnvironment)(0),                          // 1: mezon.api.StoreEnvironment
@@ -31946,77 +32152,81 @@ var file_api_proto_goTypes = []any{
 	(*ListVoiceJoinWaitingResponse)(nil),           // 396: mezon.api.ListVoiceJoinWaitingResponse
 	(*ReviewVoiceJoinRequest)(nil),                 // 397: mezon.api.ReviewVoiceJoinRequest
 	(*ReviewVoiceJoinResponse)(nil),                // 398: mezon.api.ReviewVoiceJoinResponse
-	nil,                                            // 399: mezon.api.AccountRefresh.VarsEntry
-	nil,                                            // 400: mezon.api.SessionRefreshRequest.VarsEntry
-	nil,                                            // 401: mezon.api.Event.PropertiesEntry
-	(*ChannelUserList_ChannelUser)(nil),            // 402: mezon.api.ChannelUserList.ChannelUser
-	(*ClanUserList_ClanUser)(nil),                  // 403: mezon.api.ClanUserList.ClanUser
-	(*UpdateClanOrderRequest_ClanOrder)(nil),       // 404: mezon.api.UpdateClanOrderRequest.ClanOrder
-	(*RoleUserList_RoleUser)(nil),                  // 405: mezon.api.RoleUserList.RoleUser
-	nil,                                            // 406: mezon.api.RegistrationEmailRequest.VarsEntry
-	(*GetPubKeysResponse_UserPubKey)(nil),          // 407: mezon.api.GetPubKeysResponse.UserPubKey
-	nil,                                            // 408: mezon.api.AccountEmail.VarsEntry
-	nil,                                            // 409: mezon.api.AccountMezon.VarsEntry
-	nil,                                            // 410: mezon.api.NotificationBatchRequest.NotificationsEntry
-	(*wrapperspb.StringValue)(nil),                 // 411: google.protobuf.StringValue
-	(*wrapperspb.BoolValue)(nil),                   // 412: google.protobuf.BoolValue
-	(*wrapperspb.Int32Value)(nil),                  // 413: google.protobuf.Int32Value
+	(*UserDecoration)(nil),                         // 399: mezon.api.UserDecoration
+	(*ListUserDecorationsRequest)(nil),             // 400: mezon.api.ListUserDecorationsRequest
+	(*UserDecorationList)(nil),                     // 401: mezon.api.UserDecorationList
+	(*UpdateUserDecorationRequest)(nil),            // 402: mezon.api.UpdateUserDecorationRequest
+	nil,                                            // 403: mezon.api.AccountRefresh.VarsEntry
+	nil,                                            // 404: mezon.api.SessionRefreshRequest.VarsEntry
+	nil,                                            // 405: mezon.api.Event.PropertiesEntry
+	(*ChannelUserList_ChannelUser)(nil),            // 406: mezon.api.ChannelUserList.ChannelUser
+	(*ClanUserList_ClanUser)(nil),                  // 407: mezon.api.ClanUserList.ClanUser
+	(*UpdateClanOrderRequest_ClanOrder)(nil),       // 408: mezon.api.UpdateClanOrderRequest.ClanOrder
+	(*RoleUserList_RoleUser)(nil),                  // 409: mezon.api.RoleUserList.RoleUser
+	nil,                                            // 410: mezon.api.RegistrationEmailRequest.VarsEntry
+	(*GetPubKeysResponse_UserPubKey)(nil),          // 411: mezon.api.GetPubKeysResponse.UserPubKey
+	nil,                                            // 412: mezon.api.AccountEmail.VarsEntry
+	nil,                                            // 413: mezon.api.AccountMezon.VarsEntry
+	nil,                                            // 414: mezon.api.NotificationBatchRequest.NotificationsEntry
+	(*wrapperspb.StringValue)(nil),                 // 415: google.protobuf.StringValue
+	(*wrapperspb.BoolValue)(nil),                   // 416: google.protobuf.BoolValue
+	(*wrapperspb.Int32Value)(nil),                  // 417: google.protobuf.Int32Value
 }
 var file_api_proto_depIdxs = []int32{
 	69,  // 0: mezon.api.Account.user:type_name -> mezon.api.User
-	399, // 1: mezon.api.AccountRefresh.vars:type_name -> mezon.api.AccountRefresh.VarsEntry
-	400, // 2: mezon.api.SessionRefreshRequest.vars:type_name -> mezon.api.SessionRefreshRequest.VarsEntry
+	403, // 1: mezon.api.AccountRefresh.vars:type_name -> mezon.api.AccountRefresh.VarsEntry
+	404, // 2: mezon.api.SessionRefreshRequest.vars:type_name -> mezon.api.SessionRefreshRequest.VarsEntry
 	101, // 3: mezon.api.NotificationInfo.channel:type_name -> mezon.api.ChannelDescription
 	21,  // 4: mezon.api.ChannelMessageList.messages:type_name -> mezon.api.ChannelMessage
 	100, // 5: mezon.api.ChannelMessageList.last_seen_message:type_name -> mezon.api.ChannelMessageHeader
 	100, // 6: mezon.api.ChannelMessageList.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
-	401, // 7: mezon.api.Event.properties:type_name -> mezon.api.Event.PropertiesEntry
+	405, // 7: mezon.api.Event.properties:type_name -> mezon.api.Event.PropertiesEntry
 	69,  // 8: mezon.api.Friend.user:type_name -> mezon.api.User
 	34,  // 9: mezon.api.FriendList.friends:type_name -> mezon.api.Friend
-	402, // 10: mezon.api.ChannelUserList.channel_users:type_name -> mezon.api.ChannelUserList.ChannelUser
+	406, // 10: mezon.api.ChannelUserList.channel_users:type_name -> mezon.api.ChannelUserList.ChannelUser
 	38,  // 11: mezon.api.VoiceChannelUserList.voice_channel_users:type_name -> mezon.api.VoiceChannelUser
 	40,  // 12: mezon.api.ChannelAttachmentList.attachments:type_name -> mezon.api.ChannelAttachment
-	403, // 13: mezon.api.ClanUserList.clan_users:type_name -> mezon.api.ClanUserList.ClanUser
+	407, // 13: mezon.api.ClanUserList.clan_users:type_name -> mezon.api.ClanUserList.ClanUser
 	53,  // 14: mezon.api.ClanUserStatusList.clan_user_statuses:type_name -> mezon.api.ClanUserStatusEntry
 	101, // 15: mezon.api.Notification.channel:type_name -> mezon.api.ChannelDescription
 	58,  // 16: mezon.api.EmojiRecentList.emoji_recents:type_name -> mezon.api.EmojiRecent
 	57,  // 17: mezon.api.NotificationList.notifications:type_name -> mezon.api.Notification
-	411, // 18: mezon.api.UpdateAccountRequest.display_name:type_name -> google.protobuf.StringValue
-	411, // 19: mezon.api.UpdateAccountRequest.avatar_url:type_name -> google.protobuf.StringValue
-	411, // 20: mezon.api.UpdateAccountRequest.lang_tag:type_name -> google.protobuf.StringValue
-	411, // 21: mezon.api.UpdateAccountRequest.location:type_name -> google.protobuf.StringValue
-	411, // 22: mezon.api.UpdateAccountRequest.timezone:type_name -> google.protobuf.StringValue
-	411, // 23: mezon.api.UpdateAccountRequest.about_me:type_name -> google.protobuf.StringValue
-	411, // 24: mezon.api.UpdateAccountRequest.logo:type_name -> google.protobuf.StringValue
-	411, // 25: mezon.api.UpdateAccountRequest.splash_screen:type_name -> google.protobuf.StringValue
-	411, // 26: mezon.api.UpdateAccountRequest.email:type_name -> google.protobuf.StringValue
-	411, // 27: mezon.api.UpdateAccountRequest.banner:type_name -> google.protobuf.StringValue
-	412, // 28: mezon.api.UpdateAccountRequest.pro_plan:type_name -> google.protobuf.BoolValue
-	413, // 29: mezon.api.UpdateAccountRequest.frame:type_name -> google.protobuf.Int32Value
-	411, // 30: mezon.api.UpdateGroupRequest.name:type_name -> google.protobuf.StringValue
-	411, // 31: mezon.api.UpdateGroupRequest.description:type_name -> google.protobuf.StringValue
-	411, // 32: mezon.api.UpdateGroupRequest.lang_tag:type_name -> google.protobuf.StringValue
-	411, // 33: mezon.api.UpdateGroupRequest.avatar_url:type_name -> google.protobuf.StringValue
+	415, // 18: mezon.api.UpdateAccountRequest.display_name:type_name -> google.protobuf.StringValue
+	415, // 19: mezon.api.UpdateAccountRequest.avatar_url:type_name -> google.protobuf.StringValue
+	415, // 20: mezon.api.UpdateAccountRequest.lang_tag:type_name -> google.protobuf.StringValue
+	415, // 21: mezon.api.UpdateAccountRequest.location:type_name -> google.protobuf.StringValue
+	415, // 22: mezon.api.UpdateAccountRequest.timezone:type_name -> google.protobuf.StringValue
+	415, // 23: mezon.api.UpdateAccountRequest.about_me:type_name -> google.protobuf.StringValue
+	415, // 24: mezon.api.UpdateAccountRequest.logo:type_name -> google.protobuf.StringValue
+	415, // 25: mezon.api.UpdateAccountRequest.splash_screen:type_name -> google.protobuf.StringValue
+	415, // 26: mezon.api.UpdateAccountRequest.email:type_name -> google.protobuf.StringValue
+	415, // 27: mezon.api.UpdateAccountRequest.banner:type_name -> google.protobuf.StringValue
+	416, // 28: mezon.api.UpdateAccountRequest.pro_plan:type_name -> google.protobuf.BoolValue
+	417, // 29: mezon.api.UpdateAccountRequest.frame:type_name -> google.protobuf.Int32Value
+	415, // 30: mezon.api.UpdateGroupRequest.name:type_name -> google.protobuf.StringValue
+	415, // 31: mezon.api.UpdateGroupRequest.description:type_name -> google.protobuf.StringValue
+	415, // 32: mezon.api.UpdateGroupRequest.lang_tag:type_name -> google.protobuf.StringValue
+	415, // 33: mezon.api.UpdateGroupRequest.avatar_url:type_name -> google.protobuf.StringValue
 	69,  // 34: mezon.api.Users.users:type_name -> mezon.api.User
-	412, // 35: mezon.api.ClanDesc.direct_voice_access:type_name -> google.protobuf.BoolValue
-	411, // 36: mezon.api.UpdateClanDescRequest.logo:type_name -> google.protobuf.StringValue
-	411, // 37: mezon.api.UpdateClanDescRequest.banner:type_name -> google.protobuf.StringValue
-	412, // 38: mezon.api.UpdateClanDescRequest.is_onboarding:type_name -> google.protobuf.BoolValue
-	411, // 39: mezon.api.UpdateClanDescRequest.onboarding_banner:type_name -> google.protobuf.StringValue
-	412, // 40: mezon.api.UpdateClanDescRequest.is_community:type_name -> google.protobuf.BoolValue
-	411, // 41: mezon.api.UpdateClanDescRequest.community_banner:type_name -> google.protobuf.StringValue
-	411, // 42: mezon.api.UpdateClanDescRequest.description:type_name -> google.protobuf.StringValue
-	411, // 43: mezon.api.UpdateClanDescRequest.about:type_name -> google.protobuf.StringValue
-	411, // 44: mezon.api.UpdateClanDescRequest.short_url:type_name -> google.protobuf.StringValue
-	411, // 45: mezon.api.UpdateClanDescRequest.hashtags:type_name -> google.protobuf.StringValue
-	412, // 46: mezon.api.UpdateClanDescRequest.pro_plan:type_name -> google.protobuf.BoolValue
-	413, // 47: mezon.api.UpdateClanDescRequest.join_mode:type_name -> google.protobuf.Int32Value
-	413, // 48: mezon.api.UpdateClanDescRequest.frame:type_name -> google.protobuf.Int32Value
-	412, // 49: mezon.api.UpdateClanDescRequest.direct_voice_access:type_name -> google.protobuf.BoolValue
+	416, // 35: mezon.api.ClanDesc.direct_voice_access:type_name -> google.protobuf.BoolValue
+	415, // 36: mezon.api.UpdateClanDescRequest.logo:type_name -> google.protobuf.StringValue
+	415, // 37: mezon.api.UpdateClanDescRequest.banner:type_name -> google.protobuf.StringValue
+	416, // 38: mezon.api.UpdateClanDescRequest.is_onboarding:type_name -> google.protobuf.BoolValue
+	415, // 39: mezon.api.UpdateClanDescRequest.onboarding_banner:type_name -> google.protobuf.StringValue
+	416, // 40: mezon.api.UpdateClanDescRequest.is_community:type_name -> google.protobuf.BoolValue
+	415, // 41: mezon.api.UpdateClanDescRequest.community_banner:type_name -> google.protobuf.StringValue
+	415, // 42: mezon.api.UpdateClanDescRequest.description:type_name -> google.protobuf.StringValue
+	415, // 43: mezon.api.UpdateClanDescRequest.about:type_name -> google.protobuf.StringValue
+	415, // 44: mezon.api.UpdateClanDescRequest.short_url:type_name -> google.protobuf.StringValue
+	415, // 45: mezon.api.UpdateClanDescRequest.hashtags:type_name -> google.protobuf.StringValue
+	416, // 46: mezon.api.UpdateClanDescRequest.pro_plan:type_name -> google.protobuf.BoolValue
+	417, // 47: mezon.api.UpdateClanDescRequest.join_mode:type_name -> google.protobuf.Int32Value
+	417, // 48: mezon.api.UpdateClanDescRequest.frame:type_name -> google.protobuf.Int32Value
+	416, // 49: mezon.api.UpdateClanDescRequest.direct_voice_access:type_name -> google.protobuf.BoolValue
 	74,  // 50: mezon.api.ClanDescList.clandesc:type_name -> mezon.api.ClanDesc
-	411, // 51: mezon.api.UpdateClanProfileRequest.nick_name:type_name -> google.protobuf.StringValue
-	411, // 52: mezon.api.UpdateClanProfileRequest.avatar:type_name -> google.protobuf.StringValue
-	404, // 53: mezon.api.UpdateClanOrderRequest.clans_order:type_name -> mezon.api.UpdateClanOrderRequest.ClanOrder
+	415, // 51: mezon.api.UpdateClanProfileRequest.nick_name:type_name -> google.protobuf.StringValue
+	415, // 52: mezon.api.UpdateClanProfileRequest.avatar:type_name -> google.protobuf.StringValue
+	408, // 53: mezon.api.UpdateClanOrderRequest.clans_order:type_name -> mezon.api.UpdateClanOrderRequest.ClanOrder
 	95,  // 54: mezon.api.UpdateCategoryOrderRequest.categories:type_name -> mezon.api.CategoryOrderUpdate
 	94,  // 55: mezon.api.UpdateRoleOrderRequest.roles:type_name -> mezon.api.RoleOrderUpdate
 	91,  // 56: mezon.api.CategoryDescList.categorydesc:type_name -> mezon.api.CategoryDesc
@@ -32024,8 +32234,8 @@ var file_api_proto_depIdxs = []int32{
 	100, // 58: mezon.api.ChannelDescription.last_seen_message:type_name -> mezon.api.ChannelMessageHeader
 	101, // 59: mezon.api.ChannelDescList.channeldesc:type_name -> mezon.api.ChannelDescription
 	101, // 60: mezon.api.ChannelDescListNoPool.channeldesc:type_name -> mezon.api.ChannelDescription
-	411, // 61: mezon.api.UpdateChannelDescRequest.channel_label:type_name -> google.protobuf.StringValue
-	411, // 62: mezon.api.UpdateChannelDescRequest.channel_avatar:type_name -> google.protobuf.StringValue
+	415, // 61: mezon.api.UpdateChannelDescRequest.channel_label:type_name -> google.protobuf.StringValue
+	415, // 62: mezon.api.UpdateChannelDescRequest.channel_avatar:type_name -> google.protobuf.StringValue
 	116, // 63: mezon.api.BannedUserList.banned_users:type_name -> mezon.api.BannedUser
 	101, // 64: mezon.api.ListArchivedChannelDescsResponse.channeldesc:type_name -> mezon.api.ChannelDescription
 	149, // 65: mezon.api.Role.role_user_list:type_name -> mezon.api.RoleUserList
@@ -32037,12 +32247,12 @@ var file_api_proto_depIdxs = []int32{
 	123, // 71: mezon.api.RoleList.roles:type_name -> mezon.api.Role
 	124, // 72: mezon.api.EventList.events:type_name -> mezon.api.EventManagement
 	125, // 73: mezon.api.PermissionList.permissions:type_name -> mezon.api.Permission
-	405, // 74: mezon.api.RoleUserList.role_users:type_name -> mezon.api.RoleUserList.RoleUser
+	409, // 74: mezon.api.RoleUserList.role_users:type_name -> mezon.api.RoleUserList.RoleUser
 	302, // 75: mezon.api.CreateEventRequest.meet_room:type_name -> mezon.api.GenerateMezonMeetResponse
-	411, // 76: mezon.api.UpdateRoleRequest.title:type_name -> google.protobuf.StringValue
-	411, // 77: mezon.api.UpdateRoleRequest.color:type_name -> google.protobuf.StringValue
-	411, // 78: mezon.api.UpdateRoleRequest.role_icon:type_name -> google.protobuf.StringValue
-	411, // 79: mezon.api.UpdateRoleRequest.description:type_name -> google.protobuf.StringValue
+	415, // 76: mezon.api.UpdateRoleRequest.title:type_name -> google.protobuf.StringValue
+	415, // 77: mezon.api.UpdateRoleRequest.color:type_name -> google.protobuf.StringValue
+	415, // 78: mezon.api.UpdateRoleRequest.role_icon:type_name -> google.protobuf.StringValue
+	415, // 79: mezon.api.UpdateRoleRequest.description:type_name -> google.protobuf.StringValue
 	159, // 80: mezon.api.UpdateRoleChannelRequest.permission_update:type_name -> mezon.api.PermissionUpdate
 	162, // 81: mezon.api.UploadBatchAttachmentRequest.upload_files:type_name -> mezon.api.UploadAttachmentRequest
 	164, // 82: mezon.api.UploadAttachmentBatch.uploaded_files:type_name -> mezon.api.UploadAttachment
@@ -32050,15 +32260,15 @@ var file_api_proto_depIdxs = []int32{
 	170, // 84: mezon.api.SearchMessageRequest.filters:type_name -> mezon.api.FilterParam
 	169, // 85: mezon.api.SearchMessageRequest.sorts:type_name -> mezon.api.SortParam
 	171, // 86: mezon.api.SearchMessageResponse.messages:type_name -> mezon.api.SearchMessageDocument
-	406, // 87: mezon.api.RegistrationEmailRequest.vars:type_name -> mezon.api.RegistrationEmailRequest.VarsEntry
+	410, // 87: mezon.api.RegistrationEmailRequest.vars:type_name -> mezon.api.RegistrationEmailRequest.VarsEntry
 	174, // 88: mezon.api.EmojiListedResponse.emoji_list:type_name -> mezon.api.ClanEmoji
 	177, // 89: mezon.api.StickerListedResponse.stickers:type_name -> mezon.api.ClanSticker
 	184, // 90: mezon.api.WebhookListResponse.webhooks:type_name -> mezon.api.Webhook
 	201, // 91: mezon.api.AppList.apps:type_name -> mezon.api.App
-	411, // 92: mezon.api.UpdateAppRequest.appname:type_name -> google.protobuf.StringValue
-	411, // 93: mezon.api.UpdateAppRequest.metadata:type_name -> google.protobuf.StringValue
-	411, // 94: mezon.api.UpdateAppRequest.applogo:type_name -> google.protobuf.StringValue
-	411, // 95: mezon.api.UpdateAppRequest.token:type_name -> google.protobuf.StringValue
+	415, // 92: mezon.api.UpdateAppRequest.appname:type_name -> google.protobuf.StringValue
+	415, // 93: mezon.api.UpdateAppRequest.metadata:type_name -> google.protobuf.StringValue
+	415, // 94: mezon.api.UpdateAppRequest.applogo:type_name -> google.protobuf.StringValue
+	415, // 95: mezon.api.UpdateAppRequest.token:type_name -> google.protobuf.StringValue
 	211, // 96: mezon.api.SystemMessagesList.system_messages_list:type_name -> mezon.api.SystemMessage
 	219, // 97: mezon.api.StreamingChannelUserList.streaming_channel_users:type_name -> mezon.api.StreamingChannelUser
 	226, // 98: mezon.api.ListChannelAppsResponse.channel_apps:type_name -> mezon.api.ChannelAppResponse
@@ -32071,7 +32281,7 @@ var file_api_proto_depIdxs = []int32{
 	243, // 105: mezon.api.ChannelCanvasListResponse.channel_canvases:type_name -> mezon.api.ChannelCanvasItem
 	252, // 106: mezon.api.ListUserActivity.activities:type_name -> mezon.api.UserActivity
 	258, // 107: mezon.api.PushPubKeyRequest.PK:type_name -> mezon.api.PubKey
-	407, // 108: mezon.api.GetPubKeysResponse.pub_keys:type_name -> mezon.api.GetPubKeysResponse.UserPubKey
+	411, // 108: mezon.api.GetPubKeysResponse.pub_keys:type_name -> mezon.api.GetPubKeysResponse.UserPubKey
 	264, // 109: mezon.api.ListAuditLog.logs:type_name -> mezon.api.AuditLog
 	272, // 110: mezon.api.ListOnboardingResponse.list_onboarding:type_name -> mezon.api.OnboardingItem
 	273, // 111: mezon.api.OnboardingItem.answers:type_name -> mezon.api.OnboardingAnswer
@@ -32089,8 +32299,8 @@ var file_api_proto_depIdxs = []int32{
 	25,  // 123: mezon.api.Message2InboxRequest.attachments:type_name -> mezon.api.MessageAttachment
 	24,  // 124: mezon.api.Message2InboxRequest.reactions:type_name -> mezon.api.MessageReaction
 	26,  // 125: mezon.api.Message2InboxRequest.references:type_name -> mezon.api.MessageRef
-	408, // 126: mezon.api.AccountEmail.vars:type_name -> mezon.api.AccountEmail.VarsEntry
-	409, // 127: mezon.api.AccountMezon.vars:type_name -> mezon.api.AccountMezon.VarsEntry
+	412, // 126: mezon.api.AccountEmail.vars:type_name -> mezon.api.AccountEmail.VarsEntry
+	413, // 127: mezon.api.AccountMezon.vars:type_name -> mezon.api.AccountMezon.VarsEntry
 	314, // 128: mezon.api.QuickMenuAccessList.list_menus:type_name -> mezon.api.QuickMenuAccess
 	318, // 129: mezon.api.ForSaleItemList.for_sale_items:type_name -> mezon.api.ForSaleItem
 	326, // 130: mezon.api.LogedDeviceList.devices:type_name -> mezon.api.LogedDevice
@@ -32112,7 +32322,7 @@ var file_api_proto_depIdxs = []int32{
 	343, // 146: mezon.api.UpdateChannelTimelineRequest.attachments:type_name -> mezon.api.ChannelTimelineAttachment
 	345, // 147: mezon.api.UpdateChannelTimelineResponse.event:type_name -> mezon.api.ChannelTimeline
 	345, // 148: mezon.api.ChannelTimelineDetailResponse.event:type_name -> mezon.api.ChannelTimeline
-	410, // 149: mezon.api.NotificationBatchRequest.notifications:type_name -> mezon.api.NotificationBatchRequest.NotificationsEntry
+	414, // 149: mezon.api.NotificationBatchRequest.notifications:type_name -> mezon.api.NotificationBatchRequest.NotificationsEntry
 	4,   // 150: mezon.api.CreatePollRequest.type:type_name -> mezon.api.PollType
 	363, // 151: mezon.api.CreatePollResponse.answers:type_name -> mezon.api.PollAnswer
 	4,   // 152: mezon.api.CreatePollResponse.type:type_name -> mezon.api.PollType
@@ -32127,14 +32337,15 @@ var file_api_proto_depIdxs = []int32{
 	382, // 161: mezon.api.SfuBreakoutRoomRequest.list_participants:type_name -> mezon.api.SfuBreakoutParticipant
 	390, // 162: mezon.api.ListJoinPendingResponse.items:type_name -> mezon.api.JoinPendingItem
 	394, // 163: mezon.api.ListVoiceJoinWaitingResponse.users:type_name -> mezon.api.VoiceJoinWaitingUser
-	69,  // 164: mezon.api.ClanUserList.ClanUser.user:type_name -> mezon.api.User
-	258, // 165: mezon.api.GetPubKeysResponse.UserPubKey.PK:type_name -> mezon.api.PubKey
-	60,  // 166: mezon.api.NotificationBatchRequest.NotificationsEntry.value:type_name -> mezon.api.NotificationList
-	167, // [167:167] is the sub-list for method output_type
-	167, // [167:167] is the sub-list for method input_type
-	167, // [167:167] is the sub-list for extension type_name
-	167, // [167:167] is the sub-list for extension extendee
-	0,   // [0:167] is the sub-list for field type_name
+	399, // 164: mezon.api.UserDecorationList.decorations:type_name -> mezon.api.UserDecoration
+	69,  // 165: mezon.api.ClanUserList.ClanUser.user:type_name -> mezon.api.User
+	258, // 166: mezon.api.GetPubKeysResponse.UserPubKey.PK:type_name -> mezon.api.PubKey
+	60,  // 167: mezon.api.NotificationBatchRequest.NotificationsEntry.value:type_name -> mezon.api.NotificationList
+	168, // [168:168] is the sub-list for method output_type
+	168, // [168:168] is the sub-list for method input_type
+	168, // [168:168] is the sub-list for extension type_name
+	168, // [168:168] is the sub-list for extension extendee
+	0,   // [0:168] is the sub-list for field type_name
 }
 
 func init() { file_api_proto_init() }
@@ -32148,7 +32359,7 @@ func file_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_proto_rawDesc), len(file_api_proto_rawDesc)),
 			NumEnums:      10,
-			NumMessages:   401,
+			NumMessages:   405,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

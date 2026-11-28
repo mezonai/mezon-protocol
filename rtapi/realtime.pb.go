@@ -225,6 +225,7 @@ type Envelope struct {
 	//	*Envelope_FriendStateUpdated
 	//	*Envelope_VoiceJoinWaitingEvent
 	//	*Envelope_VoiceJoinReviewedEvent
+	//	*Envelope_UserDecorationUpdatedEvent
 	Message       isEnvelope_Message `protobuf_oneof:"message"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1228,6 +1229,15 @@ func (x *Envelope) GetVoiceJoinReviewedEvent() *VoiceJoinReviewedEvent {
 	return nil
 }
 
+func (x *Envelope) GetUserDecorationUpdatedEvent() *UserDecorationUpdatedEvent {
+	if x != nil {
+		if x, ok := x.Message.(*Envelope_UserDecorationUpdatedEvent); ok {
+			return x.UserDecorationUpdatedEvent
+		}
+	}
+	return nil
+}
+
 type isEnvelope_Message interface {
 	isEnvelope_Message()
 }
@@ -1761,6 +1771,11 @@ type Envelope_VoiceJoinReviewedEvent struct {
 	VoiceJoinReviewedEvent *VoiceJoinReviewedEvent `protobuf:"bytes,109,opt,name=voice_join_reviewed_event,json=voiceJoinReviewedEvent,proto3,oneof"`
 }
 
+type Envelope_UserDecorationUpdatedEvent struct {
+	// A user's avatar decoration changed (sent to the user's clans and to their own notifications stream)
+	UserDecorationUpdatedEvent *UserDecorationUpdatedEvent `protobuf:"bytes,110,opt,name=user_decoration_updated_event,json=userDecorationUpdatedEvent,proto3,oneof"`
+}
+
 func (*Envelope_Channel) isEnvelope_Message() {}
 
 func (*Envelope_ClanJoin) isEnvelope_Message() {}
@@ -1972,6 +1987,8 @@ func (*Envelope_FriendStateUpdated) isEnvelope_Message() {}
 func (*Envelope_VoiceJoinWaitingEvent) isEnvelope_Message() {}
 
 func (*Envelope_VoiceJoinReviewedEvent) isEnvelope_Message() {}
+
+func (*Envelope_UserDecorationUpdatedEvent) isEnvelope_Message() {}
 
 type SfuBreakoutRoomEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -8420,7 +8437,7 @@ type UserProfileUpdatedEvent struct {
 	// profile banner url
 	Banner  string `protobuf:"bytes,8,opt,name=banner,proto3" json:"banner,omitempty"`
 	ProPlan bool   `protobuf:"varint,9,opt,name=pro_plan,json=proPlan,proto3" json:"pro_plan,omitempty"`
-	// Pro avatar frame, set only when it changed: -1 hidden, 0 automatic, n = frame n of the client catalog
+	// Unused: frame changes are sent as UserDecorationUpdatedEvent
 	Frame         *wrapperspb.Int32Value `protobuf:"bytes,10,opt,name=frame,proto3" json:"frame,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -11251,11 +11268,64 @@ func (x *VoiceJoinReviewedEvent) GetUrl() string {
 	return ""
 }
 
+// A user's avatar decoration changed. frame: -1 hidden, 0 automatic, n = frame n of the client catalog.
+type UserDecorationUpdatedEvent struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Frame         int32                  `protobuf:"varint,2,opt,name=frame,proto3" json:"frame,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserDecorationUpdatedEvent) Reset() {
+	*x = UserDecorationUpdatedEvent{}
+	mi := &file_rtapi_realtime_proto_msgTypes[114]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserDecorationUpdatedEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserDecorationUpdatedEvent) ProtoMessage() {}
+
+func (x *UserDecorationUpdatedEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_rtapi_realtime_proto_msgTypes[114]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserDecorationUpdatedEvent.ProtoReflect.Descriptor instead.
+func (*UserDecorationUpdatedEvent) Descriptor() ([]byte, []int) {
+	return file_rtapi_realtime_proto_rawDescGZIP(), []int{114}
+}
+
+func (x *UserDecorationUpdatedEvent) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UserDecorationUpdatedEvent) GetFrame() int32 {
+	if x != nil {
+		return x.Frame
+	}
+	return 0
+}
+
 var File_rtapi_realtime_proto protoreflect.FileDescriptor
 
 const file_rtapi_realtime_proto_rawDesc = "" +
 	"\n" +
-	"\x14rtapi/realtime.proto\x12\x0emezon.realtime\x1a\rapi/api.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x9aD\n" +
+	"\x14rtapi/realtime.proto\x12\x0emezon.realtime\x1a\rapi/api.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x8bE\n" +
 	"\bEnvelope\x12\x10\n" +
 	"\x03cid\x18\x01 \x01(\x05R\x03cid\x123\n" +
 	"\achannel\x18\x02 \x01(\v2\x17.mezon.realtime.ChannelH\x00R\achannel\x127\n" +
@@ -11369,7 +11439,8 @@ const file_rtapi_realtime_proto_rawDesc = "" +
 	"\x1cstreaming_viewer_count_event\x18j \x01(\v2).mezon.realtime.StreamingViewerCountEventH\x00R\x19streamingViewerCountEvent\x12V\n" +
 	"\x14friend_state_updated\x18k \x01(\v2\".mezon.realtime.FriendStateUpdatedH\x00R\x12friendStateUpdated\x12`\n" +
 	"\x18voice_join_waiting_event\x18l \x01(\v2%.mezon.realtime.VoiceJoinWaitingEventH\x00R\x15voiceJoinWaitingEvent\x12c\n" +
-	"\x19voice_join_reviewed_event\x18m \x01(\v2&.mezon.realtime.VoiceJoinReviewedEventH\x00R\x16voiceJoinReviewedEventB\t\n" +
+	"\x19voice_join_reviewed_event\x18m \x01(\v2&.mezon.realtime.VoiceJoinReviewedEventH\x00R\x16voiceJoinReviewedEvent\x12o\n" +
+	"\x1duser_decoration_updated_event\x18n \x01(\v2*.mezon.realtime.UserDecorationUpdatedEventH\x00R\x1auserDecorationUpdatedEventB\t\n" +
 	"\amessage\"s\n" +
 	"\x14SfuBreakoutRoomEvent\x12\x1d\n" +
 	"\n" +
@@ -12221,7 +12292,10 @@ const file_rtapi_realtime_proto_rawDesc = "" +
 	"reviewerId\x12\x1a\n" +
 	"\bapproved\x18\x05 \x01(\bR\bapproved\x12\x14\n" +
 	"\x05token\x18\x06 \x01(\tR\x05token\x12\x10\n" +
-	"\x03url\x18\a \x01(\tR\x03urlBe\n" +
+	"\x03url\x18\a \x01(\tR\x03url\"K\n" +
+	"\x1aUserDecorationUpdatedEvent\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x14\n" +
+	"\x05frame\x18\x02 \x01(\x05R\x05frameBe\n" +
 	"\x15com.mezon.mezon.rtapiB\rMezonRealtimeP\x01Z*github.com/mezonai/mezon-protocol/v2/rtapi\xaa\x02\x0eMezon.Protobufb\x06proto3"
 
 var (
@@ -12237,7 +12311,7 @@ func file_rtapi_realtime_proto_rawDescGZIP() []byte {
 }
 
 var file_rtapi_realtime_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_rtapi_realtime_proto_msgTypes = make([]protoimpl.MessageInfo, 116)
+var file_rtapi_realtime_proto_msgTypes = make([]protoimpl.MessageInfo, 117)
 var file_rtapi_realtime_proto_goTypes = []any{
 	(Error_Code)(0),                            // 0: mezon.realtime.Error.Code
 	(*Envelope)(nil),                           // 1: mezon.realtime.Envelope
@@ -12354,42 +12428,43 @@ var file_rtapi_realtime_proto_goTypes = []any{
 	(*FriendStateUpdated)(nil),                 // 112: mezon.realtime.FriendStateUpdated
 	(*VoiceJoinWaitingEvent)(nil),              // 113: mezon.realtime.VoiceJoinWaitingEvent
 	(*VoiceJoinReviewedEvent)(nil),             // 114: mezon.realtime.VoiceJoinReviewedEvent
-	nil,                                        // 115: mezon.realtime.Error.ContextEntry
-	nil,                                        // 116: mezon.realtime.GotifyMessage.ExtrasEntry
-	(*api.ChannelMessage)(nil),                 // 117: mezon.api.ChannelMessage
-	(*api.Rpc)(nil),                            // 118: mezon.api.Rpc
-	(*api.MessageReaction)(nil),                // 119: mezon.api.MessageReaction
-	(*api.CreateEventRequest)(nil),             // 120: mezon.api.CreateEventRequest
-	(*api.GiveCoffeeEvent)(nil),                // 121: mezon.api.GiveCoffeeEvent
-	(*api.TokenSentEvent)(nil),                 // 122: mezon.api.TokenSentEvent
-	(*api.Webhook)(nil),                        // 123: mezon.api.Webhook
-	(*api.NotificationUserChannel)(nil),        // 124: mezon.api.NotificationUserChannel
-	(*api.Session)(nil),                        // 125: mezon.api.Session
-	(*wrapperspb.Int32Value)(nil),              // 126: google.protobuf.Int32Value
-	(*api.ChannelMessageHeader)(nil),           // 127: mezon.api.ChannelMessageHeader
-	(*wrapperspb.BoolValue)(nil),               // 128: google.protobuf.BoolValue
-	(*api.MessageMention)(nil),                 // 129: mezon.api.MessageMention
-	(*api.MessageAttachment)(nil),              // 130: mezon.api.MessageAttachment
-	(*api.MessageRef)(nil),                     // 131: mezon.api.MessageRef
-	(*api.Notification)(nil),                   // 132: mezon.api.Notification
-	(*api.Role)(nil),                           // 133: mezon.api.Role
-	(*wrapperspb.StringValue)(nil),             // 134: google.protobuf.StringValue
-	(*api.ChannelDescription)(nil),             // 135: mezon.api.ChannelDescription
-	(*api.PermissionUpdate)(nil),               // 136: mezon.api.PermissionUpdate
-	(*api.UserActivity)(nil),                   // 137: mezon.api.UserActivity
-	(*api.ListChannelBadgeCountRequest)(nil),   // 138: mezon.api.ListChannelBadgeCountRequest
-	(*api.ListChannelBadgeCountResponse)(nil),  // 139: mezon.api.ListChannelBadgeCountResponse
-	(*api.ListClanBadgeCountResponse)(nil),     // 140: mezon.api.ListClanBadgeCountResponse
-	(*api.LogedDeviceList)(nil),                // 141: mezon.api.LogedDeviceList
-	(*api.ListUserOnlineRequest)(nil),          // 142: mezon.api.ListUserOnlineRequest
-	(*api.ListUserOnlineResponse)(nil),         // 143: mezon.api.ListUserOnlineResponse
+	(*UserDecorationUpdatedEvent)(nil),         // 115: mezon.realtime.UserDecorationUpdatedEvent
+	nil,                                        // 116: mezon.realtime.Error.ContextEntry
+	nil,                                        // 117: mezon.realtime.GotifyMessage.ExtrasEntry
+	(*api.ChannelMessage)(nil),                 // 118: mezon.api.ChannelMessage
+	(*api.Rpc)(nil),                            // 119: mezon.api.Rpc
+	(*api.MessageReaction)(nil),                // 120: mezon.api.MessageReaction
+	(*api.CreateEventRequest)(nil),             // 121: mezon.api.CreateEventRequest
+	(*api.GiveCoffeeEvent)(nil),                // 122: mezon.api.GiveCoffeeEvent
+	(*api.TokenSentEvent)(nil),                 // 123: mezon.api.TokenSentEvent
+	(*api.Webhook)(nil),                        // 124: mezon.api.Webhook
+	(*api.NotificationUserChannel)(nil),        // 125: mezon.api.NotificationUserChannel
+	(*api.Session)(nil),                        // 126: mezon.api.Session
+	(*wrapperspb.Int32Value)(nil),              // 127: google.protobuf.Int32Value
+	(*api.ChannelMessageHeader)(nil),           // 128: mezon.api.ChannelMessageHeader
+	(*wrapperspb.BoolValue)(nil),               // 129: google.protobuf.BoolValue
+	(*api.MessageMention)(nil),                 // 130: mezon.api.MessageMention
+	(*api.MessageAttachment)(nil),              // 131: mezon.api.MessageAttachment
+	(*api.MessageRef)(nil),                     // 132: mezon.api.MessageRef
+	(*api.Notification)(nil),                   // 133: mezon.api.Notification
+	(*api.Role)(nil),                           // 134: mezon.api.Role
+	(*wrapperspb.StringValue)(nil),             // 135: google.protobuf.StringValue
+	(*api.ChannelDescription)(nil),             // 136: mezon.api.ChannelDescription
+	(*api.PermissionUpdate)(nil),               // 137: mezon.api.PermissionUpdate
+	(*api.UserActivity)(nil),                   // 138: mezon.api.UserActivity
+	(*api.ListChannelBadgeCountRequest)(nil),   // 139: mezon.api.ListChannelBadgeCountRequest
+	(*api.ListChannelBadgeCountResponse)(nil),  // 140: mezon.api.ListChannelBadgeCountResponse
+	(*api.ListClanBadgeCountResponse)(nil),     // 141: mezon.api.ListClanBadgeCountResponse
+	(*api.LogedDeviceList)(nil),                // 142: mezon.api.LogedDeviceList
+	(*api.ListUserOnlineRequest)(nil),          // 143: mezon.api.ListUserOnlineRequest
+	(*api.ListUserOnlineResponse)(nil),         // 144: mezon.api.ListUserOnlineResponse
 }
 var file_rtapi_realtime_proto_depIdxs = []int32{
 	20,  // 0: mezon.realtime.Envelope.channel:type_name -> mezon.realtime.Channel
 	21,  // 1: mezon.realtime.Envelope.clan_join:type_name -> mezon.realtime.ClanJoin
 	22,  // 2: mezon.realtime.Envelope.channel_join:type_name -> mezon.realtime.ChannelJoin
 	23,  // 3: mezon.realtime.Envelope.channel_leave:type_name -> mezon.realtime.ChannelLeave
-	117, // 4: mezon.realtime.Envelope.channel_message:type_name -> mezon.api.ChannelMessage
+	118, // 4: mezon.realtime.Envelope.channel_message:type_name -> mezon.api.ChannelMessage
 	24,  // 5: mezon.realtime.Envelope.channel_message_ack:type_name -> mezon.realtime.ChannelMessageAck
 	29,  // 6: mezon.realtime.Envelope.channel_message_send:type_name -> mezon.realtime.ChannelMessageSend
 	30,  // 7: mezon.realtime.Envelope.channel_message_update:type_name -> mezon.realtime.ChannelMessageUpdate
@@ -12397,7 +12472,7 @@ var file_rtapi_realtime_proto_depIdxs = []int32{
 	32,  // 9: mezon.realtime.Envelope.channel_presence_event:type_name -> mezon.realtime.ChannelPresenceEvent
 	33,  // 10: mezon.realtime.Envelope.error:type_name -> mezon.realtime.Error
 	34,  // 11: mezon.realtime.Envelope.notifications:type_name -> mezon.realtime.Notifications
-	118, // 12: mezon.realtime.Envelope.rpc:type_name -> mezon.api.Rpc
+	119, // 12: mezon.realtime.Envelope.rpc:type_name -> mezon.api.Rpc
 	41,  // 13: mezon.realtime.Envelope.status:type_name -> mezon.realtime.Status
 	42,  // 14: mezon.realtime.Envelope.status_follow:type_name -> mezon.realtime.StatusFollow
 	43,  // 15: mezon.realtime.Envelope.status_presence_event:type_name -> mezon.realtime.StatusPresenceEvent
@@ -12409,7 +12484,7 @@ var file_rtapi_realtime_proto_depIdxs = []int32{
 	40,  // 21: mezon.realtime.Envelope.pong:type_name -> mezon.realtime.Pong
 	46,  // 22: mezon.realtime.Envelope.message_typing_event:type_name -> mezon.realtime.MessageTypingEvent
 	45,  // 23: mezon.realtime.Envelope.last_seen_message_event:type_name -> mezon.realtime.LastSeenMessageEvent
-	119, // 24: mezon.realtime.Envelope.message_reaction_event:type_name -> mezon.api.MessageReaction
+	120, // 24: mezon.realtime.Envelope.message_reaction_event:type_name -> mezon.api.MessageReaction
 	48,  // 25: mezon.realtime.Envelope.voice_joined_event:type_name -> mezon.realtime.VoiceJoinedEvent
 	47,  // 26: mezon.realtime.Envelope.voice_leaved_event:type_name -> mezon.realtime.VoiceLeavedEvent
 	49,  // 27: mezon.realtime.Envelope.voice_started_event:type_name -> mezon.realtime.VoiceStartedEvent
@@ -12427,10 +12502,10 @@ var file_rtapi_realtime_proto_depIdxs = []int32{
 	86,  // 39: mezon.realtime.Envelope.check_name_existed_event:type_name -> mezon.realtime.CheckNameExistedEvent
 	80,  // 40: mezon.realtime.Envelope.user_profile_updated_event:type_name -> mezon.realtime.UserProfileUpdatedEvent
 	14,  // 41: mezon.realtime.Envelope.add_clan_user_event:type_name -> mezon.realtime.AddClanUserEvent
-	120, // 42: mezon.realtime.Envelope.clan_event_created:type_name -> mezon.api.CreateEventRequest
+	121, // 42: mezon.realtime.Envelope.clan_event_created:type_name -> mezon.api.CreateEventRequest
 	15,  // 43: mezon.realtime.Envelope.role_assign_event:type_name -> mezon.realtime.RoleAssignedEvent
 	61,  // 44: mezon.realtime.Envelope.clan_deleted_event:type_name -> mezon.realtime.ClanDeletedEvent
-	121, // 45: mezon.realtime.Envelope.give_coffee_event:type_name -> mezon.api.GiveCoffeeEvent
+	122, // 45: mezon.realtime.Envelope.give_coffee_event:type_name -> mezon.api.GiveCoffeeEvent
 	62,  // 46: mezon.realtime.Envelope.sticker_create_event:type_name -> mezon.realtime.StickerCreateEvent
 	63,  // 47: mezon.realtime.Envelope.sticker_update_event:type_name -> mezon.realtime.StickerUpdateEvent
 	64,  // 48: mezon.realtime.Envelope.sticker_delete_event:type_name -> mezon.realtime.StickerDeleteEvent
@@ -12442,7 +12517,7 @@ var file_rtapi_realtime_proto_depIdxs = []int32{
 	54,  // 54: mezon.realtime.Envelope.streaming_ended_event:type_name -> mezon.realtime.StreamingEndedEvent
 	89,  // 55: mezon.realtime.Envelope.permission_set_event:type_name -> mezon.realtime.PermissionSetEvent
 	90,  // 56: mezon.realtime.Envelope.permission_changed_event:type_name -> mezon.realtime.PermissionChangedEvent
-	122, // 57: mezon.realtime.Envelope.token_sent_event:type_name -> mezon.api.TokenSentEvent
+	123, // 57: mezon.realtime.Envelope.token_sent_event:type_name -> mezon.api.TokenSentEvent
 	91,  // 58: mezon.realtime.Envelope.message_button_clicked:type_name -> mezon.realtime.MessageButtonClicked
 	92,  // 59: mezon.realtime.Envelope.unmute_event:type_name -> mezon.realtime.UnmuteEvent
 	12,  // 60: mezon.realtime.Envelope.webrtc_signaling_fwd:type_name -> mezon.realtime.WebrtcSignalingFwd
@@ -12454,8 +12529,8 @@ var file_rtapi_realtime_proto_depIdxs = []int32{
 	96,  // 66: mezon.realtime.Envelope.channel_app_event:type_name -> mezon.realtime.ChannelAppEvent
 	97,  // 67: mezon.realtime.Envelope.user_status_event:type_name -> mezon.realtime.UserStatusEvent
 	36,  // 68: mezon.realtime.Envelope.remove_friend:type_name -> mezon.realtime.RemoveFriend
-	123, // 69: mezon.realtime.Envelope.webhook_event:type_name -> mezon.api.Webhook
-	124, // 70: mezon.realtime.Envelope.noti_user_channel:type_name -> mezon.api.NotificationUserChannel
+	124, // 69: mezon.realtime.Envelope.webhook_event:type_name -> mezon.api.Webhook
+	125, // 70: mezon.realtime.Envelope.noti_user_channel:type_name -> mezon.api.NotificationUserChannel
 	98,  // 71: mezon.realtime.Envelope.join_channel_app_data:type_name -> mezon.realtime.JoinChannelAppData
 	10,  // 72: mezon.realtime.Envelope.canvas_event:type_name -> mezon.realtime.ChannelCanvas
 	99,  // 73: mezon.realtime.Envelope.unpin_message_event:type_name -> mezon.realtime.UnpinMessageEvent
@@ -12479,7 +12554,7 @@ var file_rtapi_realtime_proto_depIdxs = []int32{
 	77,  // 91: mezon.realtime.Envelope.clan_created_event:type_name -> mezon.realtime.ClanCreatedEvent
 	108, // 92: mezon.realtime.Envelope.aiagent_enabled_event:type_name -> mezon.realtime.AIAgentEnabledEvent
 	9,   // 93: mezon.realtime.Envelope.list_channel_users_banned_event:type_name -> mezon.realtime.ListChannelUsersBannedEvent
-	125, // 94: mezon.realtime.Envelope.refresh_session_event:type_name -> mezon.api.Session
+	126, // 94: mezon.realtime.Envelope.refresh_session_event:type_name -> mezon.api.Session
 	66,  // 95: mezon.realtime.Envelope.channel_archive_event:type_name -> mezon.realtime.ChannelArchiveEvent
 	5,   // 96: mezon.realtime.Envelope.topic_in_message_event:type_name -> mezon.realtime.TopicInMessageEvent
 	4,   // 97: mezon.realtime.Envelope.screen_share_event:type_name -> mezon.realtime.ScreenShareEvent
@@ -12491,63 +12566,64 @@ var file_rtapi_realtime_proto_depIdxs = []int32{
 	112, // 103: mezon.realtime.Envelope.friend_state_updated:type_name -> mezon.realtime.FriendStateUpdated
 	113, // 104: mezon.realtime.Envelope.voice_join_waiting_event:type_name -> mezon.realtime.VoiceJoinWaitingEvent
 	114, // 105: mezon.realtime.Envelope.voice_join_reviewed_event:type_name -> mezon.realtime.VoiceJoinReviewedEvent
-	82,  // 106: mezon.realtime.AddClanUserEvent.user:type_name -> mezon.realtime.UserProfileRedis
-	126, // 107: mezon.realtime.ChannelDescription.type:type_name -> google.protobuf.Int32Value
-	127, // 108: mezon.realtime.ChannelDescription.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
-	72,  // 109: mezon.realtime.Channel.presences:type_name -> mezon.realtime.UserPresence
-	72,  // 110: mezon.realtime.Channel.self:type_name -> mezon.realtime.UserPresence
-	128, // 111: mezon.realtime.ChannelMessageAck.persistent:type_name -> google.protobuf.BoolValue
-	29,  // 112: mezon.realtime.EphemeralMessageSend.message:type_name -> mezon.realtime.ChannelMessageSend
-	29,  // 113: mezon.realtime.QuickMenuDataEvent.message:type_name -> mezon.realtime.ChannelMessageSend
-	129, // 114: mezon.realtime.ChannelMessageSend.mentions:type_name -> mezon.api.MessageMention
-	130, // 115: mezon.realtime.ChannelMessageSend.attachments:type_name -> mezon.api.MessageAttachment
-	131, // 116: mezon.realtime.ChannelMessageSend.references:type_name -> mezon.api.MessageRef
-	129, // 117: mezon.realtime.ChannelMessageUpdate.mentions:type_name -> mezon.api.MessageMention
-	130, // 118: mezon.realtime.ChannelMessageUpdate.attachments:type_name -> mezon.api.MessageAttachment
-	72,  // 119: mezon.realtime.ChannelPresenceEvent.joins:type_name -> mezon.realtime.UserPresence
-	72,  // 120: mezon.realtime.ChannelPresenceEvent.leaves:type_name -> mezon.realtime.UserPresence
-	115, // 121: mezon.realtime.Error.context:type_name -> mezon.realtime.Error.ContextEntry
-	132, // 122: mezon.realtime.Notifications.notifications:type_name -> mezon.api.Notification
-	72,  // 123: mezon.realtime.Status.presences:type_name -> mezon.realtime.UserPresence
-	72,  // 124: mezon.realtime.StatusPresenceEvent.joins:type_name -> mezon.realtime.UserPresence
-	72,  // 125: mezon.realtime.StatusPresenceEvent.leaves:type_name -> mezon.realtime.UserPresence
-	133, // 126: mezon.realtime.RoleEvent.role:type_name -> mezon.api.Role
-	134, // 127: mezon.realtime.StatusUpdate.status:type_name -> google.protobuf.StringValue
-	69,  // 128: mezon.realtime.StreamData.stream:type_name -> mezon.realtime.Stream
-	72,  // 129: mezon.realtime.StreamData.sender:type_name -> mezon.realtime.UserPresence
-	69,  // 130: mezon.realtime.StreamPresenceEvent.stream:type_name -> mezon.realtime.Stream
-	72,  // 131: mezon.realtime.StreamPresenceEvent.joins:type_name -> mezon.realtime.UserPresence
-	72,  // 132: mezon.realtime.StreamPresenceEvent.leaves:type_name -> mezon.realtime.UserPresence
-	134, // 133: mezon.realtime.UserPresence.status:type_name -> google.protobuf.StringValue
-	135, // 134: mezon.realtime.UserChannelAdded.channel_desc:type_name -> mezon.api.ChannelDescription
-	82,  // 135: mezon.realtime.UserChannelAdded.users:type_name -> mezon.realtime.UserProfileRedis
-	82,  // 136: mezon.realtime.UserChannelAdded.caller:type_name -> mezon.realtime.UserProfileRedis
-	128, // 137: mezon.realtime.ClanUpdatedEvent.direct_voice_access:type_name -> google.protobuf.BoolValue
-	126, // 138: mezon.realtime.UserProfileUpdatedEvent.frame:type_name -> google.protobuf.Int32Value
-	83,  // 139: mezon.realtime.UserProfileRedis.fcm_tokens:type_name -> mezon.realtime.FCMTokens
-	136, // 140: mezon.realtime.PermissionSetEvent.permission_updates:type_name -> mezon.api.PermissionUpdate
-	136, // 141: mezon.realtime.PermissionChangedEvent.add_permissions:type_name -> mezon.api.PermissionUpdate
-	136, // 142: mezon.realtime.PermissionChangedEvent.remove_permissions:type_name -> mezon.api.PermissionUpdate
-	136, // 143: mezon.realtime.PermissionChangedEvent.default_permissions:type_name -> mezon.api.PermissionUpdate
-	137, // 144: mezon.realtime.ListActivity.acts:type_name -> mezon.api.UserActivity
-	127, // 145: mezon.realtime.SdTopicEvent.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
-	117, // 146: mezon.realtime.SdTopicEvent.message:type_name -> mezon.api.ChannelMessage
-	138, // 147: mezon.realtime.ListDataSocket.list_channel_badge_count_req:type_name -> mezon.api.ListChannelBadgeCountRequest
-	139, // 148: mezon.realtime.ListDataSocket.channel_badge_count:type_name -> mezon.api.ListChannelBadgeCountResponse
-	140, // 149: mezon.realtime.ListDataSocket.clan_badge_count:type_name -> mezon.api.ListClanBadgeCountResponse
-	141, // 150: mezon.realtime.ListDataSocket.list_loged_device:type_name -> mezon.api.LogedDeviceList
-	142, // 151: mezon.realtime.ListDataSocket.list_user_online_req:type_name -> mezon.api.ListUserOnlineRequest
-	143, // 152: mezon.realtime.ListDataSocket.user_online_list:type_name -> mezon.api.ListUserOnlineResponse
-	117, // 153: mezon.realtime.FcmDataPayload.message:type_name -> mezon.api.ChannelMessage
-	129, // 154: mezon.realtime.FcmDataPayload.mentions:type_name -> mezon.api.MessageMention
-	131, // 155: mezon.realtime.FcmDataPayload.references:type_name -> mezon.api.MessageRef
-	130, // 156: mezon.realtime.FcmDataPayload.attachments:type_name -> mezon.api.MessageAttachment
-	116, // 157: mezon.realtime.GotifyMessage.extras:type_name -> mezon.realtime.GotifyMessage.ExtrasEntry
-	158, // [158:158] is the sub-list for method output_type
-	158, // [158:158] is the sub-list for method input_type
-	158, // [158:158] is the sub-list for extension type_name
-	158, // [158:158] is the sub-list for extension extendee
-	0,   // [0:158] is the sub-list for field type_name
+	115, // 106: mezon.realtime.Envelope.user_decoration_updated_event:type_name -> mezon.realtime.UserDecorationUpdatedEvent
+	82,  // 107: mezon.realtime.AddClanUserEvent.user:type_name -> mezon.realtime.UserProfileRedis
+	127, // 108: mezon.realtime.ChannelDescription.type:type_name -> google.protobuf.Int32Value
+	128, // 109: mezon.realtime.ChannelDescription.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
+	72,  // 110: mezon.realtime.Channel.presences:type_name -> mezon.realtime.UserPresence
+	72,  // 111: mezon.realtime.Channel.self:type_name -> mezon.realtime.UserPresence
+	129, // 112: mezon.realtime.ChannelMessageAck.persistent:type_name -> google.protobuf.BoolValue
+	29,  // 113: mezon.realtime.EphemeralMessageSend.message:type_name -> mezon.realtime.ChannelMessageSend
+	29,  // 114: mezon.realtime.QuickMenuDataEvent.message:type_name -> mezon.realtime.ChannelMessageSend
+	130, // 115: mezon.realtime.ChannelMessageSend.mentions:type_name -> mezon.api.MessageMention
+	131, // 116: mezon.realtime.ChannelMessageSend.attachments:type_name -> mezon.api.MessageAttachment
+	132, // 117: mezon.realtime.ChannelMessageSend.references:type_name -> mezon.api.MessageRef
+	130, // 118: mezon.realtime.ChannelMessageUpdate.mentions:type_name -> mezon.api.MessageMention
+	131, // 119: mezon.realtime.ChannelMessageUpdate.attachments:type_name -> mezon.api.MessageAttachment
+	72,  // 120: mezon.realtime.ChannelPresenceEvent.joins:type_name -> mezon.realtime.UserPresence
+	72,  // 121: mezon.realtime.ChannelPresenceEvent.leaves:type_name -> mezon.realtime.UserPresence
+	116, // 122: mezon.realtime.Error.context:type_name -> mezon.realtime.Error.ContextEntry
+	133, // 123: mezon.realtime.Notifications.notifications:type_name -> mezon.api.Notification
+	72,  // 124: mezon.realtime.Status.presences:type_name -> mezon.realtime.UserPresence
+	72,  // 125: mezon.realtime.StatusPresenceEvent.joins:type_name -> mezon.realtime.UserPresence
+	72,  // 126: mezon.realtime.StatusPresenceEvent.leaves:type_name -> mezon.realtime.UserPresence
+	134, // 127: mezon.realtime.RoleEvent.role:type_name -> mezon.api.Role
+	135, // 128: mezon.realtime.StatusUpdate.status:type_name -> google.protobuf.StringValue
+	69,  // 129: mezon.realtime.StreamData.stream:type_name -> mezon.realtime.Stream
+	72,  // 130: mezon.realtime.StreamData.sender:type_name -> mezon.realtime.UserPresence
+	69,  // 131: mezon.realtime.StreamPresenceEvent.stream:type_name -> mezon.realtime.Stream
+	72,  // 132: mezon.realtime.StreamPresenceEvent.joins:type_name -> mezon.realtime.UserPresence
+	72,  // 133: mezon.realtime.StreamPresenceEvent.leaves:type_name -> mezon.realtime.UserPresence
+	135, // 134: mezon.realtime.UserPresence.status:type_name -> google.protobuf.StringValue
+	136, // 135: mezon.realtime.UserChannelAdded.channel_desc:type_name -> mezon.api.ChannelDescription
+	82,  // 136: mezon.realtime.UserChannelAdded.users:type_name -> mezon.realtime.UserProfileRedis
+	82,  // 137: mezon.realtime.UserChannelAdded.caller:type_name -> mezon.realtime.UserProfileRedis
+	129, // 138: mezon.realtime.ClanUpdatedEvent.direct_voice_access:type_name -> google.protobuf.BoolValue
+	127, // 139: mezon.realtime.UserProfileUpdatedEvent.frame:type_name -> google.protobuf.Int32Value
+	83,  // 140: mezon.realtime.UserProfileRedis.fcm_tokens:type_name -> mezon.realtime.FCMTokens
+	137, // 141: mezon.realtime.PermissionSetEvent.permission_updates:type_name -> mezon.api.PermissionUpdate
+	137, // 142: mezon.realtime.PermissionChangedEvent.add_permissions:type_name -> mezon.api.PermissionUpdate
+	137, // 143: mezon.realtime.PermissionChangedEvent.remove_permissions:type_name -> mezon.api.PermissionUpdate
+	137, // 144: mezon.realtime.PermissionChangedEvent.default_permissions:type_name -> mezon.api.PermissionUpdate
+	138, // 145: mezon.realtime.ListActivity.acts:type_name -> mezon.api.UserActivity
+	128, // 146: mezon.realtime.SdTopicEvent.last_sent_message:type_name -> mezon.api.ChannelMessageHeader
+	118, // 147: mezon.realtime.SdTopicEvent.message:type_name -> mezon.api.ChannelMessage
+	139, // 148: mezon.realtime.ListDataSocket.list_channel_badge_count_req:type_name -> mezon.api.ListChannelBadgeCountRequest
+	140, // 149: mezon.realtime.ListDataSocket.channel_badge_count:type_name -> mezon.api.ListChannelBadgeCountResponse
+	141, // 150: mezon.realtime.ListDataSocket.clan_badge_count:type_name -> mezon.api.ListClanBadgeCountResponse
+	142, // 151: mezon.realtime.ListDataSocket.list_loged_device:type_name -> mezon.api.LogedDeviceList
+	143, // 152: mezon.realtime.ListDataSocket.list_user_online_req:type_name -> mezon.api.ListUserOnlineRequest
+	144, // 153: mezon.realtime.ListDataSocket.user_online_list:type_name -> mezon.api.ListUserOnlineResponse
+	118, // 154: mezon.realtime.FcmDataPayload.message:type_name -> mezon.api.ChannelMessage
+	130, // 155: mezon.realtime.FcmDataPayload.mentions:type_name -> mezon.api.MessageMention
+	132, // 156: mezon.realtime.FcmDataPayload.references:type_name -> mezon.api.MessageRef
+	131, // 157: mezon.realtime.FcmDataPayload.attachments:type_name -> mezon.api.MessageAttachment
+	117, // 158: mezon.realtime.GotifyMessage.extras:type_name -> mezon.realtime.GotifyMessage.ExtrasEntry
+	159, // [159:159] is the sub-list for method output_type
+	159, // [159:159] is the sub-list for method input_type
+	159, // [159:159] is the sub-list for extension type_name
+	159, // [159:159] is the sub-list for extension extendee
+	0,   // [0:159] is the sub-list for field type_name
 }
 
 func init() { file_rtapi_realtime_proto_init() }
@@ -12662,6 +12738,7 @@ func file_rtapi_realtime_proto_init() {
 		(*Envelope_FriendStateUpdated)(nil),
 		(*Envelope_VoiceJoinWaitingEvent)(nil),
 		(*Envelope_VoiceJoinReviewedEvent)(nil),
+		(*Envelope_UserDecorationUpdatedEvent)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -12669,7 +12746,7 @@ func file_rtapi_realtime_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_rtapi_realtime_proto_rawDesc), len(file_rtapi_realtime_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   116,
+			NumMessages:   117,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
